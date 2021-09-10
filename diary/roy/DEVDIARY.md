@@ -12,22 +12,7 @@ Default is a *25% contribution for each student*. However, please modify as nece
 Please, report your key activities in each week this assignment is running.  
 
 **Week 1**
-* Student 1
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on my Linux distro
-    * Implemented Hello Minecraft!
-* Student 2
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on Windows 11
-    * Implemented Hello Minecraft!
-* Student 3
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on Mac OS
-    * Implemented Hello Minecraft!
-* Student 4
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code on Windows, as well as Minecraft Pi on Raspberry Pi OS (on Raspberry Pi 400)
-    * Implemented Hello Minecraft!
+* tested with designs of various buildings that will be used in the village
 
 **Week 2**
 
