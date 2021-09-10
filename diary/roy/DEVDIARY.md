@@ -12,7 +12,8 @@ Default is a *25% contribution for each student*. However, please modify as nece
 Please, report your key activities in each week this assignment is running.  
 
 **Week 1**
-* tested with designs of various buildings that will be used in the village
+-tested with designs of various buildings that will be used in the village
+-made code for basic fountain that will be used to supplement areas in the village, based on players position and will be made modular later
 
 **Week 2**
 
