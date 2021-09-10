@@ -43,4 +43,6 @@ Please, report your key activities in each week this assignment is running.
 
 
 
-THIS IS A TEST FOR JIN.. IF YOU GET THIS MESSAGE THE TEST IS SUCCESSFUL
+THIS IS A TEST FOR JIN.. IF YOU GET THIS MESSAGE THE TEST IS SUCCESSFUL.
+
+CONFIRMED 🔥, Jin.
