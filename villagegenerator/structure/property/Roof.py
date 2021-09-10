@@ -1,0 +1,2 @@
+class Roof:
+    pass
