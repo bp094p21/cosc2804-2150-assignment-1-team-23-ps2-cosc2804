@@ -12,22 +12,13 @@ Default is a *25% contribution for each student*. However, please modify as nece
 Please, report your key activities in each week this assignment is running.  
 
 **Week 1**
-* Student 1
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on my Linux distro
-    * Implemented Hello Minecraft!
-* Student 2
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on Windows 11
-    * Implemented Hello Minecraft!
-* Student 3
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on Mac OS
-    * Implemented Hello Minecraft!
-* Student 4
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code on Windows, as well as Minecraft Pi on Raspberry Pi OS (on Raspberry Pi 400)
-    * Implemented Hello Minecraft!
+* Lachlan
+    * Setup VSCode, and Minecraft on Windows 10
+    * Successfully implemented Minecraft Tools by allowing a server connection between localhost and minecraft java edition, as well as ensuring the MC_Py_API works correctly.
+    * Completed the participation activity for building a brick staircase, as well as tested various other functionalities with the MC_Py_API, resulting in creation of ideas such as teleportation, house making, and a clock (done to test numpy and time module support).
+    * Read chapter 1, 2, & 3 on Computer Architecture textbook.
+    * Completed the decimal, binary, and hexadecimal practice questions.
+    * Collaborated with my team in order to devise strategies for tackling the first assessment (how would the village be generated? who is going to do what? what are the requirements? etc)
 
 **Week 2**
 
@@ -43,6 +34,4 @@ Please, report your key activities in each week this assignment is running.
 
 
 
-THIS IS A TEST FOR JIN.. IF YOU GET THIS MESSAGE THE TEST IS SUCCESSFUL.
-
-CONFIRMED 🔥, Jin.
+THIS IS A TEST FOR JIN.. IF YOU GET THIS MESSAGE THE TEST IS SUCCESSFUL
