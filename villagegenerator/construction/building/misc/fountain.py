@@ -1,4 +1,4 @@
-#this is a test to see if i can build one, will make it modular later
+#this is a test to see if i can construction one, will make it modular later
 
 from mcpi.minecraft import Minecraft 
 mc = Minecraft.create()

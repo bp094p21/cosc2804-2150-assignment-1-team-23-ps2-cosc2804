@@ -1,15 +1,15 @@
-from villagegenerator.structure.property import property
+from villagegenerator.structure.building.property import property
 
 
-# contains the orientation, position and centre of where the structure(s) and road(s) should go.
-# this is passed down to the structure/road classes, so that they can position themselves accordingly.
+# contains the orientation, position and centre of where the construction(s) and road(s) should go.
+# this is passed down to the construction/road classes, so that they can position themselves accordingly.
 class Plot:
     def __init__(self, item):
         self.item = item
 
-    # called to build each house/road when iterating through the predefined layout.
+    # called to construction each house/road when iterating through the predefined layout.
     def build(self):
-        # if its a property, invoke the build method.
+        # if its a property, invoke the construction method.
         if type(self.item) is type(property):
             self.item.build()
             return
