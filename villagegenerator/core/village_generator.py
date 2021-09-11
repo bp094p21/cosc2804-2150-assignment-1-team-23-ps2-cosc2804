@@ -1,6 +1,7 @@
 from mcpi.minecraft import Minecraft
 
-# Main class file. The VillageBuilder will be called from here to construction a village on player request (onCommand event).
+# Main class file. The VillageBuilder will be called from here to construction a village on player request (onCommand
+# event).
 
 
 if __name__ == '__main__':

@@ -1,7 +1,6 @@
 from plot import Plot
 from villagegenerator.core import village_generator as vg
-from orientation import Orientation as o
-import grid_manager
+from orientation import Orientation as O
 
 # set of global variables to be accessed in the main program.
 
@@ -21,7 +20,7 @@ def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int
 
 FIXED_ORDINATES = _generate_fixed_ordinates(12, 6, *vg.ply_coords)
 
-# T = [(X, Y, Z), (X + 15, Y, Z), (X + 30, Y, Z), (X + 45, Y, Z), (X + 60, Y, Z),
+#      [(X, Y, Z), (X + 15, Y, Z), (X + 30, Y, Z), (X + 45, Y, Z), (X + 60, Y, Z),
 #      (X + 75, Y, Z), (X + 90, Y, Z),
 #      (X, Y, Z + 15), (X + 15, Y, Z + 15), (X + 30, Y, Z + 15), (X + 45, Y, Z + 15),
 #      (X + 60, Y, Z + 15), (X + 75, Y, Z + 15), (X + 90, Y, Z + 15),
@@ -59,7 +58,7 @@ SMALL_VARIATION_ONE = [[],
                        [],
                        [],
                        [],
-                       [Plot(Property(biome, FIXED_ORDINATES[0], o.RIGHT))]]
+                       [Plot(Property(biome, FIXED_ORDINATES[0], O.RIGHT))]]
 
 SMALL_VARIATION_TWO = [[],
                        [],
