@@ -1,6 +1,5 @@
-
-
-small_variation_one = [[],
+# set of global variables to be accessed in the main program.
+SMALL_VARIATION_ONE = [[],
                        [],
                        [],
                        [],
@@ -9,7 +8,7 @@ small_variation_one = [[],
                        [],
                        []]
 
-small_variation_two = [[],
+SMALL_VARIATION_TWO = [[],
                        [],
                        [],
                        [],
@@ -18,7 +17,7 @@ small_variation_two = [[],
                        [],
                        []]
 
-med_variation_one = [[],
+MED_VARIATION_ONE = [[],
                      [],
                      [],
                      [],
@@ -29,7 +28,7 @@ med_variation_one = [[],
                      [],
                      []]
 
-med_variation_two = [[],
+MED_VARIATION_TWO = [[],
                      [],
                      [],
                      [],
@@ -40,7 +39,7 @@ med_variation_two = [[],
                      [],
                      []]
 
-large_variation_one = [[],
+LARGE_VARIATION_ONE = [[],
                        [],
                        [],
                        [],
@@ -53,7 +52,7 @@ large_variation_one = [[],
                        [],
                        []]
 
-large_variation_two = [[],
+LARGE_VARIATION_TWO = [[],
                        [],
                        [],
                        [],
