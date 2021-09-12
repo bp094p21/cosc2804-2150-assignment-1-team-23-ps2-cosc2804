@@ -13,30 +13,41 @@ Working on 100% of `property` subpackage.
 ## Week 1
 
 Learning
-	- Read chapter 1 & 2 on textbook
-    - Setup VS Code, and Minecraft on my Macbook
-	- Learnt about the Minecraft game mechanics
-    - Learnt the Minecraft API
-	- Learnt about the order in which blocks are enumerated with the `mc.getBlocks(...)` method call
-	- Learnt about setting particular game rules such as `gamerule doDayLightCycle false`
-	- Learnt about setting particular server properties to improve the development experience such as setting
+ - Read chapter 1 & 2 on textbook
+ - Setup VS Code, and Minecraft on my Macbook
+ - Learnt about the Minecraft game mechanics
+ - Learnt the Minecraft API
+ - Learnt about the order in which blocks are enumerated with the `mc.getBlocks(...)` method call
+ - Learnt about setting particular game rules such as `gamerule doDayLightCycle false`
+ - Learnt about setting particular server properties to improve the development experience such as setting
 	  `spwan-monsters` to `false`
 
 Playing
-	- Played some Minecraft and built some blocks manually
+ - Played some Minecraft and built some blocks manually
 
 Installing
-	- Install correct version of Java
-	- Install spigot server
-	- Install Minecraft Java edition API
+ - Install correct version of Java
+ - Install spigot server
+ - Install Minecraft Java edition API
 
 Collaborating
-	- Got on a Minecraft server with Roy to build a house together manually
+ - Got on a Minecraft server with Roy to build a house together manually
 
 Implementing
-	- Added class structures
-	- Added basic program for the `build()` function for the `Property` class
+ - Added class structures
+ - Added basic program for the `build()` function for the `Property` class
+ - Added printer utility to provide feedback to user on build status
+ - Added orientation capabilities to component building
 
+Testing
+ - Tested functionality of Property build function
+ - Tested functionality of Component build function
+
+# TODO: Design components
+ - Entrance
+ - Front
+ - Boundary
+ - Entrance Door
 
 ## Week 2
 
