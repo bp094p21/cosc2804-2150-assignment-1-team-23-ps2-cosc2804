@@ -1,4 +1,5 @@
 class Printer:
+    location_str = 'Location not set yet'
     def __init__(self, init_status = None):
         self.status = init_status
     def print_status(self):
