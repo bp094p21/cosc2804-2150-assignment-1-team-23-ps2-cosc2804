@@ -1,4 +1,6 @@
 from mcpi.minecraft import Minecraft
+from villagegenerator.core.village.village_builder import build_village
+from villagegenerator.core.village.village_size import VillageSize
 
 # Main class file. The VillageBuilder will be called from here to construction a village on player request (onCommand
 # event).
@@ -10,8 +12,7 @@ if __name__ == '__main__':
 
     x, y, z = mc.player.getTilePos()
 
-    ply_coords = (x + 1, y + 1, z)
-
-    ply_biome = mc.getBiome()
+    # upon invocation will generate a village where the player is standing.
+    build_village(VillageSize.SMALL, (x + 1, y + 1, z), mc.getBiome())
 
     mc.postToChat('Done!')
