@@ -1,5 +1,6 @@
 # this is a test to see if i can build one, will make it modular later
-from villagegenerator.construction.building.misc.park import Park
+
+from park import Park
 
 class ParkFountain(Park):
     
@@ -17,8 +18,14 @@ class ParkFountain(Park):
     def build_fountain(self, x, y, z):
         self.mc.setBlocks(x + 4, y, z + 4, x + 10, y - 1, z + 10, self.stone)
         self.mc.setBlocks(x + 5, y, z + 5, x + 9, y, z + 9, self.air)
-        self.mc.setBlocks(x + 7, y, z + 7, x + 7, y + 6, z + 7, self.stone)
-        self.mc.setBlocks(x + 7, y + 6, z + 7, x + 7, y + 6, z + 7, self.water)
+        self.mc.setBlocks(x+7,y,z+7,x+7,y+5,z+7,self.stone)
+
+        self.mc.setBlocks(x+4,y,z+4,x+4,y,z+4,self.lantern)
+        self.mc.setBlocks(x+10,y,z+10,x+10,y,z+10,self.lantern)
+        self.mc.setBlocks(x+10,y,z+4,x+10,y,z+4,self.lantern)
+        self.mc.setBlocks(x+4,y,z+10,x+4,y,z+10,self.lantern)
+
+        self.mc.setBlocks(x+7,y+5,z+7,x+7,y+5,z+7,self.water)
 
 
 thing = ParkFountain()
