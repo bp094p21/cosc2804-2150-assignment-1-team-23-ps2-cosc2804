@@ -1,42 +1,49 @@
 # Development Diary
-This is a *template* for your dev diary in PS2.
-Feel free to edit as you see fit e.g., based on your progress updates, hurdles encountered and circumnvented.
-Make sure to log one comprehensive update per student, per each week of our teaching term.
-Please, get in touch with teaching staff for any questions around this or otherwise post on Microsoft Teams.
 
-# Mandatory Student's contributions
-Please, specify your individual contributions to the project **as a percentage**. 
-Default is a *25% contribution for each student*. However, please modify as necessary, if that is not the case.
+by Jin Heock - S3491222
+
+1. Manadatory Student contributions
+2. Development Diary activities
+
+# Mandatory Student contributions
+Working on 100% of `property` subpackage.
 
 # Development Diary Activities
-Please, report your key activities in each week this assignment is running.  
 
-**Week 1**
-* Student 1
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on my Linux distro
-    * Implemented Hello Minecraft!
-* Student 2
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on Windows 11
-    * Implemented Hello Minecraft!
-* Student 3
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code, and Minecraft on Mac OS
-    * Implemented Hello Minecraft!
-* Student 4
-    * Read chapter 1 & 2 on textbook
-    * Setup VS Code on Windows, as well as Minecraft Pi on Raspberry Pi OS (on Raspberry Pi 400)
-    * Implemented Hello Minecraft!
+## Week 1
 
-**Week 2**
+Learning
+	- Read chapter 1 & 2 on textbook
+    - Setup VS Code, and Minecraft on my Macbook
+	- Learnt about the Minecraft game mechanics
+    - Learnt the Minecraft API
+	- Learnt about the order in which blocks are enumerated with the `mc.getBlocks(...)` method call
+	- Learnt about setting particular game rules such as `gamerule doDayLightCycle false`
+	- Learnt about setting particular server properties to improve the development experience such as setting
+	  `spwan-monsters` to `false`
 
-.....
-.....
-.....
+Playing
+	- Played some Minecraft and built some blocks manually
 
-**Week 3**
+Installing
+	- Install correct version of Java
+	- Install spigot server
+	- Install Minecraft Java edition API
 
-.....
-.....
-.....
+Collaborating
+	- Got on a Minecraft server with Roy to build a house together manually
+
+Implementing
+	- Added class structures
+	- Added basic program for the `build()` function for the `Property` class
+
+
+## Week 2
+
+Learning
+	- 
+
+## Week 3
+
+Learning
+
