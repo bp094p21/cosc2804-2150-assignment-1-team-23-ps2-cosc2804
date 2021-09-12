@@ -1,17 +1,18 @@
+from mcpi import vec3
+from mcpi import minecraft
 import theme
 
 class Property:
-    # Init Inputs
-    corner_vector = (None, None, None)
-    entrance_edge = None
-    biome = None
-    mc = None
-    # Set by biome
-    theme = None
-    # Set by theme
-    house_type = None
-    # Set by house_type
-    components = {
+    # Init inputs
+    location_vec3: vec3.Vec3 = None
+    property_location_str: str = f"\nx: {location_vec3.x}\ny: {location_vec3.y}\nz: {location_vec3.z}"
+    entrance_edge: int = None
+    biome: int = None
+    mc: minecraft.Minecraft = None
+    # Derived properties
+    theme: str = None       # Set by biome
+    house_type: str = None      # Set by theme
+    components: dict = {        # Set by house_type
         'entrance': None,
         'boundary': None,
         'floors': [],
@@ -20,23 +21,22 @@ class Property:
         'pool': None,
         'roof': None
     }
-    # Change throughout build
-    build_status = "Property not yet instantiated"
-    # Strings
-    property_location_str = f"\nx: {corner_vector[2]}\ny: {corner_vector[0]}\nz: {corner_vector[1]}"
+    build_status: str = "Property not yet instantiated"
+
     # Public methods
-    def __init__(self, corner_vector, entrance_edge, biome, mc):
-        self.corner_vector = corner_vector
+    def __init__(self, location_vec3: vec3.Vec3, entrance_edge: int, biome: int, mc: minecraft.Minecraft):
+        self.location_vec3 = location_vec3
+        self.property_location_str: str = f"\nx: {location_vec3.x}\ny: {location_vec3.y}\nz: {location_vec3.z}"
         self.entrance_edge = entrance_edge
         self.biome = biome
         self.mc = mc
-        self.build_status = f"Property object instantiated with co-ordinates:\n{self.property_location_str}"
+        self.build_status = f"Property object instantiated with location:\n{self.property_location_str}"
         self.print_status()
         pass
     def print_status(self):
         print(self.build_status)
     def build(self):
-        self.build_status = f"Commencing property build at co-ordinates:{self.property_location_str}"
+        self.build_status = f"Commencing property build at location:{self.property_location_str}"
         self.print_status()
         self._set_theme()
         self._random_select_house_type()
