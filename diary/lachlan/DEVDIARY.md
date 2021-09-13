@@ -26,7 +26,7 @@ Please, report your key activities in each week this assignment is running.
     * Successfully created straight, curved, and intersected roads for the village using the MC_Py_API
     * Successully created a terrain scanning program that gets the block height of the highest block in specific x,z coordinates within a given matrix (will be used within the village generation to test for whether the target spawn area is acceptable or not for a village)
     * Tested the efficiency of numpy arrays against python lists using the terrain scanning program I built. The conclusion through testing was that numpy arrays have a much more efficient runtime than python lists do, as well as take up less memory.
-    * Currently working on producing different randomised structures depending on the results of the terrain scanning program. I.E is terrain is suitable for building, place a random road template in a certain position within the scan. This will be important for later implementation of our matrix.
+    * Currently working on producing different randomised structures depending on the results of the terrain scanning program. I.E if terrain is suitable for building, place a random road template in a certain position within the scan. This will be important for later implementation of our matrix.
 **Week 2**
 
 .....
