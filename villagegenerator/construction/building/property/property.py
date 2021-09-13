@@ -15,13 +15,17 @@ class Property:
     house_type: str = None      # Set by theme
     layout: l.Layout = None     # Set by house_type
     components: dict = {        # Set by layout
-        'entrance': None,
         'boundary': None,
+        'entrance': None,
         'floors': [],
         'front': None,
         'house': None,
         'pool': None,
-        'roof': None
+        'roof': None,
+        'rooms': [],
+        'sides': [],
+        'stairs': [],
+        'walls': []
     }
     # Initialize print utilities
     p = printer.Printer("Property not yet instantaited")
@@ -51,12 +55,12 @@ class Property:
     def _set_theme(self):
         # TODO: Use biome to set theme
         if self.biome:
-            self.theme = t.ThemeA()
+            self.theme = t.Basic()
         elif self.biome:
-            self.theme = t.ThemeB()
+            self.theme = t.Magic()
         elif self.biome:
-            self.theme = t.ThemeC()
-        self.p.status = f"✅ Theme set: {self.theme}\n"
+            self.theme = t.Modern()
+        self.p.status = f"✅ Theme set: {self.theme.name}\n"
         self.p.print_status()
     def _random_select_house_type(self):
         # TODO: Use theme to randomly select property type from a set of property types applicable to that theme
