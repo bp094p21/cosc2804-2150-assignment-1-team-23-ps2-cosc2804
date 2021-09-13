@@ -20,4 +20,9 @@ if __name__ == '__main__':
     #
     #     print()
 
-    print(FIXED_ORDINATES)
+    # print(FIXED_ORDINATES)
+
+    matrix = np.array([[3, 4, 5, 6, 7], [3, 4, 5, 6, 2], [9, 2, 4, 2, 2]])
+    for x in matrix:
+        for y in x:
+            print(y)

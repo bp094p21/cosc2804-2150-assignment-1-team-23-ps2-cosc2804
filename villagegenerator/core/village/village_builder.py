@@ -1,14 +1,13 @@
 import random
 
 from villagegenerator.construction.building.building import Building
-from villagegenerator.core.layout.predefined_layouts import size_to_layout
+from villagegenerator.core.layout.layout import Layout
 from villagegenerator.core.village.village_size import VillageSize
+import villagegenerator.core.layout.predefined_layouts as pl
 
 
-def build_village(size, location, biome):
-    # TODO: logic for -> build ONLY template group that is required, as specified by caller. Store template in cache
-    #  then request it if it exists (check first - create a check here), else create and add it to cache. Re-use the
-    #  objects, by just changing their location.
+def build_village(size, location, biome, mc):
+    _define_layout(size, biome, mc)
 
     selected_template = _select_random_template(size)
 
@@ -20,8 +19,20 @@ def build_village(size, location, biome):
         _build_large(location, selected_template)
 
 
+def _define_layout(size, biome, mc):
+    if len(Layout.layouts[size]) == 2:
+        return
+
+    if size is VillageSize.SMALL:
+        pl.define_small(mc, biome, size)
+    elif size is VillageSize.MEDIUM:
+        pl.define_medium(mc, biome, size)
+    else:
+        pl.define_large(mc, biome, size)
+
+
 def _select_random_template(size):
-    return random.choice(size_to_layout[size])
+    return random.choice(Layout.layouts[size]).grid
 
 
 def _build_small(location, template):
@@ -37,11 +48,12 @@ def _build_large(location, template):
 
 
 def _build_plots(fixed_ordinates, template):
-    for (i, plot) in enumerate(template):
-        if plot is type(Building):
-            plot.item.set_location(fixed_ordinates[i])
+    for row in template:
+        for (i, plot) in enumerate(row):
+            if plot is type(Building):
+                plot.item.set_location(fixed_ordinates[i])
 
-        plot.build()
+            plot.build()
 
 
 def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int, z_coord: int) -> list:
@@ -51,6 +63,7 @@ def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int
             temp.append((x_coord + x * 15, y_coord, z_coord + z * 15))
 
     return temp
+
 
 #      [(X, Y, Z), (X + 15, Y, Z), (X + 30, Y, Z), (X + 45, Y, Z), (X + 60, Y, Z),
 #      (X + 75, Y, Z), (X + 90, Y, Z),
