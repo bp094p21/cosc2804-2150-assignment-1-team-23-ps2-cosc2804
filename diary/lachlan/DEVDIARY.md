@@ -15,11 +15,18 @@ Please, report your key activities in each week this assignment is running.
 * Lachlan
     * Setup VSCode, and Minecraft on Windows 10
     * Successfully implemented Minecraft Tools by allowing a server connection between localhost and minecraft java edition, as well as ensuring the MC_Py_API works correctly.
-    * Completed the participation activity for building a brick staircase, as well as tested various other functionalities with the MC_Py_API, resulting in creation of ideas such as teleportation, house making, path making, and a clock (done to test numpy and time module support).
+    * Assisted other students in ensuring that they have all the tools required for commencing the project, as well as providing shortcuts for optimisation within the API.
+    * Completed the participation activity for building a brick staircase, as well as tested various other functionalities with the MC_Py_API, resulting in creation of ideas such as teleportation, house making, path making, terrain scanning, and a clock (done to test numpy and time module support, as well as learning the MC_Py_API commands).
     * Read chapter 1, 2, & 3 on Computer Architecture textbook.
     * Completed the decimal, binary, and hexadecimal practice questions.
+    * Created a discord channel alongside my team in order to note down rough strategies and milestones that are not major enough to be published on teams, as well as communicate ideas more informally.
     * Collaborated with my team in order to devise strategies for tackling the first assessment (how would the village be generated? who is going to do what? what are the requirements? etc)
-
+    * Created an outline of how the project will be undertaken, giving key milestones to each group member as to what needs to be completed by each week in order to stay on track and move on with steps in an order that makes sense.
+    * Completed my first major task for the week of making templates for all the roads present in the village (accounting for all possible oreintations, curves, and intersections)
+    * Successfully created straight, curved, and intersected roads for the village using the MC_Py_API
+    * Successully created a terrain scanning program that gets the block height of the highest block in specific x,z coordinates within a given matrix (will be used within the village generation to test for whether the target spawn area is acceptable or not for a village)
+    * Tested the efficiency of numpy arrays against python lists using the terrain scanning program I built. The conclusion through testing was that numpy arrays have a much more efficient runtime than python lists do, as well as take up less memory.
+    * Currently working on producing different randomised structures depending on the results of the terrain scanning program. I.E if terrain is suitable for building, place a random road template in a certain position within the scan. This will be important for later implementation of our matrix.
 **Week 2**
 
 .....
@@ -31,7 +38,3 @@ Please, report your key activities in each week this assignment is running.
 .....
 .....
 .....
-
-
-
-THIS IS A TEST FOR JIN.. IF YOU GET THIS MESSAGE THE TEST IS SUCCESSFUL
