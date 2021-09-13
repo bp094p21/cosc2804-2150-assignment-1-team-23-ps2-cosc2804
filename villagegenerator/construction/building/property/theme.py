@@ -1,16 +1,20 @@
 class Theme:
-    type = None
+    name = None
+    options = {}
     def __init__(self):
         pass
 
-class A(Theme):
+class Basic(Theme):
     def __init__(self):
-        type = 'A'
+        self.name = 'basic'
+        self.options['house'] = []
 
-class B(Theme):
-    def __init__(self):
-        type = 'B'
+        
 
-class C(Theme):
+class Magic(Theme):
     def __init__(self):
-        type = 'C'
+        type = 'magic'
+
+class Modern(Theme):
+    def __init__(self):
+        type = 'modern'
