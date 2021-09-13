@@ -2,13 +2,13 @@
 
 by Jin Heock - S3491222
 
-1. Manadatory Student contributions
-2. Development Diary activities
+1. [[#Contributions]]
+2. [[#Activities]]
 
-# Mandatory Student contributions
+# Contributions
 Working on 100% of `property` subpackage.
 
-# Development Diary Activities
+# Activities
 
 ## Week 1
 
@@ -52,9 +52,11 @@ Testing
 ## Week 2
 
 Learning
-	- 
+ 
+
+Implementing
+ - Added Basic layout for a property with start and end values in the x and z direction for each component
 
 ## Week 3
 
 Learning
-
