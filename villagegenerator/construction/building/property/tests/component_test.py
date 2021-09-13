@@ -2,7 +2,7 @@ from mcpi import vec3
 import sys
 sys.path.append('../property')
 # Import component
-import component
+import components.component as component
 # Import minecraft
 from mcpi import minecraft
 # Create connection

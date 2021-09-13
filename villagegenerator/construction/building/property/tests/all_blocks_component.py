@@ -1,6 +1,7 @@
 import sys
 sys.path.append('../property')
-import component
+import components.component as component
+
 
 from mcpi import vec3
 from mcpi import minecraft
