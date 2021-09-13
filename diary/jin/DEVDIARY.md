@@ -43,19 +43,18 @@ Testing
  - Tested functionality of Property build function
  - Tested functionality of Component build function
 
-# TODO: Design components
- - Entrance
- - Front
- - Boundary
- - Entrance Door
-
 ## Week 2
 
 Learning
+ - Went through each block from 0-255 and learnt about each one and their variation
+
+# TODO: Make sets of suitable blocks for each component for each house_type for each theme
  
 
 Implementing
  - Added Basic layout for a property with start and end values in the x and z direction for each component
+ - Drafted up suitable themes for the properties
+ - Drafted up suitable house types for each theme
 
 ## Week 3
 
