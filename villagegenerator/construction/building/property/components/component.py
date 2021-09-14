@@ -1,9 +1,14 @@
 from mcpi import vec3
 from mcpi import minecraft
 
+import sys
+sys.path.append('../property')
+
+import block as b
 from util import printer
 
 class Component:
+    block = b.STONE
     block_list = []
     x_len = None
     y_len = None
@@ -75,14 +80,3 @@ class Component:
                 y += inc_y
 
 
-
-class Entrance(Component):
-    designs = {
-        'single_story': [],
-        'double_story': [],
-        'unit': [],
-        'apartment': []
-    }
-    def __init__(self):
-        self.type = 'entrance'
-    pass
