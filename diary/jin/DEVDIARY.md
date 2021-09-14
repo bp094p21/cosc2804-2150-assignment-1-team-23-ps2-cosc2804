@@ -48,13 +48,13 @@ Testing
 Learning
  - Went through each block from 0-255 and learnt about each one and their variation
 
-# TODO: Make sets of suitable blocks for each component for each house_type for each theme
- 
-
 Implementing
  - Added Basic layout for a property with start and end values in the x and z direction for each component
  - Drafted up suitable themes for the properties
  - Drafted up suitable house types for each theme
+ - Drafted up possible themes for property
+ - Drafted up sets of distinguishable blocks to use for each theme
+# TODO: Make sets of suitable blocks for each component for each house_type for each theme
 
 ## Week 3
 
