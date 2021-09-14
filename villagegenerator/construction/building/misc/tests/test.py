@@ -1,5 +1,7 @@
 # Mediterranean, Magic, Modern
-import block as b
+import sys
+sys.path.append('../../building')
+import property.block as b
 
 class BlockList:
     def __init__(self):
@@ -10,7 +12,7 @@ class BlockList:
 
 class Mediterranean(BlockList):
     blocklist = {
-        'ground': [b.GRASS_PATH, b.SOUL_SAND],
+        'ground': [b.PATH_GRASS, b.FLOWER_RED.withData(2)],
         'tree_trunk': [b.TIMBER_LOG]
     }
     pass
@@ -28,7 +30,7 @@ class Misc:
     def build(self, biome):
         if biome == 'dessert':
             blocklist = Mediterranean()
-            ground_block_array = blocklist['ground']
+            ground_block_array = blocklist['ground'][0]
     def setGroundBlock(self):
         pass
 
