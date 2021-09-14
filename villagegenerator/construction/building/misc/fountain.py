@@ -3,7 +3,6 @@
 from park import Park
 
 class ParkFountain(Park):
-    
     # put whatever you need here to build a parkfountain object. this will ultimately be the method that is called
     # from the framework.
     def __init__(self) -> None:
@@ -26,10 +25,13 @@ class ParkFountain(Park):
         self.mc.setBlocks(x+4,y,z+10,x+4,y,z+10,self.lantern)
 
         self.mc.setBlocks(x+7,y+5,z+7,x+7,y+5,z+7,self.water)
+    def build_park(self,x,y,z):
+        self.build_foundation(x,y,z)
+        self.build_tree(x,y,z)
+        self.build_path(x,y,z)
+        self.build_fountain(x,y,z)
 
-
+    
 thing = ParkFountain()
 x, y, z = thing.player_position()
-thing.build_foundation(x, y, z)
-thing.build_path(x, y, z)
-thing.build_fountain(x, y, z)
+thing.build_park(x,y,z)
