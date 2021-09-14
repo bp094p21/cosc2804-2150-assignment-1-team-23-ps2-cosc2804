@@ -36,9 +36,15 @@ class Misc:
 class Park(Misc):
     # def basic(self):
     #     print(3)
+    components = {
+        'trees': [tree],
+        'main_footpath': None,
+        'benches': [],
+
+    }
     def basic(self):
         print('overwrote basic')
-    pass
+    pass 
 
 class Statue(Misc):
     pass
