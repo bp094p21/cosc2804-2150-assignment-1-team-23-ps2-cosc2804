@@ -23,6 +23,18 @@ class Block:
     def __repr__(self):
         return f"Block id: {self.id}, data: {self.data}, has_variation: {self.has_variation}, variation_type: {self.variation_type}"
 
+SLABS = {
+    'smooth_stone': [Block(43, 0), Block(43, 8)],
+    'sandstone': Block(43, 1),
+    'petrified_oak': Block(43, 2),
+    'cobblestone': Block(43, 3),
+    'brick': Block(43, 4),
+    'stone_brick': Block(43, 5),
+    'nether_brick': Block(43, 6),
+    'quartz': Block(43, 7),
+    'sandstone': Block(43, 1),
+
+}
 AIR                 = Block(0)
 STONE               = Block(1)
 GRASS               = Block(2)
@@ -52,8 +64,7 @@ FLOWER_YELLOW       = Block(37)
 FLOWER_RED          = Block(38)
 MUSHROOM_BROWN      = Block(39)
 MUSHROOM_RED        = Block(40)
-STONE_SLAB_DOUBLE   = Block(43, True)       # TODO: Check this
-STONE_SLAB          = Block(44, True)       # TODO: Check this
+SLAB                = Block(43, True, 'types')
 BRICK_BLOCK         = Block(45)
 BOOKSHELF           = Block(47)
 MOSSY_COBBLESTONE   = Block(48)
