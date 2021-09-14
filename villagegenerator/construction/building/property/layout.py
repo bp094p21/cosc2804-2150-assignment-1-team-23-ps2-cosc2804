@@ -1,10 +1,14 @@
 from mcpi import vec3
+def get_layout(house_type):
+    if house_type == 'basic':
+        return Basic()
+    elif house_type == 'dungeon':
+        return PoolSide()
 class Layout:
     name = ''
     def __init__(self, name = 'basic'):
         if name == 'basic':
             pass
-
 class Basic(Layout):
     def __init__(self):
         self.name = 'basic'
