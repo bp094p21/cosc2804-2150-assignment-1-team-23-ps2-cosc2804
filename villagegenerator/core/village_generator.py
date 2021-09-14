@@ -13,6 +13,6 @@ if __name__ == '__main__':
     x, y, z = mc.player.getTilePos()
 
     # upon invocation will generate a village where the player is standing.
-    build_village(VillageSize.SMALL, (x + 1, y + 1, z), mc.getBiome(), mc)
+    build_village(VillageSize.SMALL, (x + 1, y, z + 1), mc.getBiome(), mc)
 
     mc.postToChat('Done!')

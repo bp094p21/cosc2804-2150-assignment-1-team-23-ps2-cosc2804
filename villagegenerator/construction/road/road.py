@@ -3,15 +3,11 @@ import mcpi.block as block
 import math
 
 # straight
-def build_straight_ew():
+def build_straight_ew(x, y ,z):
     class PathEW(): #Path class for the East/West Path
         def __init__(self): #init function for self.mcpi connection as well as block id's 
             self.mc = minecraft.Minecraft.create()
             self.wood = 17
-
-        def get_player_pos(self): #get_player_pos function to get the position of the player in game
-            x, y, z = self.mc.player.getTilePos()
-            return x, y, z
 
         def create_path(self, x, y, z): #createPath function to create the East/West path based on current player position
             center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
@@ -29,18 +25,13 @@ def build_straight_ew():
             self.mc.setBlock(x+12, y-1, z+4+center, block.GLOWSTONE_BLOCK)
 
     craft = PathEW() #Initialise a variable to access the path class
-    x, y, z = craft.get_player_pos() #Inistialise variables for the current player position
     craft.create_path(x, y, z) #Create the path using current player position
 
-def build_straight_ns():
+def build_straight_ns(x, y, z):
     class PathNS(): #Path class for the North/South Path
         def __init__(self): #init function for self.mcpi connection as well as block id's 
             self.mc = minecraft.Minecraft.create()
             self.wood = 17
-
-        def get_player_pos(self): #get_player_pos function to get the position of the player in game
-            x, y, z = self.mc.player.getTilePos()
-            return x, y, z
 
         def create_path(self, x, y, z): #createPath function to create the North/South path based on current player position
             center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
@@ -58,18 +49,13 @@ def build_straight_ns():
             self.mc.setBlock(x+4+center, y-1, z+12, block.GLOWSTONE_BLOCK)
 
     craft = PathNS() #Initialise a variable to access the path class
-    x, y, z = craft.get_player_pos() #Inistialise variables for the current player position
     craft.create_path(x, y, z) #Create the path using current player position
 
 # bent
-def build_bent_connecting_se():
+def build_bent_connecting_se(x, y, z):
     class PathSE():
         def __init__(self):
             self.mc = minecraft.Minecraft.create()
-        
-        def get_player_pos(self):
-            x, y, z = self.mc.player.getTilePos()
-            return x, y, z
     
         def create_curve(self, x, y, z):
             radius = 11.5
@@ -88,17 +74,12 @@ def build_bent_connecting_se():
             self.mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
     
     craft = PathSE() #Initialise a variable to access the path class
-    x, y, z = craft.get_player_pos() #Inistialise variables for the current player position
     craft.create_curve(x, y, z) #Create the path using current player position
 
-def build_bent_connecting_sw():
+def build_bent_connecting_sw(x, y, z):
     class PathSW():
         def __init__(self):
             self.mc = minecraft.Minecraft.create()
-        
-        def get_player_pos(self):
-            x, y, z = self.mc.player.getTilePos()
-            return x, y, z
     
         def create_curve(self, x, y, z):
             radius = 11.5
@@ -117,17 +98,12 @@ def build_bent_connecting_sw():
             self.mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
             
     craft = PathSW() #Initialise a variable to access the path class
-    x, y, z = craft.get_player_pos() #Inistialise variables for the current player position
     craft.create_curve(x, y, z) #Create the path using current player position      
 
-def build_bent_connecting_ne():
+def build_bent_connecting_ne(x, y, z):
     class PathNE():
         def __init__(self):
             self.mc = minecraft.Minecraft.create()
-
-        def get_player_pos(self):
-            x, y, z = self.mc.player.getTilePos()
-            return x, y, z
 
         def create_curve(self, x, y, z):
             radius = 11.5
@@ -146,17 +122,12 @@ def build_bent_connecting_ne():
             self.mc.setBlock(x + 12, y - 1, z + 7, block.GLOWSTONE_BLOCK)
 
     craft = PathNE() #Initialise a variable to access the path class
-    x, y, z = craft.get_player_pos() #Inistialise variables for the current player position
     craft.create_curve(x, y, z) #Create the path using current player position  
 
-def build_bent_connecting_nw():
+def build_bent_connecting_nw(x, y, z):
     class PathNW():
         def __init__(self):
             self.mc = minecraft.Minecraft.create()
-
-        def get_player_pos(self):
-            x, y, z = self.mc.player.getTilePos()
-            return x, y, z
 
         def create_curve(self, x, y, z):
             radius = 11.5
@@ -175,19 +146,14 @@ def build_bent_connecting_nw():
             self.mc.setBlock(x + 2, y - 1, z + 7, block.GLOWSTONE_BLOCK)
 
     craft = PathNW() #Initialise a variable to access the path class
-    x, y, z = craft.get_player_pos() #Inistialise variables for the current player position
     craft.create_curve(x, y, z) #Create the path using current player position
 
 # intersection
-def build_crossintersection():
+def build_crossintersection(x, y, z):
     class Intersection(): #Path class for the intersection path
         def __init__(self): #init function for self.mcpi connection as well as block id's 
             self.mc = minecraft.Minecraft.create()
             self.wood = 17
-
-        def get_player_pos(self): #get_player_pos function to get the position of the player in game
-            x, y, z = self.mc.player.getTilePos()
-            return x, y, z
 
         def create_intersection(self, x, y, z): #createPath function to create the East/West path based on current player position
             center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
@@ -227,5 +193,4 @@ def build_crossintersection():
             self.mc.setBlock(x+12, y-1, z+4+center, block.GLOWSTONE_BLOCK)
         
     craft = Intersection() #Initialise a variable to access the path class
-    x, y, z = craft.get_player_pos() #Inistialise variables for the current player position
     craft.create_intersection(x, y, z) #Create the path using current player position
