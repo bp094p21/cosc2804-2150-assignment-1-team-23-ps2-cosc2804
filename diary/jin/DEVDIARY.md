@@ -47,6 +47,7 @@ Testing
 
 Learning
  - Went through each block from 0-255 and learnt about each one and their variation
+ - Learnt about the `random.choice()` function to choose a random item from a list
 
 Implementing
  - Added Basic layout for a property with start and end values in the x and z direction for each component
@@ -54,6 +55,8 @@ Implementing
  - Drafted up suitable house types for each theme
  - Drafted up possible themes for property
  - Drafted up sets of distinguishable blocks to use for each theme
+ - Implemented and tested build functions for Entrance and Floor class
+ 
 # TODO: Make sets of suitable blocks for each component for each house_type for each theme
 
 ## Week 3
