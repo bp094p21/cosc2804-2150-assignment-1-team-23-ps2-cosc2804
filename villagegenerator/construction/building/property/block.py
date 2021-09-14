@@ -182,5 +182,8 @@ CONCRETE_POWDER     = Block(252, True, 'colors')
 COOKING = [FURNACE_INACTIVE, FURNACE_ACTIVE]
 
 if __name__ == '__main__':
-    concrete_block = CONCRETE.withData(3)
-    print(concrete_block.variation_type)
+    from mcpi import minecraft
+    mc = minecraft.Minecraft.create()
+    x,y,z = mc.player.getPos()
+    block = CONCRETE.withData(2)
+    mc.setBlock(x,y,z,block)
