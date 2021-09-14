@@ -1,18 +1,13 @@
 class House:
+    theme = None
     type = None
     def __init__(self):
        pass 
 
-# Basic Theme
-class Cabin(House):
+# Mediterranean Theme
+class Basic(House):
     def __init__(self):
-        self.type = 'cabin'
-class Simpleton(House):
-    def __init__(self):
-        self.type = 'simpleton'
-class Tent(House):
-    def __init__(self):
-        self.type = 'tent'
+        self.type = 'basic'
 
 # Magic Theme
 class Cottage(House):
@@ -21,7 +16,7 @@ class Cottage(House):
 class Dungeon(House):
     def __init__(self):
         self.type = 'dungeon'
-class WithHouse(House):
+class WitchHouse(House):
     def __init__(self):
         self.type = 'witch_house'
 
