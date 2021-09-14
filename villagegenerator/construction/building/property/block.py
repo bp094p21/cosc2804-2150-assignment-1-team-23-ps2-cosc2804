@@ -13,14 +13,15 @@ class Block:
         return (self.id << 8) + self.data
 
     def withData(self, data):
-        return Block(self.id, data)
+        self.data = data
+        return self
 
     def __iter__(self):
         """Allows a Block to be sent whenever id [and data] is needed"""
         return iter((self.id, self.data))
         
     def __repr__(self):
-        return "Block(%d, %d)"%(self.id, self.data)
+        return f"Block id: {self.id}, data: {self.data}, has_variation: {self.has_variation}, variation_type: {self.variation_type}"
 
 AIR                 = Block(0)
 STONE               = Block(1)
@@ -37,7 +38,7 @@ LAVA                = LAVA_FLOWING
 LAVA_STATIONARY     = Block(11)
 SAND                = Block(12)
 GRAVEL              = Block(13)
-TIMBER_LOG                 = Block(17, True, 'types')
+TIMBER_LOG          = Block(17, True, 'types')
 LEAVES              = Block(18, True)   # 0 Oak, 1 Spruce, 2 Birch, 3 Jungle
 GLASS_BLOCK         = Block(20)
 FLOOR_PATTERN_GREY  = Block(23, False)
@@ -51,13 +52,13 @@ FLOWER_YELLOW       = Block(37)
 FLOWER_RED          = Block(38)
 MUSHROOM_BROWN      = Block(39)
 MUSHROOM_RED        = Block(40)
-STONE_SLAB_DOUBLE   = Block(43, True)
-STONE_SLAB          = Block(44, True)
+STONE_SLAB_DOUBLE   = Block(43, True)       # TODO: Check this
+STONE_SLAB          = Block(44, True)       # TODO: Check this
 BRICK_BLOCK         = Block(45)
 BOOKSHELF           = Block(47)
 MOSSY_COBBLESTONE   = Block(48)
 OBSIDIAN            = Block(49)
-TORCH               = Block(50, True, 'orientation')
+TORCH               = Block(50, True, 'orientation') # mc.setBlock(id, subtype) # Light source - Bright
 TORTURE_CHAMBER     = Block(52, True)
 STAIRS_WOOD         = Block(53, True, 'orientation')
 CHEST               = Block(54, True, 'orientation')
@@ -72,7 +73,7 @@ DOOR_OAK            = Block(64, True, 'orientation')
 LADDER              = Block(65)
 STAIRS_COBBLESTONE  = Block(67, True, 'orientation')
 DOOR_IRON           = Block(71, True, 'orientation')
-TORCH_REDSTONE      = Block(75)     # Same as 76
+TORCH_REDSTONE      = Block(75)     # Same as 76    # Light source - Dim
 SNOW                = Block(78, True, 'height')
 ICE                 = Block(79)
 SNOW_BLOCK          = Block(80)
@@ -81,7 +82,7 @@ CLAY                = Block(82)
 JUKEBOX             = Block(84)
 FENCE_OAK           = Block(85, True, 'orientation')
 PUMPKIN             = Block(86, True, 'orientation') 
-NETHERRACK          = Block(87)
+NETHERRACK          = Block(87)     # Fireplace under chimney
 SOUL_SAND           = Block(88)
 GLOWSTONE           = Block(89)
 PUMPKIN_LIT         = Block(91, True, 'orientation')
@@ -126,7 +127,7 @@ STAIRS_ACACIA       = Block(163, True, 'orientation')
 STAIRS_DARK_OAK     = Block(164, True, 'orientation')
 TRAPDOOR_IRON       = Block(167)
 PRISMARINE          = Block(168, True, 'colors_patterns')
-SEA_LANTERN         = Block(169)    # Decoration
+SEA_LANTERN         = Block(169)    # Light source      # Decoration
 HAY_BALE            = Block(170, True, 'orientation')
 CARPET              = Block(171, True, 'colors')
 TERRACOTTA2         = Block(172)
@@ -152,7 +153,7 @@ DOOR_BIRCH          = Block(194, True, 'orientation')
 DOOR_JUNGLE         = Block(195, True, 'orientation')
 DOOR_ACACIA         = Block(196, True, 'orientation')
 DOOR_DARK_OAK       = Block(197, True, 'orientation')
-END_ROAD            = Block(198, True, 'orientation')   # Light source # Decoration
+END_ROD             = Block(198, True, 'orientation')   # Light source # Decoration
 PURPUR_BLOCK        = Block(201)
 PURPUR_PILLAR       = Block(202, True, 'minor')
 PURPUR_STAIRS       = Block(203, True, 'orientation')
@@ -161,8 +162,6 @@ BRICKS_VANILLA      = Block(206)
 SEEDS_BEETROOT      = Block(207, True, 'growth_stage')
 PATH_GRASS          = Block(208)
 BRICKS_NETHER_RED   = Block(215)    # Use 112 for Purple
-# Blocks 219-234 are Shulker Boxes in different colors, each with orientation variation
-SHULKER_BOX         = Block(219, True, 'orientation')   # Decoration
 # Blocks 235-250 are Terracotta blocks in different colors, each with 4 variation to form a pattern
 TERRACOTTA_WHITE_GLAZED = Block(235, True, 'pattern')
 CONCRETE            = Block(251, True, 'colors')
@@ -170,3 +169,7 @@ CONCRETE_POWDER     = Block(252, True, 'colors')
 
 # OPTIONS
 COOKING = [FURNACE_INACTIVE, FURNACE_ACTIVE]
+
+if __name__ == '__main__':
+    concrete_block = CONCRETE.withData(3)
+    print(concrete_block.variation_type)
