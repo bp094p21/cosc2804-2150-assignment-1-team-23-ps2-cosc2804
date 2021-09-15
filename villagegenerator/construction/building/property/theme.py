@@ -1,6 +1,6 @@
 import random
 def get_theme(theme):
-    if theme == 'mediterranean':
+    if theme == 'medi':
         return Mediterranean()
     elif theme == 'magic':
         return Magic()
