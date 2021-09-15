@@ -9,7 +9,7 @@ def build_straight_ew(x, y ,z):
             self.mc = minecraft.Minecraft.create()
             self.wood = 17
 
-        def create_path(self, x, y, z): #createPath function to create the East/West path based on current player position
+        def create_path(self, x, y, z): #createPath function to create the East/West path based on matrix position
             center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
             for i in range(15): #Loops 15 times over to cover a 15 block radius of below blocks (length of path)
                 self.mc.setBlocks(x, y, z+center, x+i, y, z+center, block.LEAVES)
@@ -25,7 +25,7 @@ def build_straight_ew(x, y ,z):
             self.mc.setBlock(x+12, y-1, z+4+center, block.GLOWSTONE_BLOCK)
 
     craft = PathEW() #Initialise a variable to access the path class
-    craft.create_path(x, y, z) #Create the path using current player position
+    craft.create_path(x, y, z) #Create the path using current matrix position
 
 def build_straight_ns(x, y, z):
     class PathNS(): #Path class for the North/South Path
@@ -33,7 +33,7 @@ def build_straight_ns(x, y, z):
             self.mc = minecraft.Minecraft.create()
             self.wood = 17
 
-        def create_path(self, x, y, z): #createPath function to create the North/South path based on current player position
+        def create_path(self, x, y, z): #createPath function to create the North/South path based on matrix position
             center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
             for i in range(15): #Loops 15 times over to cover a 15 block radius of below blocks (length of path)
                 self.mc.setBlocks(x+center, y, z, x+center, y, z+i, block.LEAVES)
@@ -49,7 +49,7 @@ def build_straight_ns(x, y, z):
             self.mc.setBlock(x+4+center, y-1, z+12, block.GLOWSTONE_BLOCK)
 
     craft = PathNS() #Initialise a variable to access the path class
-    craft.create_path(x, y, z) #Create the path using current player position
+    craft.create_path(x, y, z) #Create the path using current matrix position
 
 # bent
 def build_bent_connecting_se(x, y, z):
@@ -74,7 +74,7 @@ def build_bent_connecting_se(x, y, z):
             self.mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
     
     craft = PathSE() #Initialise a variable to access the path class
-    craft.create_curve(x, y, z) #Create the path using current player position
+    craft.create_curve(x, y, z) #Create the path using current matrix position
 
 def build_bent_connecting_sw(x, y, z):
     class PathSW():
@@ -98,7 +98,7 @@ def build_bent_connecting_sw(x, y, z):
             self.mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
             
     craft = PathSW() #Initialise a variable to access the path class
-    craft.create_curve(x, y, z) #Create the path using current player position      
+    craft.create_curve(x, y, z) #Create the path using current matrix position      
 
 def build_bent_connecting_ne(x, y, z):
     class PathNE():
@@ -122,7 +122,7 @@ def build_bent_connecting_ne(x, y, z):
             self.mc.setBlock(x + 12, y - 1, z + 7, block.GLOWSTONE_BLOCK)
 
     craft = PathNE() #Initialise a variable to access the path class
-    craft.create_curve(x, y, z) #Create the path using current player position  
+    craft.create_curve(x, y, z) #Create the path using current matrix position  
 
 def build_bent_connecting_nw(x, y, z):
     class PathNW():
@@ -146,7 +146,7 @@ def build_bent_connecting_nw(x, y, z):
             self.mc.setBlock(x + 2, y - 1, z + 7, block.GLOWSTONE_BLOCK)
 
     craft = PathNW() #Initialise a variable to access the path class
-    craft.create_curve(x, y, z) #Create the path using current player position
+    craft.create_curve(x, y, z) #Create the path using current matrix position
 
 # intersection
 def build_crossintersection(x, y, z):
@@ -155,7 +155,7 @@ def build_crossintersection(x, y, z):
             self.mc = minecraft.Minecraft.create()
             self.wood = 17
 
-        def create_intersection(self, x, y, z): #createPath function to create the East/West path based on current player position
+        def create_intersection(self, x, y, z): #createPath function to create the East/West path based on matrix position
             center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
             for i in range(15): #Loops 15 times over to cover a 15 block radius of below blocks (length of path)
                 self.mc.setBlocks(x, y, z+center, x+i, y, z+center, block.LEAVES)
@@ -193,4 +193,4 @@ def build_crossintersection(x, y, z):
             self.mc.setBlock(x+12, y-1, z+4+center, block.GLOWSTONE_BLOCK)
         
     craft = Intersection() #Initialise a variable to access the path class
-    craft.create_intersection(x, y, z) #Create the path using current player position
+    craft.create_intersection(x, y, z) #Create the path using current matrix position
