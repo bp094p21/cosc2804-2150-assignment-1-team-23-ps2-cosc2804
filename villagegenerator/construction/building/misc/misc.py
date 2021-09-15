@@ -1,8 +1,6 @@
-
 from mcpi.minecraft import Minecraft
 import random
 import sys
-
 import block as b
 
 #types of misc objects{open nature area, park features, statue-like objects}
@@ -27,9 +25,8 @@ class BuildingBlocks():
             'shrubs':[b.GRASS_TALL,31,b.GRASS_TALL.withData(2)]
         }
 class Misc():# find  imports random misc then misc will casll global function and build that
-
+    #misc_obj = None
     types = ["open_nature","park","statue"]
-    misc_obj = None
     def __init__(self) -> None:
         self.mc = Minecraft.create()
         self.water = 8
@@ -143,11 +140,26 @@ class Statue():
         pass
     import modern_art"""
 
+"""def build():
+    misc_obj = None
+    selection = random.randint(0,2)
+    type = 'park'#types[selection]
+    if type == 'park':
+        misc_obj= park.chooseParkStructure()
+        misc_obj.build
+    elif type == "open_nature":
+        #misc_obj = Nature()
+        a =1
+    else:
+        #misc_obj = Statue()
+        a =1
+#maybe just make a build file for misc, and import all of that into there, then randomly choose sopmething to build"""
+    
 
 
 park = Misc()
 list = BuildingBlocks()
 x,y,z = park._player_position()
-#park._get_blocks(BuildingBlocks)
+
 park.build_foundation(x,y,z)
 park.build_tree(x,y,z)
