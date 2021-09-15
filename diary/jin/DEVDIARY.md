@@ -48,6 +48,10 @@ Testing
 Learning
  - Went through each block from 0-255 and learnt about each one and their variation
  - Learnt about the `random.choice()` function to choose a random item from a list
+ - Learnt a lot about OOP - class inheritance, how importing statements behave depending on what file you're running and who's importing what from where.
+
+Designing
+ - Added appropriate blocks to use for each component for 'medi' theme
 
 Implementing
  - Added Basic layout for a property with start and end values in the x and z direction for each component
@@ -56,6 +60,12 @@ Implementing
  - Drafted up possible themes for property
  - Drafted up sets of distinguishable blocks to use for each theme
  - Implemented and tested build functions for Entrance and Floor class
+ - Modified classes so that classes that represent inanimate objects such as house components ('gate', 'wall') do not contain functions. They now only contain attributes
+ - Added classes that represent objects that have the ability to "do". These classes use objects to query for design specs and appropriate blocks to use to build with
+ - Finished main module `architect.py`
+
+Testing
+ - Getting into the habit of writing "if name is main" tests at the bottom of every file to easily test main functionality of each file
  
 # TODO: Make sets of suitable blocks for each component for each house_type for each theme
 
