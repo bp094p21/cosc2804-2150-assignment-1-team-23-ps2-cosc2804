@@ -4,6 +4,8 @@ def get_theme(theme):
         return Mediterranean()
     elif theme == 'magic':
         return Magic()
+    elif theme == 'modern':
+        return Modern()
 class Theme:
     name = None
     options = {}
