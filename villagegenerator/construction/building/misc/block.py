@@ -33,44 +33,7 @@ SLABS = {
     'nether_brick': Block(43, 6),
     'quartz': Block(43, 7),
     'sandstone': Block(43, 1),
-}
-MEDI = {
-    'boundary': {
 
-    },
-    'entrance': {
-
-    },
-    'floor': {
-
-    },
-    'front': {
-
-    },
-    'house': {
-
-    },
-    'pool': {
-
-    },
-    'roof': {
-
-    },
-    'room': {
-
-    },
-    'side': {
-
-    },
-    'stairs': {
-
-    },
-    'steps': {
-
-    },
-    'wall': {
-
-    }
 }
 AIR                 = Block(0)
 STONE               = Block(1)
