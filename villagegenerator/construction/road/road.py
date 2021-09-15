@@ -53,37 +53,37 @@ def build_straight_ns(x, y, z):
 
 # bent
 def build_bent_connecting_se(x, y, z):
-    class PathSE():
+    class PathSE(): # Path class for curve SE
         def __init__(self):
             self.mc = minecraft.Minecraft.create()
     
         def create_curve(self, x, y, z):
-            radius = 11.5
-            curve = [17, [17,4], 45, 45, 45, 45, 45, [17,4], 17]
-            for angle in range(181, 270):
+            radius = 11.5 #Radius the curve is built upon
+            curve = [17, [17,4], 45, 45, 45, 45, 45, [17,4], 17] #List of blocks in path
+            for angle in range(181, 270): #Angle of path created (SE direction)
                 for i in range(len(curve)):
-                    new_x = x + (radius - i) * math.cos(angle*math.pi/180)
+                    new_x = x + (radius - i) * math.cos(angle*math.pi/180) #Assigned x and z coordinates based on angle position 
                     new_z = z + (radius - i) * math.sin(angle*math.pi/180)
-                    self.mc.setBlock(new_x + 15, y-1, new_z + 15, curve[i])
+                    self.mc.setBlock(new_x + 15, y-1, new_z + 15, curve[i]) #Place currently hovered block in list
                     if i == 8:
-                        self.mc.setBlock(new_x + 15, y, new_z + 15, block.LEAVES)
-                new_x = x + (radius) * math.cos(angle*math.pi/180)
+                        self.mc.setBlock(new_x + 15, y, new_z + 15, block.LEAVES) #Place leaf block at the end (inside)
+                new_x = x + (radius) * math.cos(angle*math.pi/180) # Assign x and z coordinates based on angle position
                 new_z = z + (radius) * math.sin(angle*math.pi/180)
-                self.mc.setBlock(new_x + 15, y, new_z + 15, block.LEAVES)
-            self.mc.setBlock(x + 12, y - 1, z + 7, block.GLOWSTONE_BLOCK)
+                self.mc.setBlock(new_x + 15, y, new_z + 15, block.LEAVES) #Place leaf blocks along the outside of the build
+            self.mc.setBlock(x + 12, y - 1, z + 7, block.GLOWSTONE_BLOCK) #Place glowstone blocks in path
             self.mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
     
     craft = PathSE() #Initialise a variable to access the path class
     craft.create_curve(x, y, z) #Create the path using current matrix position
 
 def build_bent_connecting_sw(x, y, z):
-    class PathSW():
+    class PathSW(): 
         def __init__(self):
             self.mc = minecraft.Minecraft.create()
     
         def create_curve(self, x, y, z):
-            radius = 11.5
-            curve = [17, [17,4], 45, 45, 45, 45, 45, [17,4], 17]
+            radius = 11.5 
+            curve = [17, [17,4], 45, 45, 45, 45, 45, [17,4], 17] 
             for angle in range(271, 360):
                 for i in range(len(curve)):
                     new_x = x + (radius - i) * math.cos(angle*math.pi/180)
