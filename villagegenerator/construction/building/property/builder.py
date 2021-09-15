@@ -3,7 +3,6 @@ import util.logbook as l
 import property as p
 import tradies as t
 import mcpi as m
-import numpy as n
 
 class Builder:
     name = None
@@ -18,11 +17,20 @@ class Builder:
         self.properties.append(property)
         self.logbook = l.Logbook(self)
         self.logbook.logs.append(f'Assigned property:\n{property}')
-
+    # Internal Methods
+    def _build_property(self) -> None:
+        self.p.status = f"🚧 Commencing property build at location:\n{self.p.location_str}"
+        self.p.print_status()
+        self._build_components()
+        self.p.status = f"✅ Completed property build at location:\n{self.p.location_str}"
+        self.p.print_status()
+        return None
+    def _build_components(self):
+        # TODO: Use components to randomly build components
+        pass
 
 class Bob(Builder):
     name = 'Bob'
-
 
 TRADIE = {
     'carpets': t.carpet_call.CarpetCall(),
