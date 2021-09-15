@@ -1,32 +1,29 @@
+from components.component import Component
+import block as b
+from mcpi import vec3 as v
+
 class House:
-    theme = None
     type = None
-    def __init__(self):
-       pass 
+    components = {}
+    def __init__(self, components):
+        self.components = components
 
 # Mediterranean Theme
 class Basic(House):
-    def __init__(self):
-        self.type = 'basic'
+    type = 'basic'
 
 # Magic Theme
 class Cottage(House):
-    def __init__(self):
-        self.type = 'cottage'
+    type = 'cottage'
 class Dungeon(House):
-    def __init__(self):
-        self.type = 'dungeon'
+    type = 'dungeon'
 class WitchHouse(House):
-    def __init__(self):
-        self.type = 'witch_house'
+    type = 'witch_house'
 
 # Modern Theme
 class Apartment(House):
-    def __init__(self):
-        self.type = 'apartment'
+    type = 'apartment'
 class DoubleStory(House):
-    def __init__(self):
-        self.type = 'double_story'
+    type = 'double_story'
 class Duplex(House):
-    def __init__(self):
-        self.type = 'duplex'
+    type = 'duplex'

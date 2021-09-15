@@ -1,8 +1,5 @@
-from mcpi import vec3 as v
-import sys
-sys.path.append('../property')
-
 import block as b
+from mcpi import vec3 as v
 
 class Component:
     type = None

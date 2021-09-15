@@ -1,10 +1,9 @@
-import sys
-sys.path.append('../property')
 from components.component import Component
 import block as b
 from mcpi import vec3 as v
 
 class Pool(Component):
+    # Class attributes
     type = 'pool'
     pool_depth = None
     line_block: b.Block = None

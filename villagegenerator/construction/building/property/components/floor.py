@@ -1,8 +1,4 @@
 from mcpi import vec3 as v
-
-import sys
-sys.path.append('../property')
-
 import block as b
 from components.component import Component
 

@@ -1,4 +1,14 @@
-from component import Component
+from components.component import Component
+import block as b
+from mcpi import vec3 as v
+
 class Boundary(Component):
-    def __init__(self):
+    # Class attributes
+    type = 'boundary'
+    length: int = 15
+    # Instance attributes
+    block: b.Block = None
+    ## Height and stepping frequency dependent on Entrance
+    def __init__(self, block=b.STONE):
+        self.block = block
         pass
