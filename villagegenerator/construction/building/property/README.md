@@ -4,28 +4,32 @@ This is the README file for the property subpackage.
 
 1. Usage
 2. Testing
-3. Examples
 
 ## Usage
 
-1. Instantiate Property object
-2. Build object at given location
+1. Instantiate architect
+2. Give property specs to architect
 
 ### Instantiate Property object
 
 ```python
-import property
-from mcpi import vec3
-from mcpi import minecraft
+import property.architect as arch
 
-vec3_object = vec3.Vec3(0,0,0)
-mc = minecraft.Minecraft.create()
-entrance_edge = 0
-biome = 0
+architect = arch.Jin()      # or architect = arch.Architect()
+```
 
-property_object = property.Property(vec3_object, entrance_edge, biome, mc)
-property_object.build()
+### Give property specs to architect
+
+```python
+architect.give_specs(location_v3: v.Vec3, orientation: int, theme: str, mc: minecraft.Minecraft)
+```
+
+> Properties can be accessed through `architect.properties` or `architect.builder.properties`
+
 
 ## Testing
 
-## Examples
+1. Open server connection
+2. Open minecraft and connect to server
+3. Run `$ python3 architect.py`
+
