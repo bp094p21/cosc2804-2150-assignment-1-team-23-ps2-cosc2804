@@ -1,19 +1,17 @@
 from mcpi import vec3
-from mcpi import minecraft
 import theme as t
 import layout as l
-from util import printer
+import components
 
 class Property:
     # __init__ inputs
     location_v3: vec3.Vec3 = None 
     orientation = None
-    # Derived properties
-    entrance_edge: dict['start': vec3.Vec3, 'end': vec3.Vec3] = None
     theme: t.Theme = None       
-    house_type: str = None      # Set by theme
-    layout: l.Layout = None     # Set by house_type
-    components: dict = {        # Set by layout
+    entrance_edge: dict = None
+    house_type: str = None      
+    layout: l.Layout = None     
+    components: dict = {        
         'boundary': None,
         'entrance': None,
         'floors': [],
@@ -26,63 +24,22 @@ class Property:
         'stairs': [],
         'walls': []
     }
-    # Initialize print utilities
-    p = printer.Printer("Property not yet instantaited")
-    p.location_str = "Location not set"
+    is_built = False
 
     # Public functions
-    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme: str, entrance_edge: dict, house_type: str, layout: l.Layout, components: dict) -> None:
+    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme, entrance_edge: dict, house_type: str, layout: l.Layout, components = {}) -> None:
         self.location_v3 = location_v3
-        self.p.location_str = f"\nx: {location_v3.x}\ny: {location_v3.y}\nz: {location_v3.z}\n"
-        # self.orientation = orientation
-        # self._set_entrance_edge(orientation)
-        # self._set_theme(theme)
-        # self._set_house_type()
-        # self.p.status = f"✅ Property object instantiated with location:\n{self.p.location_str}\nentrance edge: {self.entrance_edge}\ntheme: {self.theme.name}\nhouse_type: {self.house_type}"
-        # self.p.print_status()
+        self.location_str = f"\nx: {location_v3.x}\ny: {location_v3.y}\nz: {location_v3.z}\n"
+        self.orientation = orientation
+        self.theme = theme
+        self.entrance_edge = entrance_edge
+        self.house_type = house_type
+        self.layout = layout
+        self.components = components
         return None
-    def build(self) -> None:
-        self.p.status = f"🚧 Commencing property build at location:\n{self.p.location_str}"
-        self.p.print_status()
-        self._random_select_house_type()
-        self._random_select_layout()
-        self._instantiate_components()
-        self._build_components()
-        self.p.status = f"✅ Completed property build at location:\n{self.p.location_str}"
-        self.p.print_status()
-        return None
+    def __repr__(self):
+        return f"🖨  Printing object.__repr__:\n\n{type(self)}\n\nlocation_v3: {self.location_v3},\norientation: {self.orientation},\ntheme: {self.theme.name},\nhouse_type: {self.house_type},\nis_built: {self.is_built}"
     # Internal methods
-    def _set_entrance_edge(self, orientation):
-        if orientation == 0:
-            self.entrance_edge['start'] = self.location_v3
-            self.entrance_edge['end'] = vec3.Vec3(self.location_v3.x + 14, self.location_v3.y, self.location_v3.z)
-        elif orientation == 1:
-            self.entrance_edge['start'] = vec3.Vec3(self.location_v3.x + 14, self.location_v3.y, self.location_v3.z)
-            self.entrance_edge['end'] = vec3.Vec3(self.location_v3.x + 14, self.location_v3.y, self.location_v3.z + 14)
-        elif orientation == 2:
-            self.entrance_edge['start'] = vec3.Vec3(self.location_v3.x + 14, self.location_v3.y, self.location_v3.z + 14)
-            self.entrance_edge['end'] = vec3.Vec3(self.location_v3.x, self.location_v3.y, self.location_v3.z + 14)
-        elif orientation == 3:
-            self.entrance_edge['start'] = vec3.Vec3(self.location_v3.x, self.location_v3.y, self.location_v3.z + 14)
-            self.entrance_edge['end'] = self.location_v3
-        self.p.status = f"✅ Entrance edge set."
-        self.p.print_status()
-        return None
-    def _set_theme(self, theme):
-        self.theme = t.get_theme(theme)
-        self.p.status = f"✅ Theme set: {self.theme.name}"
-        self.p.print_status()
-        return None
-    def _set_house_type(self) -> None:
-        self.house_type = self.theme.house_type
-        self.p.status = f"✅ House type set: {self.house_type}"
-        self.p.print_status()
-        return None
-    def _set_layout(self) -> None:
-        self.layout = l.get_layout(self.house_type)
     def _instantiate_components(self):
         # TODO: Use layout to randomly instantiate components to build
-        pass
-    def _build_components(self):
-        # TODO: Use components to randomly build components
         pass
