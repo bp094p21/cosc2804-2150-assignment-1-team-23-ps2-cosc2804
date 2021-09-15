@@ -2,10 +2,8 @@ import sys
 sys.path.append('../property')
 import components.component as component
 
-
 from mcpi import vec3
 from mcpi import minecraft
-
 
 mc = minecraft.Minecraft.create()
 player_pos = mc.player.getPos()
