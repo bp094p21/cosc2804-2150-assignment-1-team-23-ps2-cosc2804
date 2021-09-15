@@ -6,9 +6,8 @@ from util import printer
 
 class Property:
     # __init__ inputs
-    location_vec3: vec3.Vec3 = None 
+    location_v3: vec3.Vec3 = None 
     orientation = None
-    mc: minecraft.Minecraft = None
     # Derived properties
     entrance_edge: dict['start': vec3.Vec3, 'end': vec3.Vec3] = None
     theme: t.Theme = None       
@@ -31,17 +30,16 @@ class Property:
     p = printer.Printer("Property not yet instantaited")
     p.location_str = "Location not set"
 
-    # Public methods
-    def __init__(self, location_vec3: vec3.Vec3, orientation: int, theme: str, mc: minecraft.Minecraft) -> None:
-        self.location_vec3 = location_vec3
-        self.p.location_str = f"\nx: {location_vec3.x}\ny: {location_vec3.y}\nz: {location_vec3.z}\n"
-        self.orientation = orientation
-        self._set_entrance_edge(orientation)
-        self._set_theme(theme)
-        self._set_house_type()
-        self.mc = mc
-        self.p.status = f"✅ Property object instantiated with location:\n{self.p.location_str}\nentrance edge: {self.entrance_edge}\ntheme: {self.theme.name}\nhouse_type: {self.house_type}"
-        self.p.print_status()
+    # Public functions
+    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme: str, entrance_edge: dict, house_type: str, layout: l.Layout, components: dict) -> None:
+        self.location_v3 = location_v3
+        self.p.location_str = f"\nx: {location_v3.x}\ny: {location_v3.y}\nz: {location_v3.z}\n"
+        # self.orientation = orientation
+        # self._set_entrance_edge(orientation)
+        # self._set_theme(theme)
+        # self._set_house_type()
+        # self.p.status = f"✅ Property object instantiated with location:\n{self.p.location_str}\nentrance edge: {self.entrance_edge}\ntheme: {self.theme.name}\nhouse_type: {self.house_type}"
+        # self.p.print_status()
         return None
     def build(self) -> None:
         self.p.status = f"🚧 Commencing property build at location:\n{self.p.location_str}"
@@ -56,17 +54,17 @@ class Property:
     # Internal methods
     def _set_entrance_edge(self, orientation):
         if orientation == 0:
-            self.entrance_edge['start'] = self.location_vec3
-            self.entrance_edge['end'] = vec3.Vec3(self.location_vec3.x + 14, self.location_vec3.y, self.location_vec3.z)
+            self.entrance_edge['start'] = self.location_v3
+            self.entrance_edge['end'] = vec3.Vec3(self.location_v3.x + 14, self.location_v3.y, self.location_v3.z)
         elif orientation == 1:
-            self.entrance_edge['start'] = vec3.Vec3(self.location_vec3.x + 14, self.location_vec3.y, self.location_vec3.z)
-            self.entrance_edge['end'] = vec3.Vec3(self.location_vec3.x + 14, self.location_vec3.y, self.location_vec3.z + 14)
+            self.entrance_edge['start'] = vec3.Vec3(self.location_v3.x + 14, self.location_v3.y, self.location_v3.z)
+            self.entrance_edge['end'] = vec3.Vec3(self.location_v3.x + 14, self.location_v3.y, self.location_v3.z + 14)
         elif orientation == 2:
-            self.entrance_edge['start'] = vec3.Vec3(self.location_vec3.x + 14, self.location_vec3.y, self.location_vec3.z + 14)
-            self.entrance_edge['end'] = vec3.Vec3(self.location_vec3.x, self.location_vec3.y, self.location_vec3.z + 14)
+            self.entrance_edge['start'] = vec3.Vec3(self.location_v3.x + 14, self.location_v3.y, self.location_v3.z + 14)
+            self.entrance_edge['end'] = vec3.Vec3(self.location_v3.x, self.location_v3.y, self.location_v3.z + 14)
         elif orientation == 3:
-            self.entrance_edge['start'] = vec3.Vec3(self.location_vec3.x, self.location_vec3.y, self.location_vec3.z + 14)
-            self.entrance_edge['end'] = self.location_vec3
+            self.entrance_edge['start'] = vec3.Vec3(self.location_v3.x, self.location_v3.y, self.location_v3.z + 14)
+            self.entrance_edge['end'] = self.location_v3
         self.p.status = f"✅ Entrance edge set."
         self.p.print_status()
         return None
