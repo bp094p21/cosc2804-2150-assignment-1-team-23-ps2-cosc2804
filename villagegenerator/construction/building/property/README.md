@@ -29,6 +29,7 @@ architect.give_specs(location_v3: v.Vec3, orientation: int, theme: str, mc: mine
 
 ## Testing
 
+# TODO: Write test
 1. Open server connection
 2. Open minecraft and connect to server
 3. Run `$ python3 architect.py`
