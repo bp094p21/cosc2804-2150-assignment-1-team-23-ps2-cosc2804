@@ -5,14 +5,13 @@ class ChessBoard(Misc):
     def __init__(self) -> None:
         super().__init__()
         self.back_piece = 198
-        self.front = 140
+        self.front = 214
     def build(self):
         x,y,z  = self._player_position()
         self.build_foundation(x,y,z)
         self.mc.setBlocks(x+3,y,z+3,x+11,y,z+11,self.ground_array[1])
 
         counter = 0
-
         for i in range(9):
             for j in range(9):
                 if counter % 2 == 1:

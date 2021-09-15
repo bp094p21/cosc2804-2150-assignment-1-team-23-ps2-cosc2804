@@ -6,25 +6,24 @@ import block as b
 #types of misc objects{open nature area, park features, statue-like objects}
 #theme order{0= modern, 1= mediterranean, 2= magic}
 
-
+(162,1)
 class BuildingBlocks():
     def __init__(self) -> None:
-        
         self.blocklist = {
-            'ground':[b.GRASS,b.SAND, b.MOSSY_COBBLESTONE],
+            'ground':[b.GRASS,b.SAND, b.BRICKS_NETHER_RED],
             "ground_base":[b.STONE,b.SANDSTONE,b.COBBLESTONE],
             'main_block':[b.CONCRETE, b.TERRACOTTA,b.PURPUR_BLOCK],
             'sub_block':[b.PILLAR_QUARTZ,b.TERRACOTTA_WHITE_GLAZED,b.OBSIDIAN],
             'main_slab':[(43,0),(43,1),(204)],
             "wood":[b.WOOD_PLANKS,b.WOOD_PLANKS.withData(4),b.WOOD_PLANKS.withData(5)],
-            'plant_stem':[b.TIMBER_LOG,81, 162],
-            'plant_leaves':[b.LEAVES,0,b.LEAVES2.withData(1)],
+            'plant_stem':[b.TIMBER_LOG,81, b.LOG.withData(1)],
+            'plant_leaves':[b.LEAVES,0,213],
             'main_light_block':[b.SEA_LANTERN,b.SEA_LANTERN,b.GLOWSTONE],
             'torch':[b.TORCH,b.TORCH,b.TORCH_REDSTONE],
             'flower':[b.FLOWER_RED,b.AIR, b.MUSHROOM_RED],
-            'shrubs':[b.GRASS_TALL,31,b.GRASS_TALL.withData(2)]
+            'shrubs':[b.GRASS_TALL,31,31]
         }
-class Misc():# find  imports random misc then misc will casll global function and build that
+class Misc():
     #misc_obj = None
     types = ["open_nature","park","statue"]
     def __init__(self) -> None:
@@ -39,6 +38,7 @@ class Misc():# find  imports random misc then misc will casll global function an
             block_type = 1
         else:
             block_type = 2"""
+
         if self.biome == 1:
             block_type = 0
         elif self.biome == 2:
@@ -56,6 +56,7 @@ class Misc():# find  imports random misc then misc will casll global function an
         self.lighting_options = [blockthing.blocklist['main_light_block'][block_type],blockthing.blocklist['torch'][block_type]]
         self.greenery = [blockthing.blocklist['flower'][block_type],blockthing.blocklist['shrubs'][block_type]]
         self.building_wood = blockthing.blocklist['wood'][block_type]
+    
     def _player_position(self):
         x, y, z = self.mc.player.getPos()
         return x, y, z

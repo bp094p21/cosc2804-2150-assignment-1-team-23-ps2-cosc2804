@@ -6,7 +6,7 @@ class ParkFountain(Misc):
     # put whatever you need here to build a parkfountain object. this will ultimately be the method that is called
     # from the framework.
     def __init__(self) -> None:
-        super().__init__(self)
+        super().__init__()
 
     def build(self):
         pass
