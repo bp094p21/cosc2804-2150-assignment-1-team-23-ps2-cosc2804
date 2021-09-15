@@ -28,10 +28,13 @@ Please, report your key activities in each week this assignment is running.
     * Tested the efficiency of numpy arrays against python lists using the terrain scanning program I built. The conclusion through testing was that numpy arrays have a much more efficient runtime than python lists do, as well as take up less memory.
     * Currently working on producing different randomised structures depending on the results of the terrain scanning program. I.E if terrain is suitable for building, place a random road template in a certain position within the scan. This will be important for later implementation of our matrix.
 **Week 2**
-
-.....
-.....
-.....
+* Lachlan
+    * Fully completed the terrain scanning program which can be implemented into the program to account for placement in awkward positions (on the ocean, in the sky, over a mountain, etc)
+    * Collaborated with Matt to create and optimise the matrix generation method we have decided on.
+    * Created a biome-to-theme program that picks up the biome the player is, and then assigns a theme to it, which can be used to decide the blocks in the structures generated within the village.
+    * Assigned tasks and deadlines to group members in order to stay on track with what needs to be finished by when (I.E being able to test generation with houses, misc, and roads, by Week 2 Friday, and be completely finished ideally by Week 3 Monday, latest Week 3 Wednesday, ready for recording and submission by Week 3 Friday.)
+    * Watched all required videos on linkedin learning for cybersecurity.
+    * Completed participation activities for cybersecurity.
 
 **Week 3**
 
