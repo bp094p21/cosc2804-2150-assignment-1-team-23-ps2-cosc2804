@@ -18,7 +18,8 @@ Please, report your key activities in each week this assignment is running.
 -tested creating modules with a 'park' class, after the reorganisation of files from MATT
 
 **Week 2**
-
+finished the basic misc objects, making them suitable for main function to use
+errors occured when changing code, meaning i had to spend a lot of time changing things
 .....
 .....
 .....
