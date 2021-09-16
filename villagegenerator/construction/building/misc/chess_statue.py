@@ -1,21 +1,21 @@
 
 from misc import Misc
-
+import block as b
 class ChessBoard(Misc):
     def __init__(self) -> None:
         super().__init__()
         self.back_piece = 198
         self.front = 214
-    def build(self):
-        x,y,z  = self._player_position()
+    def build(self,x,y,z,theme):
+        
         self.build_foundation(x,y,z)
-        self.mc.setBlocks(x+3,y,z+3,x+11,y,z+11,self.ground_array[1])
+        self.mc.setBlocks(x+3,y,z+3,x+11,y,z+11,b.MISC_BLOCKS[theme]['ground_base'])
 
         counter = 0
         for i in range(9):
             for j in range(9):
                 if counter % 2 == 1:
-                    self.mc.setBlocks(x+i+3,y,z+j+3,x+i+3,y,z+j+3,self.lighting_options[0])
+                    self.mc.setBlocks(x+i+3,y,z+j+3,x+i+3,y,z+j+3,b.MISC_BLOCKS[theme]['main_light_block'])
                 counter+=1
         self.mc.setBlocks(x+3,y+1,z+3,x+11,y+1,z+11,self.back_piece)
         self.mc.setBlocks(x+4,y+1,z+3,x+10,y+1,z+11,self.front)
@@ -23,5 +23,5 @@ class ChessBoard(Misc):
         self.build_tree(x,y,z)
 
         
-chess = ChessBoard()
-chess.build()
+#chess = ChessBoard()
+#chess.build()

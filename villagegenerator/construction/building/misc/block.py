@@ -181,6 +181,59 @@ CONCRETE_POWDER     = Block(252, True, 'colors')
 # OPTIONS
 COOKING = [FURNACE_INACTIVE, FURNACE_ACTIVE]
 
+MISC_BLOCKS={
+
+    'modern' : {
+            'ground': GRASS,
+            'ground_base': STONE,
+            'main_block': CONCRETE,
+            'sub_block': PILLAR_QUARTZ,
+            'main_slab': 43,
+            'wood': WOOD_PLANKS,
+            'plant_stem': TIMBER_LOG,
+            'plant_leaves': LEAVES,
+            'main_light_block': SEA_LANTERN,
+            'torch': TORCH,
+            'flower': FLOWER_RED,
+            'shrubs': GRASS_TALL,
+            'fountain_liquid': WATER_FLOWING,
+            'pond_liquid': WATER_FLOWING
+
+    },  
+    'medi':{
+            'ground': SAND,
+            'ground_base': SANDSTONE,
+            'main_block': TERRACOTTA,
+            'sub_block': TERRACOTTA_WHITE_GLAZED,
+            'main_slab': (43,1),
+            'wood': WOOD_PLANKS.withData(4),
+            'plant_stem': 81,
+            'plant_leaves': 0,
+            'main_light_block': SEA_LANTERN,
+            'torch': TORCH,
+            'flower': AIR,
+            'shrubs': 31,
+            'fountain_liquid': WATER_FLOWING,
+            'pond_liquid': WATER_FLOWING
+    },
+    'magic':{
+            'ground': BRICKS_NETHER_RED,
+            'ground_base': COBBLESTONE,
+            'main_block': PURPUR_BLOCK,
+            'sub_block': OBSIDIAN,
+            'main_slab': 204,
+            'wood': WOOD_PLANKS.withData(5),
+            'plant_stem': OBSIDIAN,
+            'plant_leaves': 213,
+            'main_light_block': GLOWSTONE,
+            'torch': TORCH_REDSTONE,
+            'flower': MUSHROOM_RED,
+            'shrubs': 31,
+            'fountain_liquid': LAVA_FLOWING,
+            'pond_liquid': WATER_FLOWING
+    }
+}
+
 if __name__ == '__main__':
     from mcpi import minecraft
     mc = minecraft.Minecraft.create()
