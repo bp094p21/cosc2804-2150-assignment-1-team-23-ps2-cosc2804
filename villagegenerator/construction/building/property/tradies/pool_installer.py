@@ -6,8 +6,6 @@ from tradies.tradie import Tradie     # Remove comment when not running tests
 class PoolInstaller(Tradie):
     trade = 'pool installations'
     pools = []
-    def __init__(self):
-        pass
     def build_component(self, pool, mc):
         self.pools.append(pool)
         self._build_pool(self.pools[-1], mc)

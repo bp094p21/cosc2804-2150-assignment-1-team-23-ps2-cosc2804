@@ -2,9 +2,12 @@ from mcpi import minecraft
 
 class Tradie:
     trade = 'general'
+    emoji = '🦺'
     msg = 'gday'
     def __init__(self):
-        pass
+        print(f"{self.emoji} Tradie created.\n")
+        if self.name:
+            print(f"tradie.name: {self.name}\n")
     # All Tradie sub-classes should have same build_component signature. They can have different code running inside it based on what they're building.
     def build_component(self, component, mc: minecraft.Minecraft):
         # Use component and mc to build component

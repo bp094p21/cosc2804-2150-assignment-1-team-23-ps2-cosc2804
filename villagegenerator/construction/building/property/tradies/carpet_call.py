@@ -2,8 +2,6 @@ from tradies.tradie import Tradie
 
 class CarpetCall(Tradie):
     trade = 'carpeting'
-    def __init__(self):
-        pass
 
 # TESTING
 
