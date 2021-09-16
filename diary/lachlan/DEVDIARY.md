@@ -35,6 +35,10 @@ Please, report your key activities in each week this assignment is running.
     * Assigned tasks and deadlines to group members in order to stay on track with what needs to be finished by when (I.E being able to test generation with houses, misc, and roads, by Week 2 Friday, and be completely finished ideally by Week 3 Monday, latest Week 3 Wednesday, ready for recording and submission by Week 3 Friday.)
     * Watched all required videos on linkedin learning for cybersecurity.
     * Completed participation activities for cybersecurity.
+    * Assisted Jin in the creation of houses using the MC_Py_API, allowing for randomisation of structure, pools, and interior design.
+    * Implemented the terrain scanning program and the biome-to-theme program into the main repository, constructing them in a way that will allow module access by any other file.
+    * Added T-intersections to the roads file to allow for more flexibility in road generation.
+    * Downloaded and tested Kali Linux using VirtualBox.
 
 **Week 3**
 
