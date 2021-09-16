@@ -6,32 +6,38 @@ import mcpi as m
 
 class Builder:
     name = None
+    emoji = '👷‍♂️'
     properties = []
     tradies = {
 
     }
     def __init__(self):
+        print(f"{self.emoji} Builder created.\n")
+        if self.name:
+            print(f"builder.name: {self.name}\n")
         pass
     # Public Functions
     def assign_property(self, property: p.Property, mc: minecraft.Minecraft) -> None:
         self.properties.append(property)
         self.logbook = l.Logbook(self)
-        self.logbook.logs.append(f'Assigned property:\n{property}')
+        self.logbook.logs.append(f'{self.emoji} Assigned property.\n')
         self._print()
         self._build_property(property, mc)
     # Internal Methods
     def _build_property(self, property, mc) -> None:
-        self.logbook.logs.append(f"🚧 Commencing property build...") 
+        self.logbook.logs.append(f"{self.emoji} Commencing property build...\n") 
         self._print()
         for component_type, component in property.components.items():
-            self._assign_tradie(component, mc)
-        self.logbook.logs.append(f"✅ Completed property build.")
+            if component_type == 'house':
+                continue
+            self._assign_tradie(component_type, component, mc)
+        self.logbook.logs.append(f"✅ Completed property build.\n")
         self._print()
         return None
-    def _assign_tradie(self, component, mc):
-        self.logbook.logs.append(f"Assigning {component.type} to tradie...")
+    def _assign_tradie(self, component_type, component, mc):
+        self.logbook.logs.append(f"{self.emoji} Assigning {component_type} to tradie...\n")
         self._print()
-        tradie = TRADIE[component.type]
+        tradie = TRADIE[component_type]
         tradie.build_component(component, mc)
     def _print(self):
         print(self.logbook.logs[-1])
