@@ -13,11 +13,16 @@ def build_village(size, location, biome, mc):
     selected_template = _select_random_template(size)
 
     if size is VillageSize.SMALL:
-        _build_small(location, selected_template, mc)
+        entrance_location = _build_small(location, selected_template, mc)
+
     elif size is VillageSize.MEDIUM:
-        _build_medium(location, selected_template, mc)
+        entrance_location = _build_medium(location, selected_template, mc)
     else:
-        _build_large(location, selected_template, mc)
+        entrance_location = _build_large(location, selected_template, mc)
+
+    entity_ids = mc.getPlayerEntityIds()
+    mc.player.setTilePos(entity_ids[0], entrance_location[0], entrance_location[1], entrance_location[2])
+    mc.postToChat('Welcome to your new village!')
 
 
 def _define_layout(size, biome, mc):
@@ -37,25 +42,35 @@ def _select_random_template(size):
 
 
 def _build_small(location, template, mc):
-    _build_plots(_generate_fixed_ordinates(8, 4, *location), template, mc)
+    return _build_plots(_generate_fixed_ordinates(8, 4, *location), template, mc)
 
 
 def _build_medium(location, template, mc):
-    _build_plots(_generate_fixed_ordinates(10, 5, *location), template, mc)
+    return _build_plots(_generate_fixed_ordinates(10, 5, *location), template, mc)
 
 
 def _build_large(location, template, mc):
-    _build_plots(_generate_fixed_ordinates(12, 6, *location), template, mc)
+    return _build_plots(_generate_fixed_ordinates(12, 6, *location), template, mc)
 
 
 def _build_plots(fixed_ordinates, template, mc):
+    entrance_location = None
+
     for row in template:
         for (i, plot) in enumerate(row):
             if isinstance(plot.plot_type, PlotType.BUILDING):
                 plot.item.set_location(fixed_ordinates[i])
                 plot.build_house()
             else:
+                if plot.entrance is True:
+                    entrance_location = _transform_to_entrance_coords(*fixed_ordinates[i])
                 plot.build_road(mc, fixed_ordinates[i])
+
+    return entrance_location
+
+
+def _transform_to_entrance_coords(x, y, z):
+    return x, y, z + 6
 
 
 def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int, z_coord: int) -> list:

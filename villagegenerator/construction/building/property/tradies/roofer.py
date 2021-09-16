@@ -11,10 +11,10 @@ class Roofer(Tradie):
     def _build_roof(self, roof, mc):
         for number in range(0, 3):
             mc.setBlocks(roof.roof_v3['start'].x+number, 
-            roof.roof_v3['start'].y+4+number,
+            roof.roof_v3['start'].y+number,
             roof.roof_v3['start'].z+number, 
             roof.roof_v3['end'].x-number, 
-            roof.roof_v3['end'].y+4+number, 
+            roof.roof_v3['end'].y+number, 
             roof.roof_v3['end'].z-number,  
             roof.roof_block)
 

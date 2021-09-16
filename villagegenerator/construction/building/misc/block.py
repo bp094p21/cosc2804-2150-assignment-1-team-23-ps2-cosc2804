@@ -234,9 +234,9 @@ MISC_BLOCKS={
     }
 }
 
-if __name__ == '__main__':
+"""if __name__ == '__main__':
     from mcpi import minecraft
     mc = minecraft.Minecraft.create()
     x,y,z = mc.player.getPos()
     block = CONCRETE.withData(1)
-    mc.setBlock(x,y,z,block)
+    mc.setBlock(x,y,z,block)"""
