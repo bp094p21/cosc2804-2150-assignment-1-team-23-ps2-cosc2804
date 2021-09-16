@@ -39,6 +39,7 @@ Please, report your key activities in each week this assignment is running.
     * Implemented the terrain scanning program and the biome-to-theme program into the main repository, constructing them in a way that will allow module access by any other file.
     * Added T-intersections to the roads file to allow for more flexibility in road generation.
     * Downloaded and tested Kali Linux using VirtualBox.
+    * Completed roof and wall structure for house generation, blocks can be substituted in and out per theme, and designs are randomised.
 
 **Week 3**
 
