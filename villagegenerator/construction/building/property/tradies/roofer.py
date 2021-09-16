@@ -1,6 +1,6 @@
 from mcpi import vec3 as v
-from tradies.tradie import Tradie
-# from tradie import Tradie
+#from tradies.tradie import Tradie
+from tradie import Tradie
 
 class Roofer(Tradie):
     trade = 'roofing'
@@ -11,16 +11,17 @@ class Roofer(Tradie):
         self.roofs.append(roof)
         self._build_roof(self.roofs[-1], mc)
     def _build_roof(self, roof, mc):
-        for number in range(0, 2):
-            mc.setBlocks(roof.roof_v3['start'].x + number, 
-            roof.roof_v3['start'].y + 4 + number, 
-            roof.roof_v3['start'].z + number, 
-            roof.roof_v3['end'].x - number, 
-            roof.roof_v3['end'].y + 4 + number, 
-            roof.roof_v3['end'].z - number, roof.roof_block)
+        for number in range(0, 3):
+            mc.setBlocks(roof.roof_v3['start'].x+number, 
+            roof.roof_v3['start'].y+4+number,
+            roof.roof_v3['start'].z+number, 
+            roof.roof_v3['end'].x-number, 
+            roof.roof_v3['end'].y+4+number, 
+            roof.roof_v3['end'].z-number,  
+            roof.roof_block)
 
-class OldMate(Roofer):
-    name = 'OldMate'
+class Freddie(Roofer):
+    name = 'Freddie'
     pass
 
 if __name__ == '__main__':
@@ -31,8 +32,8 @@ if __name__ == '__main__':
     from mcpi import minecraft
     mc = minecraft.Minecraft.create()
     v3 = mc.player.getPos()
-    roof = r.roof(v3)
-    roof_guy = OldMate()
+    roof = r.Roof(v3)
+    roof_guy = Freddie()
     roof_guy.build_component(roof, mc)
     print(dir())
 
