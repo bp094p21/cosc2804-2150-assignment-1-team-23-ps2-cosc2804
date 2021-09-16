@@ -1,8 +1,10 @@
-from tradie import Tradie
+from tradies.tradie import Tradie
 
 class Tiler(Tradie):
     trade = 'tiling'
     def __init__(self):
+        pass
+    def build_component(component, mc):
         pass
 
 class Theo(Tiler):
@@ -19,6 +21,7 @@ class Theo(Tiler):
         },
         '236': [],
     }
+
     pass
 
 class Tessa(Tiler):

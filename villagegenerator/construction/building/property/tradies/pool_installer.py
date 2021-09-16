@@ -1,6 +1,6 @@
 from mcpi import vec3 as v
-# from tradies.tradie import Tradie     # Remove comment when not running tests
-from tradie import Tradie       # Comment out when not running tests
+from tradies.tradie import Tradie     # Remove comment when not running tests
+# from tradie import Tradie       # Comment out when not running tests
 
 
 class PoolInstaller(Tradie):
@@ -8,7 +8,7 @@ class PoolInstaller(Tradie):
     pools = []
     def __init__(self):
         pass
-    def assign_pool(self, pool, mc):
+    def build_component(self, pool, mc):
         self.pools.append(pool)
         self._build_pool(self.pools[-1], mc)
     def _build_pool(self, pool, mc):
@@ -59,5 +59,5 @@ if __name__ == '__main__':
     v3 = mc.player.getPos()
     pool = p.Pool(v3)
     pool_guy = pi.Paul()
-    pool_guy.assign_pool(pool, mc)
+    pool_guy.build_component(pool, mc)
     print(dir())

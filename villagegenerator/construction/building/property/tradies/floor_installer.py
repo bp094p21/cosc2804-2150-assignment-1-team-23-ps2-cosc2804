@@ -1,6 +1,6 @@
 from mcpi import vec3 as v
-# from tradies.tradie import Tradie     # Remove comment when not running tests
-from tradie import Tradie       # Comment out when not running tests
+from tradies.tradie import Tradie     # Remove comment when not running tests
+# from tradie import Tradie       # Comment out when not running tests
 
 class FloorInstaller(Tradie):
     trade = 'flooring'
@@ -8,7 +8,7 @@ class FloorInstaller(Tradie):
     def __init__(self):
         pass
     # External calls
-    def assign_floor(self, floor, mc):
+    def build_component(self, floor, mc):
         self.floors.append(floor)
         self._build_floor(self.floors[-1], mc)
     # Internal Methods
@@ -33,5 +33,5 @@ if __name__ == '__main__':
     v3 = mc.player.getPos()
     floor = f.Floor(v3)
     floor_guy = Freddie()
-    floor_guy.assign_floor(floor, mc)
+    floor_guy.build_component(floor, mc)
     print(dir())
