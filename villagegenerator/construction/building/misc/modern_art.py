@@ -1,13 +1,13 @@
-from park import Park
+from misc import Misc
 
-class art(Park):
+class Art(Misc):
     def __init__(self) -> None:
         super().__init__()
-    def make_art(self,x,y,z):
+    def build(self,x,y,z):
         self.build_foundation(x,y,z)
         #self.mc.setBlocks(x+3,y,z+7,x+11,y+15,z+7,self.stone)
     
-park = art()    
-x,y,z = park.player_position()
-park.make_art(x,y,z)
+park = Art()    
+x,y,z = park._player_position()
+park.build(x,y,z)
         
