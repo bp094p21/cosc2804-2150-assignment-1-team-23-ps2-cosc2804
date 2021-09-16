@@ -12,3 +12,5 @@ class Boundary(Component):
     def __init__(self, block=b.STONE):
         self.block = block
         pass
+    def __repr__(self):
+        return f"🖨  Printing object.__repr__:\n\n{type(self)}\n\length: {self.length},\nblock: {self.block}\n"

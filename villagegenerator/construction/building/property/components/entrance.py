@@ -11,14 +11,8 @@ class Entrance(Component):
     height:int = None
     fence_block: b.Block = None
     gate_block: b.Block = None
-    fence_v3: dict = {
-        'start': None,
-        'end': None
-    }
-    gate_v3: dict = {
-        'start': None,
-        'end': None
-    }
+    def __repr__(self):
+        return f"🖨  Printing object.__repr__:\n\n{type(self)}\nlength: {self.length},\nroot_v3: {self.root_v3},\norientation: {self.orientation},\nheight: {self.height},\nfence_block: {self.fence_block},\ngate_block: {self.gate_block}\n"
     def __init__(self, root_v3=None, orientation=0, height=2, fence_block=b.STONE, gate_block=b.AIR):
         self.root_v3 = root_v3
         self.orientation = orientation
