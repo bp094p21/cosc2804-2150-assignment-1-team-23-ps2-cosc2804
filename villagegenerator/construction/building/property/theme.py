@@ -18,7 +18,7 @@ class Theme:
 
 class Mediterranean(Theme):
     def __init__(self):
-        self.name = 'mediterranean'
+        self.name = 'medi'
         self._randomly_select_house_type()
 
 class Magic(Theme):
@@ -41,7 +41,7 @@ class Modern(Theme):
         pass
 
 HOUSE_TYPES = {
-    'mediterranean': [
+    'medi': [
         'basic',
     ],
     'magic': [
