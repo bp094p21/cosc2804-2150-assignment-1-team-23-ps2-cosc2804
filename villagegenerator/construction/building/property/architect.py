@@ -19,7 +19,7 @@ class Architect():
     # Public Functions
     def give_specs(self, location_v3: v.Vec3, orientation: int, theme_str: str, mc: minecraft.Minecraft, plot_length=15) -> None:
         self.logbook = logbook.Logbook(self)
-        self.logbook.logs.append(f'✅ Specs received for property.\n\nLocation: {location_v3},\nOrientation: {orientation},\nTheme: {theme}.')
+        self.logbook.logs.append(f'✅ Specs received for property.\n\nLocation: {location_v3},\nOrientation: {orientation},\nTheme: {theme_str}.')
         self._print()
         self._draft_property(location_v3, orientation, theme_str, plot_length)
         self._get_designer()
@@ -33,7 +33,7 @@ class Architect():
         entrance_edge = self._get_entrance_edge(v3, orientation, plot_length)
         theme = self._set_theme(theme_str)
         house_type = self._set_house_type(theme)
-        layout = self._set_layout(house_type)
+        layout = self._set_layout(house_type, entrance_edge, orientation, plot_length)
         property = p.Property(v3, orientation, theme, entrance_edge, house_type, layout)
         self.properties.append(property)
         self.logbook.logs.append(f'✅ Drafted property.')
@@ -71,10 +71,10 @@ class Architect():
         self.logbook.logs.append(f"✅ House type set: {house_type}")
         self._print()
         return house_type
-    def _set_layout(self, house_type) -> l.Layout:
+    def _set_layout(self, house_type, entrance_edge, orientation, plot_length) -> l.Layout:
         self.logbook.logs.append(f'Setting property layout...')
         self._print()
-        layout = l.get_layout(house_type)
+        layout = l.get_layout(house_type, entrance_edge, orientation, plot_length)
         self.logbook.logs.append(f"✅ Property layout set: {layout}")
         self._print()
         return layout
@@ -87,8 +87,7 @@ class Architect():
     def _get_component_specs(self) -> dict:
         self.logbook.logs.append(f'Getting components from designer...')
         self._print()
-        components = self.designer.get_specs(self.properties[-1])
-        self.properties[-1].components = components
+        self.designer.give_specs(self.properties[-1])
         self.logbook.logs.append(f"✅ Property components set")
         self._print()
     def _get_builder(self):
