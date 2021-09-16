@@ -191,46 +191,48 @@ SLABS = {
 STAIRS = [STAIRS_WOOD, STAIRS_COBBLESTONE, STAIRS_BRICK, STAIRS_STONE_BRICK, STAIRS_NETHER_BRICK, STAIRS_SANDSTONE, STAIRS_SPRUCE, STAIRS_BIRCH, STAIRS_JUNGLE, STAIRS_QUARTZ, STAIRS_ACACIA, STAIRS_DARK_OAK, STAIRS_RED_SANDSTONE, PURPUR_STAIRS, ]
 
 # Blocks by theme
-MEDI = {
-    'boundary': {
-        'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED],
-        'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
-    },
-    'carpet': {
-        'basic': [CARPET]
-    },
-    'gate': {
-        'basic': [AIR],
-        'designer': [DOOR_ACACIA]
-    },
-    'floor': {
-        'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED],
-        'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
-    },
-    'ground': {
-        'basic': [SAND, GRAVEL]
-    },
-    'pool_fill': {
-        'basic': [WATER]
-    },
-    'pool_line': {
-        'basic': [TERRACOTTA],
-        'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
-    },
-    'roof': {
-        'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED]
-    },
-    'stairs': {
-        'basic': [STAIRS_SANDSTONE, STAIRS_WOOD],
-        'designer': [STAIRS_RED_SANDSTONE, STAIRS_QUARTZ]
-    },
-    'steps': {
-        'basic': [SLABS['sandstone'], SLABS['wooden']],
-        'designer': [SLABS['red_sandstone'], SLABS['quartz']]
-    },
-    'wall': {
-        'basic': [TERRACOTTA, SANDSTONE],
-        'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
+OPTIONS = {
+    'medi': {
+        'boundary': {
+            'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED],
+            'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
+        },
+        'carpet': {
+            'basic': [CARPET]
+        },
+        'gate': {
+            'basic': [AIR],
+            'designer': [DOOR_ACACIA]
+        },
+        'floor': {
+            'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED],
+            'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
+        },
+        'ground': {
+            'basic': [SAND, GRAVEL]
+        },
+        'pool_fill': {
+            'basic': [WATER]
+        },
+        'pool_line': {
+            'basic': [TERRACOTTA],
+            'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
+        },
+        'roof': {
+            'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED]
+        },
+        'stairs': {
+            'basic': [STAIRS_SANDSTONE, STAIRS_WOOD],
+            'designer': [STAIRS_RED_SANDSTONE, STAIRS_QUARTZ]
+        },
+        'steps': {
+            'basic': [SLABS['sandstone'], SLABS['wooden']],
+            'designer': [SLABS['red_sandstone'], SLABS['quartz']]
+        },
+        'wall': {
+            'basic': [TERRACOTTA, SANDSTONE],
+            'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
+        },
     }
 }
 
