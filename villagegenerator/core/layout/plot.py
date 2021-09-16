@@ -11,15 +11,13 @@ class Plot:
             PlotType.BUILDING if item is type(Building) else PlotType.ROAD)
         self.item = item
 
-    # called to construction each house/road when iterating through the predefined layout.
-    def build(self):
-        # if its a property, invoke the construction method.
-        if type(self.item) is type(Building):
-            self.item.build()
-            return
+    # called to construct each house when iterating through the predefined layout.
+    def build_house(self):
+        self.item.build()
 
-        # if its a road, call the function as is.
-        self.item()
+    # called to construct each road when iterating through the predefined layout.
+    def build_road(self, mc, coords):
+        self.item(mc, *coords)
 
 
 class PlotType(Enum):
