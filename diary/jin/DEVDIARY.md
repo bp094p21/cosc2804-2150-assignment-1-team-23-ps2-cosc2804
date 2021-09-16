@@ -65,6 +65,7 @@ Implementing
  - Finished main module `architect.py`
  - `property` subpackage working with basic functionality
  - Added functionality to `layout.py`, `builder.py`, and `designer.py`
+ - Add easier to read print messages for a better dev experience
 
 Testing
  - Getting into the habit of writing "if name is main" tests at the bottom of every file to easily test main functionality of each file
