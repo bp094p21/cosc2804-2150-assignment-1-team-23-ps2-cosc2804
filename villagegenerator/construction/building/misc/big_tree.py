@@ -5,11 +5,13 @@ class bigTree(Misc):
     def __init__(self) -> None:
         super().__init__()
         self.height = random.randint(2,25)
-        self.leaves = (161,1)
+        
         if self.theme_string == 'medi':
             self.wood = (162,1)
+            self.leaves = (161,1)
         else:
             self.wood = b.MISC_BLOCKS[self.theme_string]['plant_stem']
+            self.leaves = b.MISC_BLOCKS[self.theme_string]['plant_leaves']
     def big_tree_build(self,x,y,z):
         self.build_foundation(x,y,z)
         self.mc.setBlocks(x+3,y+self.height,z+3,x+11,y+self.height+5,z+11,self.leaves)
