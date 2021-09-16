@@ -31,7 +31,7 @@ if __name__ == '__main__':
     from mcpi import minecraft
     mc = minecraft.Minecraft.create()
     v3 = mc.player.getPos()
-    roof = r.roof(v3)
+    roof = r.Roof(v3)
     roof_guy = OldMate()
     roof_guy.build_component(roof, mc)
     print(dir())
