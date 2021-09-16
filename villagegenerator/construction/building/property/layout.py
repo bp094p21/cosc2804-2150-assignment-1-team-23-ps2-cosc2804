@@ -11,10 +11,12 @@ def get_layout(house_type, entrance_edge, orientation, plot_length):
 
 class Layout:
     name = None
+    emoji = '📍'
     layout = {}         
-    def __init__(self, name = 'basic'):
-        if name == 'basic':
-            pass
+    def __init__(self):
+        print(f"{self.emoji} Layout initialized.\n")
+        if self.name:
+            print(f"layout.name: {self.name}\n")
 
 class Basic(Layout):
     name = 'basic'
@@ -24,9 +26,10 @@ class Basic(Layout):
         self.plot_length = plot_length
         self._randomize_layout()
     def _print(self, item_name, item_properties):
-        print(item_name)
+        print(f"{item_name}\n")
         for k, v in item_properties.items():
             print(f"{k}: {v}")
+        print()
     def _randomize_layout(self):
         self._position_pool()
         self._print('pool', self.layout['pool'])
@@ -45,8 +48,7 @@ class Basic(Layout):
         positions = ['left', 'back', 'right']     # From perpsective of walking onto property from entrance
         random_position = random.choice(positions)
         if random_position == 'back':
-            e_offsets = [10, 11]
-            e_offset = random.choice(e_offsets)
+            e_offset = 10
             e_len = self.plot_length - e_offset
             c_offsets = [1, 2, 3, 4]
             c_offset = random.choice(c_offsets)
@@ -81,15 +83,14 @@ class Basic(Layout):
             c_offsets = [2, 3]
             c_offset = random.choice(c_offsets)
             c_len = self.plot_length - (c_offset * 2)
-            house_pool_gaps = [1, 2]
-            gap = random.choice(house_pool_gaps)
+            gap = 1
             e_len_pool = self.layout['pool']['e_len']
-            e_offsets = [6, 7]
+            e_offsets = [3,4]
             e_offset = random.choice(e_offsets)
             e_len = self.plot_length - e_offset - e_len_pool - gap 
         else:
             c_len_pool = self.layout['pool']['c_len']
-            e_offsets = [7, 8]
+            e_offsets = [6, 7]
             e_offset = random.choice(e_offsets)
             e_len = self.plot_length - e_offset - 1
             house_pool_gaps = [1, 2]
