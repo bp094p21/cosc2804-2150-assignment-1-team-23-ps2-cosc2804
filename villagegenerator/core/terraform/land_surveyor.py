@@ -44,7 +44,7 @@ class TerrainScaner():
             if x_block > x_length - 1: #if the x coordinate of the block is more than the x length provided, the search on this row (and level) is done
                 x_block = 0 #reset x coordinate back to start
                 y_block += 1 #move up a level
-            if block == 0 and prev_block_height_array[x_block, z_block] != 0 and prev_block_height_array[x_block, z_block] != 8 and prev_block_height_array[x_block, z_block] != 9 and prev_block_height_array[x_block, z_block] != 10 and prev_block_height_array[x_block, z_block] != 11 and prev_block_height_array[x_block, z_block] != 31 and prev_block_height_array[x_block, z_block] != 7 and prev_block_height_array[x_block, z_block] != 18: #checks from bottom up for a block until reaching highest block (not including air, water, lava, grass, wood, or leaves), priority being: z, x, y
+            if block == 0 and prev_block_height_array[x_block, z_block] != 0 and prev_block_height_array[x_block, z_block] != 8 and prev_block_height_array[x_block, z_block] != 9 and prev_block_height_array[x_block, z_block] != 10 and prev_block_height_array[x_block, z_block] != 11 and prev_block_height_array[x_block, z_block] != 31 and prev_block_height_array[x_block, z_block] != 7 and prev_block_height_array[x_block, z_block] != 8: #checks from bottom up for a block until reaching highest block (not including air, water, lava, grass, wood, or leaves), priority being: z, x, y
                 height_array[x_block,z_block] = y_block + 50 #set the current value in height_array to the y coordinate
             prev_block_height_array[x_block,z_block] = block #set the current value in prev_block to the current block
             z_block += 1 #ensures loop can continue
