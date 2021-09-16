@@ -8,12 +8,15 @@ class FloorInstaller(Tradie):
     def __init__(self):
         pass
     # External calls
-    def build_component(self, floor, mc):
-        self.floors.append(floor)
-        self._build_floor(self.floors[-1], mc)
+    def build_component(self, floors, mc):
+        for floor in floors:
+            self.floors.append(floor)
+            self._build_floor(self.floors[-1], mc)
     # Internal Methods
     def _build_floor(self, floor, mc):
-        mc.setBlocks(floor.floor_v3['start'], floor.floor_v3['end'], floor.floor_block)
+        s = floor.floor_v3['start']
+        e = floor.floor_v3['end']
+        mc.setBlocks(s.x, s.y + floor.elevation - 1, s.z, e.x, e.y + floor.elevation - 1, e.z, floor.floor_block)
         pass
 
 class Freddie(FloorInstaller):
