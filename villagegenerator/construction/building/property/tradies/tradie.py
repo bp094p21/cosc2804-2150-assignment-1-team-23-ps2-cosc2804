@@ -7,6 +7,7 @@ class Tradie:
         pass
     # All Tradie sub-classes should have same build_component signature. They can have different code running inside it based on what they're building.
     def build_component(self, component, mc: minecraft.Minecraft):
+        # Use component and mc to build component
         pass
     # TODO: Have basic build functions that can be used by multiple tradies below
     # IGNORE _build_cuboid for now.
