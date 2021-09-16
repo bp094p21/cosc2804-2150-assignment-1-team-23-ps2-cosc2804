@@ -1,6 +1,6 @@
 from plot import Plot
-from orientation import Orientation as O
 from villagegenerator.core.layout.layout import Layout
+from villagegenerator.construction.road.road import *
 
 
 # TODO - all the buildings must both implement the build() method, and they must have a setter to set location.
@@ -8,35 +8,29 @@ from villagegenerator.core.layout.layout import Layout
 
 
 # Small variations.
-# Dimensions - 8 * 4 = 32 Elements
-# Max Structures - 4
+# Dimensions - 5 * 4 = 20 Elements
+# Max Structures - 5
 def define_small(mc, biome, size):
     # Layout #1
     Layout(size,
-           [[],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [Plot(Property(O.RIGHT, biome, mc))]])
+           [[Plot(), Plot(build_bent_connecting_ne), Plot(build_straight_ew), Plot()],
+            [Plot(build_straight_ew), Plot(build_crossintersection), Plot(), Plot()],
+            [Plot(), Plot(build_crossintersection), Plot(build_straight_ew), Plot()],
+            [Plot(), Plot(build_straight_ns), Plot(), Plot()],
+            [Plot(), Plot(build_crossintersection), Plot(), Plot()]])
 
     # Layout #2
     Layout(size,
-           [[],
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []])
+           [[Plot(), Plot(), Plot(build_bent_connecting_se), Plot()],
+            [Plot(), Plot(build_straight_ew), Plot(build_crossintersection), Plot()],
+            [Plot(), Plot(), Plot(build_crossintersection), Plot()],
+            [Plot(), Plot(build_straight_ew), Plot(build_crossintersection), Plot()],
+            [Plot(), Plot(), Plot(build_straight_ns), Plot()]])
 
 
 # Medium variations.
-# Dimensions - 10 * 5 = 50 Elements
-# Max Structures - 6
+# Dimensions - 6 * 5 = 30 Elements
+# Max Structures - 7
 def define_medium(mc, biome, size):
     # Layout #1
     Layout(size,
@@ -45,10 +39,6 @@ def define_medium(mc, biome, size):
             [],
             [],
             [],
-            [],
-            [],
-            [],
-            [],
             []])
 
     # Layout #2
@@ -58,16 +48,12 @@ def define_medium(mc, biome, size):
             [],
             [],
             [],
-            [],
-            [],
-            [],
-            [],
             []])
 
 
 # Large variations.
-# Dimensions - 12 * 6 = 72 Elements
-# Max Structures - 8
+# Dimensions - 7 * 6 = 42 Elements
+# Max Structures - 10
 def define_large(mc, biome, size):
     # Layout #1
     Layout(size,
@@ -77,20 +63,11 @@ def define_large(mc, biome, size):
             [],
             [],
             [],
-            [],
-            [],
-            [],
-            [],
-            [],
             []])
+
     # Layout #2
     Layout(size,
            [[],
-            [],
-            [],
-            [],
-            [],
-            [],
             [],
             [],
             [],
