@@ -7,20 +7,93 @@ import components as c
 
 class Designer:
     name = None
+    emoji = '🎨'
     properties = []
     def __init__(self):
-        pass
+        print(f"{self.emoji} Designer created.\n")
+        if self.name:
+            print(f"designer.name: {self.name}\n")
     def give_specs(self, property):
         self.properties.append(property)
         self._design_components(property)
         pass
     def _design_components(self, property):
+        self._design_house(property)
         self._design_entrance(property)
         self._design_boundary(property)
         self._design_pool(property)
         pass
     def _design_house(self, property):
+        levels = random.choice([1, 2, 3])
+        house = c.house.House()
+        house.total_levels = levels
+        e_offset = property.layout.layout['house']['e_offset']
+        c_offset = property.layout.layout['house']['c_offset']
+        e_len = property.layout.layout['house']['e_len']
+        c_len = property.layout.layout['house']['c_len']    
+        v3 = None
+        e_v3 = property.entrance_edge['start']
+        z_len = None
+        x_len = None
+        if property.orientation == 0:
+            v3 = v.Vec3(e_v3.x + c_offset, e_v3.y, e_v3.z + e_offset)
+            z_len = e_len
+            x_len = c_len
+        elif property.orientation == 1:
+            v3 = v.Vec3(e_v3.x - e_offset, e_v3.y, e_v3.z + c_offset)
+            z_len = c_len
+            x_len = e_len
+        elif property.orientation == 2:
+            v3 = v.Vec3(e_v3.x - c_offset, e_v3.y, e_v3.z - e_offset)
+            z_len = e_len
+            x_len = c_len
+        elif property.orientation == 3:
+            v3 = v.Vec3(e_v3.x + e_offset, e_v3.y, e_v3.z - c_offset)
+            z_len = c_len
+            x_len = e_len
+        floors = []
+        elevation = random.choice([0, 1])
+        for level in range(levels):
+            house.floor_elevations.append(elevation)
+            floor_block = random.choice(b.OPTIONS[property.theme.name]['floor']['basic'])
+            floors.append(c.floor.Floor(v3, floor_block, level, elevation, z_len, x_len))
+            elevation += random.choice([3, 4, 5])    
+        property.components['floor'] = floors
+        for floor in floors:
+            print(floor)
+        property.components['house'] = house
         pass
+    def _design_roof(self, property):
+        v3 = None
+        e_v3 = property.entrance_edge['start']
+        e_offset = property.layout.layout['house']['e_offset']
+        c_offset = property.layout.layout['house']['c_offset']
+        e_len = property.layout.layout['house']['e_len']
+        c_len = property.layout.layout['house']['c_len']    
+
+        roof_block = random.choice(b.OPTIONS[property.theme.name]['roof']['basic'])
+        z_len = None
+        x_len = None
+        elevation = property.components['house'].floor_elevations[-1]
+        if property.orientation == 0:
+            v3 = v.Vec3(e_v3.x - 1 + c_offset, e_v3.y + elevation, e_v3.z + e_offset - 1)
+            z_len = e_len + 2
+            x_len = c_len + 2
+        elif property.orientation == 1:
+            v3 = v.Vec3(e_v3.x - e_offset + 1, e_v3.y + elevation, e_v3.z + c_offset - 1)
+            z_len = c_len + 2
+            x_len = e_len + 2
+        elif property.orientation == 2:
+            v3 = v.Vec3(e_v3.x - c_offset + 1, e_v3.y + elevation, e_v3.z - e_offset +1)
+            z_len = e_len + 2
+            x_len = c_len + 2
+        elif property.orientation == 3:
+            v3 = v.Vec3(e_v3.x + e_offset, e_v3.y, e_v3.z - c_offset)
+            z_len = c_len + 2
+            x_len = e_len + 2
+        roof = c.roof.Roof(v3, roof_block, z_len, x_len)
+        property.components['roof'] = roof
+
     def _design_entrance(self, property):
         root_v3 = property.entrance_edge['start']
         orientation = property.orientation
@@ -95,6 +168,9 @@ class Designer:
             end_v3 = v.Vec3(start_v3.x, start_v3.y + self.height - 1, start_v3.z)
         self.gate_v3['start'] = start_v3
         self.gate_v3['end'] = end_v3
+
+class Diego(Designer):
+    name = 'Diego'
 
 if __name__ == '__main__':
     from mcpi import minecraft
