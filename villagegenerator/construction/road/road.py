@@ -1,196 +1,192 @@
-import mcpi.minecraft as minecraft
 import mcpi.block as block
 import math
 
+# immutable and global state. Dependency injection added unnecessary complexity to the project and there was not enough
+# time to adhere to best practice. Moreover, these functions are not going to be unit tested due to no testing software.
+CURVE = (17, [17, 4], 45, 45, 45, 45, 45, [17, 4], 17)
+
+
 # straight
-def build_straight_ew(x, y ,z):
-    class PathEW(): #Path class for the East/West Path
-        def __init__(self): #init function for self.mcpi connection as well as block id's 
-            self.mc = minecraft.Minecraft.create()
-            self.wood = 17
+# Path class for the East/West Path
+# createPath function to create the East/West path based on matrix position
+def build_straight_ew(mc, x, y, z):
+    # Center is set to the boundaries for the path to enable the path to be centred within a 15x15 area.
+    center = 3
+    wood_id = 17
 
-        def create_path(self, x, y, z): #createPath function to create the East/West path based on matrix position
-            center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
-            for i in range(15): #Loops 15 times over to cover a 15 block radius of below blocks (length of path)
-                self.mc.setBlocks(x, y, z+center, x+i, y, z+center, block.LEAVES)
-                self.mc.setBlocks(x, y-1, z+center, x+i, y-1, z+center, self.wood)
-                self.mc.setBlocks(x, y-1, z+1+center, x+i, y-1, z+1+center, self.wood, 4)
-                self.mc.setBlocks(x, y-1, z+2+center, x+i, y-1, z+6+center, block.BRICK_BLOCK)
-                self.mc.setBlocks(x, y, z+8+center, x+i, y, z+8+center, block.LEAVES)
-                self.mc.setBlocks(x, y-1, z+8+center, x+i, y-1, z+8+center, self.wood)
-                self.mc.setBlocks(x, y-1, z+7+center, x+i, y-1, z+7+center, self.wood, 4)
+    # Loops 15 times over to cover a 15 block radius of below blocks (length of path)
+    for i in range(15):
+        mc.setBlocks(x, y, z + center, x + i, y, z + center, block.LEAVES)
+        mc.setBlocks(x, y - 1, z + center, x + i, y - 1, z + center, wood_id)
+        mc.setBlocks(x, y - 1, z + 1 + center, x + i, y - 1, z + 1 + center, wood_id, 4)
+        mc.setBlocks(x, y - 1, z + 2 + center, x + i, y - 1, z + 6 + center, block.BRICK_BLOCK)
+        mc.setBlocks(x, y, z + 8 + center, x + i, y, z + 8 + center, block.LEAVES)
+        mc.setBlocks(x, y - 1, z + 8 + center, x + i, y - 1, z + 8 + center, wood_id)
+        mc.setBlocks(x, y - 1, z + 7 + center, x + i, y - 1, z + 7 + center, wood_id, 4)
 
-            self.mc.setBlock(x+2, y-1, z+4+center, block.GLOWSTONE_BLOCK) #Will create evenly placed glowstone blocks down the center of the path
-            self.mc.setBlock(x+7, y-1, z+4+center, block.GLOWSTONE_BLOCK)
-            self.mc.setBlock(x+12, y-1, z+4+center, block.GLOWSTONE_BLOCK)
+    # Will create evenly placed glowstone blocks down the center of the path
+    mc.setBlock(x + 2, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 7, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 12, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
 
-    craft = PathEW() #Initialise a variable to access the path class
-    craft.create_path(x, y, z) #Create the path using current matrix position
 
-def build_straight_ns(x, y, z):
-    class PathNS(): #Path class for the North/South Path
-        def __init__(self): #init function for self.mcpi connection as well as block id's 
-            self.mc = minecraft.Minecraft.create()
-            self.wood = 17
+# Path class for the North/South Path
+# createPath function to create the North/South path based on matrix position
+def build_straight_ns(mc, x, y, z):
+    center = 3
+    wood_id = 17
 
-        def create_path(self, x, y, z): #createPath function to create the North/South path based on matrix position
-            center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
-            for i in range(15): #Loops 15 times over to cover a 15 block radius of below blocks (length of path)
-                self.mc.setBlocks(x+center, y, z, x+center, y, z+i, block.LEAVES)
-                self.mc.setBlocks(x+center, y-1, z, x+center, y-1, z+i, self.wood)
-                self.mc.setBlocks(x+1+center, y-1, z, x+1+center, y-1, z+i, self.wood, 4)
-                self.mc.setBlocks(x+2+center, y-1, z, x+6+center, y-1, z+i, block.BRICK_BLOCK)
-                self.mc.setBlocks(x+8+center, y, z, x+8+center, y, z+i, block.LEAVES)
-                self.mc.setBlocks(x+8+center, y-1, z, x+8+center, y-1, z+i, self.wood)
-                self.mc.setBlocks(x+7+center, y-1, z, x+7+center, y-1, z+i, self.wood, 4)
+    for i in range(15):
+        mc.setBlocks(x + center, y, z, x + center, y, z + i, block.LEAVES)
+        mc.setBlocks(x + center, y - 1, z, x + center, y - 1, z + i, wood_id)
+        mc.setBlocks(x + 1 + center, y - 1, z, x + 1 + center, y - 1, z + i, wood_id, 4)
+        mc.setBlocks(x + 2 + center, y - 1, z, x + 6 + center, y - 1, z + i, block.BRICK_BLOCK)
+        mc.setBlocks(x + 8 + center, y, z, x + 8 + center, y, z + i, block.LEAVES)
+        mc.setBlocks(x + 8 + center, y - 1, z, x + 8 + center, y - 1, z + i, wood_id)
+        mc.setBlocks(x + 7 + center, y - 1, z, x + 7 + center, y - 1, z + i, wood_id, 4)
 
-            self.mc.setBlock(x+4+center, y-1, z+2, block.GLOWSTONE_BLOCK) #Will create evenly placed glowstone blocks down the center of the path
-            self.mc.setBlock(x+4+center, y-1, z+7, block.GLOWSTONE_BLOCK)
-            self.mc.setBlock(x+4+center, y-1, z+12, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 4 + center, y - 1, z + 2, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 4 + center, y - 1, z + 7, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 4 + center, y - 1, z + 12, block.GLOWSTONE_BLOCK)
 
-    craft = PathNS() #Initialise a variable to access the path class
-    craft.create_path(x, y, z) #Create the path using current matrix position
 
 # bent
-def build_bent_connecting_se(x, y, z):
-    class PathSE(): # Path class for curve SE
-        def __init__(self):
-            self.mc = minecraft.Minecraft.create()
-    
-        def create_curve(self, x, y, z):
-            radius = 11.5 #Radius the curve is built upon
-            curve = [17, [17,4], 45, 45, 45, 45, 45, [17,4], 17] #List of blocks in path
-            for angle in range(181, 270): #Angle of path created (SE direction)
-                for i in range(len(curve)):
-                    new_x = x + (radius - i) * math.cos(angle*math.pi/180) #Assigned x and z coordinates based on angle position 
-                    new_z = z + (radius - i) * math.sin(angle*math.pi/180)
-                    self.mc.setBlock(new_x + 15, y-1, new_z + 15, curve[i]) #Place currently hovered block in list
-                    if i == 8:
-                        self.mc.setBlock(new_x + 15, y, new_z + 15, block.LEAVES) #Place leaf block at the end (inside)
-                new_x = x + (radius) * math.cos(angle*math.pi/180) # Assign x and z coordinates based on angle position
-                new_z = z + (radius) * math.sin(angle*math.pi/180)
-                self.mc.setBlock(new_x + 15, y, new_z + 15, block.LEAVES) #Place leaf blocks along the outside of the build
-            self.mc.setBlock(x + 12, y - 1, z + 7, block.GLOWSTONE_BLOCK) #Place glowstone blocks in path
-            self.mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
-    
-    craft = PathSE() #Initialise a variable to access the path class
-    craft.create_curve(x, y, z) #Create the path using current matrix position
+# Path class for curve SE
+def build_bent_connecting_se(mc, x, y, z):
+    # Radius the curve is built upon
+    radius = 11.5
+    # List of blocks in path
 
-def build_bent_connecting_sw(x, y, z):
-    class PathSW(): 
-        def __init__(self):
-            self.mc = minecraft.Minecraft.create()
-    
-        def create_curve(self, x, y, z):
-            radius = 11.5 
-            curve = [17, [17,4], 45, 45, 45, 45, 45, [17,4], 17] 
-            for angle in range(271, 360):
-                for i in range(len(curve)):
-                    new_x = x + (radius - i) * math.cos(angle*math.pi/180)
-                    new_z = z + (radius - i) * math.sin(angle*math.pi/180)
-                    self.mc.setBlock(new_x, y-1, new_z + 15, curve[i])
-                    if i == 8:
-                        self.mc.setBlock(new_x, y, new_z + 15, block.LEAVES)
-                new_x = x + (radius) * math.cos(angle*math.pi/180)
-                new_z = z + (radius) * math.sin(angle*math.pi/180)
-                self.mc.setBlock(new_x, y, new_z + 15, block.LEAVES)
-            self.mc.setBlock(x + 2, y - 1, z + 7, block.GLOWSTONE_BLOCK)
-            self.mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
-            
-    craft = PathSW() #Initialise a variable to access the path class
-    craft.create_curve(x, y, z) #Create the path using current matrix position      
+    # Angle of path created (SE direction)
+    for angle in range(181, 270):
+        for i in range(len(CURVE)):
+            # Assigned x and z coordinates based on angle position
+            new_x = x + (radius - i) * math.cos(angle * math.pi / 180)
+            new_z = z + (radius - i) * math.sin(angle * math.pi / 180)
+            # Place currently hovered block in list
+            mc.setBlock(new_x + 15, y - 1, new_z + 15, CURVE[i])
 
-def build_bent_connecting_ne(x, y, z):
-    class PathNE():
-        def __init__(self):
-            self.mc = minecraft.Minecraft.create()
+            if i == 8:
+                # Place leaf block at the end (inside)
+                mc.setBlock(new_x + 15, y, new_z + 15, block.LEAVES)
 
-        def create_curve(self, x, y, z):
-            radius = 11.5
-            curve = [17, [17,4], 45, 45, 45, 45, 45, [17,4], 17]
-            for angle in range(91, 180):
-                for i in range(len(curve)):
-                    new_x = x + (radius - i) * math.cos(angle*math.pi/180)
-                    new_z = z + (radius - i) * math.sin(angle*math.pi/180)
-                    self.mc.setBlock(new_x + 15, y-1, new_z, curve[i])
-                    if i == 8:
-                        self.mc.setBlock(new_x + 15, y, new_z, block.LEAVES)
-                new_x = x + (radius) * math.cos(angle*math.pi/180)
-                new_z = z + (radius) * math.sin(angle*math.pi/180)
-                self.mc.setBlock(new_x + 15, y, new_z, block.LEAVES)
-            self.mc.setBlock(x + 7, y - 1, z + 2, block.GLOWSTONE_BLOCK)
-            self.mc.setBlock(x + 12, y - 1, z + 7, block.GLOWSTONE_BLOCK)
+        # Assign x and z coordinates based on angle position
+        new_x = x + radius * math.cos(angle * math.pi / 180)
+        new_z = z + radius * math.sin(angle * math.pi / 180)
 
-    craft = PathNE() #Initialise a variable to access the path class
-    craft.create_curve(x, y, z) #Create the path using current matrix position  
+        # Place leaf blocks along the outside of the build
+        mc.setBlock(new_x + 15, y, new_z + 15, block.LEAVES)
 
-def build_bent_connecting_nw(x, y, z):
-    class PathNW():
-        def __init__(self):
-            self.mc = minecraft.Minecraft.create()
+    # Place glowstone blocks in path
+    mc.setBlock(x + 12, y - 1, z + 7, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
 
-        def create_curve(self, x, y, z):
-            radius = 11.5
-            curve = [17, [17,4], 45, 45, 45, 45, 45, [17,4], 17]
-            for angle in range(90):
-                for i in range(len(curve)):
-                    new_x = x + (radius - i) * math.cos(angle*math.pi/180)
-                    new_z = z + (radius - i) * math.sin(angle*math.pi/180)
-                    self.mc.setBlock(new_x , y-1, new_z, curve[i])
-                    if i == 8:
-                        self.mc.setBlock(new_x, y, new_z, block.LEAVES)
-                new_x = x + (radius) * math.cos(angle*math.pi/180)
-                new_z = z + (radius) * math.sin(angle*math.pi/180)
-                self.mc.setBlock(new_x, y, new_z, block.LEAVES)
-            self.mc.setBlock(x + 7, y - 1, z + 2, block.GLOWSTONE_BLOCK)
-            self.mc.setBlock(x + 2, y - 1, z + 7, block.GLOWSTONE_BLOCK)
 
-    craft = PathNW() #Initialise a variable to access the path class
-    craft.create_curve(x, y, z) #Create the path using current matrix position
+def build_bent_connecting_sw(mc, x, y, z):
+    radius = 11.5
+
+    for angle in range(271, 360):
+        for i in range(len(CURVE)):
+            new_x = x + (radius - i) * math.cos(angle * math.pi / 180)
+            new_z = z + (radius - i) * math.sin(angle * math.pi / 180)
+            mc.setBlock(new_x, y - 1, new_z + 15, CURVE[i])
+
+            if i == 8:
+                mc.setBlock(new_x, y, new_z + 15, block.LEAVES)
+
+        new_x = x + radius * math.cos(angle * math.pi / 180)
+        new_z = z + radius * math.sin(angle * math.pi / 180)
+        mc.setBlock(new_x, y, new_z + 15, block.LEAVES)
+
+    mc.setBlock(x + 2, y - 1, z + 7, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 7, y - 1, z + 12, block.GLOWSTONE_BLOCK)
+
+
+def build_bent_connecting_ne(mc, x, y, z):
+    radius = 11.5
+
+    for angle in range(91, 180):
+        for i in range(len(CURVE)):
+            new_x = x + (radius - i) * math.cos(angle * math.pi / 180)
+            new_z = z + (radius - i) * math.sin(angle * math.pi / 180)
+            mc.setBlock(new_x + 15, y - 1, new_z, CURVE[i])
+
+            if i == 8:
+                mc.setBlock(new_x + 15, y, new_z, block.LEAVES)
+
+        new_x = x + radius * math.cos(angle * math.pi / 180)
+        new_z = z + radius * math.sin(angle * math.pi / 180)
+        mc.setBlock(new_x + 15, y, new_z, block.LEAVES)
+
+    mc.setBlock(x + 7, y - 1, z + 2, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 12, y - 1, z + 7, block.GLOWSTONE_BLOCK)
+
+
+def build_bent_connecting_nw(mc, x, y, z):
+    radius = 11.5
+
+    for angle in range(90):
+        for i in range(len(CURVE)):
+            new_x = x + (radius - i) * math.cos(angle * math.pi / 180)
+            new_z = z + (radius - i) * math.sin(angle * math.pi / 180)
+            mc.setBlock(new_x, y - 1, new_z, CURVE[i])
+
+            if i == 8:
+                mc.setBlock(new_x, y, new_z, block.LEAVES)
+
+        new_x = x + radius * math.cos(angle * math.pi / 180)
+        new_z = z + radius * math.sin(angle * math.pi / 180)
+        mc.setBlock(new_x, y, new_z, block.LEAVES)
+
+    mc.setBlock(x + 7, y - 1, z + 2, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 2, y - 1, z + 7, block.GLOWSTONE_BLOCK)
+
 
 # intersection
-def build_crossintersection(x, y, z):
-    class Intersection(): #Path class for the intersection path
-        def __init__(self): #init function for self.mcpi connection as well as block id's 
-            self.mc = minecraft.Minecraft.create()
-            self.wood = 17
+# Path class for the intersection path
+# createPath function to create the East/West path based on matrix position
+def build_crossintersection(mc, x, y, z):
+    # This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
+    center = 3
+    wood_id = 17
 
-        def create_intersection(self, x, y, z): #createPath function to create the East/West path based on matrix position
-            center = 3 #This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
-            for i in range(15): #Loops 15 times over to cover a 15 block radius of below blocks (length of path)
-                self.mc.setBlocks(x, y, z+center, x+i, y, z+center, block.LEAVES)
-                self.mc.setBlocks(x, y-1, z+center, x+i, y-1, z+center, self.wood)
-                self.mc.setBlocks(x, y-1, z+1+center, x+i, y-1, z+1+center, self.wood, 4)
-                self.mc.setBlocks(x, y-1, z+2+center, x+i, y-1, z+6+center, block.BRICK_BLOCK)
-                self.mc.setBlocks(x, y, z+8+center, x+i, y, z+8+center, block.LEAVES)
-                self.mc.setBlocks(x, y-1, z+8+center, x+i, y-1, z+8+center, self.wood)
-                self.mc.setBlocks(x, y-1, z+7+center, x+i, y-1, z+7+center, self.wood, 4)
+    # Loops 15 times over to cover a 15 block radius of below blocks (length of path)
+    for i in range(15):
+        mc.setBlocks(x, y, z + center, x + i, y, z + center, block.LEAVES)
+        mc.setBlocks(x, y - 1, z + center, x + i, y - 1, z + center, wood_id)
+        mc.setBlocks(x, y - 1, z + 1 + center, x + i, y - 1, z + 1 + center, wood_id, 4)
+        mc.setBlocks(x, y - 1, z + 2 + center, x + i, y - 1, z + 6 + center, block.BRICK_BLOCK)
+        mc.setBlocks(x, y, z + 8 + center, x + i, y, z + 8 + center, block.LEAVES)
+        mc.setBlocks(x, y - 1, z + 8 + center, x + i, y - 1, z + 8 + center, wood_id)
+        mc.setBlocks(x, y - 1, z + 7 + center, x + i, y - 1, z + 7 + center, wood_id, 4)
 
-            for i in range(15): #Loops 15 times over to cover a 15 block radius of below blocks (length of path)
-                self.mc.setBlocks(x+center, y, z, x+center, y, z+i, block.LEAVES)
-                self.mc.setBlocks(x+center, y-1, z, x+center, y-1, z+i, self.wood)
-                self.mc.setBlocks(x+1+center, y-1, z, x+1+center, y-1, z+i, self.wood, 4)
-                self.mc.setBlocks(x+2+center, y-1, z, x+6+center, y-1, z+i, block.BRICK_BLOCK)
-                self.mc.setBlocks(x+8+center, y, z, x+8+center, y, z+i, block.LEAVES)
-                self.mc.setBlocks(x+8+center, y-1, z, x+8+center, y-1, z+i, self.wood)
-                self.mc.setBlocks(x+7+center, y-1, z, x+7+center, y-1, z+i, self.wood, 4)
+    # Loops 15 times over to cover a 15 block radius of below blocks (length of path)
+    for i in range(15):
+        mc.setBlocks(x + center, y, z, x + center, y, z + i, block.LEAVES)
+        mc.setBlocks(x + center, y - 1, z, x + center, y - 1, z + i, wood_id)
+        mc.setBlocks(x + 1 + center, y - 1, z, x + 1 + center, y - 1, z + i, wood_id, 4)
+        mc.setBlocks(x + 2 + center, y - 1, z, x + 6 + center, y - 1, z + i, block.BRICK_BLOCK)
+        mc.setBlocks(x + 8 + center, y, z, x + 8 + center, y, z + i, block.LEAVES)
+        mc.setBlocks(x + 8 + center, y - 1, z, x + 8 + center, y - 1, z + i, wood_id)
+        mc.setBlocks(x + 7 + center, y - 1, z, x + 7 + center, y - 1, z + i, wood_id, 4)
 
-            self.mc.setBlocks(x+center, y, z+4, x+center, y, z+10, block.AIR) #Removes the leaves that are in the way from intersecting paths
-            self.mc.setBlocks(x+center+8, y, z+4, x+center+8, y, z+10, block.AIR)
-            self.mc.setBlocks(x+10, y, z+4, x+center+1, y, z+center, block.AIR)
-            self.mc.setBlocks(x+10, y, z+4, x+center+1, y, z+center+8, block.AIR)
+    # Removes the leaves that are in the way from intersecting paths
+    mc.setBlocks(x + center, y, z + 4, x + center, y, z + 10, block.AIR)
+    mc.setBlocks(x + center + 8, y, z + 4, x + center + 8, y, z + 10, block.AIR)
+    mc.setBlocks(x + 10, y, z + 4, x + center + 1, y, z + center, block.AIR)
+    mc.setBlocks(x + 10, y, z + 4, x + center + 1, y, z + center + 8, block.AIR)
 
-            self.mc.setBlocks(x, y-1, z+center+1, x+14, y-1, z+center+7, block.BRICK_BLOCK) #Replace the whole EW path with bricks
-            self.mc.setBlocks(x, y-1, z+center+1, x+4, y-1, z+center+1, self.wood, 4) #Lay out wood appropriately
-            self.mc.setBlocks(x+10, y-1, z+center+1, x+14, y-1, z+center+1, self.wood, 4)
-            self.mc.setBlocks(x, y-1, z+center+7, x+4, y-1, z+center+7, self.wood, 4)
-            self.mc.setBlocks(x+10, y-1, z+center+7, x+14, y-1, z+center+7, self.wood, 4)
+    # Replace the whole EW path with bricks
+    mc.setBlocks(x, y - 1, z + center + 1, x + 14, y - 1, z + center + 7, block.BRICK_BLOCK)
+    # Lay out block appropriately
+    mc.setBlocks(x, y - 1, z + center + 1, x + 4, y - 1, z + center + 1, wood_id, 4)
+    mc.setBlocks(x + 10, y - 1, z + center + 1, x + 14, y - 1, z + center + 1, wood_id, 4)
+    mc.setBlocks(x, y - 1, z + center + 7, x + 4, y - 1, z + center + 7, wood_id, 4)
+    mc.setBlocks(x + 10, y - 1, z + center + 7, x + 14, y - 1, z + center + 7, wood_id, 4)
 
-            self.mc.setBlock(x+4+center, y-1, z+2, block.GLOWSTONE_BLOCK) #Will create evenly placed glowstone blocks down the center of the path
-            self.mc.setBlock(x+4+center, y-1, z+12, block.GLOWSTONE_BLOCK)
-            self.mc.setBlock(x+2, y-1, z+4+center, block.GLOWSTONE_BLOCK)
-            self.mc.setBlock(x+7, y-1, z+4+center, block.GLOWSTONE_BLOCK)
-            self.mc.setBlock(x+12, y-1, z+4+center, block.GLOWSTONE_BLOCK)
-        
-    craft = Intersection() #Initialise a variable to access the path class
-    craft.create_intersection(x, y, z) #Create the path using current matrix position
+    # Will create evenly placed glowstone blocks down the center of the path
+    mc.setBlock(x + 4 + center, y - 1, z + 2, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 4 + center, y - 1, z + 12, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 2, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 7, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 12, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)

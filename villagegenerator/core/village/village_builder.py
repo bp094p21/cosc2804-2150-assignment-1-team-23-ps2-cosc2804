@@ -1,22 +1,23 @@
 import random
 
-from villagegenerator.construction.building.building import Building
 from villagegenerator.core.layout.layout import Layout
 from villagegenerator.core.village.village_size import VillageSize
+from villagegenerator.core.layout.plot import PlotType
 import villagegenerator.core.layout.predefined_layouts as pl
 
 
 def build_village(size, location, biome, mc):
+    # before layouts or anything is defined/built, scan land and then if appropriate, perform terraform.
     _define_layout(size, biome, mc)
 
     selected_template = _select_random_template(size)
 
     if size is VillageSize.SMALL:
-        _build_small(location, selected_template)
+        _build_small(location, selected_template, mc)
     elif size is VillageSize.MEDIUM:
-        _build_medium(location, selected_template)
+        _build_medium(location, selected_template, mc)
     else:
-        _build_large(location, selected_template)
+        _build_large(location, selected_template, mc)
 
 
 def _define_layout(size, biome, mc):
@@ -35,25 +36,26 @@ def _select_random_template(size):
     return random.choice(Layout.layouts[size]).grid
 
 
-def _build_small(location, template):
-    _build_plots(_generate_fixed_ordinates(8, 4, *location), template)
+def _build_small(location, template, mc):
+    _build_plots(_generate_fixed_ordinates(8, 4, *location), template, mc)
 
 
-def _build_medium(location, template):
-    _build_plots(_generate_fixed_ordinates(10, 5, *location), template)
+def _build_medium(location, template, mc):
+    _build_plots(_generate_fixed_ordinates(10, 5, *location), template, mc)
 
 
-def _build_large(location, template):
-    _build_plots(_generate_fixed_ordinates(12, 6, *location), template)
+def _build_large(location, template, mc):
+    _build_plots(_generate_fixed_ordinates(12, 6, *location), template, mc)
 
 
-def _build_plots(fixed_ordinates, template):
+def _build_plots(fixed_ordinates, template, mc):
     for row in template:
         for (i, plot) in enumerate(row):
-            if plot is type(Building):
+            if isinstance(plot.plot_type, PlotType.BUILDING):
                 plot.item.set_location(fixed_ordinates[i])
-
-            plot.build()
+                plot.build_house()
+            else:
+                plot.build_road(mc, fixed_ordinates[i])
 
 
 def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int, z_coord: int) -> list:
@@ -63,7 +65,6 @@ def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int
             temp.append((x_coord + x * 15, y_coord, z_coord + z * 15))
 
     return temp
-
 
 #      [(X, Y, Z), (X + 15, Y, Z), (X + 30, Y, Z), (X + 45, Y, Z), (X + 60, Y, Z),
 #      (X + 75, Y, Z), (X + 90, Y, Z),
