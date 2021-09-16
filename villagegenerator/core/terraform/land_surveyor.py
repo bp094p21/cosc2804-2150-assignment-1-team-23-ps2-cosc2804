@@ -1,7 +1,7 @@
 from mcpi import block, minecraft
 import numpy as np
 import time
-class TerrainScaner():
+class TerrainScanner():
     def __init__(self):
         self.start_time = time.time()
         self.mc = minecraft.Minecraft.create()
