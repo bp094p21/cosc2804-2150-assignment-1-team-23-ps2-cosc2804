@@ -115,7 +115,7 @@ if __name__ == '__main__':
     v3 = mc.player.getPos()
     architect = Jin()
     print(f"✅ Architect created.\n\narchitect.name: {architect.name}\n")
-    orientation = 2
+    orientation = 0
     theme = 'medi'
     architect.give_specs(v3, orientation, theme, mc)
     print(architect.logbook)

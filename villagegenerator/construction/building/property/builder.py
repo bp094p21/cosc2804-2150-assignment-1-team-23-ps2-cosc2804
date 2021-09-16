@@ -17,15 +17,25 @@ class Builder:
         self.properties.append(property)
         self.logbook = l.Logbook(self)
         self.logbook.logs.append(f'Assigned property:\n{property}')
+        self._print()
+        self._build_property(property, mc)
     # Internal Methods
-    def _build_property(self) -> None:
-        self.p.status = f"🚧 Commencing property build at location:\n{self.p.location_str}"
-        self.p.print_status()
-        self._build_components()
-        self.p.status = f"✅ Completed property build at location:\n{self.p.location_str}"
-        self.p.print_status()
+    def _build_property(self, property, mc) -> None:
+        self.logbook.logs.append(f"🚧 Commencing property build...") 
+        self._print()
+        for component_type, component in property.components.items():
+            self._assign_tradie(component, mc)
+        self.logbook.logs.append(f"✅ Completed property build.")
+        self._print()
         return None
-    def _build_components(self):
+    def _assign_tradie(self, component, mc):
+        self.logbook.logs.append(f"Assigning {component.type} to tradie...")
+        self._print()
+        tradie = TRADIE[component.type]
+        tradie.build_component(component, mc)
+    def _print(self):
+        print(self.logbook.logs[-1])
+
         # TODO: Use components to randomly build components
         pass
 
