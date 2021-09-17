@@ -1,13 +1,13 @@
 from mcpi import vec3 as v
-from tradies.tradie import Tradie     # Remove comment when not running tests
-# from tradie import Tradie       # Comment out when not running tests
+#from tradies.tradie import Tradie     # Remove comment when not running tests
+from tradie import Tradie       # Comment out when not running tests
 
 class FloorInstaller(Tradie):
     trade = 'flooring'
     floors = []
     # External calls
     def build_component(self, floors, mc):
-        for floor in floors:
+        #for floor in floors:
             self.floors.append(floor)
             self._build_floor(self.floors[-1], mc)
     # Internal Methods

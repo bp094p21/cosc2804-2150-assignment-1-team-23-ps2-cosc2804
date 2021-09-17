@@ -1,13 +1,12 @@
 
 from misc import Misc
-import block as b
-
+import block_list as b
 
 class ChessBoard(Misc):
     def __init__(self) -> None:
         super().__init__()
         self.back_piece = 198
-        self.front = 214
+        self.front = 140
     def build(self,x,y,z):
         self.build_foundation(x,y,z)
         self.mc.setBlocks(x+3,y,z+3,x+11,y,z+11,b.MISC_BLOCKS[self.theme_string]['ground_base'])

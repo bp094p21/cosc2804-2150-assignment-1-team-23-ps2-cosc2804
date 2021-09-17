@@ -1,6 +1,5 @@
 from enum import Enum
-
-from village_generator.construction import Building
+from construction import Building
 
 
 # contains the orientation, position and centre of where the construction(s) and road(s) should go.
@@ -13,11 +12,11 @@ class Plot:
         # delineates whether this plot will be village entrance
         self.entrance = entrance
 
-    # called to construct each house when iterating through the predefined layout.
+    # called to construct each house when iterating through the predefined village_layout.
     def build_house(self):
         self.item.build()
 
-    # called to construct each road when iterating through the predefined layout.
+    # called to construct each road when iterating through the predefined village_layout.
     def build_road(self, mc, coords):
         self.item(mc, *coords)
 
