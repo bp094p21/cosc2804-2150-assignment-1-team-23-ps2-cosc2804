@@ -30,4 +30,4 @@ if __name__ == '__main__':
     from mcpi import minecraft as m
     mc = m.Minecraft.create()
     player_v3 = mc.player.getPos()
-    roof = Roof(roof_block=b.STONE_BRICK)
+    roof = Roof(roof_block=b.STAIRS_WOOD)
