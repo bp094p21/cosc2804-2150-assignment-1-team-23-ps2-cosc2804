@@ -23,7 +23,11 @@ class Roofer(Tradie):
                     mc.setBlocks(roof.roof_v3['start'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + j, roof.roof_v3['start'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + z_difference - j, 5)   
                     mc.setBlocks(roof.roof_v3['end'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + j, roof.roof_v3['end'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + z_difference - j, 5)           
             else:
-                pass
+                for j in range(int(z_difference // 2) + 2):
+                    mc.setBlock(move_up_x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z - 1 + j, 53, 2)
+                    mc.setBlock(move_up_x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + 1 + z_difference - j, 53, 3)
+                    mc.setBlocks(roof.roof_v3['start'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + j, roof.roof_v3['start'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + z_difference - j, 5)   
+                    mc.setBlocks(roof.roof_v3['end'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + j, roof.roof_v3['end'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + z_difference - j, 5)           
 
 
 class Freddie(Roofer):
