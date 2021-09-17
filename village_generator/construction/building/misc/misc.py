@@ -2,8 +2,8 @@ from mcpi.minecraft import Minecraft
 import random
 import sys
 import block as b
-"""sys.path.append('../core/layout')
-import layout.themes"""
+"""sys.path.append('../core/village_layout')
+import village_layout.themes"""
 import themes
 
 #types of misc objects{open nature area, park features, statue-like objects}

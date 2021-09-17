@@ -1,5 +1,5 @@
-from plot import Plot
-from layout import Layout
+from village_generator.core.village_layout.layout import Layout
+from village_generator.core.village_layout.plot import Plot
 from village_generator.construction import *
 
 
