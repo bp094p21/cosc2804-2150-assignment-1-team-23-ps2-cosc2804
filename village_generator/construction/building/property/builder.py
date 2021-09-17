@@ -15,6 +15,28 @@ class Builder:
         print(f"{self.emoji} Builder created.\n")
         if self.name:
             print(f"builder.name: {self.name}\n")
+        self.TRADIES = {
+            'carpets': t.carpet_call.CarpetCall(),
+            'decoration': t.decorator.Decorator(),
+            'boundary': t.jims_fencing.JimsFencing(),
+            'floor': t.floor_installer.FloorInstaller(),
+            'room': t.mason.Mason(),
+            'roof': t.roofer.Roofer(),
+            'steps': t.carpenter.Carpenter(),
+            'wall': {
+                'stone': t.mason.Mason(),
+                'brick': t.mason.Mason(),
+                'timber': t.carpenter.Carpenter(),
+                'concrete': t.mason.Mason()
+            },
+            'stairs': t.carpenter.Carpenter(),
+            'pool': t.pool_installer.PoolInstaller(),
+            'entrance': t.jims_fencing.JimsFencing(),
+            'garden': t.gardener.Gardener(),
+            'veggie_patch': t.gardener.Gardener(),
+            'fireplace': t.mason.Mason(),
+            'chimney': t.mason.Mason()
+        }
         pass
     # Public Functions
     def assign_property(self, property: p.Property, mc: minecraft.Minecraft) -> None:
@@ -25,19 +47,23 @@ class Builder:
         self._build_property(property, mc)
     # Internal Methods
     def _build_property(self, property, mc) -> None:
+        # TODO: Either append components as a list instead of dictionary or recursively build components checking it's actually a component type or a nested dictionary/list
         self.logbook.logs.append(f"{self.emoji} Commencing property build...\n") 
         self._print()
         for component_type, component in property.components.items():
             if component_type == 'house':
-                continue
-            self._assign_tradie(component_type, component, mc)
+                for house_component_type, house_component in component.components.items():
+                    self._assign_tradie(house_component_type, house_component, mc)
+
+            else:
+                self._assign_tradie(component_type, component, mc)
         self.logbook.logs.append(f"✅ Completed property build.\n")
         self._print()
         return None
     def _assign_tradie(self, component_type, component, mc):
         self.logbook.logs.append(f"{self.emoji} Assigning {component_type} to tradie...\n")
         self._print()
-        tradie = TRADIE[component_type]
+        tradie = self.TRADIES[component_type]
         tradie.build_component(component, mc)
     def _print(self):
         print(self.logbook.logs[-1])
@@ -47,26 +73,3 @@ class Builder:
 
 class Bob(Builder):
     name = 'Bob'
-
-TRADIE = {
-    'carpets': t.carpet_call.CarpetCall(),
-    'decoration': t.decorator.Decorator(),
-    'boundary': t.jims_fencing.JimsFencing(),
-    'floor': t.floor_installer.FloorInstaller(),
-    'room': t.mason.Mason(),
-    'roof': t.roofer.Roofer(),
-    'steps': t.carpenter.Carpenter(),
-    'wall': {
-        'stone': t.mason.Mason(),
-        'brick': t.mason.Mason(),
-        'timber': t.carpenter.Carpenter(),
-        'concrete': t.mason.Mason()
-    },
-    'stairs': t.carpenter.Carpenter(),
-    'pool': t.pool_installer.PoolInstaller(),
-    'entrance': t.jims_fencing.JimsFencing(),
-    'garden': t.gardener.Gardener(),
-    'veggie_patch': t.gardener.Gardener(),
-    'fireplace': t.mason.Mason(),
-    'chimney': t.mason.Mason()
-}
