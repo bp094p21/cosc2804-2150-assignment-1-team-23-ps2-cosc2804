@@ -1,5 +1,5 @@
 from numpy import np
-from villagegenerator.core.village.village_size import VillageSize
+from village_generator.core.village import VillageSize
 
 
 class Layout:
