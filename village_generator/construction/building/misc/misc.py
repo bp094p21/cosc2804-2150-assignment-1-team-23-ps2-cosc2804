@@ -1,31 +1,11 @@
 from mcpi.minecraft import Minecraft
 import random
 import sys
-import block as b
+import block_list as b
 """sys.path.append('../core/village_layout')
 import village_layout.themes"""
 import themes
 
-#types of misc objects{open nature area, park features, statue-like objects}
-#theme order{0= modern, 1= mediterranean, 2= magic}
-
-"""class BuildingBlocks():
-    def __init__(self) -> None:
-        self.blocklist = {
-            'ground':[b.GRASS,b.SAND, b.BRICKS_NETHER_RED],
-            "ground_base":[b.STONE,b.SANDSTONE,b.COBBLESTONE],
-            'main_block':[b.CONCRETE, b.TERRACOTTA,b.PURPUR_BLOCK],
-            'sub_block':[b.PILLAR_QUARTZ,b.TERRACOTTA_WHITE_GLAZED,b.OBSIDIAN],
-            'main_slab':[(43,0),(43,1),(204)],
-            "wood":[b.WOOD_PLANKS,b.WOOD_PLANKS.withData(4),b.WOOD_PLANKS.withData(5)],
-            'plant_stem':[b.TIMBER_LOG,81, b.LOG.withData(1)],
-            'plant_leaves':[b.LEAVES,0,213],
-            'main_light_block':[b.SEA_LANTERN,b.SEA_LANTERN,b.GLOWSTONE],
-            'torch':[b.TORCH,b.TORCH,b.TORCH_REDSTONE],
-            'flower':[b.FLOWER_RED,b.AIR, b.MUSHROOM_RED],
-            'shrubs':[b.GRASS_TALL,31,31]
-        }"""
-    
 class Misc():
     def __init__(self) -> None:
         self.mc = Minecraft.create()
@@ -87,10 +67,10 @@ class Misc():
 
 
 
-park = Misc()
+# park = Misc()
 
-x,y,z = park._player_position()
+# x,y,z = park._player_position()
 
-#mc = Minecraft.create()
-park.build_foundation(x,y,z)
-park.build_tree(x,y,z)
+# #mc = Minecraft.create()
+# park.build_foundation(x,y,z)
+# park.build_tree(x,y,z)
