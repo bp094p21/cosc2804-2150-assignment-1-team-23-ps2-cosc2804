@@ -1,5 +1,5 @@
 from enum import Enum
-from village_generator.construction import Building
+from construction import Building
 
 
 # contains the orientation, position and centre of where the construction(s) and road(s) should go.
