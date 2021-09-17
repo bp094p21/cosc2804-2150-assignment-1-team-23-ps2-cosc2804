@@ -63,9 +63,13 @@ Implementing
  - Modified classes so that classes that represent inanimate objects such as house components ('gate', 'wall') do not contain functions. They now only contain attributes
  - Added classes that represent objects that have the ability to "do". These classes use objects to query for design specs and appropriate blocks to use to build with
  - Finished main module `architect.py`
+ - `property` subpackage working with basic functionality
+ - Added functionality to `layout.py`, `builder.py`, and `designer.py`
+ - Add easier to read print messages for a better dev experience
 
 Testing
  - Getting into the habit of writing "if name is main" tests at the bottom of every file to easily test main functionality of each file
+ - Tested `architect.py`, `layout.py`, `builder.py` and `designer.py` and they are all working as intended together
  
 # TODO: Make sets of suitable blocks for each component for each house_type for each theme
 
