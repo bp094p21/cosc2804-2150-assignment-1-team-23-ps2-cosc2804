@@ -13,8 +13,8 @@ class Block:
         return (self.id << 8) + self.data
 
     def withData(self, data):
-        self.data = data
-        return self
+        new_block = Block(self.id, data=data)
+        return new_block
 
     def __iter__(self):
         """Allows a Block to be sent whenever id [and data] is needed"""

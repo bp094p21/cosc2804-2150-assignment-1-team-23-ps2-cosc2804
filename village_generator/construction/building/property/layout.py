@@ -8,7 +8,6 @@ def get_layout(house_type, entrance_edge, orientation, plot_length):
         return PoolSide(entrance_edge, orientation, plot_length)
     elif house_type == 'dungeon':
         return Dungeon(entrance_edge, orientation, plot_length)
-
 class Layout:
     name = None
     emoji = '📍'
@@ -17,7 +16,6 @@ class Layout:
         print(f"{self.emoji} Layout initialized.\n")
         if self.name:
             print(f"layout.name: {self.name}\n")
-
 class Basic(Layout):
     name = 'basic'
     def __init__(self, entrance_edge, orientation, plot_length):
@@ -47,17 +45,17 @@ class Basic(Layout):
         c_len = None        # c_len = length in c direction
         positions = ['left', 'back', 'right']     # From perpsective of walking onto property from entrance
         random_position = random.choice(positions)
-        if random_position == 'back':
+        if random_position == 'back':                       ### BACK POOL ###
             e_offset = 10
-            e_len = self.plot_length - e_offset
-            c_offsets = [1, 2, 3, 4]
+            e_len = self.plot_length - e_offset - 1         # POOL DEPTH = 4
+            c_offsets = [1, 2, 3, 4]                        # GAP BETWEEN BOUNDARY AND POOL = 0/1/2/3
             c_offset = random.choice(c_offsets)
-            c_len = self.plot_length - (c_offset * 2)
-        else:
-            e_offsets = [7, 8]
+            c_len = self.plot_length - (c_offset * 2)       # POOL WIDTH = 13/11/9/7
+        else:                                               ### SIDE POOL ###
+            e_offsets = [6, 7]                              # GAP BETWEEN BOUNDARY AND POOL = 5/6
             e_offset = random.choice(e_offsets)
-            e_len = self.plot_length - e_offset - 1
-            c_lens = [4, 5, 6]
+            e_len = self.plot_length - e_offset - 1         # POOL DEPTH = 8/7
+            c_lens = [4, 5, 6]                              # POOL WIDTH = 4/5/6
             c_len = random.choice(c_lens)
             if random_position == 'right':
                 c_offset = 1
@@ -79,30 +77,30 @@ class Basic(Layout):
 
         pool_position = self.layout['pool']['position']
         if pool_position == 'back':
-            position = 'middle'
+            position = 'middle'                                         ### HOUSE MIDDLE POSITION ###
             c_offsets = [2, 3]
             c_offset = random.choice(c_offsets)
-            c_len = self.plot_length - (c_offset * 2)
-            gap = 1
+            c_len = self.plot_length - (c_offset * 2)                   # HOUSE WIDTH = 11 or 9
+            gap = 1                                                     # GAP BETWEEN POOL AND HOUSE = 1
             e_len_pool = self.layout['pool']['e_len']
-            e_offsets = [3,4]
+            e_offsets = [3, 4]                                          # GAP BETWEEN ENTRANCE AND HOUSE = 2 or 3
             e_offset = random.choice(e_offsets)
-            e_len = self.plot_length - e_offset - e_len_pool - gap 
-        else:
+            e_len = self.plot_length - e_offset - e_len_pool - gap - 1  # HOUSE DEPTH = 7 or 8
+        else:                                                           ### HOUSE SIDE POSITION ###
             c_len_pool = self.layout['pool']['c_len']
-            e_offsets = [6, 7]
+            e_offsets = [6, 7]                                          # GAP BETWEEN ENTRANCE AND HOUSE = 5 or 6
             e_offset = random.choice(e_offsets)
-            e_len = self.plot_length - e_offset - 1
-            house_pool_gaps = [1, 2]
+            e_len = self.plot_length - e_offset - 1                     # HOUSE DEPTH = 8 or 7
+            house_pool_gaps = [1, 2]                                    # GAP BETWEEN HOUSE AND POOL = 1 or 2
             gap = random.choice(house_pool_gaps)
-            c_len = self.plot_length - c_len_pool - gap - 2
+            c_len = self.plot_length - c_len_pool - gap - 2             # HOUSE WIDTH = 8/7 or 7/6 or 6/5
             c_offset_pool = self.layout['pool']['c_offset']
             if pool_position == 'right':
                 position = 'left'
-                c_offset = c_offset_pool + c_len_pool + gap
+                c_offset = c_offset_pool + c_len_pool + gap             # C_OFFSET = 6/7 or 7/8 or 8/9
             elif pool_position == 'left':
                 position = 'right'
-                c_offset = 1
+                c_offset = 1                                            # C_OFFSET = 1, up to 5/6/7/8
         self.layout['house'] = {
             'position' : position,
             'e_offset': e_offset,
@@ -110,8 +108,8 @@ class Basic(Layout):
             'e_len': e_len,
             'c_len': c_len
         }
-        
     def _position_path(self):
+        # TODO look for gaps between pool, house, entrance and boundary to create paths
         e_offset = 1
         c_offset = self.plot_length // 2    # Always middle
         e_len = None
@@ -124,15 +122,8 @@ class Basic(Layout):
             'e_len': e_len,
             'c_len': c_len
         }
-    def _position_external_doors(self):
-        self._position_front_door()
-        self._position_poolside_door()
-        pass
-    def _position_front_door(self):
-        pass
-    def _position_poolside_door(self):
-        pass
     def _position_outdoor_features(self):
+        # TODO Read code again and make adjustments
         e_offset_house = self.layout['house']['e_offset']
         feature_house_gaps = [1, 2]
         feature_house_gap = random.choice(feature_house_gaps)
@@ -165,97 +156,7 @@ class Basic(Layout):
                 'e_len': e_len,
                 'c_len': self.layout['path']['c_offset'] - path_gap - 1 - 1 - boundary_gap
             }
-
-
-        
         pass
-
-
-# class Basic(Layout):
-#     def __init__(self):
-#         self.name = 'basic'
-#         self.boundary = {
-#             'start': {
-#                 'z': 0,
-#                 'x': 0
-#             },
-#             'end': {
-#                 'z': 14,
-#                 'x': 14
-#             }
-#         }
-#         self.entrance = {
-#             'start': {
-#                 'z': 0,
-#                 'x': 0
-#             },
-#             'end': {
-#                 'z': 0,
-#                 'x': 14
-#             }
-#         }
-#         self.front = {
-#             'start': {
-#                 'z': 1,
-#                 'x': 1
-#             },
-#             'end': {
-#                 'z': 3,
-#                 'x': 14
-#             }
-#         }
-#         self.house = {
-#             'start': {
-#                 'z': 4,
-#                 'x': 3
-#             },
-#             'end': {
-#                 'z': 10,
-#                 'x': 11
-#             }
-#         }
-#         self.sides = [
-#             {
-#                 'start': {
-#                     'z': 4,
-#                     'x': 1
-#                 },
-#                 'end': {
-#                     'z': 10,
-#                     'x': 2
-#                 }
-#             },
-#             {
-#                 'start': {
-#                     'z': 4,
-#                     'x': 12
-#                 },
-#                 'end': {
-#                     'z': 10,
-#                     'x': 13
-#                 }
-#             }
-#         ]
-#         self.back = {
-#             'start': {
-#                 'z': 11,
-#                 'x': 1
-#             },
-#             'end': {
-#                 'z': 13,
-#                 'x': 13
-#             }
-#         }
-#         self.pool = {
-#             'start': {
-#                 'z': 11,
-#                 'x': 1
-#             },
-#             'end': {
-#                 'z': 13,
-#                 'x': 4
-#             }
-#         }
 class PoolSide(Layout):
     def __init__(self):
         self.name = 'pool_side'
