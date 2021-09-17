@@ -1,6 +1,6 @@
 from misc import Misc
 import random
-import block as b
+import block_list as b
 class bigTree(Misc):
     def __init__(self) -> None:
         super().__init__()
