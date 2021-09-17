@@ -39,17 +39,20 @@ def _scan_terrain_large(mc, ply_coords, start_time):
 def _scan(mc, ply_coords, z_length, x_length, under_limit_num, start_time) -> bool:
     x, y, z = ply_coords
     acceptable_height = y
-    height_array = np.zeros(z_length * x_length, dtype=np.int64)
-    prev_block_height_array = np.zeros(z_length * x_length, dtype=np.int64)
+
+    height_array = np.zeros(z_length * x_length, dtype=np.int32)
+    prev_block_height_array = np.zeros(z_length * x_length, dtype=np.int32)
+
     height_array = np.reshape(height_array, (x_length, z_length))
     prev_block_height_array = np.reshape(prev_block_height_array, (x_length, z_length))
+
     # 0-256 is standard world height
     blocks = mc.getBlocks(x, 50, z, x + x_length - 1, acceptable_height + 15, z + z_length - 1)
-
     z_block = 0  # start off with
     x_block = 0
     y_block = 0
     count = 0
+
     # priority of checking is: z, x, y
     for block in blocks:
 
