@@ -14,15 +14,19 @@ FIXED_ORDINATES = generate_fixed_ordinates(12, 6, *(4, 5, 6))
 
 if __name__ == '__main__':
     # generate the grid ordinates
-    # for z in range(0, 13):
-    #     for x in range(0, 7):
-    #         print('(X + ' + str(x * 15) + ', Y, Z + ' + str(z * 15) + ')', end=', ')
-    #
-    #     print()
+    temp = []
+    for z in range(0, 13):
+        temp.append([])
+        for x in range(0, 7):
+            temp[z].append('(X + ' + str(x * 15) + ', Y, Z + ' + str(z * 15) + ')')
+
+
+    print(temp)
+    
 
     # print(FIXED_ORDINATES)
 
-    matrix = np.array([[3, 4, 5, 6, 7], [3, 4, 5, 6, 2], [9, 2, 4, 2, 2]])
-    for x in matrix:
-        for y in x:
-            print(y)
+    # matrix = np.array([[3, 4, 5, 6, 7], [3, 4, 5, 6, 2], [9, 2, 4, 2, 2]])
+    # for x in matrix:
+    #     for y in x:
+    #         print(y)
