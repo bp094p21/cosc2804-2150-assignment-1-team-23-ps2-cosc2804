@@ -41,5 +41,5 @@ class Property:
         return f"🖨  Printing object.__repr__:\n\n{type(self)}\n\nlocation_v3: {self.location_v3},\norientation: {self.orientation},\ntheme: {self.theme.name},\nhouse_type: {self.house_type},\nis_built: {self.is_built}"
     # Internal methods
     def _instantiate_components(self):
-        # TODO: Use layout to randomly instantiate components to build
+        # TODO: Use village_layout to randomly instantiate components to build
         pass

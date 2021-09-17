@@ -1,9 +1,9 @@
 import random
-import village_generator.core.layout.predefined_layouts as pl
+import village_generator.core.village_layout.predefined_layouts as pl
 
-from village_size import VillageSize
-from village_generator.core.layout import Layout
-from village_generator.core.layout import PlotType
+from village_generator.core.village.village_size import VillageSize
+from village_generator.core.village_layout import Layout
+from village_generator.core.village_layout import PlotType
 
 
 def build_village(size, location, biome, mc):

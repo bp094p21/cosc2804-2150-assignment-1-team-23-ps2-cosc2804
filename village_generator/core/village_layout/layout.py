@@ -1,4 +1,4 @@
-from numpy import np
+import numpy as np
 from village_generator.core.village import VillageSize
 
 
@@ -12,6 +12,6 @@ class Layout:
         self.grid = matrix
         self.size = layout_size
 
-        Layout.layouts[layout_size].append(self)  # add the layout as a matrix to the static layouts dict.
+        Layout.layouts[layout_size].append(self)  # add the village_layout as a matrix to the static layouts dict.
 
-# contains a numpy matrix and a bunch of methods for manipulating a particular layout, so that they can just be called.
+# contains a numpy matrix and a bunch of methods for manipulating a particular village_layout, so that they can just be called.
