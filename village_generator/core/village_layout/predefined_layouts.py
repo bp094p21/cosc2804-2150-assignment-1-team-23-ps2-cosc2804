@@ -1,6 +1,6 @@
-from village_generator.core.village_layout.layout import Layout
-from village_generator.core.village_layout.plot import Plot
-from village_generator.construction import *
+from core.village_layout.layout import Layout
+from core.village_layout.plot import Plot
+from construction import *
 
 
 # TODO - all the buildings must both implement the build() method, and they must have a setter to set location.
@@ -12,20 +12,21 @@ from village_generator.construction import *
 # Max Structures - 5
 def define_small(mc, biome, size):
     # Layout #1
+    
     Layout(size,
-           [[Plot(), Plot(build_bent_connecting_ne), Plot(build_straight_ew), Plot()],
-            [Plot(build_straight_ew), Plot(build_crossintersection), Plot(), Plot()],
-            [Plot(), Plot(build_crossintersection), Plot(build_straight_ew), Plot()],
+           [[Plot(), Plot(build_bent_connecting_se), Plot(build_straight_ew), Plot()],
+            [Plot(build_straight_ew, True), Plot(build_intersection_w_ns), Plot(), Plot()],
+            [Plot(), Plot(build_intersection_e_ns), Plot(build_straight_ew), Plot()],
             [Plot(), Plot(build_straight_ns), Plot(), Plot()],
-            [Plot(), Plot(build_crossintersection), Plot(), Plot()]])
+            [Plot(), Plot(build_intersection_n_ew), Plot(), Plot()]])
 
     # Layout #2
     Layout(size,
            [[Plot(), Plot(), Plot(build_bent_connecting_se), Plot()],
-            [Plot(), Plot(build_straight_ew), Plot(build_crossintersection), Plot()],
-            [Plot(), Plot(), Plot(build_crossintersection), Plot()],
-            [Plot(), Plot(build_straight_ew), Plot(build_crossintersection), Plot()],
-            [Plot(), Plot(), Plot(build_straight_ns), Plot()]])
+            [Plot(), Plot(build_straight_ew), Plot(build_intersection_w_ns), Plot()],
+            [Plot(), Plot(), Plot(build_intersection_e_ns), Plot()],
+            [Plot(), Plot(build_straight_ew), Plot(build_intersection_w_ns), Plot()],
+            [Plot(), Plot(), Plot(build_straight_ns, True), Plot()]])
 
 
 # Medium variations.
