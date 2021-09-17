@@ -13,15 +13,15 @@ class Roofer(Tradie):
         z_difference = int(roof.roof_v3['end'].z - roof.roof_v3['start'].z)
         abs(x_difference)
         abs(z_difference)
-        print(x_difference)
-        print(z_difference)
         for i in range(x_difference + 1):
-            moveUp = roof.roof_v3['start'].x + i
+            move_up_x = roof.roof_v3['start'].x + i
             if z_difference % 2 == 0:
                 for j in range(int(z_difference / 2) + 1):
-                    mc.setBlock(moveUp, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z - 1 + j, 53, 2)
-                    mc.setBlock(moveUp, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + 1 + z_difference - j, 53, 3)
-                    mc.setBlock(moveUp, roof.roof_v3['start'].y + (z_difference / 2), roof.roof_v3['start'].z + (z_difference / 2), 44, 2)
+                    mc.setBlock(move_up_x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z - 1 + j, 53, 2)
+                    mc.setBlock(move_up_x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + 1 + z_difference - j, 53, 3)
+                    mc.setBlock(move_up_x, roof.roof_v3['start'].y + (z_difference / 2), roof.roof_v3['start'].z + (z_difference / 2), 44, 2)
+                    mc.setBlocks(roof.roof_v3['start'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + j, roof.roof_v3['start'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + z_difference - j, 5)   
+                    mc.setBlocks(roof.roof_v3['end'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + j, roof.roof_v3['end'].x, roof.roof_v3['start'].y - 1 + j, roof.roof_v3['start'].z + z_difference - j, 5)           
             else:
                 pass
 
