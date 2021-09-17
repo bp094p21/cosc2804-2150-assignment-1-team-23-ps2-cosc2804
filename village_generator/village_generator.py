@@ -1,6 +1,6 @@
 from mcpi.minecraft import Minecraft
-from villagegenerator.core.village.village_builder import build_village
-from villagegenerator.core.village.village_size import VillageSize
+from core import build_village
+from core import VillageSize
 
 # Main class file. The VillageBuilder will be called from here to construction a village on player request (onCommand
 # event).

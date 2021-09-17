@@ -1,6 +1,6 @@
 from plot import Plot
-from villagegenerator.core.layout.layout import Layout
-from villagegenerator.construction.road.road import *
+from layout import Layout
+from village_generator.construction import *
 
 
 # TODO - all the buildings must both implement the build() method, and they must have a setter to set location.
