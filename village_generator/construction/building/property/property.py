@@ -11,23 +11,11 @@ class Property:
     entrance_edge: dict = None
     house_type: str = None      
     layout: l.Layout = None     
-    components: dict = {        
-        'boundary': None,
-        'entrance': None,
-        'floors': [],
-        'front': None,
-        'house': None,
-        'pool': None,
-        'roof': None,
-        'rooms': [],
-        'sides': [],
-        'stairs': [],
-        'walls': []
-    }
+    components: list = []
     is_built = False
 
     # Public functions
-    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme, entrance_edge: dict, house_type: str, layout: l.Layout, components = {}) -> None:
+    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme, entrance_edge: dict, house_type: str, layout: l.Layout, components = []) -> None:
         self.location_v3 = location_v3
         self.location_str = f"\nx: {location_v3.x}\ny: {location_v3.y}\nz: {location_v3.z}\n"
         self.orientation = orientation
