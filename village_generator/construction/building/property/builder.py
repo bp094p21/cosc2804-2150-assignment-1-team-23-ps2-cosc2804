@@ -43,26 +43,24 @@ class Builder:
         self.properties.append(property)
         self.logbook = l.Logbook(self)
         self.logbook.logs.append(f'{self.emoji} Assigned property.\n')
-        self._print()
+        # self._print()
         self._build_property(property, mc)
     # Internal Methods
     def _build_property(self, property, mc) -> None:
-        # TODO: Either append components as a list instead of dictionary or recursively build components checking it's actually a component type or a nested dictionary/list
         self.logbook.logs.append(f"{self.emoji} Commencing property build...\n") 
-        self._print()
-        for component_type, component in property.components.items():
-            if component_type == 'house':
-                for house_component_type, house_component in component.components.items():
-                    self._assign_tradie(house_component_type, house_component, mc)
-
+        # self._print()
+        all_components = property.components + property.house.components
+        for component in all_components:
+            if component.type == 'house':
+                continue
             else:
-                self._assign_tradie(component_type, component, mc)
+                self._assign_tradie(component.type, component, mc)
         self.logbook.logs.append(f"✅ Completed property build.\n")
-        self._print()
+        # self._print()
         return None
     def _assign_tradie(self, component_type, component, mc):
         self.logbook.logs.append(f"{self.emoji} Assigning {component_type} to tradie...\n")
-        self._print()
+        # self._print()
         tradie = self.TRADIES[component_type]
         tradie.build_component(component, mc)
     def _print(self):
