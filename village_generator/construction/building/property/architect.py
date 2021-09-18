@@ -23,7 +23,7 @@ class Architect():
     def give_specs(self, location_v3: v.Vec3, orientation: int, theme_str: str, mc: minecraft.Minecraft, plot_length=15) -> None:
         self.logbook = lb.Logbook(self)
         self.logbook.logs.append(f'{self.emoji} Specs received for property.\n\nLocation: {location_v3},\nOrientation: {orientation},\nTheme: {theme_str}\n')
-        self._print()
+        # self._print()
         self._draft_property(location_v3, orientation, theme_str, plot_length)
         self._get_designer()
         self._get_component_specs()
@@ -32,7 +32,7 @@ class Architect():
     # Interal Methods
     def _draft_property(self, v3, orientation, theme_str, plot_length):
         self.logbook.logs.append(f'{self.emoji} Drafting property...\n')
-        self._print()
+        # self._print()
         entrance_edge = self._get_entrance_edge(v3, orientation, plot_length)
         theme = self._set_theme(theme_str)
         house_type = self._set_house_type(theme)
@@ -42,7 +42,7 @@ class Architect():
         self.logbook.logs.append(f'✅ Property drafted.')
     def _get_entrance_edge(self, v3, orientation, plot_length):
         self.logbook.logs.append(f'{self.emoji} Getting entrance edge...\n')
-        self._print()
+        # self._print()
         start = None
         end = None
         if orientation == 0:
@@ -58,53 +58,53 @@ class Architect():
             start = v.Vec3(v3.x, v3.y, v3.z + plot_length - 1)
             end = v3
         self.logbook.logs.append(f'✅ Entrance edge set.\n\nstart: {start},\nend: {end}\n')
-        self._print()
+        # self._print()
         return {'start': start, 'end': end}
     def _set_theme(self, theme_str) -> t.Theme:
         self.logbook.logs.append(f'{self.emoji} Setting theme...\n')
-        self._print()
+        # self._print()
         theme = t.get_theme(theme_str)
         self.logbook.logs.append(f"✅ Property theme set: {theme.name}\n")
-        self._print()
+        # self._print()
         return theme
     def _set_house_type(self, theme: t.Theme) -> str:
         self.logbook.logs.append(f'{self.emoji} Setting house type...\n')
-        self._print()
+        # self._print()
         house_type = theme.house_type
         self.logbook.logs.append(f"✅ House type set: {house_type}\n")
-        self._print()
+        # self._print()
         return house_type
     def _set_layout(self, house_type, entrance_edge, orientation, plot_length) -> l.Layout:
         self.logbook.logs.append(f'{self.emoji} Setting property layout...\n')
-        self._print()
+        # self._print()
         layout = l.get_layout(house_type, entrance_edge, orientation, plot_length)
         self.logbook.logs.append(f"✅ Property layout set: {layout.name}\n")
-        self._print()
+        # self._print()
         return layout
     def _get_designer(self):
         self.logbook.logs.append(f'{self.emoji} Getting designer...\n')
-        self._print()
+        # self._print()
         self.designer = d.Designer()
         self.logbook.logs.append(f'✅ Designer on board\n')
-        self._print()
+        # self._print()
     def _get_component_specs(self) -> dict:
         self.logbook.logs.append(f'{self.emoji} Getting components from designer...\n')
-        self._print()
+        # self._print()
         self.designer.give_specs(self.properties[-1])
         self.logbook.logs.append(f"✅ Property components set\n")
-        self._print()
+        # self._print()
     def _get_builder(self):
         self.logbook.logs.append(f'{self.emoji} Getting builder...\n')
-        self._print()
+        # self._print()
         self.builder = b.Bob()
         self.logbook.logs.append(f'✅ Got builder\n')
-        self._print()
+        # self._print()
     def _build_property(self, mc):
         self.logbook.logs.append(f'{self.emoji} Assigning builder to property...\n')
-        self._print()
+        # self._print()
         self.builder.assign_property(self.properties[-1], mc)
         self.logbook.logs.append(f'✅ Builder assigned to property\n')
-        self._print()
+        # self._print()
     def _print(self):
         print(self.logbook.logs[-1])
 
@@ -113,10 +113,11 @@ class Jin(Architect):
 
 # TESTING
 if __name__ == '__main__':
+    import sys
     mc = minecraft.Minecraft.create()
     v3 = mc.player.getTilePos()
     architect = Jin()
-    orientation = 0
+    orientation = int(sys.argv[1])
     theme = 'medi'
     architect.give_specs(v3, orientation, theme, mc)
     print(architect.logbook)
