@@ -1,6 +1,8 @@
 from mcpi import vec3 as v
-#from tradies.tradie import Tradie     # Remove comment when not running tests
-from tradie import Tradie       # Comment out when not running tests
+if __name__ == '__main__':
+    from tradie import Tradie      
+else:
+    from tradies.tradie import Tradie
 
 class Mason(Tradie):
     trade = 'masonry'
