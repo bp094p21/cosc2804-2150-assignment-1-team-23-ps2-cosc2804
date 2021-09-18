@@ -2,9 +2,16 @@ from components.component import Component
 import block as b
 from mcpi import vec3 as v
 
-class House:
-    components = {}
+class House(Component):
+    type = 'house'
+    components = []
+    position = None
+    layout = None
+    orientation = None
+    theme = None
     total_levels = None
     floor_elevations = []
-    def __init__(self, components={}):
+    house_v3: v.Vec3 = None
+    end_v3: v.Vec3 = None
+    def __init__(self, components=[]):
         self.components = components

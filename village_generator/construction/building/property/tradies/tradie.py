@@ -2,6 +2,7 @@ from mcpi import minecraft
 
 class Tradie:
     trade = 'general'
+    name = None
     emoji = '🦺'
     msg = 'gday'
     def __init__(self):

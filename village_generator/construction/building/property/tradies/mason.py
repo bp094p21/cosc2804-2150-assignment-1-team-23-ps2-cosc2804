@@ -1,6 +1,8 @@
 from mcpi import vec3 as v
-from tradies.tradie import Tradie     # Remove comment when not running tests
-# from tradie import Tradie       # Comment out when not running tests
+if __name__ == '__main__':
+    from tradie import Tradie      
+else:
+    from tradies.tradie import Tradie
 
 class Mason(Tradie):
     trade = 'masonry'
@@ -12,7 +14,7 @@ class Mason(Tradie):
         self.walls.append(wall)
         self.__build_roof(self.walls[-1], mc)
     # Internal Methods
-    def __build_roof(self, wall, mc):
+    def _build_room(self, room, mc):
         mc.setBlocks(wall.wall_v3['start'], wall.wall_v3['end'], wall.wall_block)
        
         mc.setBlocks(wall.wall_v3['start'].x + 1, 

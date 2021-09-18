@@ -3,4 +3,5 @@ import block as b
 from mcpi import vec3 as v
 
 class Steps(Component):
+    type = 'steps'
     pass

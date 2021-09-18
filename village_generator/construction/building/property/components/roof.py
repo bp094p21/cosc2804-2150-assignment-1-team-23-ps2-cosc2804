@@ -15,7 +15,7 @@ class Roof(Component):
         'start': None,
         'end': None
     }
-    def __init__(self, root_v3: v.Vec3, roof_block=b.STONE_BRICK, z_len=7, x_len=5, y_len=1):
+    def __init__(self, root_v3: v.Vec3, roof_block=b.STAIRS_WOOD, z_len=7, x_len=5, y_len=1):
         self.root_v3 = root_v3
         self.roof_block = roof_block
         self.z_len = z_len
@@ -30,4 +30,4 @@ if __name__ == '__main__':
     from mcpi import minecraft as m
     mc = m.Minecraft.create()
     player_v3 = mc.player.getPos()
-    roof = Roof(roof_block=b.STONE_BRICK)
+    roof = Roof(roof_block=b.STAIRS_WOOD)

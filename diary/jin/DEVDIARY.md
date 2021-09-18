@@ -65,13 +65,15 @@ Implementing
  - Finished main module `architect.py`
  - `property` subpackage working with basic functionality
  - Added functionality to `layout.py`, `builder.py`, and `designer.py`
- - Add easier to read print messages for a better dev experience
+ - Added easier to read print messages for a better dev experience
+ - Added method to design stair components
+ - Added method to built stairs
+ - Added `orientate` function to set component positions based on property orientation
 
 Testing
  - Getting into the habit of writing "if name is main" tests at the bottom of every file to easily test main functionality of each file
  - Tested `architect.py`, `layout.py`, `builder.py` and `designer.py` and they are all working as intended together
- 
-# TODO: Make sets of suitable blocks for each component for each house_type for each theme
+ - Tested component designing for gate, fence, floor, pool and stairs and they are working as intended
 
 ## Week 3
 

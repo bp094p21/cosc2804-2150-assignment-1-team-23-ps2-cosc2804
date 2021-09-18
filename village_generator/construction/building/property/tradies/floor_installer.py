@@ -1,15 +1,16 @@
 from mcpi import vec3 as v
-from tradies.tradie import Tradie     # Remove comment when not running tests
-# from tradie import Tradie       # Comment out when not running tests
+if __name__ == '__main__':
+    from tradie import Tradie      
+else:
+    from tradies.tradie import Tradie
 
 class FloorInstaller(Tradie):
     trade = 'flooring'
     floors = []
     # External calls
-    def build_component(self, floors, mc):
-        for floor in floors:
-            self.floors.append(floor)
-            self._build_floor(self.floors[-1], mc)
+    def build_component(self, floor, mc):
+        self.floors.append(floor)
+        self._build_floor(floor, mc)
     # Internal Methods
     def _build_floor(self, floor, mc):
         s = floor.floor_v3['start']

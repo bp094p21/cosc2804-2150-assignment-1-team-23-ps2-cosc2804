@@ -6,6 +6,8 @@ from construction import *
 # TODO - all the buildings must both implement the build() method, and they must have a setter to set location.
 #  Enforce this later.
 
+# TODO - consider path finding to randomise the roads. Do at very end once everything else is finished though.
+
 
 # Small variations.
 # Dimensions - 5 * 4 = 20 Elements

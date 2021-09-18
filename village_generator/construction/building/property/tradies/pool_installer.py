@@ -1,6 +1,8 @@
 from mcpi import vec3 as v
-from tradies.tradie import Tradie     # Remove comment when not running tests
-# from tradie import Tradie       # Comment out when not running tests
+if __name__ == '__main__':
+    from tradie import Tradie      
+else:
+    from tradies.tradie import Tradie
 
 
 class PoolInstaller(Tradie):
@@ -10,28 +12,17 @@ class PoolInstaller(Tradie):
         self.pools.append(pool)
         self._build_pool(self.pools[-1], mc)
     def _build_pool(self, pool, mc):
-        self._line_pool(pool.line_v3, pool.line_depth, pool.line_x, pool.line_y, pool.line_z, pool.line_block,  mc)
+        self._line_pool(pool.line_v3, pool.line_block, mc)
+        self._air_fill(pool.fill_v3, pool.line_raise, mc)
         self._make_entry()
         self._fill_pool(pool.fill_v3, pool.fill_block, mc)
-        pass
-    def _line_pool(self, v3, line_depth, x, y, z, block, mc):
-        root = v3['start']
-        start = v.Vec3(root.x + line_depth, root.y - y, root.z + line_depth)
-        end = v.Vec3(root.x + (x - 1), root.y - y, root.z + (z - 1))
-        mc.setBlocks(start, end, block)
-        start = v3['start']
-        end = v.Vec3(start.x + x - 1, start.y - y, start.z)
-        mc.setBlocks(start, end, block)
-        start = v.Vec3(end.x + 1, end.y, end.z)
-        end = v.Vec3(start.x, start.y + y, start.z + z - 1)
-        mc.setBlocks(start, end, block)
-        start = v.Vec3(end.x, end.y, end.z + 1)
-        end = v.Vec3(start.x - (x - 1), start.y - y, start.z)
-        mc.setBlocks(start, end, block)
-        start = v.Vec3(end.x - 1, end.y, end.z)
-        end = v.Vec3(start.x, start.y + y, start.z - (z - 1))
-        mc.setBlocks(start, end, block)
-        pass
+    def _line_pool(self, v3, block, mc):
+        mc.setBlocks(v3['start'], v3['end'], block)
+    def _air_fill(self, v3, line_raise, mc):
+        x, y, z = v3['start']
+        y += line_raise
+        x2, y2, z2 = v3['end']
+        mc.setBlocks(x,y,z,x2,y2,z2,0)
     def _make_entry(self):
         # TODO: make entry into pool using slabs add adding more lining on entrance edge
         pass

@@ -17,7 +17,7 @@ class Wall(Component):
         'start': None,
         'end': None
     }
-    def __init__(self, root_v3: v.Vec3, wall_block=b.WOOD_PLANKS, level='ground', name='main', elevation = 0, z_len=7, x_len=5, y_len=4):
+    def __init__(self, root_v3: v.Vec3, wall_block=b.STONE_BRICK, level='ground', name='main', elevation = 0, z_len=7, x_len=5, y_len=4):
         self.root_v3 = root_v3
         self.wall_block = wall_block
         self.level = level
