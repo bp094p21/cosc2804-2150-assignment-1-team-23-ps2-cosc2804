@@ -29,6 +29,8 @@ architect.give_specs(location_v3: v.Vec3, orientation: int, theme: str, mc: mine
 
 ## Testing
 
+> If using vscode, open the `property` folder and not any other root directory.
+
 1. Open server connection
 2. Open minecraft and connect to server
 3. Run `$ python3 architect.py 0`
