@@ -16,7 +16,7 @@ class Floor(Component):
         'start': None,
         'end': None
     }
-    def __init__(self, root_v3: v.Vec3, floor_block=b.TERRACOTTA, floor_level=0, elevation = 0, z_len=7, x_len=5, y_len=1):
+    def __init__(self, root_v3: v.Vec3, end_v3, floor_block=b.TERRACOTTA, floor_level=0, elevation = 0, z_len=7, x_len=5, y_len=1):
         self.root_v3 = root_v3
         self.floor_block = floor_block
         self.floor_level = floor_level
@@ -24,9 +24,7 @@ class Floor(Component):
         self.z_len = z_len
         self.x_len = x_len
         self.y_len = y_len
-        self.floor_v3['start'] = v.Vec3(self.root_v3.x, self.root_v3.y, self.root_v3.z)
-        v3 = self.floor_v3['start']
-        end_v3 = v.Vec3(v3.x + (self.x_len - 1), v3.y + (self.y_len - 1), v3.z + (self.z_len - 1))
+        self.floor_v3['start'] = root_v3
         self.floor_v3['end'] = end_v3
     def __repr__(self):
         return f"🖨  Printing object.__repr__:\n\n{type(self)}\nfloor_v3 start: {self.floor_v3['start']},\nfloor_v3 end: {self.floor_v3['end']},\nfloor_level: {self.floor_level},\nelevation : {self.elevation},\nz_len: {self.z_len},\ny_len start: {self.y_len}\nfloor_block: {self.floor_block}"
