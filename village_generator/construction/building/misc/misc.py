@@ -2,16 +2,16 @@ from mcpi.minecraft import Minecraft
 import random
 import sys
 import block_list as b
-"""sys.path.append('../core/village_layout')
-import village_layout.themes"""
-import themes
+sys.path.append('../../core/village_layout')
+#import village_layout.themes
+from themes import BiomeToTheme
 
 class Misc():
     def __init__(self) -> None:
         self.mc = Minecraft.create()
         self.air = 0
         
-        theme = themes.BiomeToTheme()
+        theme = BiomeToTheme()
         self.theme_string = theme.get_player_theme()
 
   

@@ -5,6 +5,7 @@ import math
 # time to adhere to best practice. Moreover, these functions are not going to be unit tested due to no testing software.
 CURVE = (17, [17, 4], 45, 45, 45, 45, 45, [17, 4], 17)
 
+# TODO - update the road functions so that they build atop land, rather than digging into it/replacing it.
 
 # straight
 # Path class for the East/West Path
