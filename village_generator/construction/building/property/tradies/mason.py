@@ -7,22 +7,25 @@ else:
 class Mason(Tradie):
     trade = 'masonry'
     walls = []
+    wall_wraps = []
     def __init__(self):
         pass
     # External calls
-    def build_component(self, wall, mc):
-        self.walls.append(wall)
-        self.__build_roof(self.walls[-1], mc)
+    def build_component(self, component, mc):
+        if component.type == 'wall':
+            self.walls.append(component)
+            self._build_wall(component, mc)
+        elif component. type == 'wall_wrap':
+            self.wall_wraps.append(component)
+            self._build_wall_wrap(component, mc)
     # Internal Methods
-    def _build_room(self, room, mc):
-        mc.setBlocks(wall.wall_v3['start'], wall.wall_v3['end'], wall.wall_block)
-       
-        mc.setBlocks(wall.wall_v3['start'].x + 1, 
-        wall.wall_v3['start'].y,
-        wall.wall_v3['start'].z + 1,
-        wall.wall_v3['end'].x - 1,
-        wall.wall_v3['end'].y + 5,
-        wall.wall_v3['end'].z - 1, 0)
+    def _build_wall(self, wall, mc):
+        pass
+    def _build_wall_wrap(self, wall_wrap, mc):
+        mc.setBlocks(wall_wrap.start_v3, wall_wrap.end_v3.x, wall_wrap.end_v3.y, wall_wrap.start_v3.z, wall_wrap.wall_block)
+        mc.setBlocks(wall_wrap.start_v3, wall_wrap.start_v3.x, wall_wrap.end_v3.y, wall_wrap.end_v3.z, wall_wrap.wall_block)
+        mc.setBlocks(wall_wrap.start_v3.x, wall_wrap.start_v3.y, wall_wrap.end_v3.z, wall_wrap.end_v3, wall_wrap.wall_block)
+        mc.setBlocks(wall_wrap.end_v3.x, wall_wrap.start_v3.y, wall_wrap.start_v3.z, wall_wrap.end_v3, wall_wrap.wall_block)
 
 
 

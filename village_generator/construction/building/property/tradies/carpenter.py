@@ -13,20 +13,47 @@ class Carpenter(Tradie):
         pass
     def _make_headroom(self, stairs, mc):
         x, y, z = stairs.start_v3
-        y += 3
-        air_block = 0
-        for i in range(4):
-            mc.setBlock(x, y, z + i, air_block)
 
     def _build_stairs(self, stairs, mc):
         x,y,z = stairs.start_v3
         block_up = stairs.block_up
         block_down = stairs.block_down
-        for i in range(3):
-            mc.setBlock(x, y + i, z + i, block_up)
-            mc.setBlock(x, y + i, z + i + 1, block_down)
-        mc.setBlock(x, y + i + 1, z + i + 1, block_up)
-        pass
+        if stairs.orientation == 0:
+            for i in range(3):
+                mc.setBlock(x, y + i, z + i, block_up)
+                mc.setBlock(x, y + i, z + i + 1, block_down)
+            mc.setBlock(x, y + i + 1, z + i + 1, block_up)
+            y += 3
+            air_block = 0
+            for i in range(3):
+                mc.setBlock(x, y, z + i, air_block)
+        if stairs.orientation == 1:
+            for i in range(3):
+                mc.setBlock(x - i, y + i, z, block_up)
+                mc.setBlock(x - i - 1, y + i, z, block_down)
+            mc.setBlock(x - i - 1, y + i + 1, z, block_up)
+            y += 3
+            air_block = 0
+            for i in range(3):
+                mc.setBlock(x - i, y, z, air_block)
+        if stairs.orientation == 2:
+            for i in range(3):
+                mc.setBlock(x, y + i, z - i, block_up)
+                mc.setBlock(x, y + i, z - i - 1, block_down)
+            mc.setBlock(x, y + i + 1, z - i - 1, block_up)
+            y += 3
+            air_block = 0
+            for i in range(3):
+                mc.setBlock(x, y, z - i, air_block)
+        if stairs.orientation == 3:
+            for i in range(3):
+                mc.setBlock(x + i, y + i, z, block_up)
+                mc.setBlock(x + i + 1, y + i, z, block_down)
+            mc.setBlock(x + i + 1, y + i + 1, z, block_up)
+            y += 3
+            air_block = 0
+            for i in range(3):
+                mc.setBlock(x + i, y, z, air_block)
 
 if __name__ == '__main__':
     import sys

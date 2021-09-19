@@ -30,21 +30,23 @@ class Basic(Layout):
         print()
     def _randomize_layout(self):
         self._position_pool()
-        self._print('pool', self.layout['pool'])
+        # self._print('pool', self.layout['pool'])
         self._position_house()
-        self._print('house', self.layout['house'])
+        # self._print('house', self.layout['house'])
         self._position_path()
-        self._print('path', self.layout['path'])
+        # self._print('path', self.layout['path'])
         self._position_outdoor_features()
         for k, v in self.layout['outdoor_features'].items():
-            self._print(k, v)
+            # self._print(k, v)
+            pass
     def _position_pool(self):
         e_offset = None     # e_offset = offset into property from edge (+z for orientation 0)
         c_offset = None     # c_offset = offset from entrance corner to corner (+x for orientation 0)
         e_len = None        # e_len = length in e  direction
         c_len = None        # c_len = length in c direction
         positions = ['left', 'back', 'right']     # From perpsective of walking onto property from entrance
-        random_position = random.choice(positions)
+        # random_position = random.choice(positions)
+        random_position = 'left'    # HARD CODED FOR TESTING
         if random_position == 'back':                       ### BACK POOL ###
             e_offset = 10
             e_len = self.plot_length - e_offset - 1         # POOL DEPTH = 4
@@ -85,14 +87,16 @@ class Basic(Layout):
             e_len_pool = self.layout['pool']['e_len']
             e_offsets = [3, 4]                                          # GAP BETWEEN ENTRANCE AND HOUSE = 2 or 3
             e_offset = random.choice(e_offsets)
-            e_len = self.plot_length - e_offset - e_len_pool - gap - 1  # HOUSE DEPTH = 7 or 8
+            e_len = self.plot_length - e_offset - e_len_pool - gap - 1  # HOUSE DEPTH = 6 or 5
         else:                                                           ### HOUSE SIDE POSITION ###
             c_len_pool = self.layout['pool']['c_len']
             e_offsets = [6, 7]                                          # GAP BETWEEN ENTRANCE AND HOUSE = 5 or 6
-            e_offset = random.choice(e_offsets)
+            # e_offset = random.choice(e_offsets)
+            e_offset = 6    # HARD CODED FOR TESTING
             e_len = self.plot_length - e_offset - 1                     # HOUSE DEPTH = 8 or 7
             house_pool_gaps = [1, 2]                                    # GAP BETWEEN HOUSE AND POOL = 1 or 2
-            gap = random.choice(house_pool_gaps)
+            # gap = random.choice(house_pool_gaps)
+            gap = 1     # HARD CODED FOR TESTING
             c_len = self.plot_length - c_len_pool - gap - 2             # HOUSE WIDTH = 8/7 or 7/6 or 6/5
             c_offset_pool = self.layout['pool']['c_offset']
             if pool_position == 'right':

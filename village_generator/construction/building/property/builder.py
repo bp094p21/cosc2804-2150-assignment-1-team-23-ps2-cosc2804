@@ -23,12 +23,8 @@ class Builder:
             'room': t.mason.Mason(),
             'roof': t.roofer.Roofer(),
             'steps': t.carpenter.Carpenter(),
-            'wall': {
-                'stone': t.mason.Mason(),
-                'brick': t.mason.Mason(),
-                'timber': t.carpenter.Carpenter(),
-                'concrete': t.mason.Mason()
-            },
+            'wall': t.mason.Mason(),
+            'wall_wrap': t.mason.Mason(),
             'stairs': t.carpenter.Carpenter(),
             'pool': t.pool_installer.PoolInstaller(),
             'entrance': t.jims_fencing.JimsFencing(),

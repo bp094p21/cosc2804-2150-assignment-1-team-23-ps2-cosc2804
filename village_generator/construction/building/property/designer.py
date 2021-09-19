@@ -28,16 +28,35 @@ class Designer:
         self._design_house(property)
     def _design_house_components(self, house):
         self._design_floors(house)
+        self._design_walls(house)
         if house.total_levels >= 2:
             self._design_stairs(house)
         # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
+        pass
+    def _design_external_walls(self, house):
+        wall_wraps = []
+        orientation = house.orientation
+        e_offset = house.layout['e_len'] - 1
+        c_offset = house.layout['c_len'] - 1
+        wall_block = random.choice(b.OPTIONS[house.theme]['wall']['basic'])
+        for i, floor_elevation in enumerate(house.floor_elevations):
+            x, y, z = house.house_v3
+            y += floor_elevation
+            (x2, y2, z2) = self._orientate(house.house_v3, orientation, e_offset, c_offset)[0]
+            y2 += 2 + floor_elevation
+            wall_wrap = c.wall.WallWrap(v.Vec3(x, y, z), v.Vec3(x2, y2, z2), wall_block, i)
+            wall_wraps.append(wall_wrap)
+        for wall_wrap in wall_wraps:
+            house.components.append(wall_wrap)
+    def _design_walls(self, house):
+        self._design_external_walls(house)
         pass
     def _get_random_total_levels(self, e_len, c_len):
         total_levels = None
         print(f"E LEN: {e_len}")
         print(f"C_LEN: {c_len}")
         if (e_len >= 8 and (c_len == 11 or c_len == 8 or c_len == 7)):
-            total_levels = random.choice([1, 2, 3])
+            total_levels = random.choice([1, 2])
         else: 
             total_levels = 1
         return total_levels
@@ -59,7 +78,7 @@ class Designer:
         v3 = self._orientate(floor_v3, orientation, 2, c_offset_stairs, e_len, c_len)[0]
         x, y, z = v3
         for i in range(house.total_levels - 1):
-            stairs.append(c.stairs.Stairs((x, y, z), block_up, block_down))
+            stairs.append(c.stairs.Stairs((x, y, z), orientation, block_up, block_down))
             y += 4
         for stair_component in stairs:
             house.components.append(stair_component)
@@ -72,7 +91,7 @@ class Designer:
             down = 4
         elif orientation == 2:
             up = 3
-            down = 5
+            down = 6
         elif orientation == 3:
             up = 0
             down = 5
