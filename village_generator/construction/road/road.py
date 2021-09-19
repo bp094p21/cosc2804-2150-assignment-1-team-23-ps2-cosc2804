@@ -5,30 +5,39 @@ import math
 # time to adhere to best practice. Moreover, these functions are not going to be unit tested due to no testing software.
 CURVE = (17, [17, 4], 45, 45, 45, 45, 45, [17, 4], 17)
 
+
 # TODO - update the road functions so that they build atop land, rather than digging into it/replacing it.
+# TODO - mitigate code repetition to satisfy criterion halil spoke about.
+
+def _enforce_single_height_increments(mc, start_loc, max_x, max_y, max_z):
+    x, y, z = start_loc
+    begin = 3
+
+    # for i in range(9):
+
 
 # straight
 # Path class for the East/West Path
 # A function that builds a path corresponding to function name based on matrix position
 def build_straight_ew(mc, x, y, z):
-    # Center is set to the boundaries for the path to enable the path to be centred within a 15x15 area.
-    center = 3
+    # Start is set to the boundaries for the path to enable the path to be centred within a 15x15 area.
+    start = 3
     wood_id = 17
 
     # Loops 15 times over to cover a 15 block radius of below blocks (length of path)
-    for i in range(15):
-        mc.setBlocks(x, y, z + center, x + i, y, z + center, block.LEAVES)
-        mc.setBlocks(x, y - 1, z + center, x + i, y - 1, z + center, wood_id)
-        mc.setBlocks(x, y - 1, z + 1 + center, x + i, y - 1, z + 1 + center, wood_id, 4)
-        mc.setBlocks(x, y - 1, z + 2 + center, x + i, y - 1, z + 6 + center, block.BRICK_BLOCK)
-        mc.setBlocks(x, y, z + 8 + center, x + i, y, z + 8 + center, block.LEAVES)
-        mc.setBlocks(x, y - 1, z + 8 + center, x + i, y - 1, z + 8 + center, wood_id)
-        mc.setBlocks(x, y - 1, z + 7 + center, x + i, y - 1, z + 7 + center, wood_id, 4)
+
+    mc.setBlocks(x, y, z + start, x + 15, y, z + start, block.LEAVES)
+    mc.setBlocks(x, y - 1, z + start, x + 15, y - 1, z + start, wood_id)
+    mc.setBlocks(x, y - 1, z + 1 + start, x + 15, y - 1, z + 1 + start, wood_id, 4)
+    mc.setBlocks(x, y - 1, z + 2 + start, x + 15, y - 1, z + 6 + start, block.BRICK_BLOCK)
+    mc.setBlocks(x, y - 1, z + 7 + start, x + 15, y - 1, z + 7 + start, wood_id, 4)
+    mc.setBlocks(x, y - 1, z + 8 + start, x + 15, y - 1, z + 8 + start, wood_id)
+    mc.setBlocks(x, y, z + 8 + start, x + 15, y, z + 8 + start, block.LEAVES)
 
     # Will create evenly placed glowstone blocks down the center of the path
-    mc.setBlock(x + 2, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
-    mc.setBlock(x + 7, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
-    mc.setBlock(x + 12, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 2, y - 1, z + 4 + start, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 7, y - 1, z + 4 + start, block.GLOWSTONE_BLOCK)
+    mc.setBlock(x + 12, y - 1, z + 4 + start, block.GLOWSTONE_BLOCK)
 
 
 # Path class for the North/South Path
