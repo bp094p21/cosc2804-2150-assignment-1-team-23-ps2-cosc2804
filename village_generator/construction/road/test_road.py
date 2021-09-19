@@ -1,5 +1,6 @@
-from  mcpi.minecraft import Minecraft
+from mcpi.minecraft import Minecraft
 import mcpi.block as block
+
 
 # FIXME: replace with getLowestYInLine()
 def get_lowest_y_in_region(mc, x1, y1, z1, z2):
@@ -7,12 +8,14 @@ def get_lowest_y_in_region(mc, x1, y1, z1, z2):
 
     for k in range(int(z1), int(z2) + 1):
         curr_y = mc.getHeight(x1, k)
-        if  curr_y < lowest:
+        if curr_y < lowest:
             lowest = curr_y
 
     return lowest
 
-# TODO: only activate the flattener in certain regions where hills are guaranted (biomes). Will be more efficient because in plains biome, there wont be much to flatten.
+
+# TODO: only activate the flattener in certain regions where hills are guaranted (biomes).
+#  Will be more efficient because in plains biome, there wont be much to flatten.
 # x1 and x2 for the only a different z will be the same.
 def flatten(mc, x1, y1, z1, z2):
     # have some sort of heuristic that checks if flattening is necessary, and if not, cancels.
@@ -29,7 +32,7 @@ def build_straight_ew(mc, x, y, z):
         flatten(mc, x + i, mc.getHeight(x + i, z), z + 3, z + 12)
 
     # build the roads on the validated path.
-    
+
     for i in range(15):
         new_y = mc.getHeight(x + i, start + z)
         mc.setBlock(x + i, new_y, start + z, wood_id)
@@ -49,7 +52,6 @@ def build_straight_ew(mc, x, y, z):
             mc.setBlock(x + 12, new_y, z + 4 + start, block.GLOWSTONE_BLOCK)
 
 
-    
 if __name__ == '__main__':
     mc = Minecraft.create()
 
