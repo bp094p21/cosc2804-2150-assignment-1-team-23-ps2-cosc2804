@@ -25,7 +25,7 @@ for block in blocks: #priority of checking is: z, x, y
     if x_block > x_length - 1: #if the x coordinate of the block is more than the x length provided, the search on this row (and level) is done
         x_block = 0 #reset x coordinate back to start
         y_block += 1 #move up a level
-    if block == 0 and prev_block_height_array[x_block, z_block] != 0 and prev_block_height_array[x_block, z_block] != 8 and prev_block_height_array[x_block, z_block] != 9 and prev_block_height_array[x_block, z_block] != 10 and prev_block_height_array[x_block, z_block] != 11 and prev_block_height_array[x_block, z_block] != 17 and prev_block_height_array[x_block, z_block] != 18: #checks from bottom up for a block until reaching highest block (not including air, water, or lava), priority being: z, x, y
+    if block == 0 and prev_block_height_array[x_block, z_block] != 0 and prev_block_height_array[x_block, z_block] != 8 and prev_block_height_array[x_block, z_block] != 9 and prev_block_height_array[x_block, z_block] != 10 and prev_block_height_array[x_block, z_block] != 11 and prev_block_height_array[x_block, z_block] != 18 and prev_block_height_array[x_block, z_block] != 161 and prev_block_height_array[x_block, z_block] != 162 and prev_block_height_array[x_block, z_block] != 175 and prev_block_height_array[x_block, z_block] != 99 and prev_block_height_array[x_block, z_block] != 100 and prev_block_height_array[x_block, z_block] != 37 and prev_block_height_array[x_block, z_block] != 38 and prev_block_height_array[x_block, z_block] != 39 and prev_block_height_array[x_block, z_block] != 40 and prev_block_height_array[x_block, z_block] != 175: #checks from bottom up for a block until reaching highest block (not including air, water, or lava), priority being: z, x, y
         height_array[x_block,z_block] = y_block + 50 #set the current value in height_array to the y coordinate
     prev_block_height_array[x_block,z_block] = block #set the current value in prev_block to the current block
     z_block += 1 #ensures loop can continue
@@ -34,18 +34,19 @@ for block in blocks: #priority of checking is: z, x, y
 min_heights = height_array.min(axis=1)
 prev_item = 0
 for item in min_heights:
+    if item == 0:
+        item = prev_item
     if prev_item == 0:
         mc.setBlocks(x, item, z, x, item + 15, z+2, 0)
         mc.setBlocks(x, item - 1, z, x, item - 1, z+2, 7)
         prev_item = item
     else:
-        if prev_item <= item:
-            if item - prev_item > 0:
-                item = prev_item + 1
-            mc.setBlocks(x, item, z, x, item + 15, z+2, 0)
-            mc.setBlocks(x, item - 1, z, x, item - 1, z+2, 7)
-            prev_item = item
-        x = x + 1
+        if item - prev_item > 0:
+            item = prev_item + 1
+        mc.setBlocks(x, item, z, x, item + 15, z+2, 0)
+        mc.setBlocks(x, item - 1, z, x, item - 1, z+2, 7)
+        prev_item = item
+    x = x + 1
 
 
 print(height_array)
