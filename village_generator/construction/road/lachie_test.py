@@ -7,6 +7,7 @@ mc = minecraft.Minecraft.create()
 z_length = 3 #z_length by x_length dimensions (feel free to edit how you please to test different areas, this will later just call upon the village size)
 x_length = 15
 x, y, z = mc.player.getPos()
+mc.setBlocks(x, y, z, x, y, z+3, 0)
 acceptable_height = y
 height_array = np.zeros(z_length * x_length, dtype=np.int64)
 prev_block_height_array = np.zeros(z_length * x_length, dtype=np.int64)
