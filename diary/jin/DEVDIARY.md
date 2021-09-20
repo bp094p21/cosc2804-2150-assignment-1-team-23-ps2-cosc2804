@@ -69,6 +69,7 @@ Implementing
  - Added method to design stair components
  - Added method to built stairs
  - Added `orientate` function to set component positions based on property orientation
+ - Add wall wrap designing function
 
 Testing
  - Getting into the habit of writing "if name is main" tests at the bottom of every file to easily test main functionality of each file
@@ -78,3 +79,16 @@ Testing
 ## Week 3
 
 Learning
+ - Learnt about difference between `__str__` and `__repr__`
+  - concensus:
+   - `__repr__` is for developers and to be as comprehensive to provide info of object
+   - `__str__` is for clients to provide simple readable feedback
+ - It's very annoying to assign new objects inside a for loop because it gets overridden every time. TODO: learn more about this
+
+Implementing
+ - Added layout randomizer functions for pool gate, fencing, house door placements, and outdoor paths
+ - Added component designing functions for pool gate, fencing, house door and outdoor paths
+ - 
+
+Testing
+ - Successfully tested automatic creation of entrance, paths, floors, walls, house doors (need further improvement with orientation), stairs, pool lining, pool filling, pool fence & gate
