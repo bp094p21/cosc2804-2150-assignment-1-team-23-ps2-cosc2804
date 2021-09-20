@@ -16,22 +16,24 @@ class Builder:
         if self.name:
             print(f"builder.name: {self.name}\n")
         self.TRADIES = {
-            'carpets': t.carpet_call.CarpetCall(),
-            'decoration': t.decorator.Decorator(),
             'boundary': t.jims_fencing.JimsFencing(),
+            'carpets': t.carpet_call.CarpetCall(),
+            'chimney': t.mason.Mason(),
+            'decoration': t.decorator.Decorator(),
+            'door': t.carpenter.Carpenter(),
+            'entrance': t.jims_fencing.JimsFencing(),
+            'fireplace': t.mason.Mason(),
             'floor': t.floor_installer.FloorInstaller(),
+            'garden': t.gardener.Gardener(),
+            'path': t.landscaper.Landscaper(),
+            'pool': t.pool_installer.PoolInstaller(),
+            'stairs': t.carpenter.Carpenter(),
             'room': t.mason.Mason(),
             'roof': t.roofer.Roofer(),
             'steps': t.carpenter.Carpenter(),
-            'wall': t.mason.Mason(),
-            'wall_wrap': t.mason.Mason(),
-            'stairs': t.carpenter.Carpenter(),
-            'pool': t.pool_installer.PoolInstaller(),
-            'entrance': t.jims_fencing.JimsFencing(),
-            'garden': t.gardener.Gardener(),
             'veggie_patch': t.gardener.Gardener(),
-            'fireplace': t.mason.Mason(),
-            'chimney': t.mason.Mason()
+            'wall': t.mason.Mason(),
+            'wall_wrap': t.mason.Mason()
         }
         pass
     # Public Functions
