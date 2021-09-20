@@ -16,6 +16,10 @@ class PoolInstaller(Tradie):
         self._air_fill(pool.fill_v3, pool.line_raise, mc)
         self._make_entry()
         self._fill_pool(pool.fill_v3, pool.fill_block, mc)
+        self._fence_pool(pool.fence_v3, pool.fence_block, mc)
+        self._gate_pool(pool.gate_v3, pool.gate_block, mc)
+    def _gate_pool(self, v3, block, mc):
+        self._one_block(v3, block, mc)
     def _line_pool(self, v3, block, mc):
         mc.setBlocks(v3['start'], v3['end'], block)
     def _air_fill(self, v3, line_raise, mc):
@@ -26,6 +30,8 @@ class PoolInstaller(Tradie):
     def _make_entry(self):
         # TODO: make entry into pool using slabs add adding more lining on entrance edge
         pass
+    def _fence_pool(self, v3, block, mc):
+        self._wrap(v3['start'], v3['end'], block, mc)
     def _fill_pool(self, v3, block, mc):
         mc.setBlocks(v3['start'], v3['end'], block)
         pass
