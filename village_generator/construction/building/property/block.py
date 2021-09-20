@@ -137,7 +137,7 @@ BANNER_LOW          = Block(177, True, 'orientation')   # Decoration
 SANDSTONE_RED       = Block(179, True, 'minor')
 STAIRS_RED_SANDSTONE= Block(180, True, 'orientation')
 SLAB_RED_SANDSTONE  = Block(181)
-FENCE_GATE_SPRUCE   = Block(183, True, 'orientation')
+FENCE_GATE_SPRUCE   = Block(183, True, 'orientation')       # 0 = x direction, 1 = z direction
 FENCE_GATE_BIRCH    = Block(184, True, 'orientation')
 FENCE_GATE_JUNGLE   = Block(185, True, 'orientation')
 FENCE_GATE_DARK_OAK = Block(186, True, 'orientation')
@@ -200,9 +200,17 @@ OPTIONS = {
         'carpet': {
             'basic': [CARPET]
         },
+        'door': {
+            'basic': [DOOR_ACACIA, DOOR_BIRCH]
+        },
+        'fence': {
+            'basic': [FENCE_ACACIA, FENCE_BIRCH],
+            'designer': [FENCE_BIRCH]
+        },
         'gate': {
             'basic': [AIR],
-            'designer': [DOOR_ACACIA]
+            'designer': [FENCE_GATE_ACACIA, FENCE_GATE_BIRCH],
+            'pool': [FENCE_GATE_ACACIA, FENCE_GATE_BIRCH]
         },
         'floor': {
             'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED],
@@ -210,6 +218,9 @@ OPTIONS = {
         },
         'ground': {
             'basic': [SAND, GRAVEL]
+        },
+        'path': {
+            'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED],
         },
         'pool_fill': {
             'basic': [WATER]
