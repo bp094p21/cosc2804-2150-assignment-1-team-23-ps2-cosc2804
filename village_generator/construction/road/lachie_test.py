@@ -12,7 +12,7 @@ height_array = np.zeros(z_length * x_length, dtype=np.int64)
 prev_block_height_array = np.zeros(z_length * x_length, dtype=np.int64)
 height_array = np.reshape(height_array, (x_length,z_length))
 prev_block_height_array = np.reshape(prev_block_height_array, (x_length,z_length))
-blocks = mc.getBlocks(x, 50, z, x+x_length-1, acceptable_height + 50, z+z_length-1) #0-256 is standard world height
+blocks = mc.getBlocks(x, 60, z, x+x_length-1, acceptable_height + 50, z+z_length-1) #0-256 is standard world height
 
 z_block = 0 #start off with
 x_block = 0
@@ -26,7 +26,7 @@ for block in blocks: #priority of checking is: z, x, y
         x_block = 0 #reset x coordinate back to start
         y_block += 1 #move up a level
     if block == 0 and prev_block_height_array[x_block, z_block] != 0 and prev_block_height_array[x_block, z_block] != 8 and prev_block_height_array[x_block, z_block] != 9 and prev_block_height_array[x_block, z_block] != 10 and prev_block_height_array[x_block, z_block] != 11 and prev_block_height_array[x_block, z_block] != 18 and prev_block_height_array[x_block, z_block] != 161 and prev_block_height_array[x_block, z_block] != 162 and prev_block_height_array[x_block, z_block] != 175 and prev_block_height_array[x_block, z_block] != 99 and prev_block_height_array[x_block, z_block] != 100 and prev_block_height_array[x_block, z_block] != 37 and prev_block_height_array[x_block, z_block] != 38 and prev_block_height_array[x_block, z_block] != 39 and prev_block_height_array[x_block, z_block] != 40 and prev_block_height_array[x_block, z_block] != 175: #checks from bottom up for a block until reaching highest block (not including air, water, or lava), priority being: z, x, y
-        height_array[x_block,z_block] = y_block + 50 #set the current value in height_array to the y coordinate
+        height_array[x_block,z_block] = y_block + 60 #set the current value in height_array to the y coordinate
     prev_block_height_array[x_block,z_block] = block #set the current value in prev_block to the current block
     z_block += 1 #ensures loop can continue
     count += 1
