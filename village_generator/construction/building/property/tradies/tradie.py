@@ -11,8 +11,18 @@ class Tradie:
             print(f"tradie.name: {self.name}\n")
     # All Tradie sub-classes should have same build_component signature. They can have different code running inside it based on what they're building.
     def build_component(self, component, mc: minecraft.Minecraft):
-        # Use component and mc to build component
-        pass
+        self._fill(component.start_v3, component.end_v3, component.block, mc)
+    def _air(self, start_v3, end_v3, mc):
+        mc.setBlocks(start_v3, end_v3, 0)
+    def _one_block(self, v3, block, mc):
+        mc.setBlock(v3, block)
+    def _wrap(self, start_v3, end_v3, block, mc):
+        mc.setBlocks(start_v3, end_v3.x, end_v3.y, start_v3.z, block)
+        mc.setBlocks(start_v3, start_v3.x, end_v3.y, end_v3.z, block)
+        mc.setBlocks(start_v3.x, start_v3.y, end_v3.z, end_v3, block)
+        mc.setBlocks(end_v3.x, start_v3.y, start_v3.z, end_v3, block)
+    def _fill(self, start_v3, end_v3, block, mc):
+        mc.setBlocks(start_v3, end_v3, block)
     # TODO: Have basic build functions that can be used by multiple tradies below
     # IGNORE _build_cuboid for now.
     # def _build_cuboid(self, corner_pos = 0):
