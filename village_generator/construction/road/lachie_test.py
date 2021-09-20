@@ -39,14 +39,14 @@ for item in min_heights:
         mc.setBlocks(x, item - 1, z, x, item - 1, z+2, 7)
         prev_item = item
     else:
-        if prev_item < item:
+        if prev_item <= item:
             if item - prev_item > 0:
                 item = prev_item + 1
             mc.setBlocks(x, item, z, x, item + 15, z+2, 0)
             mc.setBlocks(x, item - 1, z, x, item - 1, z+2, 7)
             prev_item = item
         x = x + 1
-        
+
 
 print(height_array)
 
