@@ -4,9 +4,10 @@ by Jin Heock - S3491222
 
 1. [[#Contributions]]
 2. [[#Activities]]
+3. [[#Credits]]
 
 # Contributions
-Working on 100% of `property` subpackage.
+Working on 100% of `property` subpackage with minor contributions from Lachlan. See [[#Credits]]
 
 # Activities
 
@@ -88,7 +89,14 @@ Learning
 Implementing
  - Added layout randomizer functions for pool gate, fencing, house door placements, and outdoor paths
  - Added component designing functions for pool gate, fencing, house door and outdoor paths
- - 
+ - Add layout randomizer function for internal walls
+ - Add component designer for internal walls
 
 Testing
  - Successfully tested automatic creation of entrance, paths, floors, walls, house doors (need further improvement with orientation), stairs, pool lining, pool filling, pool fence & gate
+ - Successfully tested internal wall building for all orientations and possible house layouts
+ - Ameneded house layout randomisation range to accomodate for internal room sizes
+
+## Credits
+Contributions from Lachlan.
+ - particular on `components/roof.py`, `components/wall.py` and `tradies/mason.py`
