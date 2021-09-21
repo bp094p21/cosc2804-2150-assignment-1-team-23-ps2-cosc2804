@@ -27,6 +27,33 @@ class Designer:
         self._design_pool(property)
         self._design_house(property)
         self._design_paths(property)
+    def _design_house_components(self, house):
+        self._design_floors(house)
+        self._design_walls(house)
+        if house.total_levels >= 2:
+            self._design_stairs(house)
+        self._design_doors(house)
+        self._design_internal_walls(house)
+        # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
+        pass
+    def _design_internal_walls(self, house):
+        layout = house.layout
+        internal_wall_layouts = layout['internal_walls']
+        orientation = house.orientation
+        e_v3 = house.property_v3
+        hx, hy, hz = house.house_v3
+        g_v3 = v.Vec3(e_v3.x, e_v3.y, e_v3.z)
+        for internal_wall_layout in internal_wall_layouts:
+            for floor_elevation in house.floor_elevations:
+                (x,y,z) = self._orientate(g_v3, orientation, internal_wall_layout['e_offset'], internal_wall_layout['c_offset'], internal_wall_layout['e_len'], internal_wall_layout['c_len'])[0]
+                y += floor_elevation
+                (x2,y2,z2) = self._orientate(v.Vec3(x,y,z), orientation, internal_wall_layout['e_len'] - 1, internal_wall_layout['c_len'] - 1)[0]
+                y2 += 2
+                block = random.choice(b.OPTIONS[house.theme]['wall']['basic'])
+                internal_wall = c.wall.Wall(v.Vec3(x,y,z), v.Vec3(x2, y2, z2), block)
+                house.components.append(internal_wall)
+
+        pass
     def _design_paths(self, property):
         e_v3 = property.entrance_edge['start']
         g_v3 = v.Vec3(e_v3.x, e_v3.y - 1, e_v3.z)
@@ -38,14 +65,6 @@ class Designer:
             block = random.choice(b.OPTIONS[property.theme.name]['path']['basic'])
             path = c.path.Path(v.Vec3(x,y,z), v.Vec3(x2, y2, z2), block)
             property.components.append(path)
-        pass
-    def _design_house_components(self, house):
-        self._design_floors(house)
-        self._design_walls(house)
-        if house.total_levels >= 2:
-            self._design_stairs(house)
-        self._design_doors(house)
-        # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
         pass
     def _design_doors(self, house):
         doors = []
@@ -290,6 +309,8 @@ class Designer:
 
 class Diego(Designer):
     name = 'Diego'
+
+# TESTING
 
 if __name__ == '__main__':
     from mcpi import minecraft
