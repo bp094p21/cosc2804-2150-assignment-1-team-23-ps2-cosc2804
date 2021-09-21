@@ -1,9 +1,10 @@
 from mcpi import block, minecraft
 import numpy as np
+import math
 mc = minecraft.Minecraft.create()
 
 def scanner(x, y, z):
-    z_length = 15 #z_length by x_length dimensions (feel free to edit how you please to test different areas, this will later just call upon the village size)
+    z_length = 180 #z_length by x_length dimensions (feel free to edit how you please to test different areas, this will later just call upon the village size)
     x_length = 15
     mc.setBlocks(x, y, z, x, y, z+3, 0)
     acceptable_height = y
@@ -80,14 +81,27 @@ def path_ns(min_heights, x, y, z):
             prev_item = item
         z = z + 1
 
+def path_se(mc, x, y, z):
+    mc.setBlocks(x, y, z, x+14, y + 30, z+14, 0)
+    radius = 9.5
+    for angle in range(181, 270):
+        for i in range(5):
+            new_x = x + (radius - i) * math.cos(angle * math.pi / 180)
+            new_z = z + (radius - i) * math.sin(angle * math.pi / 180)
+            mc.setBlock(new_x + 14, y - 1, new_z + 14, 98)
+        new_x = x + radius * math.cos(angle * math.pi / 180)
+        new_z = z + radius * math.sin(angle * math.pi / 180)
+
+
 x, y, z = mc.player.getPos()
 heights = scanner(x, y, z)
+#mc.setBlocks(x, y-1, z, x+14, y-1, z+14, 1)
 min_heights_ew = heights.min(axis=1)
 min_heights_ns = heights.min(axis=0)
-path_ew(min_heights_ew, x, y, z)
+#path_ew(min_heights_ew, x, y, z)
 path_ns(min_heights_ns, x, y, z)
-#print(heights)
-#print(min_heights_ns)
+#path_se(mc, x, y, z)
+
 
 
 
