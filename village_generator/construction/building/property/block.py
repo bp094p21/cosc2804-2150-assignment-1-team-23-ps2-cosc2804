@@ -289,6 +289,10 @@ OPTIONS = {
             'basic': [TERRACOTTA, SANDSTONE],
             'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
         },
+        'window': {
+            'basic': [GLASS_BLOCK],
+            'designer': [STAINED_GLASS_BLOCK.withData(x) for x in range(10)]
+        },
     }
 }
 
