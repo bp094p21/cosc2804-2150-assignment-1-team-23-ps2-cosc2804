@@ -27,9 +27,9 @@ Playing
  - Played some Minecraft and built some blocks manually
 
 Installing
- - Install correct version of Java
- - Install spigot server
- - Install Minecraft Java edition API
+ - Installed correct version of Java
+ - Installed spigot server
+ - Installed Minecraft Java edition API
 
 Collaborating
  - Got on a Minecraft server with Roy to build a house together manually
@@ -68,7 +68,7 @@ Implementing
  - Added functionality to `layout.py`, `builder.py`, and `designer.py`
  - Added easier to read print messages for a better dev experience
  - Added method to design stair components
- - Added method to built stairs
+ - Added method to build stairs
  - Added `orientate` function to set component positions based on property orientation
  - Add wall wrap designing function
 
@@ -93,6 +93,10 @@ Implementing
  - Add component designer for internal walls
  - Tweak `roofer.py` to use given style of stair, slab and cube blocks to be used for roof building
  - Add dictionary for different roof blocks
+ - Add window layout designing func
+ - Add window component designing func
+ - Add window component specs
+ - Add window making func
 
 Testing
  - Successfully tested automatic creation of entrance, paths, floors, walls, house doors (need further improvement with orientation), stairs, pool lining, pool filling, pool fence & gate
@@ -102,4 +106,4 @@ Testing
 
 ## Credits
 Contributions from Lachlan.
- - particular on `components/roof.py`, `components/wall.py`, `components/roofer.py` and `tradies/mason.py`
+ - particularly on `components/roof.py`, `components/wall.py`, `components/roofer.py` and `tradies/mason.py`
