@@ -49,6 +49,8 @@ Please, report your key activities in each week this assignment is running.
     * Thought about and tested solutions to the environment conservation problem (how will we get houses to generate in natural ways when their positions are predetermined by the matrix?)
     * Created East/West and North/South paths that can scale any terrain (more mark efficient than previous design), this was done using the same algorithm I implemented in the terrain scanner last week, which is what allowed the efficient scalability
     * Tried out using the math import to do vector calculus in minecraft (if we were able to find the base of the mountain on top and bottom, we could build the path going upwards in a way where it doesnt excavate terrain), in the process this would allow us to build houses in practically any position and connect them to paths accordingly. This is something Matt and I will work on throughout the week most likely
+    * Tested the A* (AStar) path finding algorithm to use in place of our regular road designs in order to accomondate for extreme mountain terrain taking the best path, proved to be a waste of time as it appears to be impossible to force natural generation in extreme mountain terrain
+    * Created a seperate version of the terrain scanner that will search plots (15x15) in the matrix for suitable places to build houses, and if the village cannot generate 3+ houses, then the village will not be spawned 
     
 .....
 .....
