@@ -20,7 +20,7 @@ class Mason(Tradie):
             self._build_wall_wrap(component, mc)
     # Internal Methods
     def _build_wall(self, wall, mc):
-        pass
+        self._fill(wall.start_v3, wall.end_v3, wall.wall_block, mc)
     def _build_wall_wrap(self, wall_wrap, mc):
         mc.setBlocks(wall_wrap.start_v3, wall_wrap.end_v3.x, wall_wrap.end_v3.y, wall_wrap.start_v3.z, wall_wrap.wall_block)
         mc.setBlocks(wall_wrap.start_v3, wall_wrap.start_v3.x, wall_wrap.end_v3.y, wall_wrap.end_v3.z, wall_wrap.wall_block)
