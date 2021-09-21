@@ -41,9 +41,15 @@ Please, report your key activities in each week this assignment is running.
     * Downloaded and tested Kali Linux using VirtualBox.
     * Completed roof and wall structure for house generation, blocks can be substituted in and out per theme, and designs are randomised and account for each others dimensions (roof builds according to dimensions of walls) to fit criteria.
     * Used Kali Linux through VirtualBox to capture TCP packets being communicated between Kali Linux and Windows on the same machine (this was done using wireshark).
+    * Re-read chapter 3, as well as chapter 4, on Computer Architecture textbook.
 
 **Week 3**
-
+* Lachlan
+    * Reconsidered path design in order to fufill criteria better (perhaps doing a 9 block wide path with blockages on the side is not worth it when compared to doing a 5 block wide path with no blockages that can scale terrain)
+    * Thought about and tested solutions to the environment conservation problem (how will we get houses to generate in natural ways when their positions are predetermined by the matrix?)
+    * Created East/West and North/South paths that can scale any terrain (more mark efficient than previous design), this was done using the same algorithm I implemented in the terrain scanner last week, which is what allowed the efficient scalability
+    * Tried out using the math import to do vector calculus in minecraft (if we were able to find the base of the mountain on top and bottom, we could build the path going upwards in a way where it doesnt excavate terrain), in the process this would allow us to build houses in practically any position and connect them to paths accordingly. This is something Matt and I will work on throughout the week most likely
+    
 .....
 .....
 .....
