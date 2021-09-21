@@ -11,6 +11,7 @@ class House(Component):
     theme = None
     total_levels = None
     floor_elevations = []
+    property_v3: v.Vec3 = None
     house_v3: v.Vec3 = None
     end_v3: v.Vec3 = None
     def __init__(self, components=[]):

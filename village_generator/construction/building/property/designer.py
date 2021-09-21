@@ -26,12 +26,44 @@ class Designer:
         self._design_boundary(property)
         self._design_pool(property)
         self._design_house(property)
+        self._design_paths(property)
+    def _design_paths(self, property):
+        e_v3 = property.entrance_edge['start']
+        g_v3 = v.Vec3(e_v3.x, e_v3.y - 1, e_v3.z)
+        orientation = property.orientation
+        path_layouts = property.layout.layout['paths']
+        for path_layout in path_layouts:
+            (x,y,z) = self._orientate(g_v3, orientation, path_layout['e_offset'], path_layout['c_offset'], path_layout['e_len'], path_layout['c_len'])[0]
+            (x2,y2,z2) = self._orientate(v.Vec3(x,y,z), orientation, path_layout['e_len'] - 1, path_layout['c_len'] - 1)[0]
+            block = random.choice(b.OPTIONS[property.theme.name]['path']['basic'])
+            path = c.path.Path(v.Vec3(x,y,z), v.Vec3(x2, y2, z2), block)
+            property.components.append(path)
+        pass
     def _design_house_components(self, house):
         self._design_floors(house)
         self._design_walls(house)
         if house.total_levels >= 2:
             self._design_stairs(house)
+        self._design_doors(house)
         # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
+        pass
+    def _design_doors(self, house):
+        doors = []
+        layout = house.layout
+        orientation = house.orientation
+        pool_door_e_offset = layout['pool_door_e_offset']
+        pool_door_c_offset = layout['pool_door_c_offset']
+        front_door_e_offset = layout['front_door_e_offset']
+        front_door_c_offset = layout['front_door_c_offset']
+        x, y, z = house.property_v3
+        elevated_v3 = v.Vec3(x, y + house.floor_elevations[0], z)
+        pool_door_v3 = self._orientate(elevated_v3, orientation, pool_door_e_offset, pool_door_c_offset)[0]
+        door_block = random.choice(b.OPTIONS[house.theme]['door']['basic'])
+        doors.append(c.door.Door(pool_door_v3, orientation, door_block))
+        front_door_v3 = self._orientate(elevated_v3, orientation, front_door_e_offset, front_door_c_offset)[0]
+        doors.append(c.door.Door(front_door_v3, orientation, door_block))
+        for door in doors:
+            house.components.append(door)
         pass
     def _design_external_walls(self, house):
         wall_wraps = []
@@ -111,6 +143,7 @@ class Designer:
         e_offset = house_layout['e_offset']
         c_offset = house_layout['c_offset']
         e_v3 = property.entrance_edge['start']
+        house.property_v3 = e_v3
         orientation = property.orientation
         house.orientation = orientation
         house.position = house_layout['position']
@@ -208,29 +241,49 @@ class Designer:
     def _design_pool(self, property):
         line_block = random.choice(b.OPTIONS[property.theme.name]['pool_line']['basic'])
         fill_block = random.choice(b.OPTIONS[property.theme.name]['pool_fill']['basic'])
+        fence_block = random.choice(b.OPTIONS[property.theme.name]['fence']['basic'])
         line_v3 = {}
         fill_v3 = {}
+        fence_v3 = {}
+        gate_v3 = None
         line_depth = 1
+        position = property.layout.layout['pool']['position']
         e_offset = property.layout.layout['pool']['e_offset']
         c_offset = property.layout.layout['pool']['c_offset']
         e_len = property.layout.layout['pool']['e_len']
         c_len = property.layout.layout['pool']['c_len']
         e_v3 = property.entrance_edge['start']
         orientation = property.orientation
-        line_raise = random.choice([0,1,2])
+        gate_block = None
+        if position == 'back':
+            if orientation == 0 or orientation == 2:
+                gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['pool']).withData(0)
+            else:
+                gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['pool']).withData(1)
+        else:
+            if orientation == 0 or orientation == 2:
+                gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['pool']).withData(1)
+            else:
+                gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['pool']).withData(0)
+        line_raise = 0
+        gate_e_offset = property.layout.layout['pool']['gate_e_offset']
+        gate_c_offset = property.layout.layout['pool']['gate_c_offset']
+        gate_v3 = self._orientate(e_v3, orientation, gate_e_offset, gate_c_offset)[0]
         (x, y, z) = self._orientate(e_v3, orientation, e_offset, c_offset)[0]
         line_v3['start'] = v.Vec3(x,y + (line_raise - 1),z)
+        fence_v3['start'] = v.Vec3(x, y + line_raise, z)
         (x, y, z) = self._orientate(line_v3['start'], orientation, line_depth, line_depth)[0]
         fill_v3['start'] = v.Vec3(x, y - line_raise, z)
         x, y, z = line_v3['start']
         (x, y, z) = self._orientate(e_v3, orientation, e_offset + e_len - 1, c_offset + c_len - 1)[0]
         pool_depth = random.choice([2, 3, 4])
         line_v3['end'] = v.Vec3(x, y - (pool_depth + 1), z)
+        fence_v3['end'] = v.Vec3(line_v3['end'].x, line_v3['end'].y + pool_depth + 1, line_v3['end'].z)
         (x, y, z) = self._orientate(line_v3['end'], orientation, line_depth * -1, line_depth * -1)[0]
         fill_v3['end'] = v.Vec3(x, y + 1, z)
         # TODO: Use position to make fence and gate for pool
         # position = property.layout.layout['pool']['position']
-        pool = c.pool.Pool(line_v3, fill_v3, line_block, fill_block, pool_depth, line_raise, line_depth)
+        pool = c.pool.Pool(line_v3, fill_v3, fence_v3, gate_v3, line_block, fill_block, fence_block, gate_block, pool_depth, line_raise, line_depth)
         print("Pool design completed\n")
         print(pool)
         property.components.append(pool)

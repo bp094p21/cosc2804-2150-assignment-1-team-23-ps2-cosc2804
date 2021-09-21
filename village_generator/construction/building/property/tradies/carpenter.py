@@ -8,12 +8,20 @@ else:
 class Carpenter(Tradie):
     trade = 'carpentry'
     def build_component(self, component, mc):
-        self._build_stairs(component, mc)
-        self._make_headroom(component, mc)
+        if component.type == 'stairs':
+            self._build_stairs(component, mc)
+            self._make_headroom(component, mc)
+        elif component.type == 'door':
+            self._set_door(component, mc)
+        pass
+    def _set_door(self, door, mc):
+        x, y, z = door.root_v3
+        self._air((x, y, z), (x, y + 1, z), mc)
+        self._one_block(door.root_v3, door.door_block, mc)
+        # self._one_block((x, y + 1, z), door.door_block, mc)
         pass
     def _make_headroom(self, stairs, mc):
         x, y, z = stairs.start_v3
-
     def _build_stairs(self, stairs, mc):
         x,y,z = stairs.start_v3
         block_up = stairs.block_up
