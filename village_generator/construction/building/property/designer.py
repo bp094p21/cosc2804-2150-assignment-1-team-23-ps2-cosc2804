@@ -34,8 +34,36 @@ class Designer:
             self._design_stairs(house)
         self._design_doors(house)
         self._design_internal_walls(house)
+        self._design_roof(house)
         # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
         pass
+    def _design_roof(self, house):
+        style = random.choice([0, 1, 2, 3])
+        stair_block = b.OPTIONS[house.theme]['roof']['stair'][style]
+        slab_block = b.OPTIONS[house.theme]['roof']['slab'][style]
+        cube_block = b.OPTIONS[house.theme]['roof']['cube'][style]
+        layout = house.layout
+        orientation = house.orientation
+        h_v3 = house.house_v3
+        y = h_v3.y + house.floor_elevations[-1] + 4
+        e_len = layout['e_len']
+        c_len = layout['c_len']
+        start_v3 = None
+        end_v3 = None
+        if orientation == 0:
+            start_v3 = v.Vec3(h_v3.x, y, h_v3.z)
+            end_v3 = v.Vec3(h_v3.x + c_len - 1, y, h_v3.z + e_len - 1 )
+        elif orientation == 1:
+            start_v3 = v.Vec3(h_v3.x - (e_len - 1), y, h_v3.z)
+            end_v3 = v.Vec3(h_v3.x, y, h_v3.z + c_len - 1 )
+        elif orientation == 2:
+            start_v3 = v.Vec3(h_v3.x - (c_len - 1), y, h_v3.z - (e_len - 1))
+            end_v3 = v.Vec3(h_v3.x, y, h_v3.z)
+        elif orientation == 3:
+            start_v3 = v.Vec3(h_v3.x, y, h_v3.z - (c_len - 1))
+            end_v3 = v.Vec3(h_v3.x + (e_len - 1), y, h_v3.z)
+        roof = c.roof.Roof(start_v3, end_v3, stair_block, slab_block, cube_block)
+        house.components.append(roof)
     def _design_internal_walls(self, house):
         layout = house.layout
         internal_wall_layouts = layout['internal_walls']
@@ -207,36 +235,6 @@ class Designer:
         for floor in floors:
             house.components.append(floor)
             print(floor)
-    def _design_roof(self, property):
-        v3 = None
-        e_v3 = property.entrance_edge['start']
-        e_offset = property.layout.layout['house']['e_offset']
-        c_offset = property.layout.layout['house']['c_offset']
-        e_len = property.layout.layout['house']['e_len']
-        c_len = property.layout.layout['house']['c_len']    
-
-        roof_block = random.choice(b.OPTIONS[property.theme.name]['roof']['basic'])
-        z_len = None
-        x_len = None
-        elevation = property.components['house'].floor_elevations[-1]
-        if property.orientation == 0:
-            v3 = v.Vec3(e_v3.x - 1 + c_offset, e_v3.y + elevation, e_v3.z + e_offset - 1)
-            z_len = e_len + 2
-            x_len = c_len + 2
-        elif property.orientation == 1:
-            v3 = v.Vec3(e_v3.x - e_offset + 1, e_v3.y + elevation, e_v3.z + c_offset - 1)
-            z_len = c_len + 2
-            x_len = e_len + 2
-        elif property.orientation == 2:
-            v3 = v.Vec3(e_v3.x - c_offset + 1, e_v3.y + elevation, e_v3.z - e_offset +1)
-            z_len = e_len + 2
-            x_len = c_len + 2
-        elif property.orientation == 3:
-            v3 = v.Vec3(e_v3.x + e_offset, e_v3.y, e_v3.z - c_offset)
-            z_len = c_len + 2
-            x_len = e_len + 2
-        roof = c.roof.Roof(v3, roof_block, z_len, x_len)
-        property.components['roof'] = roof
     def _design_level(self, level):
         total_rooms = random.choice(1,2)
         pass

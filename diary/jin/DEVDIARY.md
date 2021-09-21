@@ -91,12 +91,15 @@ Implementing
  - Added component designing functions for pool gate, fencing, house door and outdoor paths
  - Add layout randomizer function for internal walls
  - Add component designer for internal walls
+ - Tweak `roofer.py` to use given style of stair, slab and cube blocks to be used for roof building
+ - Add dictionary for different roof blocks
 
 Testing
  - Successfully tested automatic creation of entrance, paths, floors, walls, house doors (need further improvement with orientation), stairs, pool lining, pool filling, pool fence & gate
  - Successfully tested internal wall building for all orientations and possible house layouts
- - Ameneded house layout randomisation range to accomodate for internal room sizes
+ - Amended house layout randomisation range to accomodate for internal room sizes
+ - Successfully tested roof component designing and building
 
 ## Credits
 Contributions from Lachlan.
- - particular on `components/roof.py`, `components/wall.py` and `tradies/mason.py`
+ - particular on `components/roof.py`, `components/wall.py`, `components/roofer.py` and `tradies/mason.py`
