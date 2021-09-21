@@ -34,9 +34,22 @@ class Designer:
             self._design_stairs(house)
         self._design_doors(house)
         self._design_internal_walls(house)
+        self._design_windows(house)
         self._design_roof(house)
         # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
         pass
+    def _design_windows(self, house):
+        window_block = random.choice(b.OPTIONS[house.theme]['window']['basic'])
+        orientation = house.orientation
+        h_v3 = house.house_v3
+        for window_layout in house.layout['windows']:
+            for i, floor_elevation in enumerate(house.floor_elevations):
+                e_offset = window_layout['e_offset']
+                c_offset = window_layout['c_offset']
+                (x, y, z) = self._orientate(h_v3, orientation, e_offset, c_offset)[0]
+                y += i * 4 + 2
+                window = c.window.Window(v.Vec3(x, y, z), window_block)
+                house.components.append(window)
     def _design_roof(self, house):
         style = random.choice([0, 1, 2, 3])
         stair_block = b.OPTIONS[house.theme]['roof']['stair'][style]
@@ -226,7 +239,8 @@ class Designer:
         root_v3 = house.house_v3
         end_v3 = house.end_v3
         floors = []
-        elevation = random.choice([0, 1])
+        # elevation = random.choice([0, 1])
+        elevation = 1
         for floor_level in range(total_levels):
             house.floor_elevations.append(elevation)
             floor_block = random.choice(b.OPTIONS[house.theme]['floor']['basic'])
