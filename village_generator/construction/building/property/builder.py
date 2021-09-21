@@ -33,7 +33,8 @@ class Builder:
             'steps': t.carpenter.Carpenter(),
             'veggie_patch': t.gardener.Gardener(),
             'wall': t.mason.Mason(),
-            'wall_wrap': t.mason.Mason()
+            'wall_wrap': t.mason.Mason(),
+            'window': t.window_maker.WindowMaker()
         }
         pass
     # Public Functions
