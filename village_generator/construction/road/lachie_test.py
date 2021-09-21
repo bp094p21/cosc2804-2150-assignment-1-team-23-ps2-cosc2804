@@ -94,11 +94,12 @@ def path_se(mc, x, y, z): #test
 
 x, y, z = mc.player.getPos()
 heights = scanner(x, y, z)
-#mc.setBlocks(x, y-1, z, x+14, y-1, z+14, 1)
+#mc.setBlocks(x, y, z, x+14, y+30, z+14, 0) #For houses
+#mc.setBlocks(x, y-1, z, x+14, y-30, z+14, 3) #Four houses
 min_heights_ew = heights.min(axis=1)
 min_heights_ns = heights.min(axis=0)
 #path_ew(min_heights_ew, x, y, z)
-path_ns(min_heights_ns, x, y, z)
+#path_ns(min_heights_ns, x, y, z)
 #path_se(mc, x, y, z)
 print(heights)
 
