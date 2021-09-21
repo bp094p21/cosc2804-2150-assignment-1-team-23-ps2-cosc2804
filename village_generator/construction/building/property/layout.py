@@ -38,10 +38,78 @@ class Basic(Layout):
         # self._print('house', self.layout['house'])
         self._position_paths()
         self._position_internal_walls()
+        self._position_windows()
         # self._print('path', self.layout['path'])
         # self._position_outdoor_features()
         # for k, v in self.layout['outdoor_features'].items():
             # self._print(k, v)
+    def _position_windows(self):
+        window_layouts = []
+        house_layout = self.layout['house']
+        if house_layout['position'] == 'middle':
+            front_window_layouts = []
+            e_offset = 0
+            c_offset = house_layout['c_len'] // 4
+            front_window_layouts.append ({
+                'name': 'front_window',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+            })
+            c_offset = house_layout['c_len'] - 1 - c_offset
+            front_window_layouts.append ({
+                'name': 'front_window',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+            })
+            back_window_layouts = []
+            e_offset = house_layout['e_len'] - 1
+            back_window_layouts.append ({
+                'name': 'front_window',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+            })
+            c_offset = house_layout['c_len'] // 4
+            back_window_layouts.append ({
+                'name': 'front_window',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+            })
+            window_layouts = front_window_layouts + back_window_layouts 
+        elif house_layout['position'] == 'right':
+            front_window_layouts = []
+            e_offset = 0
+            c_offset = house_layout['c_len'] // 4
+            front_window_layouts.append ({
+                'name': 'front_window',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+            })
+            back_window_layouts = []
+            e_offset = house_layout['e_len'] - 1
+            back_window_layouts.append ({
+                'name': 'front_window',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+            })
+            window_layouts = front_window_layouts + back_window_layouts 
+        elif house_layout['position'] == 'left':
+            front_window_layouts = []
+            e_offset = 0
+            c_offset = house_layout['c_len'] - 1 - house_layout['c_len'] // 4
+            front_window_layouts.append ({
+                'name': 'front_window',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+            })
+            back_window_layouts = []
+            e_offset = house_layout['e_len'] - 1
+            back_window_layouts.append ({
+                'name': 'front_window',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+            })
+            window_layouts = front_window_layouts + back_window_layouts 
+        self.layout['house']['windows'] = window_layouts
     def _position_internal_walls(self):
         internal_wall_layouts = []
         house_layout = self.layout['house']
@@ -112,8 +180,8 @@ class Basic(Layout):
         gate_e_offset = None
         gate_c_offset = None
         positions = ['left', 'back', 'right']     # From perpsective of walking onto property from entrance
-        # random_position = random.choice(positions)
-        random_position = 'left'    # HARD CODED FOR TESTING
+        random_position = random.choice(positions)
+        # random_position = 'left'    # HARD CODED FOR TESTING
         if random_position == 'back':                       ### BACK POOL ###
             e_offset = 10
             e_len = self.plot_length - e_offset - 1         # POOL DEPTH = 4
@@ -160,6 +228,7 @@ class Basic(Layout):
             position = 'middle'                                         ### HOUSE MIDDLE POSITION ###
             c_offsets = [2, 3]
             c_offset = random.choice(c_offsets)
+            # c_offset = 3        # HARD CODED FOR TESTING
             c_len = self.plot_length - (c_offset * 2)                   # HOUSE WIDTH = 11 or 9
             gap = 1                                                     # GAP BETWEEN POOL AND HOUSE = 1
             e_len_pool = self.layout['pool']['e_len']
@@ -173,8 +242,8 @@ class Basic(Layout):
         else:                                                           ### HOUSE SIDE POSITION ###
             c_len_pool = self.layout['pool']['c_len']
             e_offsets = [6, 7]                                          # GAP BETWEEN ENTRANCE AND HOUSE = 5 or 6
-            # e_offset = random.choice(e_offsets)
-            e_offset = 6    # HARD CODED FOR TESTING
+            e_offset = random.choice(e_offsets)
+            # e_offset = 6    # HARD CODED FOR TESTING
             e_len = self.plot_length - e_offset - 1                     # HOUSE DEPTH = 8 or 7
             gap = 1                                                     # GAP BETWEEN HOUSE AND POOL = 1
             c_len = self.plot_length - c_len_pool - gap - 2             # HOUSE WIDTH = 8 or 7
