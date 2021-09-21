@@ -173,6 +173,25 @@ CONCRETE_POWDER     = Block(252, True, 'colors')
 # LISTS BY BLOCK TYPE
 FURNACE = [FURNACE_INACTIVE, FURNACE_ACTIVE]
 
+CUBES = {
+    'smooth_stone': [Block(43, 0), Block(43, 8)],
+    'sandstone': Block(43, 1),
+    'petrified_oak': Block(43, 2),
+    'cobblestone': Block(43, 3),
+    'brick': Block(43, 4),
+    'stone_brick': Block(43, 5),
+    'nether_brick': Block(43, 6),
+    'quartz': Block(43, 7),
+    'sandstone': SANDSTONE,
+    'oak': WOOD_PLANKS.withData(0),
+    'spruce': WOOD_PLANKS.withData(1),
+    'birch': WOOD_PLANKS.withData(2),
+    'jungle': WOOD_PLANKS.withData(3),
+    'acacia': WOOD_PLANKS.withData(4),
+    'dark_oak': WOOD_PLANKS.withData(5),
+    'red_sandstone': SANDSTONE_RED,
+    'purpur': PURPUR_BLOCK
+}
 SLABS = {
     'smooth_stone': [Block(43, 0), Block(43, 8)],
     'sandstone': Block(43, 1),
@@ -183,9 +202,33 @@ SLABS = {
     'nether_brick': Block(43, 6),
     'quartz': Block(43, 7),
     'sandstone': Block(43, 1),
-    'wooden': SLAB_WOODEN,
+    'oak': SLAB_WOODEN.withData(0),
+    'spruce': SLAB_WOODEN.withData(1),
+    'birch': SLAB_WOODEN.withData(2),
+    'jungle': SLAB_WOODEN.withData(3),
+    'acacia': SLAB_WOODEN.withData(4),
+    'dark_oak': SLAB_WOODEN.withData(5),
     'red_sandstone': SLAB_RED_SANDSTONE,
     'purpur': PURPUR_SLAB
+}
+SLABS_TOP = {
+    'smooth_stone': Block(43, 8),
+    'sandstone': Block(44, 9),
+    'petrified_oak': Block(44, 10),
+    'cobblestone': Block(44, 11),
+    'brick': Block(44, 12),
+    'stone_brick': Block(44, 13),
+    'nether_brick': Block(44, 14),
+    'quartz': Block(44, 15),
+    'oak': SLAB_WOODEN.withData(8),
+    'spruce': SLAB_WOODEN.withData(9),
+    'birch': SLAB_WOODEN.withData(10),
+    'jungle': SLAB_WOODEN.withData(11),
+    'acacia': SLAB_WOODEN.withData(12),
+    'dark_oak': SLAB_WOODEN.withData(13),
+    'wooden': Block(44, 2),
+    'red_sandstone': SLAB_RED_SANDSTONE.withData(8),
+    'purpur': PURPUR_SLAB.withData(8),
 }
 
 STAIRS = [STAIRS_WOOD, STAIRS_COBBLESTONE, STAIRS_BRICK, STAIRS_STONE_BRICK, STAIRS_NETHER_BRICK, STAIRS_SANDSTONE, STAIRS_SPRUCE, STAIRS_BIRCH, STAIRS_JUNGLE, STAIRS_QUARTZ, STAIRS_ACACIA, STAIRS_DARK_OAK, STAIRS_RED_SANDSTONE, PURPUR_STAIRS, ]
@@ -230,14 +273,16 @@ OPTIONS = {
             'designer': [TERRACOTTA1, TERRACOTTA2, TERRACOTTA3]
         },
         'roof': {
-            'basic': [TERRACOTTA, SANDSTONE, SANDSTONE_RED]
+            'stair': [STAIRS_WOOD, STAIRS_RED_SANDSTONE, STAIRS_ACACIA, STAIRS_SPRUCE],
+            'slab': [SLABS['oak'], SLABS['red_sandstone'], SLABS['acacia'], SLABS['spruce']],
+            'cube': [CUBES['oak'], CUBES['red_sandstone'], CUBES['acacia'], CUBES['spruce']]
         },
         'stairs': {
             'basic': [STAIRS_SANDSTONE, STAIRS_WOOD],
             'designer': [STAIRS_RED_SANDSTONE, STAIRS_QUARTZ]
         },
         'steps': {
-            'basic': [SLABS['sandstone'], SLABS['wooden']],
+            'basic': [SLABS['sandstone'], SLABS['oak']],
             'designer': [SLABS['red_sandstone'], SLABS['quartz']]
         },
         'wall': {
