@@ -39,10 +39,13 @@ if __name__ == '__main__':
     import sys
     sys.path.append('../property')
     from components import wall as w
+    import block as b
     from mcpi import minecraft
     mc = minecraft.Minecraft.create()
-    v3 = mc.player.getPos()
-    wall = w.Wall(v3)
+    start_v3 = mc.player.getPos()
+    end_v3 = v.Vec3(start_v3.x + 3, start_v3.y + 2, start_v3.z)
+    wall_block = b.STONE_BRICK
+    wall = w.Wall(start_v3, end_v3, wall_block)
     wall_guy = BigBloke()
     wall_guy.build_component(wall, mc)
     print(dir())
