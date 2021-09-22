@@ -138,9 +138,6 @@ def call_for_intersection(mc, x, y, z, oreintation):
     mc.setBlocks(x + 15, final_y_in_plot_ew - 1, z + center, x + 16, final_y_in_plot_ew - 30, z + 4 + center, 98)
     mc.setBlocks(x + center, final_y_in_plot_ns, z + 15, x + 4 + center, final_y_in_plot_ns + 30, z + 16, 0)
     mc.setBlocks(x + center, final_y_in_plot_ns - 1, z + 15, x + 4 + center, final_y_in_plot_ns - 30, z + 16, 98)
-    if oreintation == 'ns':
-        return final_y_in_plot_ns
-    elif oreintation == 'ew':
-        return final_y_in_plot_ew
+    return final_y_in_plot_ns, final_y_in_plot_ew
 
 
