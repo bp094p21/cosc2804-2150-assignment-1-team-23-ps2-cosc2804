@@ -1,28 +1,24 @@
 class Block:
-    """Minecraft PI block description. Can be sent to Minecraft.setBlock/s"""
+    """Minecraft PI block description w/ slight modifications and custom dictionaries. Can be sent to Minecraft.setBlock/s"""
     def __init__(self, id, has_variation=False, variation_type=None, data=0):
         self.id = id
         self.data = data
         self.has_variation = has_variation
         self.variation_type = variation_type
-
     def __eq__(self, rhs):
         return self.id == rhs.id and self.data == rhs.data
-
     def __hash__(self):
         return (self.id << 8) + self.data
-
     def withData(self, data):
         new_block = Block(self.id, data=data)
         return new_block
-
     def __iter__(self):
         """Allows a Block to be sent whenever id [and data] is needed"""
         return iter((self.id, self.data))
-        
     def __repr__(self):
         return f"Block id: {self.id}, data: {self.data}, has_variation: {self.has_variation}, variation_type: {self.variation_type}"
 
+# List of usable blocks for property buildings
 AIR                 = Block(0)
 STONE               = Block(1)
 GRASS               = Block(2)
@@ -165,14 +161,17 @@ BRICKS_NETHER_RED   = Block(215)    # Use 112 for Purple
 TERRACOTTA1 = Block(235, True, 'pattern')
 TERRACOTTA2 = Block(236, True, 'pattern')
 TERRACOTTA3 = Block(238, True, 'pattern')
-
 CONCRETE            = Block(251, True, 'colors')
 CONCRETE_POWDER     = Block(252, True, 'colors')
 
 
-# LISTS BY BLOCK TYPE
-FURNACE = [FURNACE_INACTIVE, FURNACE_ACTIVE]
+### LISTS BY BLOCK TYPE ###
+FURNACE = {
+    'inactive': FURNACE_INACTIVE,
+    'active': FURNACE_ACTIVE
+}
 
+# Blocks for roof
 CUBES = {
     'smooth_stone': [Block(43, 0), Block(43, 8)],
     'sandstone': Block(43, 1),
@@ -201,7 +200,6 @@ SLABS = {
     'stone_brick': Block(43, 5),
     'nether_brick': Block(43, 6),
     'quartz': Block(43, 7),
-    'sandstone': Block(43, 1),
     'oak': SLAB_WOODEN.withData(0),
     'spruce': SLAB_WOODEN.withData(1),
     'birch': SLAB_WOODEN.withData(2),
@@ -232,6 +230,13 @@ SLABS_TOP = {
 }
 
 STAIRS = [STAIRS_WOOD, STAIRS_COBBLESTONE, STAIRS_BRICK, STAIRS_STONE_BRICK, STAIRS_NETHER_BRICK, STAIRS_SANDSTONE, STAIRS_SPRUCE, STAIRS_BIRCH, STAIRS_JUNGLE, STAIRS_QUARTZ, STAIRS_ACACIA, STAIRS_DARK_OAK, STAIRS_RED_SANDSTONE, PURPUR_STAIRS, ]
+
+BEDS = {
+    'list': [],
+    'color': {
+        'blue': None,
+    }
+}
 
 # Blocks by theme
 OPTIONS = {
@@ -282,7 +287,7 @@ OPTIONS = {
             'designer': [STAIRS_RED_SANDSTONE, STAIRS_QUARTZ]
         },
         'steps': {
-            'basic': [SLABS['sandstone'], SLABS['oak']],
+            'basic': [SLABS['sandstone'], SLABS['brick'], SLABS['spruce'], SLABS['acacia'], SLABS['red_sandstone']],
             'designer': [SLABS['red_sandstone'], SLABS['quartz']]
         },
         'wall': {
