@@ -33,12 +33,30 @@ class Designer:
         if house.total_levels >= 2:
             self._design_stairs(house)
         self._design_doors(house)
+        self._design_door_steps(house)
         self._design_internal_walls(house)
         self._design_internal_doors(house)
         self._design_windows(house)
         self._design_roof(house)
         # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
         pass
+    def _design_door_steps(self, house):
+        v3 = house.property_v3
+        orientation = house.orientation
+        layout = house.layout
+        front_step_e_offset = layout['front_step_e_offset']
+        front_step_c_offset = layout['front_step_c_offset']
+        pool_step_e_offset = layout['pool_step_e_offset']
+        pool_step_c_offset = layout['pool_step_c_offset']
+        front_step_v3 = self._orientate(v3, orientation, front_step_e_offset, front_step_c_offset)[0]
+        pool_step_v3 = self._orientate(v3, orientation, pool_step_e_offset, pool_step_c_offset)[0]
+        front_step_block = random.choice(b.OPTIONS[house.theme]['steps']['basic'])
+        pool_step_block = random.choice(b.OPTIONS[house.theme]['steps']['basic'])
+        front_step = c.steps.Steps(front_step_v3, front_step_block)
+        pool_step = c.steps.Steps(pool_step_v3, pool_step_block)
+        house.components.append(front_step)
+        house.components.append(pool_step)
+
     def _design_internal_doors(self, house):
         h_v3 = house.house_v3
         orientation = house.orientation
@@ -177,7 +195,8 @@ class Designer:
         print(f"E LEN: {e_len}")
         print(f"C_LEN: {c_len}")
         if (e_len >= 8 and (c_len == 11 or c_len == 8 or c_len == 7)):
-            total_levels = random.choice([1, 2])
+            # total_levels = random.choice([1, 2])
+            total_levels = 2        # HARD CODED FOR TESTING
         else: 
             total_levels = 1
         return total_levels
