@@ -5,15 +5,17 @@ class Door(Component):
     # Class attributes
     type: str = 'door'
     # Instance attributes
-    root_v3 = None
+    v3 = None
     orientation: int = None
-    door_block: b.Block = None
+    top_block: b.Block = None
+    bot_block: b.Block = None
     def __repr__(self):
-        return f"🖨  Printing object.__repr__:\n\n{type(self)}\nroot_v3: {self.root_v3},\norientation: {self.orientation},\ndoor_block: {self.door_block}\n"
-    def __init__(self, root_v3, orientation, door_block):
-        self.root_v3 = root_v3
+        return f"🖨  Printing object.__repr__:\n\n{type(self)}\nv3: {self.v3},\norientation: {self.orientation},\ntop_block: {self.top_block}\nbot_block: {self.bot_block}\n"
+    def __init__(self, v3, top_block, bot_block, orientation):
+        self.v3 = v3
+        self.top_block = top_block
+        self.bot_block = bot_block
         self.orientation = orientation
-        self.door_block = door_block
 
 # TESTING
 if __name__ == '__main__':
@@ -21,6 +23,4 @@ if __name__ == '__main__':
     mc = m.Minecraft.create()
     player_v3 = mc.player.getPos()
     orientation = 0
-    entrance = Door(root_v3=player_v3, orientation=0, door_block=b.AIR)
-    pass
 	
