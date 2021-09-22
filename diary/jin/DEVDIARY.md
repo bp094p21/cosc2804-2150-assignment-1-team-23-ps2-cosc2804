@@ -85,6 +85,9 @@ Learning
    - `__repr__` is for developers and to be as comprehensive to provide info of object
    - `__str__` is for clients to provide simple readable feedback
  - It's very annoying to assign new objects inside a for loop because it gets overridden every time. TODO: learn more about this
+ - Learnt about the difference between `__new__` and `__init__`
+  - `__new__` is what creates an instance of the class and returns that object
+  - `__init__` is the code that is run after the object is instantiated and that is why it doesn't return anything
 
 Implementing
  - Added layout randomizer functions for pool gate, fencing, house door placements, and outdoor paths
@@ -97,12 +100,23 @@ Implementing
  - Add window component designing func
  - Add window component specs
  - Add window making func
+ - Add door layout/design/specs/building code
+ - Add steps layout/design/specs/building code
 
 Testing
  - Successfully tested automatic creation of entrance, paths, floors, walls, house doors (need further improvement with orientation), stairs, pool lining, pool filling, pool fence & gate
  - Successfully tested internal wall building for all orientations and possible house layouts
  - Amended house layout randomisation range to accomodate for internal room sizes
  - Successfully tested roof component designing and building
+ - Successfully tested door layout,design,building for all orientations
+ - Successfully tested step layout,design,building for all orientations
+ 
+ Refactoring
+  - Refactored `architect.py`
+  - Refactored `layout.py`
+  - Refactored `theme.py`
+  - Refactored `property.py`
+  - Refactored `block.py`
 
 ## Credits
 Contributions from Lachlan.
