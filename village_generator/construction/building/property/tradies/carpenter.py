@@ -1,4 +1,5 @@
 from mcpi import minecraft as m
+from mcpi import vec3 as v
 
 if __name__ == '__main__':
     from tradie import Tradie      
@@ -15,11 +16,10 @@ class Carpenter(Tradie):
             self._set_door(component, mc)
         pass
     def _set_door(self, door, mc):
-        x, y, z = door.root_v3
+        x, y, z = door.v3
         self._air((x, y, z), (x, y + 1, z), mc)
-        self._one_block(door.root_v3, door.door_block, mc)
-        # self._one_block((x, y + 1, z), door.door_block, mc)
-        pass
+        self._one_block((x, y+1, z), door.top_block, mc)
+        self._one_block((x, y, z), door.bot_block, mc)
     def _make_headroom(self, stairs, mc):
         x, y, z = stairs.start_v3
     def _build_stairs(self, stairs, mc):
