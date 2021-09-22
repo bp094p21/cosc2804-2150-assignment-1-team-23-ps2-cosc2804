@@ -124,7 +124,7 @@ def call_for_ew(mc, x, y, z):
     mc.setBlocks(x + 15, final_y_in_plot - 1, z + center, x + 16, final_y_in_plot - 30, z + 4 + center, 98)
     return final_y_in_plot
 
-def call_for_intersection(mc, x, y, z, oreintation):
+def call_for_intersection(mc, x, y, z):
     center = 5
     heights = scanner(x, y, z)
     min_heights_ew = heights.min(axis=1)
