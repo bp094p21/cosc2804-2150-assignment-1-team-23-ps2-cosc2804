@@ -14,7 +14,11 @@ class Carpenter(Tradie):
             self._make_headroom(component, mc)
         elif component.type == 'door':
             self._set_door(component, mc)
+        elif component.type == 'steps':
+            self._build_steps(component, mc)
         pass
+    def _build_steps(self, component, mc):
+        self._one_block(component.v3, component.block, mc)
     def _set_door(self, door, mc):
         x, y, z = door.v3
         self._air((x, y, z), (x, y + 1, z), mc)
