@@ -54,6 +54,7 @@ class Builder:
                 continue
             else:
                 self._assign_tradie(component.type, component, mc)
+        property.is_built = True
         self.logbook.logs.append(f"✅ Completed property build.\n")
         # self._print()
         return None
