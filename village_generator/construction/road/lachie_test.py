@@ -140,4 +140,5 @@ def call_for_intersection(mc, x, y, z):
     mc.setBlocks(x + center, final_y_in_plot_ns - 1, z + 15, x + 4 + center, final_y_in_plot_ns - 30, z + 16, 98)
     return final_y_in_plot_ns, final_y_in_plot_ew
 
-
+x, y, z = mc.player.getTilePos()
+next_y = call_for_ew(mc, x, y, z)
