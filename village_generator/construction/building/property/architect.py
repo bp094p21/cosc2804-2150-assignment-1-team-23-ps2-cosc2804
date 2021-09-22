@@ -10,18 +10,32 @@ import theme as t
 import util.logbook as lb
 
 class Architect():
-    name = None
-    emoji = '👔'
-    properties = []
-    designer = None
-    builder = None
+
+    """Given a Vec3, the Architect will assume it as the corner of least z and x values and build a property of 15 x 15 block dimensions in the positive z and x direction\nOrientation must also be given. 0 means the property will face West, 1 - North, 2 - East and 3 - South\nTheme should be given in format. Currently accepts 'medi'.\nA Minecraft object should also be given.\nPlot Length is assumed to be 15."""
+
+    name: str               = None
+    emoji: str              = '👔'
+    properties: list        = []
+
+    logbook: lb.Logbook     = None
+    designer: d.Designer    = None
+    builder: b.Builder      = None
+
     def __init__(self):
         print(f"{self.emoji} Architect created.\n")
         if self.name:
             print(f"architect.name: {self.name}\n")
-    # Public Functions
-    def give_specs(self, location_v3: v.Vec3, orientation: int, theme_str: str, mc: minecraft.Minecraft, plot_length=15) -> None:
-        self.logbook = lb.Logbook(self)
+        self.logbook = lb.Logbook(self.name)
+
+    # External Call
+    def give_specs(
+        self,
+        location_v3: v.Vec3,
+        orientation: int,
+        theme_str: str,
+        mc: minecraft.Minecraft,
+        plot_length=15
+        ) -> None:
         self.logbook.logs.append(f'{self.emoji} Specs received for property.\n\nLocation: {location_v3},\nOrientation: {orientation},\nTheme: {theme_str}\n')
         # self._print()
         self._draft_property(location_v3, orientation, theme_str, plot_length)
@@ -29,6 +43,7 @@ class Architect():
         self._get_component_specs()
         self._get_builder()
         self._build_property(mc)
+
     # Interal Methods
     def _draft_property(self, v3, orientation, theme_str, plot_length):
         self.logbook.logs.append(f'{self.emoji} Drafting property...\n')
@@ -36,7 +51,7 @@ class Architect():
         entrance_edge = self._get_entrance_edge(v3, orientation, plot_length)
         theme = self._set_theme(theme_str)
         house_type = self._set_house_type(theme)
-        layout = self._set_layout(house_type, entrance_edge, orientation, plot_length)
+        layout = self._set_layout(house_type, plot_length)
         property = p.Property(v3, orientation, theme, entrance_edge, house_type, layout)
         self.properties.append(property)
         self.logbook.logs.append(f'✅ Property drafted.')
@@ -74,10 +89,10 @@ class Architect():
         self.logbook.logs.append(f"✅ House type set: {house_type}\n")
         # self._print()
         return house_type
-    def _set_layout(self, house_type, entrance_edge, orientation, plot_length) -> l.Layout:
+    def _set_layout(self, house_type, plot_length) -> l.Layout:
         self.logbook.logs.append(f'{self.emoji} Setting property layout...\n')
         # self._print()
-        layout = l.get_layout(house_type, entrance_edge, orientation, plot_length)
+        layout = l.get_layout(house_type, plot_length)
         self.logbook.logs.append(f"✅ Property layout set: {layout.name}\n")
         # self._print()
         return layout
@@ -120,8 +135,5 @@ if __name__ == '__main__':
     orientation = int(sys.argv[1])
     theme = 'medi'
     architect.give_specs(v3, orientation, theme, mc)
-    print(architect.logbook)
-    print(architect.properties)
-    print(architect.builder.name)
     for property in architect.properties:
         print(f"Property is_built: {property.is_built}")
