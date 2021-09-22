@@ -85,7 +85,7 @@ def _scan(mc, ply_coords, z_length, x_length, under_limit_num, start_time) -> bo
         count += 1
 
     under_limit = 0
-    limit = acceptable_height - 5
+    limit = acceptable_height - 15 # manually decided limit for builds
 
     # go through every value to see if its under the limit or not, if it is add 1 to under_limit
     for row in height_array:
