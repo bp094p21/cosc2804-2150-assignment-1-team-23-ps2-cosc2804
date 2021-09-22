@@ -124,5 +124,23 @@ def call_for_ew(mc, x, y, z):
     mc.setBlocks(x + 15, final_y_in_plot - 1, z + center, x + 16, final_y_in_plot - 30, z + 4 + center, 98)
     return final_y_in_plot
 
+def call_for_intersection(mc, x, y, z, oreintation):
+    center = 5
+    heights = scanner(x, y, z)
+    min_heights_ew = heights.min(axis=1)
+    min_heights_ns = heights.min(axis=0)
+    new_heights_ew = path_ew(min_heights_ew, x, y, z)
+    new_heights_ns = path_ns(min_heights_ns, x, y, z)
+    final_y_in_plot_ew = new_heights_ew[-1]
+    final_y_in_plot_ns = new_heights_ns[-1]
+    #print(final_y_in_plot)
+    mc.setBlocks(x + 15, final_y_in_plot_ew, z + center, x + 16, final_y_in_plot_ew + 30, z + 4 + center, 0)
+    mc.setBlocks(x + 15, final_y_in_plot_ew - 1, z + center, x + 16, final_y_in_plot_ew - 30, z + 4 + center, 98)
+    mc.setBlocks(x + center, final_y_in_plot_ns, z + 15, x + 4 + center, final_y_in_plot_ns + 30, z + 16, 0)
+    mc.setBlocks(x + center, final_y_in_plot_ns - 1, z + 15, x + 4 + center, final_y_in_plot_ns - 30, z + 16, 98)
+    if oreintation == 'ns':
+        return final_y_in_plot_ns
+    elif oreintation == 'ew':
+        return final_y_in_plot_ew
 
 
