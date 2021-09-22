@@ -38,11 +38,85 @@ class Basic(Layout):
         # self._print('house', self.layout['house'])
         self._position_paths()
         self._position_internal_walls()
+        self._position_doors()
         self._position_windows()
         # self._print('path', self.layout['path'])
         # self._position_outdoor_features()
         # for k, v in self.layout['outdoor_features'].items():
             # self._print(k, v)
+    def _position_doors(self):
+        # self._position_external_doors()
+        self._position_internal_doors()
+        pass
+    # def _position_external_doors(self):
+    #     house_layout = self.layout['house']
+    #     front_door_layout = None
+    #     pool_door_layout = None
+    #     if house_layout['position'] == 'middle':
+    #         front_e_offset = 
+    #         pass
+    #     pass
+    def _position_internal_doors(self):
+        internal_door_layouts = []
+        house_layout = self.layout['house']
+        h_e_offset = house_layout['e_offset']
+        h_e_len = house_layout['e_len']
+        h_c_offset = house_layout['c_offset']
+        h_c_len = house_layout['c_len']
+        if house_layout['position'] == 'middle':
+            e_offset = house_layout['e_len'] // 2
+            c_offset = house_layout['c_len'] // 2 - 1
+            internal_door_layouts.append({
+                'name': 'right_internal_door',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+                'orientation': 0
+            })
+            c_offset = house_layout['c_len'] // 2 + 1
+            internal_door_layouts.append({
+                'name': 'left_internal_door',
+                'e_offset': e_offset,
+                'c_offset': c_offset,
+                'orientation': 2
+            })
+        else:
+            e_offset = None
+            c_offset = None
+            if house_layout['position'] == 'left':
+                c_offset = 3
+                e_offset = 2
+                orientation = 2
+                internal_door_layouts.append({
+                    'name': 'front_room',
+                    'e_offset': e_offset,
+                    'c_offset': c_offset,
+                    'orientation': orientation
+                })
+                e_offset = h_e_len - 1 - 2
+                internal_door_layouts.append({
+                    'name': 'back_room',
+                    'e_offset': e_offset,
+                    'c_offset': c_offset,
+                    'orientation': orientation
+                })
+            if house_layout['position'] == 'right':
+                c_offset = h_c_len - 1 - 3
+                e_offset = 2
+                orientation = 0
+                internal_door_layouts.append({
+                    'name': 'front_room',
+                    'e_offset': e_offset,
+                    'c_offset': c_offset,
+                    'orientation': orientation
+                })
+                e_offset = h_e_len - 1 - 2
+                internal_door_layouts.append({
+                    'name': 'back_room',
+                    'e_offset': e_offset,
+                    'c_offset': c_offset,
+                    'orientation': orientation
+                })
+        self.layout['house']['internal_doors'] = internal_door_layouts
     def _position_windows(self):
         window_layouts = []
         house_layout = self.layout['house']
@@ -220,8 +294,10 @@ class Basic(Layout):
         c_len = None
         pool_door_e_offset = None
         pool_door_c_offset = None
+        pool_door_orientation = None
         front_door_e_offset = None
         front_door_c_offset = None
+        front_door_orientation = 3
 
         pool_position = self.layout['pool']['position']
         if pool_position == 'back':
@@ -237,6 +313,7 @@ class Basic(Layout):
             e_len = self.plot_length - e_offset - e_len_pool - gap - 1  # HOUSE DEPTH = 6 or 5
             pool_door_e_offset = e_offset + e_len - 1
             pool_door_c_offset = c_offset + (c_len // 2)
+            pool_door_orientation = 1
             front_door_e_offset = e_offset
             front_door_c_offset = c_offset + (c_len // 2)
         else:                                                           ### HOUSE SIDE POSITION ###
@@ -255,12 +332,14 @@ class Basic(Layout):
                 position = 'left'
                 c_offset = c_offset_pool + c_len_pool + gap             # C_OFFSET = 6/7 or 7/8 or 8/9
                 pool_door_c_offset = c_offset
+                pool_door_orientation = 2
                 front_door_c_offset = c_offset + 2
                 corridor_wall_e_offset = front_door_c_offset + 3
             elif pool_position == 'left':
                 position = 'right'
                 c_offset = 1                                            # C_OFFSET = 1, up to 5/6/7/8
                 pool_door_c_offset = c_offset + c_len - 1
+                pool_door_orientation = 0
                 front_door_c_offset = c_offset + c_len - 1 - 2
                 corridor_wall_e_offset = front_door_c_offset - 1
         self.layout['house'] = {
@@ -271,8 +350,10 @@ class Basic(Layout):
             'c_len': c_len,
             'pool_door_e_offset': pool_door_e_offset,
             'pool_door_c_offset': pool_door_c_offset,
+            'pool_door_orientation': pool_door_orientation,
             'front_door_e_offset': front_door_e_offset,
             'front_door_c_offset': front_door_c_offset,
+            'front_door_orientation': front_door_orientation,
             'internal_walls': []
         }
     def _position_paths(self):
