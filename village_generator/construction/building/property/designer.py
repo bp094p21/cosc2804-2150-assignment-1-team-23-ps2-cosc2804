@@ -34,9 +34,28 @@ class Designer:
             self._design_stairs(house)
         self._design_doors(house)
         self._design_internal_walls(house)
+        self._design_internal_doors(house)
         self._design_windows(house)
         self._design_roof(house)
         # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
+        pass
+    def _design_internal_doors(self, house):
+        h_v3 = house.house_v3
+        orientation = house.orientation
+        theme = house.theme
+        for internal_door_layout in house.layout['internal_doors']:
+            internal_door_orientation = internal_door_layout['orientation']
+            e_offset = internal_door_layout['e_offset']
+            c_offset = internal_door_layout['c_offset']
+            for floor_elevation in house.floor_elevations:
+                elevated_v3 = v.Vec3(h_v3.x, h_v3.y + floor_elevation, h_v3.z)
+                v3 = self._orientate(elevated_v3, orientation, e_offset, c_offset)[0]
+                door_orientation = self._get_absolute_door_orientation(orientation, internal_door_orientation)
+                top_block = random.choice(b.OPTIONS[theme]['door']['basic']).withData(8)
+                bot_block = top_block.withData(door_orientation)
+                internal_door = c.door.Door(v3, top_block, bot_block, door_orientation)
+                house.components.append(internal_door)
+                pass
         pass
     def _design_windows(self, house):
         window_block = random.choice(b.OPTIONS[house.theme]['window']['basic'])
@@ -113,18 +132,28 @@ class Designer:
         orientation = house.orientation
         pool_door_e_offset = layout['pool_door_e_offset']
         pool_door_c_offset = layout['pool_door_c_offset']
+        pool_door_orientation = layout['pool_door_orientation']
         front_door_e_offset = layout['front_door_e_offset']
         front_door_c_offset = layout['front_door_c_offset']
+        front_door_orientation = layout['front_door_orientation']
         x, y, z = house.property_v3
         elevated_v3 = v.Vec3(x, y + house.floor_elevations[0], z)
         pool_door_v3 = self._orientate(elevated_v3, orientation, pool_door_e_offset, pool_door_c_offset)[0]
-        door_block = random.choice(b.OPTIONS[house.theme]['door']['basic'])
-        doors.append(c.door.Door(pool_door_v3, orientation, door_block))
+        door_orientation = self._get_absolute_door_orientation(orientation, pool_door_orientation)
+        top_block = random.choice(b.OPTIONS[house.theme]['door']['basic']).withData(8)
+        bot_block = top_block.withData(door_orientation)
+        doors.append(c.door.Door(pool_door_v3, top_block, bot_block, orientation))
         front_door_v3 = self._orientate(elevated_v3, orientation, front_door_e_offset, front_door_c_offset)[0]
-        doors.append(c.door.Door(front_door_v3, orientation, door_block))
+        door_orientation = self._get_absolute_door_orientation(orientation, front_door_orientation)
+        top_block = random.choice(b.OPTIONS[house.theme]['door']['basic']).withData(8)
+        bot_block = top_block.withData(door_orientation)
+        doors.append(c.door.Door(front_door_v3, top_block, bot_block, orientation))
         for door in doors:
             house.components.append(door)
         pass
+    def _get_absolute_door_orientation(self, house_orientation, door_orientation):
+        absolute_orientation = (house_orientation + 2+ door_orientation) % 4
+        return absolute_orientation
     def _design_external_walls(self, house):
         wall_wraps = []
         orientation = house.orientation
@@ -174,6 +203,23 @@ class Designer:
             y += 4
         for stair_component in stairs:
             house.components.append(stair_component)
+    def _get_correct_door_pair(self, theme, orientation):
+        if orientation == 0:
+            top = 8
+            bottom = 1
+        elif orientation == 1:
+            top = 8
+            bottom = 2
+        elif orientation == 2:
+            top = 8
+            bottom = 3
+        elif orientation == 3:
+            top = 8
+            bottom = 0
+        stair_block = random.choice(b.OPTIONS[theme]['door']['basic'])
+        door_top = stair_block.withData(top)
+        door_bottom = stair_block.withData(bottom)
+        return door_top, door_bottom
     def _get_correct_stairs_pair(self, theme, orientation):
         if orientation == 0:
             up = 2
