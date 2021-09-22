@@ -17,7 +17,7 @@ def terraform_road_plot(mc, start_loc, max_x, max_z):
 def _terraform(mc, start_loc, max_x, max_z):
     x, y, z = start_loc
 
-    max_y = _get_highest_point(mc, x, z, max_x, max_z)
+    max_y = mc.getHighestYInRegion(x, z, max_x, max_z)
 
     _clear_disallowed_blocks(mc, start_loc, max_x, max_y, max_z)
 
@@ -57,7 +57,7 @@ def _enforce_single_height_increments(mc, x, ):
 #  high up in the air. Cause this would mean roads could not reach it without incrementing more than one block. Also
 #  need to consider that the position where the roads and houses integrate may be off. Moreover, the house may take up
 #  all of the 15x15 and this idea would no longer be feasible.
-def _get_highest_point(mc, x, z, max_x, max_z) -> int:
-    # excessive calls to mc's methods are too expensive and slow. test speed difference with this vs backend re-write.
-    # this guess may be off too and could cause problems. consider re-writing on backend.
-    return mc.getHighestYInRegion(x, z, max_x, max_z)
+# def _get_highest_point(mc, x, z, max_x, max_z) -> int:
+#     # excessive calls to mc's methods are too expensive and slow. test speed difference with this vs backend re-write.
+#     # this guess may be off too and could cause problems. consider re-writing on backend.
+#     return 
