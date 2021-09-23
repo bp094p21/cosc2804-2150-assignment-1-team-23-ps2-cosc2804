@@ -9,12 +9,6 @@ CURVE = (17, [17, 4], 45, 45, 45, 45, 45, [17, 4], 17)
 # TODO - update the road functions so that they build atop land, rather than digging into it/replacing it.
 # TODO - mitigate code repetition to satisfy criterion halil spoke about.
 
-def _enforce_single_height_increments(mc, start_loc, max_x, max_y, max_z):
-    x, y, z = start_loc
-    begin = 3
-
-    # for i in range(9):
-
 
 # straight
 # Path class for the East/West Path
@@ -46,14 +40,13 @@ def build_straight_ns(mc, x, y, z):
     center = 3
     wood_id = 17
 
-    for i in range(15):
-        mc.setBlocks(x + center, y, z, x + center, y, z + i, block.LEAVES)
-        mc.setBlocks(x + center, y - 1, z, x + center, y - 1, z + i, wood_id)
-        mc.setBlocks(x + 1 + center, y - 1, z, x + 1 + center, y - 1, z + i, wood_id, 4)
-        mc.setBlocks(x + 2 + center, y - 1, z, x + 6 + center, y - 1, z + i, block.BRICK_BLOCK)
-        mc.setBlocks(x + 8 + center, y, z, x + 8 + center, y, z + i, block.LEAVES)
-        mc.setBlocks(x + 8 + center, y - 1, z, x + 8 + center, y - 1, z + i, wood_id)
-        mc.setBlocks(x + 7 + center, y - 1, z, x + 7 + center, y - 1, z + i, wood_id, 4)
+    mc.setBlocks(x + center, y, z, x + center, y, z + 15, block.LEAVES)
+    mc.setBlocks(x + center, y - 1, z, x + center, y - 1, z + 15, wood_id)
+    mc.setBlocks(x + 1 + center, y - 1, z, x + 1 + center, y - 1, z + 15, wood_id, 4)
+    mc.setBlocks(x + 2 + center, y - 1, z, x + 6 + center, y - 1, z + 15, block.BRICK_BLOCK)
+    mc.setBlocks(x + 8 + center, y, z, x + 8 + center, y, z + 15, block.LEAVES)
+    mc.setBlocks(x + 8 + center, y - 1, z, x + 8 + center, y - 1, z + 15, wood_id)
+    mc.setBlocks(x + 7 + center, y - 1, z, x + 7 + center, y - 1, z + 15, wood_id, 4)
 
     mc.setBlock(x + 4 + center, y - 1, z + 2, block.GLOWSTONE_BLOCK)
     mc.setBlock(x + 4 + center, y - 1, z + 7, block.GLOWSTONE_BLOCK)
@@ -243,7 +236,10 @@ def build_intersection_e_ns(mc, x, y, z):
     mc.setBlock(x + 7, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
     mc.setBlock(x + 12, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
 
-    mc.setBlocks(x, y - 1, z, x + 2, y, z + 14, block.AIR)  # To help create intersection
+    #TODO: Lachie you need to fix this. It's clearing out the blocks below.
+    #mc.setBlocks(x, y - 1, z, x + 2, y, z + 14, block.AIR)  # To help create intersection
+
+    
 
 
 # A function that builds a path corresponding to function name based on current player position
