@@ -152,7 +152,8 @@ def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int
         temp.append([])
         print('LOG >> CREATING NEW ROW OF FIXED ORDINATES')
         for x in range(0, max_x + 1):
-            temp[z].append([x_coord + x * 15, y_coord, z_coord + z * 15])
+            new_y = y_coord + random.randint(0, 1) ################################ ADDED THIS LINE FOR HEIGHT FLEXIBILITY (see how it looks matt)
+            temp[z].append([x_coord + x * 15, new_y, z_coord + z * 15])
     print('LOG >> FIXED ORDINATES COMPLETE')
     return temp
 
