@@ -1,6 +1,6 @@
 
-from misc import Misc
-import block_list as b
+from construction.building.misc.misc import Misc
+import construction.building.misc.block_list as b
 
 class ChessBoard(Misc):
     def __init__(self) -> None:

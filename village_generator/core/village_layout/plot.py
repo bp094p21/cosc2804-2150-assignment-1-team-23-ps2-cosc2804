@@ -1,13 +1,20 @@
 from enum import Enum
-from construction import Building
+#from construction import Architect, MiscBuilder
+from construction import MiscBuilder
 
 
 # contains the orientation, position and centre of where the construction(s) and road(s) should go.
 # this is passed down to the construction/road classes, so that they can position themselves accordingly.
 class Plot:
     def __init__(self, item=None, entrance=False):
-        self.plot_type = PlotType.EMPTY if item is None else (
-            PlotType.BUILDING if item is type(Building) else PlotType.ROAD)
+        if item is None:
+            self.plot_type = PlotType.EMPTY
+        #elif type(item) is Architect:
+            #self.plot_type = PlotType.HOUSE
+        elif type(item) is MiscBuilder:
+            self.plot_type = PlotType.MISC
+        else:
+            self.plot_type = PlotType.ROAD
         self.item = item
         # delineates whether this plot will be village entrance
         self.entrance = entrance
@@ -16,13 +23,16 @@ class Plot:
     def build_house(self):
         self.item.build()
 
+    def build_misc(self, coords):
+        self.item.build(*coords)
+
     # called to construct each road when iterating through the predefined village_layout.
-    # returns the previous y-coordinate of the road.
-    def build_road(self, mc, coords) -> int:
-        return self.item(mc, *coords)
+    def build_road(self, mc, coords):
+        self.item(mc, *coords)
 
 
 class PlotType(Enum):
     EMPTY = 0
-    BUILDING = 1
-    ROAD = 2
+    HOUSE = 1
+    MISC = 2
+    ROAD = 3

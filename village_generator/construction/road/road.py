@@ -239,6 +239,11 @@ def build_intersection_e_ns(mc, x, y, z):
     #TODO: Lachie you need to fix this. It's clearing out the blocks below.
     #mc.setBlocks(x, y - 1, z, x + 2, y, z + 14, block.AIR)  # To help create intersection
 
+    #FIXME: temp solution.
+    mc.setBlocks(x, y, z, x + 2, y, z + 14, block.AIR)
+    block_id = mc.getBlock(x, y - 1, z + 15)
+    mc.setBlocks(x, y - 1, z, x + 2, y - 1, z + 14, block_id)
+
     
 
 
