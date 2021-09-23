@@ -1,14 +1,13 @@
 import random
-from village_generator.core.terraform.terraformer import terraform_house_plot, terraform_road_plot
 
-from mcpi.minecraft import Minecraft
+
 import core.village_layout.predefined_layouts as pl
 
 from core.village.village_size import VillageSize
 from core.village_layout.layout import Layout
 from core.village_layout.plot import PlotType
-from core.terraform.terrain_scanner import scan_terrain, flatten_and_smooth
-from core.terraform.terraformer import terraform
+from core.terraform.terraformer import terraform_house_plot, terraform_road_plot, terraform_entire_land
+from core.terraform.terrain_scanner import scan_terrain
 
 
 # TODO: rewrite this function so that the if-else statements for checking size are only written once.
@@ -18,20 +17,23 @@ def build_village(size, location, biome, mc):
     if not scan_terrain(mc, location, size):
         return
 
+    # do not need the y-coordinate.
+    location = (location[0], location[2])
+
     mc.postToChat('Generating village...')
-    # TODO - finish.
-    #flatten_and_smooth()
 
     _define_layout(size, biome, mc)
     selected_template = _select_random_template(size)
 
+
     if size is VillageSize.SMALL:
-        entrance_location = _build_small(location, selected_template, mc)
+        print('LOG >> BUILDING SMALL')
+        entrance_location = _build_small(selected_template, mc, biome, *location)
 
     elif size is VillageSize.MEDIUM:
-        entrance_location = _build_medium(location, selected_template, mc)
+        entrance_location = _build_medium(selected_template, mc, biome, *location)
     else:
-        entrance_location = _build_large(location, selected_template, mc)
+        entrance_location = _build_large(selected_template, mc, biome, *location)
 
     mc.player.setPos(entrance_location[0], entrance_location[1], entrance_location[2])
     mc.postToChat('Done. Welcome to your new village!')
@@ -53,16 +55,41 @@ def _select_random_template(size):
     return random.choice(Layout.layouts[size]).grid
 
 
-def _build_small(location, template, mc):
-    return _build_plots(_generate_fixed_ordinates(5, 4, *location), template, mc)
+def _build_small(template, mc, biome, x, z):
+    length_z = 5
+    length_x = 4
+
+    max_z = z + 15 * length_z
+    max_x = x + 15 * length_x
+    max_y, min_y = mc.getHighestAndLowestYInRegion(x, z, max_x, max_z)
+
+    terraform_entire_land(mc, biome, x, min_y, z, max_x, max_y, max_z)
+
+    return _build_plots(_generate_fixed_ordinates(length_z, length_x, x, min_y, z), template, mc)
 
 
-def _build_medium(location, template, mc):
-    return _build_plots(_generate_fixed_ordinates(6, 5, *location), template, mc)
+def _build_medium(template, mc, biome, x, z):
+    length_z = 6
+    length_x = 5
+
+    max_z = z + 15 * length_z
+    max_x = x + 15 * length_x
+    max_y, min_y = mc.getHighestAndLowestYInRegion(x, z, max_x, max_z)
+
+    terraform_entire_land(mc, biome, x, min_y, z, max_x, max_y, max_z)
+    return _build_plots(_generate_fixed_ordinates(length_z, length_x, x, min_y, z), template, mc)
 
 
-def _build_large(location, template, mc):
-    return _build_plots(_generate_fixed_ordinates(7, 6, *location), template, mc)
+def _build_large(template, mc, biome, x, z):
+    length_z = 7
+    length_x = 6
+
+    max_z = z + 15 * length_z
+    max_x = x + 15 * length_x
+    max_y, min_y = mc.getHighestAndLowestYInRegion(x, z, max_x, max_z)
+
+    terraform_entire_land(mc, biome, x, min_y, z, max_x, max_y, max_z)
+    return _build_plots(_generate_fixed_ordinates(length_z, length_x, x, min_y, z), template, mc)
 
 
 def _build_plots(fixed_ordinates, template, mc):
@@ -74,20 +101,23 @@ def _build_plots(fixed_ordinates, template, mc):
 
             print(i, plot, plot.plot_type)
 
+            #Set the y-coords to be dynamic.
+            coordinates = fixed_ordinates[i][j]
+            
             if plot.plot_type == PlotType.BUILDING:
-                coordinates = fixed_ordinates[i][j]
                 #_update_variable_house_height(coordinates, mc)
                 # terraform only for buildings & roads, to save resources and for it to look more natural with terrain.
-                terraform_house_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
+                #terraform_house_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
                 plot.item.set_location(coordinates)
                 plot.build_house()
             elif plot.plot_type == PlotType.ROAD:
-                coordinates = fixed_ordinates[i][j]
+                #terraform_road_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
+
                 if plot.entrance is True:
                     entrance_location = _transform_to_entrance_coords(*coordinates)
 
-                terraform_road_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
                 plot.build_road(mc, fixed_ordinates[i][j])
+
 
     return entrance_location
 
@@ -113,15 +143,15 @@ def _transform_to_entrance_coords(x, y, z):
     return x + 7.5, y, z + 7.5
 
 
-def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, z_coord: int, mc: Minecraft) -> list:
+def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int, z_coord: int, ) -> list:
     temp = []
+    print('LOG >> GENERATING FIXED ORDINATES')
     for z in range(0, max_z + 1):
         temp.append([])
+        print('LOG >> CREATING NEW ROW OF FIXED ORDINATES')
         for x in range(0, max_x + 1):
-            temp_x = x_coord + x * 15
-            temp_z = z_coord + z * 15
-            temp[z].append([temp_x, mc.getHeight(temp_x, temp_z), temp_z])
-
+            temp[z].append([x_coord + x * 15, y_coord, z_coord + z * 15])
+    print('LOG >> FIXED ORDINATES COMPLETE')
     return temp
 
 #      [(X, Y, Z), (X + 15, Y, Z), (X + 30, Y, Z), (X + 45, Y, Z), (X + 60, Y, Z),

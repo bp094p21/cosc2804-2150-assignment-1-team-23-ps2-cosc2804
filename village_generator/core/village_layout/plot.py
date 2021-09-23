@@ -17,8 +17,9 @@ class Plot:
         self.item.build()
 
     # called to construct each road when iterating through the predefined village_layout.
-    def build_road(self, mc, coords):
-        self.item(mc, *coords)
+    # returns the previous y-coordinate of the road.
+    def build_road(self, mc, coords) -> int:
+        return self.item(mc, *coords)
 
 
 class PlotType(Enum):
