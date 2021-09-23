@@ -171,6 +171,26 @@ FURNACE = {
     'active': FURNACE_ACTIVE
 }
 
+# LOGS
+LOGS = {
+    'vertical': {
+        'oak': TIMBER_LOG.withData(0),
+        'spruce': TIMBER_LOG.withData(1),
+        'birch': TIMBER_LOG.withData(2),
+        'jungle': TIMBER_LOG.withData(3),
+        'acacia': LOG.withData(0),
+        'dark_oak': LOG.withData(1)
+    }
+}
+# LEAVES
+LEAFAGE = {
+    'oak': LEAVES.withData(0),
+    'spruce': LEAVES.withData(1),
+    'birch': LEAVES.withData(2),
+    'jungle': LEAVES.withData(3),
+    'acacia': LEAVES2.withData(0),
+    'dark_oak': LEAVES2.withData(1)
+}
 # Blocks for roof
 CUBES = {
     'smooth_stone': [Block(43, 0), Block(43, 8)],
@@ -289,6 +309,10 @@ OPTIONS = {
         'steps': {
             'basic': [SLABS['sandstone'], SLABS['brick'], SLABS['spruce'], SLABS['acacia'], SLABS['red_sandstone']],
             'designer': [SLABS['red_sandstone'], SLABS['quartz']]
+        },
+        'tree': {
+            'trunk': [LOGS['vertical']['acacia'], LOGS['vertical']['oak'], LOGS['vertical']['spruce']],
+            'leaves': [LEAFAGE['acacia'], LEAFAGE['oak'], LEAFAGE['spruce']]
         },
         'wall': {
             'basic': [TERRACOTTA, SANDSTONE],
