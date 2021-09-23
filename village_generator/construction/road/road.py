@@ -1,14 +1,7 @@
 import mcpi.block as block
 import math
 
-# immutable and global state. Dependency injection added unnecessary complexity to the project and there was not enough
-# time to adhere to best practice. Moreover, these functions are not going to be unit tested due to no testing software.
 CURVE = (17, [17, 4], 45, 45, 45, 45, 45, [17, 4], 17)
-
-
-# TODO - update the road functions so that they build atop land, rather than digging into it/replacing it.
-# TODO - mitigate code repetition to satisfy criterion halil spoke about.
-
 
 # straight
 # Path class for the East/West Path
@@ -17,7 +10,7 @@ def build_straight_ew(mc, x, y, z):
     # Start is set to the boundaries for the path to enable the path to be centred within a 15x15 area.
     start = 3
     wood_id = 17
-
+    # Working within 15x15 dimensions to generate road
     # Loops 15 times over to cover a 15 block radius of below blocks (length of path)
 
     mc.setBlocks(x, y, z + start, x + 15, y, z + start, block.LEAVES)
@@ -44,9 +37,9 @@ def build_straight_ns(mc, x, y, z):
     mc.setBlocks(x + center, y - 1, z, x + center, y - 1, z + 15, wood_id)
     mc.setBlocks(x + 1 + center, y - 1, z, x + 1 + center, y - 1, z + 15, wood_id, 4)
     mc.setBlocks(x + 2 + center, y - 1, z, x + 6 + center, y - 1, z + 15, block.BRICK_BLOCK)
-    mc.setBlocks(x + 8 + center, y, z, x + 8 + center, y, z + 15, block.LEAVES)
-    mc.setBlocks(x + 8 + center, y - 1, z, x + 8 + center, y - 1, z + 15, wood_id)
     mc.setBlocks(x + 7 + center, y - 1, z, x + 7 + center, y - 1, z + 15, wood_id, 4)
+    mc.setBlocks(x + 8 + center, y - 1, z, x + 8 + center, y - 1, z + 15, wood_id)
+    mc.setBlocks(x + 8 + center, y, z, x + 8 + center, y, z + 15, block.LEAVES)
 
     mc.setBlock(x + 4 + center, y - 1, z + 2, block.GLOWSTONE_BLOCK)
     mc.setBlock(x + 4 + center, y - 1, z + 7, block.GLOWSTONE_BLOCK)
@@ -59,7 +52,7 @@ def build_bent_connecting_se(mc, x, y, z):
     # Radius the curve is built upon
     radius = 11.5
     # List of blocks in path
-
+    # Working within 15x15 dimensions to generate road
     # Angle of path created (SE direction)
     for angle in range(181, 270):
         for i in range(len(CURVE)):
@@ -87,7 +80,7 @@ def build_bent_connecting_se(mc, x, y, z):
 
 def build_bent_connecting_sw(mc, x, y, z):
     radius = 11.5
-
+    # Working within 15x15 dimensions to generate road
     for angle in range(271, 360):
         for i in range(len(CURVE)):
             new_x = x + (radius - i) * math.cos(angle * math.pi / 180)
@@ -152,7 +145,7 @@ def build_crossintersection(mc, x, y, z):
     # This is to set the boundaries for the path to enable the path to be centred within a 15x15 area
     center = 3
     wood_id = 17
-
+    # Working within 15x15 dimensions to generate road
     # Loops 15 times over to cover a 15 block radius of below blocks (length of path)
     for i in range(15):
         mc.setBlocks(x, y, z + center, x + i, y, z + center, block.LEAVES)
@@ -199,7 +192,7 @@ def build_crossintersection(mc, x, y, z):
 def build_intersection_e_ns(mc, x, y, z):
     center = 3
     wood_id = 17
-
+    # Working within 15x15 dimensions to generate road
     for i in range(15):
         mc.setBlocks(x, y, z + center, x + i, y, z + center, block.LEAVES)
         mc.setBlocks(x, y - 1, z + center, x + i, y - 1, z + center, wood_id)
@@ -236,22 +229,16 @@ def build_intersection_e_ns(mc, x, y, z):
     mc.setBlock(x + 7, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
     mc.setBlock(x + 12, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
 
-    #TODO: Lachie you need to fix this. It's clearing out the blocks below.
-    #mc.setBlocks(x, y - 1, z, x + 2, y, z + 14, block.AIR)  # To help create intersection
-
-    #FIXME: temp solution.
+    # Remove a part of the intersection that is sticking out in order to make a T, and replace the hole with the block in the biome
     mc.setBlocks(x, y, z, x + 2, y, z + 14, block.AIR)
     block_id = mc.getBlock(x, y - 1, z + 15)
     mc.setBlocks(x, y - 1, z, x + 2, y - 1, z + 14, block_id)
-
-    
-
 
 # A function that builds a path corresponding to function name based on current player position
 def build_intersection_s_ew(mc, x, y, z):
     center = 3
     wood_id = 17
-
+    # Working within 15x15 dimensions to generate road
     for i in range(15):
         mc.setBlocks(x, y, z + center, x + i, y, z + center, block.LEAVES)
         mc.setBlocks(x, y - 1, z + center, x + i, y - 1, z + center, wood_id)
@@ -261,7 +248,7 @@ def build_intersection_s_ew(mc, x, y, z):
         mc.setBlocks(x, y - 1, z + 8 + center, x + i, y - 1, z + 8 + center, wood_id)
         mc.setBlocks(x, y - 1, z + 7 + center, x + i, y - 1, z + 7 + center, wood_id, 4)
 
-    for i in range(15):
+    for i in range(15): 
         mc.setBlocks(x + center, y, z, x + center, y, z + i, block.LEAVES)
         mc.setBlocks(x + center, y - 1, z, x + center, y - 1, z + i, wood_id)
         mc.setBlocks(x + 1 + center, y - 1, z, x + 1 + center, y - 1, z + i, wood_id, 4)
@@ -289,11 +276,12 @@ def build_intersection_s_ew(mc, x, y, z):
     mc.setBlock(x + 7, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
     mc.setBlock(x + 12, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
 
-    # To help create intersection
+    # Remove a part of the intersection that is sticking out in order to make a T, and replace the hole with the block in the biome
+    block_id = mc.getBlock(x, y - 1, z)
     mc.setBlocks(x, y - 1, z, x + 14, y, z + 2, block.AIR)
     mc.setBlocks(x, y - 1, z + 3, x + 14, y - 1, z + 3, wood_id)
     mc.setBlocks(x, y - 1, z + 4, x + 14, y - 1, z + 4, wood_id, 4)
-
+    mc.setBlocks(x, y - 1, z, x + 15, y - 1, z + 2, block_id)
 
 # A function that builds a path corresponding to function name based on current player position
 def build_intersection_w_ns(mc, x, y, z):
@@ -379,4 +367,9 @@ def build_intersection_n_ew(mc, x, y, z):
     mc.setBlock(x + 7, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
     mc.setBlock(x + 12, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
 
-    mc.setBlocks(x, y - 1, z + 10, x + 14, y - 1, z + 10, wood_id, 4)  # To help create intersection
+    mc.setBlocks(x, y - 1, z + 10, x + 14, y - 1, z + 10, wood_id, 4)  # Add wood to previous intersection path that has been cut off to make a T
+
+import mcpi.minecraft as minecraft
+mc = minecraft.Minecraft.create()
+x, y, z = mc.player.getTilePos()
+build_intersection_w_ns(mc, x, y, z)
