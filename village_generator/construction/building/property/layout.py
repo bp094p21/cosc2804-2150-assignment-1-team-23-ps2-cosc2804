@@ -44,7 +44,7 @@ class Basic(Layout):
         self._position_internal_walls()
         self._position_internal_doors()
         self._position_windows()
-        # self._position_outdoor_features()
+        self._position_outdoor_features()
     def _position_pool(self):
         e_offset = None     # offset into property from edge (+z for orientation 0)
         c_offset = None     # offset from entrance corner to corner (+x for orientation 0)
@@ -54,7 +54,7 @@ class Basic(Layout):
         gate_c_offset = None
         positions = ['left', 'back', 'right']               # From perpsective of walking onto property from entrance
         random_position = random.choice(positions)
-        # random_position = 'left'                          # HARD CODED FOR TESTING
+        # random_position = 'back'                          # HARD CODED FOR TESTING
         if random_position == 'back':                       ### BACK POOL ###
             e_offset = 10
             e_len = self.plot_length - e_offset - 1         # POOL DEPTH = 4
@@ -107,8 +107,8 @@ class Basic(Layout):
 
         pool_position = self.layout['pool']['position']
 
-        if pool_position == 'back':
-            position = 'middle'                                         ### HOUSE MIDDLE POSITION ###
+        if pool_position == 'back':                                     ### HOUSE MIDDLE POSITION ###
+            position = 'middle'                                         
             c_offsets = [2, 3]
             c_offset = random.choice(c_offsets)
             # c_offset = 3        # HARD CODED FOR TESTING
@@ -255,7 +255,7 @@ class Basic(Layout):
                 'c_offset': c_offset,
             })
             back_window_layouts = []
-            e_offset = h_c_len - 1
+            e_offset = h_e_len - 1
             back_window_layouts.append ({
                 'name': 'front_window',
                 'e_offset': e_offset,
@@ -370,36 +370,38 @@ class Basic(Layout):
         e_offset_house = self.layout['house']['e_offset']
         feature_house_gaps = [1, 2]
         feature_house_gap = random.choice(feature_house_gaps)
-        entrance_feature_gaps = [0, 1]
+        entrance_feature_gaps = [1, 2]
         entrance_feature_gap = random.choice(entrance_feature_gaps)
         e_len = e_offset_house - feature_house_gap - entrance_feature_gap - 1
         e_offset = 1 + entrance_feature_gap
-        boundary_gaps = [0, 1]
+        boundary_gaps = [1, 2]
         boundary_gap = random.choice(boundary_gaps)
-        path_gaps = [0, 1]
+        path_gaps = [1, 2]
         path_gap = random.choice(path_gaps)
-        left_feature_option = [True, False]
-        right_feature_option = [True, False]
-        left_feature = random.choice(left_feature_option)
-        right_feature = random.choice(right_feature_option)
-        self.layout['outdoor_features'] = {}
+        left_feature = random.choice([True, False])
+        right_feature = random.choice([True, False])
+        self.layout['outdoor_features'] = []
         if left_feature:
-            c_offset = self.layout['path']['c_offset'] + path_gap + 1
-            self.layout['outdoor_features']['outdoor_feature_left'] = {
+            c_offset = 7 + path_gap + 1
+            self.layout['outdoor_features'].append({
+                'position': 'left',
                 'e_offset': e_offset,
                 'c_offset': c_offset,
                 'e_len': e_len,
                 'c_len': self.plot_length - c_offset - boundary_gap - 1 - 1
-            }
+            })
         if right_feature:
             c_offset = 1 + boundary_gap
-            self.layout['outdoor_features']['outdoor_feature_right'] = {
+            self.layout['outdoor_features'].append({
+                'position': 'right',
                 'e_offset': e_offset,
                 'c_offset': c_offset,
                 'e_len': e_len,
-                'c_len': self.layout['path']['c_offset'] - path_gap - 1 - 1 - boundary_gap
-            }
-        pass
+                'c_len': 7 - path_gap - 1 - 1 - boundary_gap
+            })
+        for layout in self.layout['outdoor_features']:
+            self._print('outdoor_feature', layout)
+        return None
     def _position_paths(self):
         # TODO look for gaps between pool, house, entrance and boundary to create paths
         paths = []

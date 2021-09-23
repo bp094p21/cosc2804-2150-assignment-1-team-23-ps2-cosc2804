@@ -27,6 +27,45 @@ class Designer:
         self._design_pool(property)
         self._design_house(property)
         self._design_paths(property)
+        self._design_outdoor_features(property)
+    def _design_outdoor_features(self, property):
+        e_v3 = property.entrance_edge['start']
+        orientation = property.orientation
+        h_e_offset = property.layout.layout['house']['e_offset']
+        for outdoor_feature_layout in property.layout.layout['outdoor_features']:
+            e_offset = outdoor_feature_layout['e_offset']
+            c_offset = outdoor_feature_layout['c_offset']
+            e_len = outdoor_feature_layout['e_len']
+            c_len = outdoor_feature_layout['c_len']
+            o_v3 = self._orientate(e_v3, orientation, e_offset, c_offset)[0]
+            start_v3 = None
+            x_len = None
+            z_len = None
+            if orientation == 0:
+                start_v3 = v.Vec3(o_v3.x, o_v3.y, o_v3.z)
+                x_len, z_len = c_len, e_len
+            elif orientation == 1:
+                start_v3 = v.Vec3(o_v3.x - (e_len - 1), o_v3.y, o_v3.z)
+                x_len, z_len = e_len, c_len
+            elif orientation == 2:
+                start_v3 = v.Vec3(o_v3.x - (c_len - 1), o_v3.y, o_v3.z - (e_len - 1))
+                x_len, z_len = c_len, e_len
+            elif orientation == 3:
+                start_v3 = v.Vec3(o_v3.x, o_v3.y, o_v3.z - (c_len - 1))
+                x_len, z_len = e_len, c_len
+            if x_len >= 2 and z_len >= 2:
+                option = random.choice(['veggie_patch', 'flower_bed'])
+                if option == 'veggie_patch':
+                    property.components.append(c.veggie_patch.VeggiePatch(start_v3, x_len, z_len))
+                elif option == 'flower_bed':
+                    property.components.append(c.flower_bed.FlowerBed(start_v3, x_len, z_len))
+            else:
+                if h_e_offset == 3:
+                    continue
+                trunk_block = random.choice(b.OPTIONS[property.theme.name]['tree']['trunk'])
+                leaves_block = random.choice(b.OPTIONS[property.theme.name]['tree']['leaves'])
+                property.components.append(c.tree.Tree(o_v3, trunk_block, leaves_block))
+        pass
     def _design_house_components(self, house):
         self._design_floors(house)
         self._design_walls(house)

@@ -7,7 +7,7 @@ by Jin Heock - S3491222
 3. [[#Credits]]
 
 # Contributions
-Working on 100% of `property` subpackage with minor contributions from Lachlan. See [[#Credits]]
+Working on 100% of `property` subpackage with minor contributions from Lachlan and Roy. See [[#Credits]]
 
 # Activities
 
@@ -92,17 +92,25 @@ Learning
 Implementing
  - Added layout randomizer functions for pool gate, fencing, house door placements, and outdoor paths
  - Added component designing functions for pool gate, fencing, house door and outdoor paths
- - Add layout randomizer function for internal walls
- - Add component designer for internal walls
+ - Added layout randomizer function for internal walls
+ - Added component designer for internal walls
  - Tweak `roofer.py` to use given style of stair, slab and cube blocks to be used for roof building
- - Add dictionary for different roof blocks
- - Add window layout designing func
- - Add window component designing func
- - Add window component specs
- - Add window making func
- - Add door layout/design/specs/building code
- - Add steps layout/design/specs/building code
+ - Added dictionary for different roof blocks
+ - Added window layout designing func
+ - Added window component designing func
+ - Added window component specs
+ - Added window making func
+ - Added door layout/design/specs/building code
+ - Added steps layout/design/specs/building code
+ - Added outdoor features layout code
+ - Added veggie patch, flower bed and tree designing/component specs code
+ 
+Collaborate
+ - Got assisstance from Roy to contribute code to build veggie patch, flower bed and tree components with mcpi
 
+Fixes
+ - Fixed poolside window positioning for house position middle.
+ 
 Testing
  - Successfully tested automatic creation of entrance, paths, floors, walls, house doors (need further improvement with orientation), stairs, pool lining, pool filling, pool fence & gate
  - Successfully tested internal wall building for all orientations and possible house layouts
@@ -110,6 +118,7 @@ Testing
  - Successfully tested roof component designing and building
  - Successfully tested door layout,design,building for all orientations
  - Successfully tested step layout,design,building for all orientations
+ - Successfully tested outdoor feature generation for all orientations
  
  Refactoring
   - Refactored `architect.py`
@@ -121,3 +130,6 @@ Testing
 ## Credits
 Contributions from Lachlan.
  - particularly on `components/roof.py`, `components/wall.py`, `components/roofer.py` and `tradies/mason.py`
+
+Contributions from Roy.
+ - particularly on `tradies/gardner.py`

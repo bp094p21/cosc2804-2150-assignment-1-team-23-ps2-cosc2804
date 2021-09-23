@@ -26,6 +26,8 @@ Give the architect the Vec3 co-ordinates of the corner with least x and least z 
 architect.give_specs(location_v3: v.Vec3, orientation: int, theme: str, mc: minecraft.Minecraft)
 ```
 
+> Note: Only 'medi' theme will generate a property at this stage.
+
 The property will now be generated randomly.
 
 > Properties can be accessed through `architect.properties` or `architect.builder.properties`

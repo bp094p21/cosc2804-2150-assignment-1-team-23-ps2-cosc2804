@@ -10,10 +10,9 @@ class Tree(Component):
     trunk_block: b.Block = None
     leaves_block: b.Block = None
     def __repr__(self):
-        return f"🖨  Printing object.__repr__:\n\n{type(self)}\start_v3: {self.start_v3},\nend_v3: {self.end_v3},\nblock: {self.block}\n"
-    def __init__(self, start_v3, end_v3, trunk_block, leaves_block):
-        self.start_v3 = start_v3
-        self.end_v3 = end_v3
+        return f"🖨  Printing object.__repr__:\n\n{type(self)}\nv3: {self.v3},\ntrunk_block: {self.trunk_block}\nleaves_block: {self.leave_block}\n"
+    def __init__(self, v3, trunk_block, leaves_block):
+        self.v3 = v3
         self.trunk_block = trunk_block
         self.leaves_block = leaves_block
 
