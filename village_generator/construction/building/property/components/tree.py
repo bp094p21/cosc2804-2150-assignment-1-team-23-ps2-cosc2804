@@ -5,8 +5,7 @@ class Tree(Component):
     # Class attributes
     type: str = 'tree'
     # Instance attributes
-    start_v3 = None
-    end_v3: int = None
+    v3 = None
     trunk_block: b.Block = None
     leaves_block: b.Block = None
     def __repr__(self):
@@ -26,5 +25,5 @@ if __name__ == '__main__':
     trunk_block = None
     leaves_block = None
 
-    entrance = Tree(start_V3=player_v3, end_v3=player_v3, trunk_block=trunk_block, leaves_block=leaves_block)
+    entrance = Tree(v3 = player_v3, trunk_block=trunk_block, leaves_block=leaves_block)
 	
