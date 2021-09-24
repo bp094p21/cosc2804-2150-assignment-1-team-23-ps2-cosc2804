@@ -16,6 +16,7 @@ class Builder:
         if self.name:
             print(f"builder.name: {self.name}\n")
         self.TRADIES = {
+            'bed': t.decorator.Decorator(),
             'boundary': t.jims_fencing.JimsFencing(),
             'carpets': t.carpet_call.CarpetCall(),
             'chimney': t.mason.Mason(),
