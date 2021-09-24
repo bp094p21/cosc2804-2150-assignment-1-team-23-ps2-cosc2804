@@ -9,6 +9,8 @@ by Jin Heock - S3491222
 # Contributions
 Working on 100% of `property` subpackage with minor contributions from Lachlan and Roy. See [[#Credits]]
 
+Github commits under bp094p21 & fibretothepremises.
+
 # Activities
 
 ## Week 1
@@ -128,6 +130,15 @@ Testing
   - Refactored `theme.py`
   - Refactored `property.py`
   - Refactored `block.py`
+  - Renamed e and c references to z and x for easier understanding
+  - moved `_orientate` function to `util` subpackage and renamed to `orientate`
+
+Documenting
+ - Added docstring to `architect.py`
+ - Added docstring to `block.py`
+ - Added docstring to `layout.py`
+ - Added docstring to `theme.py`
+ - Added docstring to `designer.py`
 
 ## Credits
 Contributions from Lachlan.
