@@ -76,9 +76,51 @@ class Designer:
         self._design_internal_walls(house)
         self._design_internal_doors(house)
         self._design_windows(house)
+        self._design_beds(house)
         self._design_roof(house)
         # self._design_rooms(house, levels, e_v3, e_offset, c_offset, e_len, c_len)
         pass
+    def _design_beds(self, house):
+        h_v3 = house.house_v3
+        layout = house.layout
+        orientation = house.orientation
+        for bed_layout in layout['beds']:
+            for elevation in house.floor_elevations:
+                e_offset = bed_layout['e_offset']
+                c_offset = bed_layout['c_offset']
+                bed_orientation = bed_layout['orientation']
+                bedhead_v3 = self._orientate(h_v3, orientation, e_offset, c_offset)[0]
+                x, y, z = bedhead_v3
+                y += elevation
+                bedtail_v3, bedhead_block, bedtail_block = self._get_bed_pair(bedhead_v3, orientation, bed_orientation)
+                x2, y2, z2 = bedtail_v3
+                y2 += elevation
+                bedhead = c.bed.Bed(v.Vec3(x,y,z), bedhead_block)
+                bedtail = c.bed.Bed(v.Vec3(x2,y2,z2), bedtail_block)
+                house.components.append(bedhead)
+                house.components.append(bedtail)
+    def _get_bed_pair(self, bedhead_v3, orientation, bed_orientation):
+        bedtail_v3 = None
+        bedhead_block = None
+        bedtail_block = None
+        sum_orientation = (orientation + bed_orientation) % 4
+        if sum_orientation == 0:
+            bedtail_v3 = v.Vec3(bedhead_v3.x, bedhead_v3.y, bedhead_v3.z - 1)
+            bedhead_block = b.BED.withData(8)
+            bedtail_block = b.BED.withData(0)
+        elif sum_orientation == 1:
+            bedtail_v3 = v.Vec3(bedhead_v3.x + 1, bedhead_v3.y, bedhead_v3.z)
+            bedhead_block = b.BED.withData(9)
+            bedtail_block = b.BED.withData(1)
+        elif sum_orientation == 2:
+            bedtail_v3 = v.Vec3(bedhead_v3.x, bedhead_v3.y, bedhead_v3.z + 1)
+            bedhead_block = b.BED.withData(10)
+            bedtail_block = b.BED.withData(2)
+        elif sum_orientation == 3:
+            bedtail_v3 = v.Vec3(bedhead_v3.x - 1, bedhead_v3.y, bedhead_v3.z)
+            bedhead_block = b.BED.withData(11)
+            bedtail_block = b.BED.withData(3)
+        return bedtail_v3, bedhead_block, bedtail_block
     def _design_door_steps(self, house):
         v3 = house.property_v3
         orientation = house.orientation
