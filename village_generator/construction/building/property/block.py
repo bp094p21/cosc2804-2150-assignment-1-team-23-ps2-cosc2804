@@ -1,5 +1,5 @@
 class Block:
-    """Minecraft PI block description w/ slight modifications and custom dictionaries. Can be sent to Minecraft.setBlock/s"""
+    """Minecraft PI block description w/ slight modifications and custom dictionaries. To be used in Minecraft.setBlock/s"""
     def __init__(self, id, has_variation=False, variation_type=None, data=0):
         self.id = id
         self.data = data
@@ -18,7 +18,8 @@ class Block:
     def __repr__(self):
         return f"Block id: {self.id}, data: {self.data}, has_variation: {self.has_variation}, variation_type: {self.variation_type}"
 
-# List of usable blocks for property buildings
+# List of usable blocks for building property and house components
+#region
 AIR                 = Block(0)
 STONE               = Block(1)
 GRASS               = Block(2)
@@ -163,15 +164,14 @@ TERRACOTTA2 = Block(236, True, 'pattern')
 TERRACOTTA3 = Block(238, True, 'pattern')
 CONCRETE            = Block(251, True, 'colors')
 CONCRETE_POWDER     = Block(252, True, 'colors')
-
+#endregion
 
 ### LISTS BY BLOCK TYPE ###
+
 FURNACE = {
     'inactive': FURNACE_INACTIVE,
     'active': FURNACE_ACTIVE
 }
-
-# LOGS
 LOGS = {
     'vertical': {
         'oak': TIMBER_LOG.withData(0),
@@ -182,7 +182,6 @@ LOGS = {
         'dark_oak': LOG.withData(1)
     }
 }
-# LEAVES
 LEAFAGE = {
     'oak': LEAVES.withData(0),
     'spruce': LEAVES.withData(1),
@@ -248,8 +247,7 @@ SLABS_TOP = {
     'red_sandstone': SLAB_RED_SANDSTONE.withData(8),
     'purpur': PURPUR_SLAB.withData(8),
 }
-
-STAIRS = [STAIRS_WOOD, STAIRS_COBBLESTONE, STAIRS_BRICK, STAIRS_STONE_BRICK, STAIRS_NETHER_BRICK, STAIRS_SANDSTONE, STAIRS_SPRUCE, STAIRS_BIRCH, STAIRS_JUNGLE, STAIRS_QUARTZ, STAIRS_ACACIA, STAIRS_DARK_OAK, STAIRS_RED_SANDSTONE, PURPUR_STAIRS, ]
+STAIRS = [STAIRS_WOOD, STAIRS_COBBLESTONE, STAIRS_BRICK, STAIRS_STONE_BRICK, STAIRS_NETHER_BRICK, STAIRS_SANDSTONE, STAIRS_SPRUCE, STAIRS_BIRCH, STAIRS_JUNGLE, STAIRS_QUARTZ, STAIRS_ACACIA, STAIRS_DARK_OAK, STAIRS_RED_SANDSTONE, PURPUR_STAIRS]
 
 BEDS = {
     'list': [],
@@ -324,6 +322,8 @@ OPTIONS = {
         },
     }
 }
+
+# TESTING
 
 if __name__ == '__main__':
     from mcpi import minecraft
