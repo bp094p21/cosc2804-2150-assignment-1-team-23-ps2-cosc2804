@@ -11,7 +11,7 @@ import util.logbook as lb
 
 class Architect():
 
-    """Given a Vec3, the Architect will assume it as the corner of least z and x values and build a property of 15 x 15 block dimensions in the positive z and x direction\nOrientation must also be given. 0 means the property will face West, 1 - North, 2 - East and 3 - South\nTheme should be given in format. Currently accepts 'medi'.\nA Minecraft object should also be given.\nPlot Length is assumed to be 15."""
+    """Given a Vec3, the Architect will assume it as the corner of least z and x values and build a property of 15 x 15 block dimensions in the positive z and x direction\nOrientation must also be given. 0 means the property will face West, 1 - North, 2 - East and 3 - South\nTheme should be given in string format (Currently ONLY accepts 'medi').\nA Minecraft object should also be given.\nPlot Length is assumed to be 15 and currently does not support any other plot length."""
 
     name: str               = None
     emoji: str              = '👔'
@@ -44,6 +44,7 @@ class Architect():
         self._get_builder()
         self._build_property(mc)
 
+#region
     # Interal Methods
     def _draft_property(self, v3, orientation, theme_str, plot_length):
         self.logbook.logs.append(f'{self.emoji} Drafting property...\n')
@@ -120,9 +121,11 @@ class Architect():
         self.builder.assign_property(self.properties[-1], mc)
         self.logbook.logs.append(f'✅ Builder assigned to property\n')
         # self._print()
+
+    # Print Method
     def _print(self):
         print(self.logbook.logs[-1])
-
+#endregion
 class Jin(Architect):
     name = 'Jin'
 
