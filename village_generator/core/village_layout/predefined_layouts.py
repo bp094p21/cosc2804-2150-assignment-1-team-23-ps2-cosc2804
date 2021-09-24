@@ -18,7 +18,7 @@ def define_small(mc, biome, size):
     Layout(size,
            [[Plot(), Plot(build_bent_connecting_se), Plot(build_straight_ew), Plot()],
             [Plot(build_straight_ew, True), Plot(build_intersection_w_ns), Plot(), Plot()],
-            [Plot(), Plot(build_intersection_e_ns), Plot(build_straight_ew), Plot()],
+            [Plot(MiscBuilder()), Plot(build_intersection_e_ns), Plot(build_straight_ew), Plot()],
             [Plot(), Plot(build_straight_ns), Plot(), Plot()],
             [Plot(), Plot(build_intersection_n_ew), Plot(), Plot()]])
 
@@ -26,7 +26,7 @@ def define_small(mc, biome, size):
     Layout(size,
            [[Plot(), Plot(), Plot(build_bent_connecting_se), Plot()],
             [Plot(), Plot(build_straight_ew), Plot(build_intersection_w_ns), Plot()],
-            [Plot(), Plot(), Plot(build_intersection_e_ns), Plot()],
+            [Plot(), Plot(MiscBuilder()), Plot(build_intersection_e_ns), Plot()],
             [Plot(), Plot(build_straight_ew), Plot(build_intersection_w_ns), Plot()],
             [Plot(), Plot(), Plot(build_straight_ns, True), Plot()]])
 
@@ -37,21 +37,21 @@ def define_small(mc, biome, size):
 def define_medium(mc, biome, size):
     # Layout #1
     Layout(size,
-           [[],
-            [],
-            [],
-            [],
-            [],
-            []])
+           [[Plot(), Plot(), Plot(), Plot(build_intersection_e_ns, True), Plot()],
+            [Plot(), Plot(), Plot(), Plot(build_straight_ns), Plot()],
+            [Plot(build_bent_connecting_se), Plot(build_straight_ew), Plot(build_straight_ew), Plot(build_crossintersection), Plot(build_straight_ew)],
+            [Plot(build_straight_ns), Plot(MiscBuilder()), Plot(), Plot(build_straight_ns), Plot()],
+            [Plot(build_straight_ns), Plot(), Plot(), Plot(build_crossintersection), Plot()],
+            [Plot(), Plot(), Plot(), Plot(), Plot()]])
 
     # Layout #2
     Layout(size,
-           [[],
-            [],
-            [],
-            [],
-            [],
-            []])
+           [[Plot(), Plot(build_intersection_e_ns, True), Plot(build_bent_connecting_sw), Plot(), Plot()],
+            [Plot(), Plot(MiscBuilder()), Plot(build_intersection_e_ns), Plot(build_straight_ew), Plot()],
+            [Plot(), Plot(build_straight_ew), Plot(build_intersection_w_ns), Plot(), Plot()],
+            [Plot(), Plot(), Plot(build_crossintersection), Plot(), Plot()],
+            [Plot(), Plot(), Plot(build_crossintersection), Plot(), Plot()],
+            [Plot(), Plot(), Plot(build_straight_ns), Plot(), Plot()]])
 
 
 # Large variations.
@@ -60,20 +60,20 @@ def define_medium(mc, biome, size):
 def define_large(mc, biome, size):
     # Layout #1
     Layout(size,
-           [[],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []])
+           [[Plot(), Plot(), Plot(), Plot(), Plot(build_straight_ns), Plot()],
+            [Plot(), Plot(build_crossintersection), Plot(), Plot(), Plot(build_straight_ns), Plot()],
+            [Plot(), Plot(build_intersection_e_ns), Plot(build_straight_ew), Plot(build_straight_ew), Plot(build_crossintersection), Plot(build_straight_ew)],
+            [Plot(MiscBuilder()), Plot(build_intersection_w_ns), Plot(), Plot(), Plot(build_straight_ns), Plot()],
+            [Plot(), Plot(build_straight_ns), Plot(), Plot(), Plot(), Plot()],
+            [Plot(), Plot(build_straight_ns), Plot(MiscBuilder()), Plot(), Plot(), Plot()],
+            [Plot(), Plot(build_bent_connecting_ne), Plot(build_straight_ew), Plot(build_straight_ew), Plot(build_straight_ew), Plot(build_straight_ew, True)]])
 
     # Layout #2
     Layout(size,
-           [[],
-            [],
-            [],
-            [],
-            [],
-            [],
-            []])
+           [[Plot(), Plot(build_straight_ew), Plot(build_bent_connecting_sw), Plot(), Plot(), Plot(build_straight_ns, True)],
+            [Plot(), Plot(), Plot(build_bent_connecting_ne), Plot(build_bent_connecting_sw), Plot(), Plot(build_straight_ns)],
+            [Plot(), Plot(), Plot(MiscBuilder()), Plot(build_straight_ns), Plot(), Plot(build_straight_ns)],
+            [Plot(), Plot(build_bent_connecting_se), Plot(build_straight_ew), Plot(build_crossintersection), Plot(build_straight_ew), Plot(build_bent_connecting_nw)],
+            [Plot(), Plot(build_straight_ns), Plot(), Plot(build_straight_ns), Plot(), Plot()],
+            [Plot(MiscBuilder()), Plot(build_straight_ns), Plot(), Plot(build_bent_connecting_ne), Plot(build_straight_ew), Plot(build_bent_connecting_sw)],
+            [Plot(), Plot(build_straight_ns), Plot(), Plot(), Plot(), Plot(build_straight_ns)]])

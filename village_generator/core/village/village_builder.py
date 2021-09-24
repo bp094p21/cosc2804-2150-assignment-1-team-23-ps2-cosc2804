@@ -104,12 +104,14 @@ def _build_plots(fixed_ordinates, template, mc):
             #Set the y-coords to be dynamic.
             coordinates = fixed_ordinates[i][j]
             
-            if plot.plot_type == PlotType.BUILDING:
+            if plot.plot_type == PlotType.HOUSE:
                 #_update_variable_house_height(coordinates, mc)
                 # terraform only for buildings & roads, to save resources and for it to look more natural with terrain.
                 #terraform_house_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
                 plot.item.set_location(coordinates)
                 plot.build_house()
+            elif plot.plot_type == PlotType.MISC:
+                plot.build_misc(coordinates)
             elif plot.plot_type == PlotType.ROAD:
                 #terraform_road_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
 
@@ -150,7 +152,8 @@ def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int
         temp.append([])
         print('LOG >> CREATING NEW ROW OF FIXED ORDINATES')
         for x in range(0, max_x + 1):
-            temp[z].append([x_coord + x * 15, y_coord, z_coord + z * 15])
+            new_y = y_coord + random.randint(0, 1) ################################ ADDED THIS LINE FOR HEIGHT FLEXIBILITY (see how it looks matt)
+            temp[z].append([x_coord + x * 15, new_y, z_coord + z * 15])
     print('LOG >> FIXED ORDINATES COMPLETE')
     return temp
 

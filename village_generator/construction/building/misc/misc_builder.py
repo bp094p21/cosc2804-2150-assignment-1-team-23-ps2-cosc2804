@@ -1,16 +1,15 @@
 misc_list = ['chess_statue','big_tree','fountain','pond','modern_art']
-from chess_statue import ChessBoard
-from pond import ParkPond
-from modern_art import Art
-from big_tree import bigTree
-from fountain import ParkFountain
-from mcpi.minecraft import Minecraft
+from construction.building.misc.chess_statue import ChessBoard
+from construction.building.misc.pond import ParkPond
+from construction.building.misc.modern_art import Art
+from construction.building.misc.big_tree import bigTree
+from construction.building.misc.fountain import ParkFountain
 
 import random
 #have code that 
 # create misc object instead 
 
-class Builder:
+class MiscBuilder:
     def __init__(self) -> None:
         pass
     def build(self,x,y,z ):
@@ -34,7 +33,7 @@ class Builder:
         else:
             misc_obj = Art()
             misc_obj.build(x,y,z) 
-thing = Builder()
-mc = Minecraft.create()
-x,y,z, = mc.player.getPos()
-thing.build(x,y,z)
+# thing = Builder()
+# mc = Minecraft.create()
+# x,y,z, = mc.player.getPos()
+# thing.build(x,y,z)

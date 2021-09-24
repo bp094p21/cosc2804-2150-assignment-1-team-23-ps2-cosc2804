@@ -1,10 +1,10 @@
 from mcpi.minecraft import Minecraft
 import random
 import sys
-import block_list as b
+import construction.building.misc.block_list as b
 sys.path.append('../../core/village_layout')
 #import village_layout.themes
-from themes import BiomeToTheme
+from construction.building.misc.themes import BiomeToTheme
 
 class Misc():
     def __init__(self) -> None:
