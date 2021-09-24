@@ -104,6 +104,7 @@ Implementing
  - Added steps layout/design/specs/building code
  - Added outdoor features layout code
  - Added veggie patch, flower bed and tree designing/component specs code
+ - Added bed layout/design/specs/building code
  
 Collaborate
  - Got assisstance from Roy to contribute code to build veggie patch, flower bed and tree components with mcpi
@@ -119,6 +120,7 @@ Testing
  - Successfully tested door layout,design,building for all orientations
  - Successfully tested step layout,design,building for all orientations
  - Successfully tested outdoor feature generation for all orientations
+ - Successfully tested bed generation for all orientations and floor elevations
  
  Refactoring
   - Refactored `architect.py`
