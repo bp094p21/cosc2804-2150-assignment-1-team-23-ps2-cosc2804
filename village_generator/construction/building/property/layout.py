@@ -44,7 +44,89 @@ class Basic(Layout):
         self._position_internal_walls()
         self._position_internal_doors()
         self._position_windows()
+        self._position_beds()
         self._position_outdoor_features()
+    def _position_beds(self):
+        bed_layouts = []
+        house_layout = self.layout['house']
+        h_position = house_layout['position']
+        h_e_offset = house_layout['e_offset']
+        h_c_offset = house_layout['c_offset']
+        h_e_len = house_layout['e_len']
+        h_c_len = house_layout['c_len']
+        if h_position == 'middle':
+            bedroom_side = random.choice(['right', 'left'])
+            if bedroom_side == 'right':
+                house_layout['bedroom_side'] = 'right'
+                e_offset = 1
+                c_offset = 1
+                orientation = 1
+                bed_layouts.append({
+                    'room': 'right',
+                    'orientation': orientation,
+                    'e_offset': e_offset,
+                    'c_offset': c_offset
+                })
+                e_offset = h_e_len - 1 - 1
+                bed_layouts.append({
+                    'room': 'right',
+                    'orientation': orientation,
+                    'e_offset': e_offset,
+                    'c_offset': c_offset
+                })
+            elif bedroom_side == 'left':
+                house_layout['bedroom_side'] = 'left'
+                e_offset = 1
+                c_offset = h_c_len - 1 - 1
+                orientation = 3
+                bed_layouts.append({
+                    'room': 'left',
+                    'orientation': orientation,
+                    'e_offset': e_offset,
+                    'c_offset': c_offset
+                })
+                e_offset = h_e_len - 1 - 1
+                bed_layouts.append({
+                    'room': 'left',
+                    'orientation': orientation,
+                    'e_offset': e_offset,
+                    'c_offset': c_offset
+                })
+        elif h_position == 'left':
+            e_offset = 1
+            c_offset = h_c_len - 1 - 1
+            orientation = 3
+            bed_layouts.append({
+                'room': 'front',
+                'orientation': orientation,
+                'e_offset': e_offset,
+                'c_offset': c_offset
+            })
+            e_offset = h_e_len - 1 - 1
+            bed_layouts.append({
+                'room': 'back',
+                'orientation': orientation,
+                'e_offset': e_offset,
+                'c_offset': c_offset
+            })
+        elif h_position == 'right':
+            e_offset = 1
+            c_offset = 1
+            orientation = 1
+            bed_layouts.append({
+                'room': 'front',
+                'orientation': orientation,
+                'e_offset': e_offset,
+                'c_offset': c_offset
+            })
+            e_offset = h_e_len - 1 - 1
+            bed_layouts.append({
+                'room': 'back',
+                'orientation': orientation,
+                'e_offset': e_offset,
+                'c_offset': c_offset
+            })
+        house_layout['beds'] = bed_layouts
     def _position_pool(self):
         e_offset = None     # offset into property from edge (+z for orientation 0)
         c_offset = None     # offset from entrance corner to corner (+x for orientation 0)
