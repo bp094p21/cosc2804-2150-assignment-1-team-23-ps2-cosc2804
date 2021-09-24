@@ -12,13 +12,17 @@ Default is a *25% contribution for each student*. However, please modify as nece
 Please, report your key activities in each week this assignment is running.  
 
 **Week 1**
-project work:
+***project work:***
 tested with designs of various buildings that will be used in the village, was later assigned with the role of creating various park like areas for the village
 -group then decided that areas of land should be 15x15 blocks for convinence, so i designed my parks with that in mind
 -made code for a basic fountain that is currently based on players position, with the plan to make it modular and accept x,y,z values and biome from main program to dictate where it will be built. then made pond park.
 -tested creating modules with a 'park' class, after the reorganisation of files from Mathew.
 decided that i would like a tree in one of the four corners of the park, so i created a function that would randomly select the coordinates of a corner, and randomly generate a tree there.
--thought that the park did not have enough nature, so i created function called, place_grass and place_flower, where it would randomly choose a x,z value in the park and place grass and a flower in that random coordinate
+-thought that the park did not have enough nature, so functions, place_grass and place_flower were created, and they would randomly choose a x,z value in the park and place grass and a flower in that random coordinate
+
+*** Studio class reading/work**
+-set up working environment(spigot and mcpi that was given out) needed to work on the project
+-tried out the tools by placing blocks in Minecraft via python files
 
 
 
@@ -46,6 +50,7 @@ the team also decided that instead of making a village type for every biome, we 
 **Week 3**
 project work
 -started on decorations for the property objects, with template code given by jin
+- created flowerbeds, vegetable gardens and a tree in the simplest form, unsure whether to make them more complex
 
 .....
 .....

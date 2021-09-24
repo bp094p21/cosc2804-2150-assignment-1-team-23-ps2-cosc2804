@@ -1,4 +1,4 @@
-
+# dictionary used to decide blocks that will be used depending on biome
 
 MISC_BLOCKS={
 
