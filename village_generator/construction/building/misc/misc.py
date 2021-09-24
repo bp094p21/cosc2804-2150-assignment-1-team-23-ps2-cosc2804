@@ -3,8 +3,8 @@ import random
 import sys
 import construction.building.misc.block_list as b
 sys.path.append('../../core/village_layout')
-#import village_layout.themes
-from construction.building.misc.themes import BiomeToTheme
+from core.village_layout.themes import BiomeToTheme
+#from construction.building.misc.themes import BiomeToTheme
 
 class Misc():
     def __init__(self) -> None:
