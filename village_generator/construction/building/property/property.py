@@ -16,7 +16,8 @@ class Property:
     is_built: bool = False
 
     # Initializer
-    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme: Theme, entrance_edge: dict, house_type: str, layout: Layout):
+    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme: Theme, entrance_edge: dict, house_type: str,
+                 layout: Layout):
         self.location_v3 = location_v3
         self.orientation = orientation
         self.theme = theme

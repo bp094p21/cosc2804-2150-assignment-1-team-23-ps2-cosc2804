@@ -1,6 +1,7 @@
 from mcpi import minecraft as m
 from .tradie import Tradie
 
+
 class Carpenter(Tradie):
     trade = 'carpentry'
 

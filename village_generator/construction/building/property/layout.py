@@ -527,7 +527,6 @@ class Basic(Layout):
         for layout in self.layout['outdoor_features']:
             self._print('outdoor_feature', layout)
 
-
     def _position_paths(self):
         # TODO look for gaps between pool, house, entrance and boundary to create paths
         paths = []

@@ -488,7 +488,7 @@ class Designer:
         # TODO: Use position to make fence and gate for pool
         # position = property.layout.layout['pool']['position']
         pool = Pool(line_v3, fill_v3, fence_v3, gate_v3, line_block, fill_block, fence_block, gate_block,
-                           pool_depth, line_raise, line_depth)
+                    pool_depth, line_raise, line_depth)
         print("Pool design completed\n")
         print(pool)
         property.components.append(pool)

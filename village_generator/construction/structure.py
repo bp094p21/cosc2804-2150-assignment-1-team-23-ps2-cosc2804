@@ -1,5 +1,6 @@
 """A collection of two data classes to allow interoperability with the property and misc package's system."""
 
+
 # Represents an individual house.
 class House:
     def __init__(self, mc_instance, orientation, theme):
@@ -8,6 +9,7 @@ class House:
         self.mc_instance = mc_instance
         self.orientation = orientation
         self.theme = theme
+
 
 # Represents an individual misc building.
 class Misc:

@@ -5,6 +5,7 @@ from core.village import VillageSize
 and inexpensively created later if need be  (memoization). This feature did not deem useful in the submission of this project, however, it would be useful if all the features were completed as 
 intended."""
 
+
 class Layout:
     layouts = {VillageSize.SMALL: [],
                VillageSize.MEDIUM: [],

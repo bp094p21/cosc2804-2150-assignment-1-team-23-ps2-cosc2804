@@ -7,6 +7,7 @@ GROUND_FILLER = {'DESERT': 24,
                  'FOREST': 2,
                  'ICE': 78}
 
+
 def terraform_entire_land(mc, biome, x1, y1, z1, x2, y2, z2):
     mc.setBlocks(x1, y1, z1, x2, y2, z2, 0)
 
@@ -14,7 +15,8 @@ def terraform_entire_land(mc, biome, x1, y1, z1, x2, y2, z2):
     mc.setBlocks(x1, y1 - 1, z1, x2, y1 - 1, z2, ground_fill_block)
 
 
-# Searches the dictionary to see if the biome string is in any of the keys, and if it is, return the block id to pave the floor.
+# Searches the dictionary to see if the biome string is in any of the keys, and if it is, return the block id to pave
+# the floor.
 def iterate_ground_filler(keys, target):
     for i in keys:
         if target in i:
@@ -22,11 +24,9 @@ def iterate_ground_filler(keys, target):
     # Default to grass otherwise.
     return 2
 
-
-
-
-# Whilst most of the unused and abaonded code has been deleted from this package, this one was left due to its usefulness - especially in future.
-# If the project is ever done correctly, then these functions would be incredibly useful along that journey, and they showcase the forked API.
+# Whilst most of the unused and abaonded code has been deleted from this package, this one was left due to its
+# usefulness - especially in future. If the project is ever done correctly, then these functions would be incredibly
+# useful along that journey, and they showcase the forked API.
 
 # DISALLOWED_BLOCKS = (17, 18, 81, 86, 106, 161, 162, 175, 37, 38, 39, 40, 30, 10, 11, 31)
 
@@ -75,6 +75,7 @@ def iterate_ground_filler(keys, target):
 # def _clear_disallowed_blocks(mc, start_loc, max_x, max_y, max_z):
 #     print('LOG >> CLEARING DISALLOWED BLOCKS')
 #     x, y, z = start_loc
-#     # Implemented on back-end because the transfer between sockets was a big bottleneck and slowed down program tremendously.
+#     # Implemented on back-end because the transfer between sockets was a big bottleneck and
+#     # slowed down program tremendously.
 #     mc.removeBlocksInRegion(x, y, z, max_x, max_y, max_z, *DISALLOWED_BLOCKS)
 #     print('LOG >> CLEARED DISALLOWED BLOCKS')

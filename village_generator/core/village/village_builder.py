@@ -7,12 +7,16 @@ from construction import Architect, MiscBuilder
 from core.terraform import *
 from mcpi.vec3 import Vec3
 
-"""This module hosts a series of functions that are responsible for generating a village. This is the API for this application.
-A client should interact with this program by simply calling the build_village() function, and specifiying the deisred specifications via argument insertion."""
+"""This module hosts a series of functions that are responsible for generating a village. This is the API for this 
+application. A client should interact with this program by simply calling the build_village() function, 
+and specifiying the deisred specifications via argument insertion."""
 
-# This module was designed with a functional programming approach, as only local behaviour was required (not state), thus deeming an object oriented style less effective.
-# The functions all try to remain as pure as possible to avoid unintended side-affects, and to allow for easy unit testing. However, there is a tight coupling between 
-# the private functions within this module, and thereby, the build_village() function is best tested with its dependencies (private functions).
+
+# This module was designed with a functional programming approach, as only local behaviour was required (not state),
+# thus deeming an object oriented style less effective. The functions all try to remain as pure as possible to avoid
+# unintended side-affects, and to allow for easy unit testing. However, there is a tight coupling between the private
+# functions within this module, and thereby, the build_village() function is best tested with its dependencies (
+# private functions).
 
 # 
 def build_village(size, location, biome, mc):
@@ -46,7 +50,7 @@ def build_village(size, location, biome, mc):
 
         * You will then be teleported to the village's entrance in-game. *
     """
-    
+
     # Before layouts or anything is defined/built, scan the land and then if appropriate, perform terraform.
     if not scan_terrain(mc, location, size):
         return
@@ -88,18 +92,22 @@ def _define_layout(size, biome, theme, mc):
 def _select_random_template(size):
     return random.choice(Layout.layouts[size]).grid
 
-def _build_generic(template, mc, biome, length_z, length_x, x ,z):
+
+def _build_generic(template, mc, biome, length_z, length_x, x, z):
     max_z = z + 15 * length_z
     max_x = x + 15 * length_x
 
     # Obtain the highest and lowest y-value within the region specified (depends on size).
     max_y, min_y = mc.getHighestAndLowestYInRegion(x, z, max_x, max_z)
 
-    # Flatten and remove all blocks within this region and plaster the floor with an appropriate block relative to the biome.
+    # Flatten and remove all blocks within this region and plaster the floor with an appropriate block relative to
+    # the biome.
     terraform_entire_land(mc, biome, x, min_y, z, max_x, max_y, max_z)
 
-    # Return the entrance coordinates, after first generating the fixed ordinates (grid system for each plot's placement) and then building each plot's item.
+    # Return the entrance coordinates, after first generating the fixed ordinates (grid system for each plot's
+    # placement) and then building each plot's item.
     return _build_plots(_generate_fixed_ordinates(length_z, length_x, x, min_y, z), template, mc)
+
 
 # Responsible for iterating the selected template and building all the items within it.
 def _build_plots(fixed_ordinates, template, mc):
@@ -128,10 +136,12 @@ def _build_plots(fixed_ordinates, template, mc):
 
     return entrance_location
 
+
 def _transform_to_entrance_coords(x, y, z):
     return x + 7.5, y, z + 7.5
 
-# Generates a 3-way nested list and tuple structure, such that the innermost structure is a tuple containing 
+
+# Generates a 3-way nested list and tuple structure, such that the innermost structure is a tuple containing
 # the x, y and z for a particular plot's leftmost corner block.
 def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int, z_coord: int, ) -> list:
     temp = []

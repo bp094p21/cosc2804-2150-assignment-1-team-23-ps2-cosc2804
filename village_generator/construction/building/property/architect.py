@@ -3,14 +3,19 @@ from mcpi import vec3 as v
 
 from .builder import Builder, Bob
 from .designer import Designer
-from .layout  import Layout, get_layout
+from .layout import Layout, get_layout
 from .property import Property
 from .theme import Theme, get_theme
 
 from .util import Logbook
 
-class Architect():
-    """Given a Vec3, the Architect will assume it as the corner of least z and x values and build a property of 15 x 15 block dimensions in the positive z and x direction\nOrientation must also be given. 0 means the property will face West, 1 - North, 2 - East and 3 - South\nTheme should be given in string format (Currently ONLY accepts 'medi').\nA Minecraft object should also be given.\nPlot Length is assumed to be 15 and currently does not support any other plot length."""
+
+class Architect:
+    """Given a Vec3, the Architect will assume it as the corner of least z and x values and build a property of 15 x
+    15 block dimensions in the positive z and x direction\nOrientation must also be given. 0 means the property will
+    face West, 1 - North, 2 - East and 3 - South\nTheme should be given in string format (Currently ONLY accepts
+    'medi').\nA Minecraft object should also be given.\nPlot Length is assumed to be 15 and currently does not
+    support any other plot length. """
 
     name: str = None
     emoji: str = '👔'
@@ -142,4 +147,3 @@ class Architect():
 #     architect.give_specs(v3, House(mc, orientation, theme))
 #     for property in architect.properties:
 #         print(f"Property is_built: {property.is_built}")
-

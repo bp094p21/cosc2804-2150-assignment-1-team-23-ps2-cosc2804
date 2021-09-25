@@ -16,8 +16,10 @@ def scan_terrain(mc, ply_coords, size):
     else:
         return _scan_terrain_generic(mc, ply_coords, start_time, 105, 90, unstable_percentage)
 
+
 def _scan_terrain_generic(mc, ply_coords, start_time, z_length, x_length, unstable_percentagee):
     return _scan(mc, ply_coords, z_length, x_length, (z_length * x_length) * (unstable_percentagee / 100), start_time)
+
 
 def _scan(mc, ply_coords, z_length, x_length, under_limit_num, start_time) -> bool:
     x, y, z = ply_coords
@@ -68,7 +70,7 @@ def _scan(mc, ply_coords, z_length, x_length, under_limit_num, start_time) -> bo
         count += 1
 
     under_limit = 0
-    limit = acceptable_height - 15 # manually decided limit for builds
+    limit = acceptable_height - 15  # manually decided limit for builds
 
     # go through every value to see if its under the limit or not, if it is add 1 to under_limit
     for row in height_array:

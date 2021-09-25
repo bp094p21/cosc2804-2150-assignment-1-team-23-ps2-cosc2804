@@ -1,6 +1,7 @@
 from .component import Component
 from construction.building.property.block import Block
 
+
 class Tree(Component):
     # Class attributes
     type: str = 'tree'

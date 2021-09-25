@@ -1,5 +1,6 @@
 from .tradie import Tradie
 
+
 class CarpetCall(Tradie):
     trade = 'carpeting'
 

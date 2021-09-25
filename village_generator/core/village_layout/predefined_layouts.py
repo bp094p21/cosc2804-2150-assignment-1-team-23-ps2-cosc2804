@@ -5,6 +5,7 @@ from construction import *
 
 """This module hosts 3 functions responsible for defining a different sized template."""
 
+
 # Small variations. Function will randomly select between the two instantiated templates.
 # Dimensions - 5 * 4 = 20 Elements
 # Max Structures - 5

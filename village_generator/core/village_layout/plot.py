@@ -4,6 +4,7 @@ from construction import House, Misc
 """A data class containing a particular type of first-class citizen (road, house or misc function/object), and the type the plot contains.
 This represents the atomic unit of each item within a template and is how each block of land will be represented. Each plot is 15x15 in dimensions."""
 
+
 class Plot:
     def __init__(self, item=None, entrance=False):
         if item is None:
@@ -27,7 +28,9 @@ class Plot:
     def build_road(self, mc, coords):
         self.item(mc, *coords)
 
+
 """An enum representing the type of Plot, so that it can be easily identified throughout the code."""
+
 
 class PlotType(Enum):
     EMPTY = 0
