@@ -1,9 +1,9 @@
 from enum import Enum
 from construction import House, Misc
 
+"""A data class containing a particular type of first-class citizen (road, house or misc function/object), and the type the plot contains.
+This represents the atomic unit of each item within a template and is how each block of land will be represented. Each plot is 15x15 in dimensions."""
 
-# contains the orientation, position and centre of where the construction(s) and road(s) should go.
-# this is passed down to the construction/road classes, so that they can position themselves accordingly.
 class Plot:
     def __init__(self, item=None, entrance=False):
         if item is None:
@@ -14,17 +14,20 @@ class Plot:
             self.plot_type = PlotType.MISC
         else:
             self.plot_type = PlotType.ROAD
+
         self.item = item
-        # delineates whether this plot will be village entrance
+        # Delineates whether this plot will be the village entrance
         self.entrance = entrance
 
+    # Called to construct each misc building when iterating through the predefined village_layout.
     def build_misc(self, coords):
         self.item.build(*coords)
 
-    # called to construct each road when iterating through the predefined village_layout.
+    # Called to construct each road when iterating through the predefined village_layout.
     def build_road(self, mc, coords):
         self.item(mc, *coords)
 
+"""An enum representing the type of Plot, so that it can be easily identified throughout the code."""
 
 class PlotType(Enum):
     EMPTY = 0
