@@ -1,40 +1,23 @@
 import numpy as np
 import time
 
-from village import VillageSize
+from core.village import VillageSize
 
 
 def scan_terrain(mc, ply_coords, size):
     start_time = time.time()
+    # At most 40% unsuitable terrain allowed
+    unstable_percentage = 40
 
     if size == VillageSize.SMALL:
-        return _scan_terrain_small(mc, ply_coords, start_time)
+        return _scan_terrain_generic(mc, ply_coords, start_time, 75, 60, unstable_percentage)
     elif size == VillageSize.MEDIUM:
-        return _scan_terrain_medium(mc, ply_coords, start_time)
+        return _scan_terrain_generic(mc, ply_coords, start_time, 90, 75, unstable_percentage)
     else:
-        return _scan_terrain_large(mc, ply_coords, start_time)
+        return _scan_terrain_generic(mc, ply_coords, start_time, 105, 90, unstable_percentage)
 
-
-def _scan_terrain_small(mc, ply_coords, start_time):
-    z_length = 75  # 15 * 5
-    x_length = 60  # 15 * 4
-    under_limit_num = 1800  # At most 40% unsuitable terrain allowed
-    return _scan(mc, ply_coords, z_length, x_length, under_limit_num, start_time)
-
-
-def _scan_terrain_medium(mc, ply_coords, start_time):
-    z_length = 90  # 15 * 6
-    x_length = 75  # 15 * 5
-    under_limit_num = 2700  # At most 40% unsuitable terrain allowed
-    return _scan(mc, ply_coords, z_length, x_length, under_limit_num, start_time)
-
-
-def _scan_terrain_large(mc, ply_coords, start_time):
-    z_length = 105  # 15 * 7
-    x_length = 90  # 15 * 6
-    under_limit_num = 3780  # At most 40% unsuitable terrain allowed
-    return _scan(mc, ply_coords, z_length, x_length, under_limit_num, start_time)
-
+def _scan_terrain_generic(mc, ply_coords, start_time, z_length, x_length, unstable_percentagee):
+    return _scan(mc, ply_coords, z_length, x_length, (z_length * x_length) * (unstable_percentagee / 100), start_time)
 
 def _scan(mc, ply_coords, z_length, x_length, under_limit_num, start_time) -> bool:
     x, y, z = ply_coords
