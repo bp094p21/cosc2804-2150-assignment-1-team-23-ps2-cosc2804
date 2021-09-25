@@ -1,6 +1,9 @@
 import numpy as np
 from core.village import VillageSize
 
+"""A layout class representing an entire matrix of plots for a particular size. This is a data class at its finest, and it stores all layouts created, so that they can be cached
+and inexpensively created later if need be  (memoization). This feature did not deem useful in the submission of this project, however, it would be useful if all the features were completed as 
+intended."""
 
 class Layout:
     layouts = {VillageSize.SMALL: [],
@@ -12,7 +15,4 @@ class Layout:
         self.grid = matrix
         self.size = layout_size
 
-        Layout.layouts[layout_size].append(self)  # add the village_layout as a matrix to the static layouts dict.
-
-# contains a numpy matrix and a bunch of methods for manipulating a particular village_layout, so that they can just
-# be called.
+        Layout.layouts[layout_size].append(self)  # Add the village_layout as a matrix to the static layouts dict.
