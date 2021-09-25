@@ -148,4 +148,5 @@ def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int
         temp.append([])
         for x in range(0, max_x + 1):
             temp[z].append((x_coord + x * 15, y_coord, z_coord + z * 15))
+            
     return temp
