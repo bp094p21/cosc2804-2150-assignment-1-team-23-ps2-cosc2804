@@ -16,7 +16,7 @@ class ChessBoard(Misc):
             for j in range(9):
                 if counter % 2 == 1:
                     self.mc.setBlocks(x + i + 3, y, z + j + 3, x + i + 3, y, z + j + 3,
-                                      b.MISC_BLOCKS[self.theme]['main_light_block'])
+                                      MISC_BLOCKS[self.theme]['main_light_block'])
                 counter += 1
         self.mc.setBlocks(x + 3, y + 1, z + 3, x + 11, y + 1, z + 11, self.back_piece)
         self.mc.setBlocks(x + 4, y + 1, z + 3, x + 10, y + 1, z + 11, self.front)
