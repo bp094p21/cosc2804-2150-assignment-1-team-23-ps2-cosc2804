@@ -121,7 +121,6 @@ def _build_plots(fixed_ordinates, template, mc):
             coordinates = fixed_ordinates[i][j]
 
             if plot.plot_type == PlotType.HOUSE:
-
                 house_builder.give_specs(Vec3(*coordinates), plot.item)
                 # Terraform only for buildings & roads, to save resources and for it to look more natural with terrain.
                 # terraform_house_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
