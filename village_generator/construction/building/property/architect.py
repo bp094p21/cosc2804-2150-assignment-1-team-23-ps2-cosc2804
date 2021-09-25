@@ -29,7 +29,7 @@ class Architect():
 
     # External Call
     def give_specs(self, location_v3: v.Vec3, building, plot_length=15):
-        self.logbook.logs.append(f'{self.emoji} Specs received for property.\n\nLocation: {location_v3},\nOrientation: {orientation},\nTheme: {building.theme}\n')
+        self.logbook.logs.append(f'{self.emoji} Specs received for property.\n\nLocation: {location_v3},\nOrientation: {building.orientation},\nTheme: {building.theme}\n')
         # self._print()
         self._draft_property(location_v3, building.orientation, building.theme, plot_length)
         self._get_designer()
