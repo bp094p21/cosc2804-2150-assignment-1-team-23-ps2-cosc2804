@@ -3,8 +3,9 @@
 ## STEPS
 1. 
     1.a) If you want to download from my github (this will eventually be taken down), visit <a href=https://github.com/Huntermuze/RaspberryJuice>here</a>.
+   
     1.b) Navigate to **/download_here**.
-
+<br></br>
     2.a) If you are reading this, you likely have access to this repo. Hence, navigate to **/modified_api/API** and obtain the files from there.
 
 2. Download both ``MC_Py_API.zip`` and ``RJ-Fork.jar``.
