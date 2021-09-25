@@ -3,36 +3,72 @@ import random
 from core.village_layout import predefined_layouts as pl
 from core.village_layout import Layout, PlotType
 from .village_size import VillageSize
-
 from construction import Architect, MiscBuilder
-from terraform import *
-
+from core.terraform import *
 from mcpi.vec3 import Vec3
 
+"""This module hosts a series of functions that are responsible for generating a village. This is the API for this application.
+A client should interact with this program by simply calling the build_village() function, and specifiying the deisred specifications via argument insertion."""
 
-# TODO: rewrite this function so that the if-else statements for checking size are only written once.
+# This module was designed with a functional programming approach, as only local behaviour was required (not state), thus deeming an object oriented style less effective.
+# The functions all try to remain as pure as possible to avoid unintended side-affects, and to allow for easy unit testing. However, there is a tight coupling between 
+# the private functions within this module, and thereby, the build_village() function is best tested with its dependencies (private functions).
+
+# 
 def build_village(size, location, biome, mc):
-    # before layouts or anything is defined/built, scan land and then if appropriate, perform terraform.
+    """
+    Create a custom Minecraft village.
 
+    The main, public function which is the main interface for the client to interact with and create a village.
+
+    Parameters
+    ----------
+    size : VillageSize
+        An enum constant representing the size of the village (SMALL, MEDIUM, LARGE).
+    location : Tuple of ints
+        The x, y and z coordinates to begin creation.
+    biome: str
+        The player's biome.
+    mc: Minecraft
+        The running mcpi Minecraft instance.
+
+    Examples
+    --------
+    >>> build_village(VillageSize.MEDIUM, mc.player.getPos(), mc.player.getBiome(), mc)
+    Generating village...
+    Done. Welcome to your new village!
+
+        * You will then be teleported to the village's entrance in-game. *
+
+    >>> build_village(VillageSize.SMALL, mc.player.getTilePos(), mc.player.getBiome(), mc)
+    Generating village...
+    Done. Welcome to your new village!
+
+        * You will then be teleported to the village's entrance in-game. *
+    """
+    
+    # Before layouts or anything is defined/built, scan the land and then if appropriate, perform terraform.
     if not scan_terrain(mc, location, size):
         return
 
-    # do not need the y-coordinate.
+    # We no longer require the y-coordinate past this point, hence it is discarded from hereon.
     location = (location[0], location[2])
 
     mc.postToChat('Generating village...')
 
+    # Define the layout objects and store them.
     _define_layout(size, biome, 'medi', mc)
+    # Select a random template from the two layouts just defined.
     selected_template = _select_random_template(size)
 
     if size is VillageSize.SMALL:
-        entrance_location = _build_small(selected_template, mc, biome, *location)
-
+        entrance_location = _build_generic(selected_template, mc, biome, 5, 4, *location)
     elif size is VillageSize.MEDIUM:
-        entrance_location = _build_medium(selected_template, mc, biome, *location)
+        entrance_location = _build_generic(selected_template, mc, biome, 6, 5, *location)
     else:
-        entrance_location = _build_large(selected_template, mc, biome, *location)
+        entrance_location = _build_generic(selected_template, mc, biome, 7, 6, *location)
 
+    # Teleport the player to the entrance of the village.
     mc.player.setPos(entrance_location[0], entrance_location[1], entrance_location[2])
     mc.postToChat('Done. Welcome to your new village!')
 
@@ -52,70 +88,39 @@ def _define_layout(size, biome, theme, mc):
 def _select_random_template(size):
     return random.choice(Layout.layouts[size]).grid
 
-
-def _build_small(template, mc, biome, x, z):
-    length_z = 5
-    length_x = 4
-
+def _build_generic(template, mc, biome, length_z, length_x, x ,z):
     max_z = z + 15 * length_z
     max_x = x + 15 * length_x
+
+    # Obtain the highest and lowest y-value within the region specified (depends on size).
     max_y, min_y = mc.getHighestAndLowestYInRegion(x, z, max_x, max_z)
 
+    # Flatten and remove all blocks within this region and plaster the floor with an appropriate block relative to the biome.
     terraform_entire_land(mc, biome, x, min_y, z, max_x, max_y, max_z)
 
+    # Return the entrance coordinates, after first generating the fixed ordinates (grid system for each plot's placement) and then building each plot's item.
     return _build_plots(_generate_fixed_ordinates(length_z, length_x, x, min_y, z), template, mc)
 
-
-def _build_medium(template, mc, biome, x, z):
-    length_z = 6
-    length_x = 5
-
-    max_z = z + 15 * length_z
-    max_x = x + 15 * length_x
-    max_y, min_y = mc.getHighestAndLowestYInRegion(x, z, max_x, max_z)
-
-    terraform_entire_land(mc, biome, x, min_y, z, max_x, max_y, max_z)
-    return _build_plots(_generate_fixed_ordinates(length_z, length_x, x, min_y, z), template, mc)
-
-
-def _build_large(template, mc, biome, x, z):
-    length_z = 7
-    length_x = 6
-
-    max_z = z + 15 * length_z
-    max_x = x + 15 * length_x
-    max_y, min_y = mc.getHighestAndLowestYInRegion(x, z, max_x, max_z)
-
-    terraform_entire_land(mc, biome, x, min_y, z, max_x, max_y, max_z)
-    return _build_plots(_generate_fixed_ordinates(length_z, length_x, x, min_y, z), template, mc)
-
-
+# Responsible for iterating the selected template and building all the items within it.
 def _build_plots(fixed_ordinates, template, mc):
     house_builder = Architect()
     misc_builder = MiscBuilder()
     entrance_location = None
 
-    print(template)
     for (i, row) in enumerate(template):
         for (j, plot) in enumerate(row):
-
-            print(i, plot, plot.plot_type)
-
             # Set the y-coords to be dynamic.
             coordinates = fixed_ordinates[i][j]
 
             if plot.plot_type == PlotType.HOUSE:
-                # pass the building plot to the architect's give_specs function.
-                house_builder.give_specs(Vec3(*coordinates), plot.item)
 
-                # _update_variable_house_height(coordinates, mc)
-                # terraform only for buildings & roads, to save resources and for it to look more natural with terrain.
+                house_builder.give_specs(Vec3(*coordinates), plot.item)
+                # Terraform only for buildings & roads, to save resources and for it to look more natural with terrain.
                 # terraform_house_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
             elif plot.plot_type == PlotType.MISC:
                 misc_builder.build(plot.item, *coordinates)
             elif plot.plot_type == PlotType.ROAD:
                 # terraform_road_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
-
                 if plot.entrance is True:
                     entrance_location = _transform_to_entrance_coords(*coordinates)
 
@@ -123,64 +128,15 @@ def _build_plots(fixed_ordinates, template, mc):
 
     return entrance_location
 
-
-# # TODO: finish and test.
-# def _update_variable_house_height(house_location, mc):
-#     highest_peak = mc.getHeight(house_location[0], house_location[2])
-
-#     # if the peak is really high up (5 blocks+) then flatten it a bit.
-#     # or maybe just let it be high up, and have the roads steeper.
-#     # or better yet, with the terraformer, make it clear the land so that the increments of height are shallow and not
-#     # super steep. So only increments by 1 at a time, with minimum distance of 2 blocks from the previous level
-#     # to the next level. That way it is guaranteed to fit flush. This is a secondary measure.
-
-#     if highest_peak - house_location[1] > 4:
-#         # implement some sort of land smoother/flattener/brush tool that will smooth out the land and make it more real.
-#         pass
-
-#     house_location[1] = house_location[1] + highest_peak
-
-
 def _transform_to_entrance_coords(x, y, z):
     return x + 7.5, y, z + 7.5
 
-
+# Generates a 3-way nested list and tuple structure, such that the innermost structure is a tuple containing 
+# the x, y and z for a particular plot's leftmost corner block.
 def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int, z_coord: int, ) -> list:
     temp = []
-    print('LOG >> GENERATING FIXED ORDINATES')
     for z in range(0, max_z + 1):
         temp.append([])
-        print('LOG >> CREATING NEW ROW OF FIXED ORDINATES')
         for x in range(0, max_x + 1):
-            ################################ ADDED THIS LINE FOR HEIGHT FLEXIBILITY (see how it looks matt)
-            new_y = y_coord + random.randint(0, 1)
-            temp[z].append([x_coord + x * 15, new_y, z_coord + z * 15])
-    print('LOG >> FIXED ORDINATES COMPLETE')
+            temp[z].append((x_coord + x * 15, y_coord, z_coord + z * 15))
     return temp
-
-#      [(X, Y, Z), (X + 15, Y, Z), (X + 30, Y, Z), (X + 45, Y, Z), (X + 60, Y, Z),
-#      (X + 75, Y, Z), (X + 90, Y, Z),
-#      (X, Y, Z + 15), (X + 15, Y, Z + 15), (X + 30, Y, Z + 15), (X + 45, Y, Z + 15),
-#      (X + 60, Y, Z + 15), (X + 75, Y, Z + 15), (X + 90, Y, Z + 15),
-#      (X, Y, Z + 30), (X + 15, Y, Z + 30), (X + 30, Y, Z + 30), (X + 45, Y, Z + 30),
-#      (X + 60, Y, Z + 30), (X + 75, Y, Z + 30), (X + 90, Y, Z + 30),
-#      (X, Y, Z + 45), (X + 15, Y, Z + 45), (X + 30, Y, Z + 45), (X + 45, Y, Z + 45),
-#      (X + 60, Y, Z + 45), (X + 75, Y, Z + 45), (X + 90, Y, Z + 45),
-#      (X, Y, Z + 60), (X + 15, Y, Z + 60), (X + 30, Y, Z + 60), (X + 45, Y, Z + 60),
-#      (X + 60, Y, Z + 60), (X + 75, Y, Z + 60), (X + 90, Y, Z + 60),
-#      (X, Y, Z + 75), (X + 15, Y, Z + 75), (X + 30, Y, Z + 75), (X + 45, Y, Z + 75),
-#      (X + 60, Y, Z + 75), (X + 75, Y, Z + 75), (X + 90, Y, Z + 75),
-#      (X, Y, Z + 90), (X + 15, Y, Z + 90), (X + 30, Y, Z + 90), (X + 45, Y, Z + 90),
-#      (X + 60, Y, Z + 90), (X + 75, Y, Z + 90), (X + 90, Y, Z + 90),
-#      (X, Y, Z + 105), (X + 15, Y, Z + 105), (X + 30, Y, Z + 105), (X + 45, Y, Z + 105),
-#      (X + 60, Y, Z + 105), (X + 75, Y, Z + 105), (X + 90, Y, Z + 105),
-#      (X, Y, Z + 120), (X + 15, Y, Z + 120), (X + 30, Y, Z + 120), (X + 45, Y, Z + 120),
-#      (X + 60, Y, Z + 120), (X + 75, Y, Z + 120), (X + 90, Y, Z + 120),
-#      (X, Y, Z + 135), (X + 15, Y, Z + 135), (X + 30, Y, Z + 135), (X + 45, Y, Z + 135),
-#      (X + 60, Y, Z + 135), (X + 75, Y, Z + 135), (X + 90, Y, Z + 135),
-#      (X, Y, Z + 150), (X + 15, Y, Z + 150), (X + 30, Y, Z + 150), (X + 45, Y, Z + 150),
-#      (X + 60, Y, Z + 150), (X + 75, Y, Z + 150), (X + 90, Y, Z + 150),
-#      (X, Y, Z + 165), (X + 15, Y, Z + 165), (X + 30, Y, Z + 165), (X + 45, Y, Z + 165),
-#      (X + 60, Y, Z + 165), (X + 75, Y, Z + 165), (X + 90, Y, Z + 165),
-#      (X, Y, Z + 180), (X + 15, Y, Z + 180), (X + 30, Y, Z + 180), (X + 45, Y, Z + 180),
-#      (X + 60, Y, Z + 180), (X + 75, Y, Z + 180), (X + 90, Y, Z + 180)]
