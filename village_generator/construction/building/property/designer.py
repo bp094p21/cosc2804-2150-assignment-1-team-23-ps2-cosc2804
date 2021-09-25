@@ -1,9 +1,10 @@
 from mcpi import vec3 as v
 import random
-import property as p
-import block as b
-import component as c
-from util.vector import orientate
+
+from .property import Property
+from .block import *
+from .component import *
+from .util.vector import orientate
 
 
 class Designer:
@@ -18,7 +19,7 @@ class Designer:
         if self.name:
             print(f"designer.name: {self.name}\n")
 
-    def give_specs(self, property: p.Property):
+    def give_specs(self, property: Property):
         self.properties.append(property)
         self._design_components(property)
 
@@ -78,17 +79,17 @@ class Designer:
                 option = random.choice(['veggie_patch', 'flower_bed'])
 
                 if option == 'veggie_patch':
-                    property.components.append(c.veggie_patch.VeggiePatch(start_v3))
+                    property.components.append(VeggiePatch(start_v3))
                 elif option == 'flower_bed':
-                    property.components.append(c.flower_bed.FlowerBed(start_v3))
+                    property.components.append(FlowerBed(start_v3))
 
             else:
                 if h_z_offset == 3:
                     continue
 
-                trunk_block = random.choice(b.OPTIONS[property.theme.name]['tree']['trunk'])
-                leaves_block = random.choice(b.OPTIONS[property.theme.name]['tree']['leaves'])
-                property.components.append(c.tree.Tree(o_v3, trunk_block, leaves_block))
+                trunk_block = random.choice(OPTIONS[property.theme.name]['tree']['trunk'])
+                leaves_block = random.choice(OPTIONS[property.theme.name]['tree']['leaves'])
+                property.components.append(Tree(o_v3, trunk_block, leaves_block))
 
     def _design_beds(self, house):
         h_v3 = house.house_v3
@@ -106,8 +107,8 @@ class Designer:
                 bedtail_v3, bedhead_block, bedtail_block = self._get_bed_pair(bedhead_v3, orientation, bed_orientation)
                 x2, y2, z2 = bedtail_v3
                 y2 += elevation
-                bedhead = c.bed.Bed(v.Vec3(x, y, z), bedhead_block)
-                bedtail = c.bed.Bed(v.Vec3(x2, y2, z2), bedtail_block)
+                bedhead = Bed(v.Vec3(x, y, z), bedhead_block)
+                bedtail = Bed(v.Vec3(x2, y2, z2), bedtail_block)
                 house.components.append(bedhead)
                 house.components.append(bedtail)
 
@@ -119,20 +120,20 @@ class Designer:
 
         if sum_orientation == 0:
             bedtail_v3 = v.Vec3(bedhead_v3.x, bedhead_v3.y, bedhead_v3.z - 1)
-            bedhead_block = b.BED.withData(8)
-            bedtail_block = b.BED.withData(0)
+            bedhead_block = BED.withData(8)
+            bedtail_block = BED.withData(0)
         elif sum_orientation == 1:
             bedtail_v3 = v.Vec3(bedhead_v3.x + 1, bedhead_v3.y, bedhead_v3.z)
-            bedhead_block = b.BED.withData(9)
-            bedtail_block = b.BED.withData(1)
+            bedhead_block = BED.withData(9)
+            bedtail_block = BED.withData(1)
         elif sum_orientation == 2:
             bedtail_v3 = v.Vec3(bedhead_v3.x, bedhead_v3.y, bedhead_v3.z + 1)
-            bedhead_block = b.BED.withData(10)
-            bedtail_block = b.BED.withData(2)
+            bedhead_block = BED.withData(10)
+            bedtail_block = BED.withData(2)
         elif sum_orientation == 3:
             bedtail_v3 = v.Vec3(bedhead_v3.x - 1, bedhead_v3.y, bedhead_v3.z)
-            bedhead_block = b.BED.withData(11)
-            bedtail_block = b.BED.withData(3)
+            bedhead_block = BED.withData(11)
+            bedtail_block = BED.withData(3)
         return bedtail_v3, bedhead_block, bedtail_block
 
     def _design_door_steps(self, house):
@@ -145,10 +146,10 @@ class Designer:
         pool_step_x_offset = layout['pool_step_x_offset']
         front_step_v3 = orientate(v3, orientation, front_step_z_offset, front_step_x_offset)
         pool_step_v3 = orientate(v3, orientation, pool_step_z_offset, pool_step_x_offset)
-        front_step_block = random.choice(b.OPTIONS[house.theme]['steps']['basic'])
-        pool_step_block = random.choice(b.OPTIONS[house.theme]['steps']['basic'])
-        front_step = c.steps.Steps(front_step_v3, front_step_block)
-        pool_step = c.steps.Steps(pool_step_v3, pool_step_block)
+        front_step_block = random.choice(OPTIONS[house.theme]['steps']['basic'])
+        pool_step_block = random.choice(OPTIONS[house.theme]['steps']['basic'])
+        front_step = Steps(front_step_v3, front_step_block)
+        pool_step = Steps(pool_step_v3, pool_step_block)
         house.components.append(front_step)
         house.components.append(pool_step)
 
@@ -166,13 +167,13 @@ class Designer:
                 elevated_v3 = v.Vec3(h_v3.x, h_v3.y + floor_elevation, h_v3.z)
                 v3 = orientate(elevated_v3, orientation, z_offset, x_offset)
                 door_orientation = self._get_absolute_door_orientation(orientation, internal_door_orientation)
-                top_block = random.choice(b.OPTIONS[theme]['door']['basic']).withData(8)
+                top_block = random.choice(OPTIONS[theme]['door']['basic']).withData(8)
                 bot_block = top_block.withData(door_orientation)
-                internal_door = c.door.Door(v3, top_block, bot_block, door_orientation)
+                internal_door = Door(v3, top_block, bot_block, door_orientation)
                 house.components.append(internal_door)
 
     def _design_windows(self, house):
-        window_block = random.choice(b.OPTIONS[house.theme]['window']['basic'])
+        window_block = random.choice(OPTIONS[house.theme]['window']['basic'])
         orientation = house.orientation
         h_v3 = house.house_v3
 
@@ -182,14 +183,14 @@ class Designer:
                 x_offset = window_layout['x_offset']
                 (x, y, z) = orientate(h_v3, orientation, z_offset, x_offset)
                 y += i * 4 + 2
-                window = c.window.Window(v.Vec3(x, y, z), window_block)
+                window = Window(v.Vec3(x, y, z), window_block)
                 house.components.append(window)
 
     def _design_roof(self, house):
         style = random.choice([0, 1, 2, 3])
-        stair_block = b.OPTIONS[house.theme]['roof']['stair'][style]
-        slab_block = b.OPTIONS[house.theme]['roof']['slab'][style]
-        cube_block = b.OPTIONS[house.theme]['roof']['cube'][style]
+        stair_block = OPTIONS[house.theme]['roof']['stair'][style]
+        slab_block = OPTIONS[house.theme]['roof']['slab'][style]
+        cube_block = OPTIONS[house.theme]['roof']['cube'][style]
         layout = house.layout
         orientation = house.orientation
         h_v3 = house.house_v3
@@ -212,7 +213,7 @@ class Designer:
             start_v3 = v.Vec3(h_v3.x, y, h_v3.z - (x_len - 1))
             end_v3 = v.Vec3(h_v3.x + (z_len - 1), y, h_v3.z)
 
-        roof = c.roof.Roof(start_v3, end_v3, stair_block, slab_block, cube_block)
+        roof = Roof(start_v3, end_v3, stair_block, slab_block, cube_block)
         house.components.append(roof)
 
     def _design_internal_walls(self, house):
@@ -230,8 +231,8 @@ class Designer:
                 (x2, y2, z2) = orientate(v.Vec3(x, y, z), orientation, internal_wall_layout['z_len'] - 1,
                                          internal_wall_layout['x_len'] - 1)
                 y2 += 2
-                block = random.choice(b.OPTIONS[house.theme]['wall']['basic'])
-                internal_wall = c.wall.Wall(v.Vec3(x, y, z), v.Vec3(x2, y2, z2), block)
+                block = random.choice(OPTIONS[house.theme]['wall']['basic'])
+                internal_wall = Wall(v.Vec3(x, y, z), v.Vec3(x2, y2, z2), block)
                 house.components.append(internal_wall)
 
     def _design_paths(self, property):
@@ -243,8 +244,8 @@ class Designer:
         for path_layout in path_layouts:
             (x, y, z) = orientate(g_v3, orientation, path_layout['z_offset'], path_layout['x_offset'])
             (x2, y2, z2) = orientate(v.Vec3(x, y, z), orientation, path_layout['z_len'] - 1, path_layout['x_len'] - 1)
-            block = random.choice(b.OPTIONS[property.theme.name]['path']['basic'])
-            path = c.path.Path(v.Vec3(x, y, z), v.Vec3(x2, y2, z2), block)
+            block = random.choice(OPTIONS[property.theme.name]['path']['basic'])
+            path = Path(v.Vec3(x, y, z), v.Vec3(x2, y2, z2), block)
             property.components.append(path)
 
     def _design_doors(self, house):
@@ -263,15 +264,15 @@ class Designer:
 
         pool_door_v3 = orientate(elevated_v3, orientation, pool_door_z_offset, pool_door_x_offset)
         door_orientation = self._get_absolute_door_orientation(orientation, pool_door_orientation)
-        top_block = random.choice(b.OPTIONS[house.theme]['door']['basic']).withData(8)
+        top_block = random.choice(OPTIONS[house.theme]['door']['basic']).withData(8)
         bot_block = top_block.withData(door_orientation)
-        doors.append(c.door.Door(pool_door_v3, top_block, bot_block, orientation))
+        doors.append(Door(pool_door_v3, top_block, bot_block, orientation))
 
         front_door_v3 = orientate(elevated_v3, orientation, front_door_z_offset, front_door_x_offset)
         door_orientation = self._get_absolute_door_orientation(orientation, front_door_orientation)
-        top_block = random.choice(b.OPTIONS[house.theme]['door']['basic']).withData(8)
+        top_block = random.choice(OPTIONS[house.theme]['door']['basic']).withData(8)
         bot_block = top_block.withData(door_orientation)
-        doors.append(c.door.Door(front_door_v3, top_block, bot_block, orientation))
+        doors.append(Door(front_door_v3, top_block, bot_block, orientation))
 
         for door in doors:
             house.components.append(door)
@@ -285,14 +286,14 @@ class Designer:
         orientation = house.orientation
         z_offset = house.layout['z_len'] - 1
         x_offset = house.layout['x_len'] - 1
-        wall_block = random.choice(b.OPTIONS[house.theme]['wall']['basic'])
+        wall_block = random.choice(OPTIONS[house.theme]['wall']['basic'])
 
         for i, floor_elevation in enumerate(house.floor_elevations):
             x, y, z = house.house_v3
             y += floor_elevation
             (x2, y2, z2) = orientate(house.house_v3, orientation, z_offset, x_offset)
             y2 += 2 + floor_elevation
-            wall_wrap = c.wall.WallWrap(v.Vec3(x, y, z), v.Vec3(x2, y2, z2), wall_block, i)
+            wall_wrap = WallWrap(v.Vec3(x, y, z), v.Vec3(x2, y2, z2), wall_block, i)
             wall_wraps.append(wall_wrap)
 
         for wall_wrap in wall_wraps:
@@ -333,7 +334,7 @@ class Designer:
         x, y, z = v3
 
         for i in range(house.total_levels - 1):
-            stairs.append(c.stairs.Stairs((x, y, z), orientation, block_up, block_down))
+            stairs.append(Stairs((x, y, z), orientation, block_up, block_down))
             y += 4
 
         for stair_component in stairs:
@@ -353,7 +354,7 @@ class Designer:
             top = 8
             bottom = 0
 
-        stair_block = random.choice(b.OPTIONS[theme]['door']['basic'])
+        stair_block = random.choice(OPTIONS[theme]['door']['basic'])
         door_top = stair_block.withData(top)
         door_bottom = stair_block.withData(bottom)
 
@@ -373,14 +374,14 @@ class Designer:
             up = 0
             down = 5
 
-        stair_block = random.choice(b.OPTIONS[theme]['stairs']['basic'])
+        stair_block = random.choice(OPTIONS[theme]['stairs']['basic'])
         block_up = stair_block.withData(up)
         block_down = stair_block.withData(down)
 
         return block_up, block_down
 
     def _design_house(self, property):
-        house = c.house.House()
+        house = House()
         house_layout = property.layout.layout['house']
         house.layout = house_layout
         house.theme = property.theme.name
@@ -412,8 +413,8 @@ class Designer:
 
         for floor_level in range(total_levels):
             house.floor_elevations.append(elevation)
-            floor_block = random.choice(b.OPTIONS[house.theme]['floor']['basic'])
-            floors.append(c.floor.Floor(root_v3, end_v3, floor_block, floor_level, elevation))
+            floor_block = random.choice(OPTIONS[house.theme]['floor']['basic'])
+            floors.append(Floor(root_v3, end_v3, floor_block, floor_level, elevation))
             elevation += 4
 
         for floor in floors:
@@ -425,24 +426,24 @@ class Designer:
         orientation = property.orientation
         heights = [1, 2, 3]
         random_height = random.choice(heights)
-        fence_block = random.choice(b.OPTIONS[property.theme.name]['boundary']['basic'])
-        gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['basic'])
-        entrance = c.entrance.Entrance(root_v3, orientation, random_height, fence_block, gate_block)
+        fence_block = random.choice(OPTIONS[property.theme.name]['boundary']['basic'])
+        gate_block = random.choice(OPTIONS[property.theme.name]['gate']['basic'])
+        entrance = Entrance(root_v3, orientation, random_height, fence_block, gate_block)
         print("Entrance design completed\n")
         print(entrance)
         property.components.append(entrance)
 
     def _design_boundary(self, property):
-        fence_block = random.choice(b.OPTIONS[property.theme.name]['boundary']['basic'])
-        boundary = c.boundary.Boundary(fence_block)
+        fence_block = random.choice(OPTIONS[property.theme.name]['boundary']['basic'])
+        boundary = Boundary(fence_block)
         print("Boundary design completed\n")
         print(boundary)
         property.components.append(boundary)
 
     def _design_pool(self, property):
-        line_block = random.choice(b.OPTIONS[property.theme.name]['pool_line']['basic'])
-        fill_block = random.choice(b.OPTIONS[property.theme.name]['pool_fill']['basic'])
-        fence_block = random.choice(b.OPTIONS[property.theme.name]['fence']['basic'])
+        line_block = random.choice(OPTIONS[property.theme.name]['pool_line']['basic'])
+        fill_block = random.choice(OPTIONS[property.theme.name]['pool_fill']['basic'])
+        fence_block = random.choice(OPTIONS[property.theme.name]['fence']['basic'])
         line_v3 = {}
         fill_v3 = {}
         fence_v3 = {}
@@ -457,14 +458,14 @@ class Designer:
 
         if position == 'back':
             if orientation == 0 or orientation == 2:
-                gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['pool']).withData(0)
+                gate_block = random.choice(OPTIONS[property.theme.name]['gate']['pool']).withData(0)
             else:
-                gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['pool']).withData(1)
+                gate_block = random.choice(OPTIONS[property.theme.name]['gate']['pool']).withData(1)
         else:
             if orientation == 0 or orientation == 2:
-                gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['pool']).withData(1)
+                gate_block = random.choice(OPTIONS[property.theme.name]['gate']['pool']).withData(1)
             else:
-                gate_block = random.choice(b.OPTIONS[property.theme.name]['gate']['pool']).withData(0)
+                gate_block = random.choice(OPTIONS[property.theme.name]['gate']['pool']).withData(0)
 
         line_raise = 0
         gate_z_offset = property.layout.layout['pool']['gate_z_offset']
@@ -486,7 +487,7 @@ class Designer:
 
         # TODO: Use position to make fence and gate for pool
         # position = property.layout.layout['pool']['position']
-        pool = c.pool.Pool(line_v3, fill_v3, fence_v3, gate_v3, line_block, fill_block, fence_block, gate_block,
+        pool = Pool(line_v3, fill_v3, fence_v3, gate_v3, line_block, fill_block, fence_block, gate_block,
                            pool_depth, line_raise, line_depth)
         print("Pool design completed\n")
         print(pool)

@@ -1,9 +1,6 @@
 from mcpi import vec3 as v
 
-if __name__ == '__main__':
-    from tradie import Tradie
-else:
-    from tradies.tradie import Tradie
+from .tradie import Tradie
 
 
 class Mason(Tradie):

@@ -1,4 +1,4 @@
-from components.component import Component
+from .component import Component
 
 
 class VeggiePatch(Component):

@@ -1,6 +1,6 @@
 from mcpi import vec3 as v
-import block as b
-from components.component import Component
+from construction.building.property.block import TERRACOTTA, Block
+from .component import Component
 
 
 class Floor(Component):
@@ -8,7 +8,7 @@ class Floor(Component):
     type = 'floor'
     # Instance attributes
     root_v3: v.Vec3 = None
-    floor_block: b.Block = None
+    floor_block: Block = None
     floor_level: int = None
     elevation: int = None
     z_len: int = None
@@ -18,7 +18,7 @@ class Floor(Component):
         'end': None
     }
 
-    def __init__(self, root_v3: v.Vec3, end_v3, floor_block=b.TERRACOTTA, floor_level=0, elevation=0, z_len=7, x_len=5,
+    def __init__(self, root_v3: v.Vec3, end_v3, floor_block=TERRACOTTA, floor_level=0, elevation=0, z_len=7, x_len=5,
                  y_len=1):
         self.root_v3 = root_v3
         self.floor_block = floor_block
@@ -42,4 +42,4 @@ if __name__ == '__main__':
 
     mc = m.Minecraft.create()
     player_v3 = mc.player.getPos()
-    floor = Floor(floor_block=b.TERRACOTTA, level='ground', name='main')
+    floor = Floor(floor_block=TERRACOTTA, level='ground', name='main')

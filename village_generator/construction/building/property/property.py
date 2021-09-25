@@ -1,22 +1,22 @@
 from mcpi import vec3
-import theme as t
-import layout as l
+from .theme import Theme
+from .layout import Layout
 
 
 class Property:
     # __init__ inputs
     location_v3: vec3.Vec3 = None
     orientation: int = None
-    theme: t.Theme = None
+    theme: Theme = None
     entrance_edge: dict = None
     house_type: str = None
-    layout: l.Layout = None
+    layout: Layout = None
     # Default attributes
     components: list = []
     is_built: bool = False
 
     # Initializer
-    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme: t.Theme, entrance_edge: dict, house_type: str, layout: l.Layout):
+    def __init__(self, location_v3: vec3.Vec3, orientation: int, theme: Theme, entrance_edge: dict, house_type: str, layout: Layout):
         self.location_v3 = location_v3
         self.orientation = orientation
         self.theme = theme

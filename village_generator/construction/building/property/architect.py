@@ -3,12 +3,11 @@ from mcpi import vec3 as v
 
 from .builder import Builder, Bob
 from .designer import Designer
-from .layout import Layout, get_layout
+from .layout  import Layout, get_layout
 from .property import Property
 from .theme import Theme, get_theme
 
 from .util import Logbook
-
 
 class Architect():
     """Given a Vec3, the Architect will assume it as the corner of least z and x values and build a property of 15 x 15 block dimensions in the positive z and x direction\nOrientation must also be given. 0 means the property will face West, 1 - North, 2 - East and 3 - South\nTheme should be given in string format (Currently ONLY accepts 'medi').\nA Minecraft object should also be given.\nPlot Length is assumed to be 15 and currently does not support any other plot length."""
@@ -28,15 +27,15 @@ class Architect():
         self.logbook = Logbook(self.name)
 
     # External Call
-    def give_specs(self, location_v3: v.Vec3, building, plot_length=15):
+    def give_specs(self, location_v3: v.Vec3, house, plot_length=15):
         self.logbook.logs.append(
-            f'{self.emoji} Specs received for property.\n\nLocation: {location_v3},\nOrientation: {building.orientation},\nTheme: {building.theme}\n')
+            f'{self.emoji} Specs received for property.\n\nLocation: {location_v3},\nOrientation: {house.orientation},\nTheme: {house.theme}\n')
         # self._print()
-        self._draft_property(location_v3, building.orientation, building.theme, plot_length)
+        self._draft_property(location_v3, house.orientation, house.theme, plot_length)
         self._get_designer()
         self._get_component_specs()
         self._get_builder()
-        self._build_property(building.mc_instance)
+        self._build_property(house.mc_instance)
 
     # region
     # Interal Methods
@@ -132,14 +131,15 @@ class Architect():
 # class Jin(Architect):
 #     name = 'Jin'
 
-# # TESTING
+# TESTING
 # if __name__ == '__main__':
 #     import sys
 #     mc = minecraft.Minecraft.create()
 #     v3 = mc.player.getTilePos()
-#     architect = Jin()
-#     orientation = int(sys.argv[1])
+#     architect = Architect()
+#     orientation = 2
 #     theme = 'medi'
-#     architect.give_specs(v3, orientation, theme, mc)
+#     architect.give_specs(v3, House(mc, orientation, theme))
 #     for property in architect.properties:
 #         print(f"Property is_built: {property.is_built}")
+

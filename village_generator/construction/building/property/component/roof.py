@@ -1,5 +1,5 @@
-from components.component import Component
-import block as b
+from .component import Component
+from construction.building.property.block import Block, STAIRS_WOOD
 from mcpi import vec3 as v
 
 
@@ -7,9 +7,9 @@ class Roof(Component):
     # Class attributes
     type = 'roof'
     # Instance attributes
-    stair_block: b.Block = None
-    slab_block: b.Block = None
-    cube_block: b.Block = None
+    stair_block: Block = None
+    slab_block: Block = None
+    cube_block: Block = None
     elevation: int = None
     roof_v3 = {
         'start': None,
@@ -29,4 +29,4 @@ if __name__ == '__main__':
 
     mc = m.Minecraft.create()
     player_v3 = mc.player.getPos()
-    roof = Roof(roof_block=b.STAIRS_WOOD)
+    roof = Roof(roof_block=STAIRS_WOOD)

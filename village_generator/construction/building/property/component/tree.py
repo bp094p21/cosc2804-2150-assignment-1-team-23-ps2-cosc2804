@@ -1,14 +1,13 @@
-from components.component import Component
-import block as b
-
+from .component import Component
+from construction.building.property.block import Block
 
 class Tree(Component):
     # Class attributes
     type: str = 'tree'
     # Instance attributes
     v3 = None
-    trunk_block: b.Block = None
-    leaves_block: b.Block = None
+    trunk_block: Block = None
+    leaves_block: Block = None
 
     def __repr__(self):
         return f"🖨  Printing object.__repr__:\n\n{type(self)}\nv3: {self.v3},\ntrunk_block: {self.trunk_block}" \

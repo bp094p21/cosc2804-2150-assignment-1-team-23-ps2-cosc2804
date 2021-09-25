@@ -1,5 +1,5 @@
-from components.component import Component
-import block as b
+from .component import Component
+from construction.building.property.block import CARPET
 from mcpi import vec3 as v
 
 
@@ -12,5 +12,5 @@ class Carpet(Component):
         'end': None
     }
 
-    def __init__(self, block=b.CARPET):
+    def __init__(self, block=CARPET):
         self.block = block

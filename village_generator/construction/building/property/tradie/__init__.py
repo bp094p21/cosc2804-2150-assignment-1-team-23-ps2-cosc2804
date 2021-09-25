@@ -1,3 +1,12 @@
-import sys
-sys.path.append('../property')
-import tradies.carpenter, tradies.carpet_call, tradies.decorator, tradies.floor_installer, tradies.gardener, tradies.jims_fencing, tradies.landscaper, tradies.mason, tradies.pool_installer, tradies.roofer, tradies.tiler, tradies.tradie, tradies.window_maker
+from .carpenter import Carpenter
+from .carpet_call import CarpetCall
+from .decorator import Decorator
+from .floor_installer import FloorInstaller
+from .gardener import Gardener
+from .jims_fencing import JimsFencing
+from .landscaper import Landscaper
+from .mason import Mason
+from .pool_installer import PoolInstaller
+from .roofer import Roofer
+from .tiler import Tiler
+from .window_maker import WindowMaker

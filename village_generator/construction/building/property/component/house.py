@@ -1,4 +1,4 @@
-from components.component import Component
+from .component import Component
 from mcpi import vec3 as v
 
 

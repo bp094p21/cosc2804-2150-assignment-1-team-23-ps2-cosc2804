@@ -1,11 +1,11 @@
-import block as b
+from construction.building.property.block import Block, STONE
 from mcpi import vec3 as v
 
 
 class Component:
     type = None
     root_v3: v.Vec3 = None
-    block: b.Block = None
+    block: Block = None
     z_len = None
     x_len = None
     y_len = None
@@ -14,7 +14,7 @@ class Component:
     is_built = False
 
     # Init
-    def __init__(self, type, root_v3: v.Vec3, block=b.STONE, z_len=1, x_len=1, y_len=1, block_list=[], orientation=0):
+    def __init__(self, type, root_v3: v.Vec3, block=STONE, z_len=1, x_len=1, y_len=1, block_list=[], orientation=0):
         self.type = type
         self.root_v3 = root_v3
         self.block = block

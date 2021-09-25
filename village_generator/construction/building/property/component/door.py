@@ -1,5 +1,5 @@
-from components.component import Component
-import block as b
+from .component import Component
+from construction.building.property.block import Block
 
 
 class Door(Component):
@@ -8,8 +8,8 @@ class Door(Component):
     # Instance attributes
     v3 = None
     orientation: int = None
-    top_block: b.Block = None
-    bot_block: b.Block = None
+    top_block: Block = None
+    bot_block: Block = None
 
     def __repr__(self):
         return f"🖨  Printing object.__repr__:\n\n{type(self)}\nv3: {self.v3},\norientation: {self.orientation}," \

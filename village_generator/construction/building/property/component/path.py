@@ -1,5 +1,5 @@
-from components.component import Component
-import block as b
+from .component import Component
+from construction.building.property.block import Block, COBBLESTONE
 
 
 class Path(Component):
@@ -8,7 +8,7 @@ class Path(Component):
     # Instance attributes
     start_v3 = None
     end_v3: int = None
-    block: b.Block = None
+    block: Block = None
 
     def __repr__(self):
         return f"🖨  Printing object.__repr__:\n\n{type(self)}\start_v3: {self.start_v3},\nend_v3: {self.end_v3}," \
@@ -27,4 +27,4 @@ if __name__ == '__main__':
     mc = m.Minecraft.create()
     player_v3 = mc.player.getPos()
     orientation = 0
-    entrance = Path(start_V3=player_v3, end_v3=player_v3, door_block=b.COBBLESTONE)
+    entrance = Path(start_V3=player_v3, end_v3=player_v3, door_block=COBBLESTONE)

@@ -1,9 +1,7 @@
 from mcpi import minecraft
 from .util import Logbook
 from .property import Property
-import property as p
-import tradie as t
-import mcpi as m
+from .tradie import *
 
 
 class Builder:
@@ -17,28 +15,28 @@ class Builder:
         if self.name:
             print(f"builder.name: {self.name}\n")
         self.TRADIES = {
-            'bed': t.decorator.Decorator(),
-            'boundary': t.jims_fencing.JimsFencing(),
-            'carpets': t.carpet_call.CarpetCall(),
-            'chimney': t.mason.Mason(),
-            'decoration': t.decorator.Decorator(),
-            'door': t.carpenter.Carpenter(),
-            'entrance': t.jims_fencing.JimsFencing(),
-            'fireplace': t.mason.Mason(),
-            'floor': t.floor_installer.FloorInstaller(),
-            'flower_bed': t.gardener.Gardener(),
-            'garden': t.gardener.Gardener(),
-            'path': t.landscaper.Landscaper(),
-            'pool': t.pool_installer.PoolInstaller(),
-            'stairs': t.carpenter.Carpenter(),
-            'room': t.mason.Mason(),
-            'roof': t.roofer.Roofer(),
-            'steps': t.carpenter.Carpenter(),
-            'tree': t.gardener.Gardener(),
-            'veggie_patch': t.gardener.Gardener(),
-            'wall': t.mason.Mason(),
-            'wall_wrap': t.mason.Mason(),
-            'window': t.window_maker.WindowMaker()
+            'bed': Decorator(),
+            'boundary': JimsFencing(),
+            'carpets': CarpetCall(),
+            'chimney': Mason(),
+            'decoration': Decorator(),
+            'door': Carpenter(),
+            'entrance': JimsFencing(),
+            'fireplace': Mason(),
+            'floor': FloorInstaller(),
+            'flower_bed': Gardener(),
+            'garden': Gardener(),
+            'path': Landscaper(),
+            'pool': PoolInstaller(),
+            'stairs': Carpenter(),
+            'room': Mason(),
+            'roof': Roofer(),
+            'steps': Carpenter(),
+            'tree': Gardener(),
+            'veggie_patch': Gardener(),
+            'wall': Mason(),
+            'wall_wrap': Mason(),
+            'window': WindowMaker()
         }
         pass
 

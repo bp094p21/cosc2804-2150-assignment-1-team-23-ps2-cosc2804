@@ -1,12 +1,12 @@
-from components.component import Component
-import block as b
+from .component import Component
+from construction.building.property.block import TERRACOTTA
 from mcpi import vec3 as v
 
 
 class Room(Component):
     type = 'room'
 
-    def __init__(self, start_v3: v.Vec3, end_v3: v.Vec3, wall_block=b.TERRACOTTA, level=0, elevation=0, z_len=7,
+    def __init__(self, start_v3: v.Vec3, end_v3: v.Vec3, wall_block=TERRACOTTA, level=0, elevation=0, z_len=7,
                  x_len=5, y_len=1):
         self.start_v3 = start_v3
         self.end_v3 = end_v3

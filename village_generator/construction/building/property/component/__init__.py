@@ -1,4 +1,18 @@
-import sys
-sys.path.append('../property')
-
-import components.boundary, components.carpet, components.component, components.door, components.entrance, components.floor, components.house, components.path, components.pool, components.roof, components.roof, components.room, components.stairs, components.steps, components.wall, components.flower_bed, components.tree, components.veggie_patch, components.window, components.bed
+from .bed import Bed
+from .boundary import Boundary
+from .carpet import Carpet
+from .door import Door
+from .entrance import Entrance
+from .floor import Floor
+from .flower_bed import FlowerBed
+from .house import House
+from .path import Path
+from .pool import Pool
+from .roof import Roof
+from .room import Room
+from .stairs import Stairs
+from .steps import Steps
+from .tree import Tree
+from .veggie_patch import VeggiePatch
+from .wall import Wall, WallWrap
+from .window import Window

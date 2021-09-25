@@ -1,5 +1,5 @@
-from components.component import Component
-import block as b
+from .component import Component
+from construction.building.property.block import Block, GLASS_PANE
 from mcpi import vec3 as v
 
 
@@ -8,9 +8,9 @@ class Window(Component):
     type = 'window'
     # Instance attributes
     v3: v.Vec3 = None
-    block: b.Block = None
+    block: Block = None
 
-    def __init__(self, v3: v.Vec3, block=b.GLASS_PANE):
+    def __init__(self, v3: v.Vec3, block=GLASS_PANE):
         self.v3 = v3
         self.block = block
 

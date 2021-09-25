@@ -1,10 +1,5 @@
 from mcpi import minecraft as m
-
-if __name__ == '__main__':
-    from tradie import Tradie
-else:
-    from tradies.tradie import Tradie
-
+from .tradie import Tradie
 
 class Carpenter(Tradie):
     trade = 'carpentry'

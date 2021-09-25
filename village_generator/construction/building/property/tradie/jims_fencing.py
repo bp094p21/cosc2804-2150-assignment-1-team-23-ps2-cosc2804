@@ -1,8 +1,5 @@
 # Jim's Fencing specialises in fencing
-if __name__ == '__main__':
-    from tradie import Tradie
-else:
-    from tradies.tradie import Tradie
+from .tradie import Tradie
 from mcpi import minecraft as m
 from mcpi import vec3 as v
 
