@@ -1,14 +1,15 @@
 import random
 
 
-import core.village_layout.predefined_layouts as pl
+from core.village_layout import predefined_layouts as pl
+from core.village_layout import Layout, PlotType
+from .village_size import VillageSize
 
-from core.village.village_size import VillageSize
-from core.village_layout.layout import Layout
-from core.village_layout.plot import PlotType
-from core.terraform.terraformer import terraform_house_plot, terraform_road_plot, terraform_entire_land
-from core.terraform.terrain_scanner import scan_terrain
 
+from terraform import *
+from construction import Architect, MiscBuilder
+
+from mcpi.vec3 import Vec3
 
 # TODO: rewrite this function so that the if-else statements for checking size are only written once.
 def build_village(size, location, biome, mc):
@@ -22,12 +23,11 @@ def build_village(size, location, biome, mc):
 
     mc.postToChat('Generating village...')
 
-    _define_layout(size, biome, mc)
+    _define_layout(size, biome, 'medi', mc)
     selected_template = _select_random_template(size)
 
 
     if size is VillageSize.SMALL:
-        print('LOG >> BUILDING SMALL')
         entrance_location = _build_small(selected_template, mc, biome, *location)
 
     elif size is VillageSize.MEDIUM:
@@ -39,16 +39,16 @@ def build_village(size, location, biome, mc):
     mc.postToChat('Done. Welcome to your new village!')
 
 
-def _define_layout(size, biome, mc):
+def _define_layout(size, biome, theme, mc):
     if len(Layout.layouts[size]) == 2:
         return
 
     if size is VillageSize.SMALL:
-        pl.define_small(mc, biome, size)
+        pl.define_small(mc, biome, theme, size)
     elif size is VillageSize.MEDIUM:
-        pl.define_medium(mc, biome, size)
+        pl.define_medium(mc, biome, theme, size)
     else:
-        pl.define_large(mc, biome, size)
+        pl.define_large(mc, biome, theme, size)
 
 
 def _select_random_template(size):
@@ -93,6 +93,8 @@ def _build_large(template, mc, biome, x, z):
 
 
 def _build_plots(fixed_ordinates, template, mc):
+    house_builder = Architect()
+    misc_builder = MiscBuilder()
     entrance_location = None
 
     print(template)
@@ -105,13 +107,14 @@ def _build_plots(fixed_ordinates, template, mc):
             coordinates = fixed_ordinates[i][j]
             
             if plot.plot_type == PlotType.HOUSE:
+                #pass the building plot to the architect's give_specs function.
+                house_builder.give_specs(Vec3(*coordinates), plot.item)
+
                 #_update_variable_house_height(coordinates, mc)
                 # terraform only for buildings & roads, to save resources and for it to look more natural with terrain.
                 #terraform_house_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
-                plot.item.set_location(coordinates)
-                plot.build_house()
             elif plot.plot_type == PlotType.MISC:
-                plot.build_misc(coordinates)
+                misc_builder.build(plot.item, *coordinates)
             elif plot.plot_type == PlotType.ROAD:
                 #terraform_road_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
 

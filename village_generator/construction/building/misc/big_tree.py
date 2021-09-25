@@ -1,17 +1,19 @@
-from construction.building.misc.misc import Misc
 import random
-import construction.building.misc.block_list as b
-class bigTree(Misc):
-    def __init__(self) -> None:
-        super().__init__()
+from .misc import Misc
+from .block_list import MISC_BLOCKS
+
+
+class BigTree(Misc):
+    def __init__(self, biome, mc):
+        super().__init__(biome, mc)
         self.height = random.randint(2,25)
         
-        if self.theme_string == 'medi':
+        if self.theme == 'medi':
             self.wood = (162,1)
             self.leaves = (161,1)
         else:
-            self.wood = b.MISC_BLOCKS[self.theme_string]['plant_stem']
-            self.leaves = b.MISC_BLOCKS[self.theme_string]['plant_leaves']
+            self.wood = MISC_BLOCKS[self.theme]['plant_stem']
+            self.leaves = MISC_BLOCKS[self.theme]['plant_leaves']
     def big_tree_build(self,x,y,z):
         self.build_foundation(x,y,z)
         self.mc.setBlocks(x+3,y+self.height,z+3,x+11,y+self.height+5,z+11,self.leaves)
@@ -26,7 +28,3 @@ class bigTree(Misc):
             self.big_tree_build(x, y, z)
             self.big_branches(x,y,z)
             self.build_tree(x,y,z)
-
-# tree = bigTree()
-# x, y, z = tree._player_position()
-# tree.build(x,y,z)

@@ -1,7 +1,7 @@
 import numpy as np
 import time
 
-from core.village.village_size import VillageSize
+from village import VillageSize
 
 
 def scan_terrain(mc, ply_coords, size):

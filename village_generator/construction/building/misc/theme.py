@@ -1,7 +1,3 @@
-import mcpi.minecraft as minecraft
-
-mc = minecraft.Minecraft.create()
-
 MEDI = ['BEACH',
         'COLD_BEACH',
         'DESERT',
@@ -38,14 +34,10 @@ MODERN = ['EXTREME_HILLS',
           'SMALLER_EXTREME_HILLS']
 
 
-class BiomeToTheme():
-    def __init__(self):
-        self.biome = mc.player.getBiome()
-
-    def get_player_theme(self):
-        if self.biome in MEDI:
-            return 'medi'
-        elif self.biome in MODERN:
-            return 'modern'
-        else:
-            return 'magic'
+def get_player_theme(biome):
+    if biome in MEDI:
+        return 'medi'
+    elif biome in MODERN:
+        return 'modern'
+    else:
+        return 'magic'

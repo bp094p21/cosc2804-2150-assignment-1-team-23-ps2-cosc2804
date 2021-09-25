@@ -1,6 +1,5 @@
 from enum import Enum
-#from construction import Architect, MiscBuilder
-from construction import MiscBuilder
+from construction import House, Misc
 
 
 # contains the orientation, position and centre of where the construction(s) and road(s) should go.
@@ -9,19 +8,15 @@ class Plot:
     def __init__(self, item=None, entrance=False):
         if item is None:
             self.plot_type = PlotType.EMPTY
-        #elif type(item) is Architect:
-            #self.plot_type = PlotType.HOUSE
-        elif type(item) is MiscBuilder:
+        elif type(item) is House:
+            self.plot_type = PlotType.HOUSE
+        elif type(item) is Misc:
             self.plot_type = PlotType.MISC
         else:
             self.plot_type = PlotType.ROAD
         self.item = item
         # delineates whether this plot will be village entrance
         self.entrance = entrance
-
-    # called to construct each house when iterating through the predefined village_layout.
-    def build_house(self):
-        self.item.build()
 
     def build_misc(self, coords):
         self.item.build(*coords)

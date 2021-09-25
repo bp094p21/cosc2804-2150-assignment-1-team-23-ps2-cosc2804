@@ -1,6 +1,5 @@
 import numpy as np
-from core.village.village_size import VillageSize
-
+from core.village import VillageSize
 
 class Layout:
     layouts = {VillageSize.SMALL: [],

@@ -1,17 +1,14 @@
-from construction.building.misc.misc import Misc
-import construction.building.misc.block_list as b
+from .misc import Misc
+from .block_list import MISC_BLOCKS
+
+
 class Art(Misc):
-    def __init__(self) -> None:
-        super().__init__()
+    def __init__(self, biome, mc):
+        super().__init__(biome, mc)
     def make_artwork(self,x,y,z):
-        self.mc.setBlocks(x+3,y,z+3,x+11,y+8,z+11,b.MISC_BLOCKS[self.theme_string]['sub_block'])
+        self.mc.setBlocks(x+3,y,z+3,x+11,y+8,z+11,MISC_BLOCKS[self.theme]['sub_block'])
         for i in range(10):
             self.mc.setBlocks(x+i,y+i,z+1,x+i+2,y+i+2,z+i+2,self.air)
     def build(self,x,y,z):
         self.build_foundation(x,y,z)
         self.make_artwork(x,y,z)
-    
-"""park = Art()    
-x,y,z = park._player_position()
-park.build(x,y,z)"""
-        

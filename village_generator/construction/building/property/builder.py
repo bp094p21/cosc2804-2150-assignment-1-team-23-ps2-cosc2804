@@ -1,5 +1,6 @@
 from mcpi import minecraft
-import util.logbook as l
+from .util import Logbook
+from .property import Property
 import property as p
 import tradies as t
 import mcpi as m
@@ -41,9 +42,9 @@ class Builder:
         }
         pass
     # Public Functions
-    def assign_property(self, property: p.Property, mc: minecraft.Minecraft) -> None:
+    def assign_property(self, property: Property, mc: minecraft.Minecraft) -> None:
         self.properties.append(property)
-        self.logbook = l.Logbook(self)
+        self.logbook = Logbook(self)
         self.logbook.logs.append(f'{self.emoji} Assigned property.\n')
         # self._print()
         self._build_property(property, mc)
