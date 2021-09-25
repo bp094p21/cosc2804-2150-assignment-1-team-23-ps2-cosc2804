@@ -2,16 +2,16 @@ from mcpi import minecraft
 from .util import Logbook
 from .property import Property
 import property as p
-import tradies as t
+import tradie as t
 import mcpi as m
+
 
 class Builder:
     name = None
     emoji = '👷‍♂️'
     properties = []
-    tradies = {
+    tradies = {}
 
-    }
     def __init__(self):
         print(f"{self.emoji} Builder created.\n")
         if self.name:
@@ -41,16 +41,18 @@ class Builder:
             'window': t.window_maker.WindowMaker()
         }
         pass
+
     # Public Functions
-    def assign_property(self, property: Property, mc: minecraft.Minecraft) -> None:
+    def assign_property(self, property: Property, mc: minecraft.Minecraft):
         self.properties.append(property)
         self.logbook = Logbook(self)
         self.logbook.logs.append(f'{self.emoji} Assigned property.\n')
         # self._print()
         self._build_property(property, mc)
+
     # Internal Methods
-    def _build_property(self, property, mc) -> None:
-        self.logbook.logs.append(f"{self.emoji} Commencing property build...\n") 
+    def _build_property(self, property, mc):
+        self.logbook.logs.append(f"{self.emoji} Commencing property build...\n")
         # self._print()
         all_components = property.components + property.house.components
         for component in all_components:
@@ -61,17 +63,19 @@ class Builder:
         property.is_built = True
         self.logbook.logs.append(f"✅ Completed property build.\n")
         # self._print()
-        return None
+
     def _assign_tradie(self, component_type, component, mc):
         self.logbook.logs.append(f"{self.emoji} Assigning {component_type} to tradie...\n")
         # self._print()
         tradie = self.TRADIES[component_type]
         tradie.build_component(component, mc)
+
     def _print(self):
         print(self.logbook.logs[-1])
 
-        # TODO: Use components to randomly build components
+        # TODO: Use component to randomly build component
         pass
+
 
 class Bob(Builder):
     name = 'Bob'

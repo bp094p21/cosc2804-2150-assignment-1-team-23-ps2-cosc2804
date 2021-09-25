@@ -3,6 +3,7 @@ import math
 
 CURVE = (17, [17, 4], 45, 45, 45, 45, 45, [17, 4], 17)
 
+
 # straight
 # Path class for the East/West Path
 # A function that builds a path corresponding to function name based on matrix position
@@ -234,6 +235,7 @@ def build_intersection_e_ns(mc, x, y, z):
     block_id = mc.getBlock(x, y - 1, z + 15)
     mc.setBlocks(x, y - 1, z, x + 2, y - 1, z + 14, block_id)
 
+
 # A function that builds a path corresponding to function name based on current player position
 def build_intersection_s_ew(mc, x, y, z):
     center = 3
@@ -248,7 +250,7 @@ def build_intersection_s_ew(mc, x, y, z):
         mc.setBlocks(x, y - 1, z + 8 + center, x + i, y - 1, z + 8 + center, wood_id)
         mc.setBlocks(x, y - 1, z + 7 + center, x + i, y - 1, z + 7 + center, wood_id, 4)
 
-    for i in range(15): 
+    for i in range(15):
         mc.setBlocks(x + center, y, z, x + center, y, z + i, block.LEAVES)
         mc.setBlocks(x + center, y - 1, z, x + center, y - 1, z + i, wood_id)
         mc.setBlocks(x + 1 + center, y - 1, z, x + 1 + center, y - 1, z + i, wood_id, 4)
@@ -282,6 +284,7 @@ def build_intersection_s_ew(mc, x, y, z):
     mc.setBlocks(x, y - 1, z + 3, x + 14, y - 1, z + 3, wood_id)
     mc.setBlocks(x, y - 1, z + 4, x + 14, y - 1, z + 4, wood_id, 4)
     mc.setBlocks(x, y - 1, z, x + 15, y - 1, z + 2, block_id)
+
 
 # A function that builds a path corresponding to function name based on current player position
 def build_intersection_w_ns(mc, x, y, z):
@@ -367,9 +370,5 @@ def build_intersection_n_ew(mc, x, y, z):
     mc.setBlock(x + 7, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
     mc.setBlock(x + 12, y - 1, z + 4 + center, block.GLOWSTONE_BLOCK)
 
-    mc.setBlocks(x, y - 1, z + 10, x + 14, y - 1, z + 10, wood_id, 4)  # Add wood to previous intersection path that has been cut off to make a T
-
-import mcpi.minecraft as minecraft
-mc = minecraft.Minecraft.create()
-x, y, z = mc.player.getTilePos()
-build_intersection_w_ns(mc, x, y, z)
+    mc.setBlocks(x, y - 1, z + 10, x + 14, y - 1, z + 10, wood_id,
+                 4)  # Add wood to previous intersection path that has been cut off to make a T

@@ -1,6 +1,7 @@
 from mcpi import minecraft
 from mcpi import vec3
 import sys
+
 sys.path.append('../property')
 import component
 
@@ -11,10 +12,10 @@ class Cloner:
         self.x_len = x_len
         self.y_len = y_len
         self.z_len = z_len
-        pass
-    def clone(self, original_pos, x = 0, y = 0, z = 15):
 
-        blocks = self.mc.getBlocks(original_pos, original_pos.x + self.x_len - 1, original_pos.y + self.y_len - 1, original_pos.z + self.z_len - 1)
+    def clone(self, original_pos, x=0, y=0, z=15):
+        blocks = self.mc.getBlocks(original_pos, original_pos.x + self.x_len - 1, original_pos.y + self.y_len - 1,
+                                   original_pos.z + self.z_len - 1)
         clone_pos = vec3.Vec3(original_pos.x + x, original_pos.y + y, original_pos.z + z)
         clone = component.Component('clone')
         clone.block_list = blocks
@@ -22,6 +23,7 @@ class Cloner:
         clone.y_len = self.y_len
         clone.z_len = self.z_len
         clone.build(clone_pos, self.mc, 0)
+
 
 # TEST
 if __name__ == "__main__":

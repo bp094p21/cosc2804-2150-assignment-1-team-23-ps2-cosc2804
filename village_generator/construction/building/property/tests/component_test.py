@@ -1,16 +1,18 @@
 from mcpi import vec3
 import sys
+
 sys.path.append('../property')
 # Import component
 import components.component as component
 # Import minecraft
 from mcpi import minecraft
+
 # Create connection
 mc = minecraft.Minecraft.create()
 # Get player's current position
 player_pos = mc.player.getPos()
 # Set build_pos to 5 blocks in front of player
-build_pos = vec3.Vec3(player_pos.x + 5, player_pos.y-3, player_pos.z)
+build_pos = vec3.Vec3(player_pos.x + 5, player_pos.y - 3, player_pos.z)
 
 wall = component.Component('wall')
 # Give wall a block_list

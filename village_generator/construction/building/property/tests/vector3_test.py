@@ -1,5 +1,6 @@
 # Import minecraft
 from mcpi import minecraft
+
 # Create connection
 mc = minecraft.Minecraft.create()
 # Get player's current position
@@ -12,8 +13,8 @@ y, z, x = build_pos
 block_type = 0
 
 # Set Stone blocks in x-axis
-mc.setBlocks(y,z,x, y,z,x+2, 1)
+mc.setBlocks(y, z, x, y, z, x + 2, 1)
 # Set Grass blocks in y-axis
-mc.setBlocks(y,z,x, y+2,z,x, 2)
+mc.setBlocks(y, z, x, y + 2, z, x, 2)
 # Set Wood blocks in z-axis
-mc.setBlocks(y,z,x, y,z+2,x, 5)
+mc.setBlocks(y, z, x, y, z + 2, x, 5)

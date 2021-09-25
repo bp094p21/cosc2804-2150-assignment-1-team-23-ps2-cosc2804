@@ -1,6 +1,8 @@
 # terraformer
 
 DISALLOWED_BLOCKS = (17, 18, 81, 86, 106, 161, 162, 175, 37, 38, 39, 40, 30, 10, 11, 31)
+
+
 # TIMBER_LOG = 17  (0 Oak, 1 Spruce)
 # LEAVES = 18 (Oak, 1 Spruce, 2 Birch, 3 Jungle)
 # CACTUS = 81
@@ -23,9 +25,10 @@ DISALLOWED_BLOCKS = (17, 18, 81, 86, 106, 161, 162, 175, 37, 38, 39, 40, 30, 10,
 
 def terraform_entire_land(mc, biome, x1, y1, z1, x2, y2, z2):
     mc.setBlocks(x1, y1, z1, x2, y2, z2, 0)
-    
+
     ground_fill_block = iterate_ground_filler(GROUND_FILLER, biome)
     mc.setBlocks(x1, y1 - 1, z1, x2, y1 - 1, z2, ground_fill_block)
+
 
 # searches the dictionary to see if the biome string is in any of the keys, and if it is, return the block id to pave the floor.
 def iterate_ground_filler(keys, target):
@@ -35,13 +38,15 @@ def iterate_ground_filler(keys, target):
     # default to grass otherwise.
     return 2
 
+
 GROUND_FILLER = {'DESERT': 24,
-'PLAINS': 2,
-'REDWOOD': 2,
-'HILLS': 2,
-'JUNGLE': 2,
-'FOREST': 2,
-'ICE': 78}
+                 'PLAINS': 2,
+                 'REDWOOD': 2,
+                 'HILLS': 2,
+                 'JUNGLE': 2,
+                 'FOREST': 2,
+                 'ICE': 78}
+
 
 def terraform_house_plot(mc, start_loc, max_x, max_z):
     print('LOG >> TERRAFORMING HOUSE PLOT')
@@ -95,11 +100,10 @@ def _clear_random_blocks():
 
 # this will ensure that the terrain does not jump by two blocks, because if it does, then the user will not be able
 # to walk up the road (players can only jump one block).
-# FIXME - consider making this function essentially "flatten" the land or make it unsuitable terrain for the terrain scanner
-#  if there are more than x > 1 block jumps or something.
+# FIXME - consider making this function essentially "flatten" the land or make it unsuitable terrain for the terrain
+#  scanner if there are more than x > 1 block jumps or something.
 def _enforce_single_height_increments(mc, x, ):
     pass
-
 
 # TODO - make a get_lowest_point for the houses, so that they are built at the lowest point to avoid them being very
 #  high up in the air. Cause this would mean roads could not reach it without incrementing more than one block. Also
@@ -108,4 +112,4 @@ def _enforce_single_height_increments(mc, x, ):
 # def _get_highest_point(mc, x, z, max_x, max_z) -> int:
 #     # excessive calls to mc's methods are too expensive and slow. test speed difference with this vs backend re-write.
 #     # this guess may be off too and could cause problems. consider re-writing on backend.
-#     return 
+#     return

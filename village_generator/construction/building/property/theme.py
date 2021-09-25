@@ -1,5 +1,6 @@
 import random
 
+
 def get_theme(theme):
     if theme == 'medi':
         return Mediterranean()
@@ -8,19 +9,29 @@ def get_theme(theme):
     elif theme == 'modern':
         return Modern()
 
+
 class Theme:
     name: str = None
     house_type: str = None
+
     def __init__(self):
         self._randomly_select_house_type()
+
     def _randomly_select_house_type(self):
         self.house_type = random.choice(HOUSE_TYPES[self.name])
+
+
 class Mediterranean(Theme):
     name = 'medi'
+
+
 class Magic(Theme):
     name = 'magic'
+
+
 class Modern(Theme):
     name = 'modern'
+
 
 HOUSE_TYPES = {
     'medi': [

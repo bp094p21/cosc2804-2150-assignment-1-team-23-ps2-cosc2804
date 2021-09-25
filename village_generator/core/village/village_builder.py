@@ -1,15 +1,14 @@
 import random
 
-
 from core.village_layout import predefined_layouts as pl
 from core.village_layout import Layout, PlotType
 from .village_size import VillageSize
 
-
-from terraform import *
 from construction import Architect, MiscBuilder
+from terraform import *
 
 from mcpi.vec3 import Vec3
+
 
 # TODO: rewrite this function so that the if-else statements for checking size are only written once.
 def build_village(size, location, biome, mc):
@@ -25,7 +24,6 @@ def build_village(size, location, biome, mc):
 
     _define_layout(size, biome, 'medi', mc)
     selected_template = _select_random_template(size)
-
 
     if size is VillageSize.SMALL:
         entrance_location = _build_small(selected_template, mc, biome, *location)
@@ -103,26 +101,25 @@ def _build_plots(fixed_ordinates, template, mc):
 
             print(i, plot, plot.plot_type)
 
-            #Set the y-coords to be dynamic.
+            # Set the y-coords to be dynamic.
             coordinates = fixed_ordinates[i][j]
-            
+
             if plot.plot_type == PlotType.HOUSE:
-                #pass the building plot to the architect's give_specs function.
+                # pass the building plot to the architect's give_specs function.
                 house_builder.give_specs(Vec3(*coordinates), plot.item)
 
-                #_update_variable_house_height(coordinates, mc)
+                # _update_variable_house_height(coordinates, mc)
                 # terraform only for buildings & roads, to save resources and for it to look more natural with terrain.
-                #terraform_house_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
+                # terraform_house_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
             elif plot.plot_type == PlotType.MISC:
                 misc_builder.build(plot.item, *coordinates)
             elif plot.plot_type == PlotType.ROAD:
-                #terraform_road_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
+                # terraform_road_plot(mc, coordinates, coordinates[0] + 15, coordinates[2] + 15)
 
                 if plot.entrance is True:
                     entrance_location = _transform_to_entrance_coords(*coordinates)
 
                 plot.build_road(mc, fixed_ordinates[i][j])
-
 
     return entrance_location
 
@@ -155,7 +152,8 @@ def _generate_fixed_ordinates(max_z: int, max_x: int, x_coord: int, y_coord: int
         temp.append([])
         print('LOG >> CREATING NEW ROW OF FIXED ORDINATES')
         for x in range(0, max_x + 1):
-            new_y = y_coord + random.randint(0, 1) ################################ ADDED THIS LINE FOR HEIGHT FLEXIBILITY (see how it looks matt)
+            ################################ ADDED THIS LINE FOR HEIGHT FLEXIBILITY (see how it looks matt)
+            new_y = y_coord + random.randint(0, 1)
             temp[z].append([x_coord + x * 15, new_y, z_coord + z * 15])
     print('LOG >> FIXED ORDINATES COMPLETE')
     return temp

@@ -1,6 +1,7 @@
 import numpy as np
 from core.village import VillageSize
 
+
 class Layout:
     layouts = {VillageSize.SMALL: [],
                VillageSize.MEDIUM: [],
@@ -13,4 +14,5 @@ class Layout:
 
         Layout.layouts[layout_size].append(self)  # add the village_layout as a matrix to the static layouts dict.
 
-# contains a numpy matrix and a bunch of methods for manipulating a particular village_layout, so that they can just be called.
+# contains a numpy matrix and a bunch of methods for manipulating a particular village_layout, so that they can just
+# be called.

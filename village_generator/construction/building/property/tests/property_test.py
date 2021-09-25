@@ -1,10 +1,13 @@
 from mcpi import vec3
-import sys
-sys.path.append('../property')
-# Import property
-import property
 # Import minecraft
 from mcpi import minecraft
+import sys
+# Import property
+import property
+
+sys.path.append('../property')
+
+
 # Create connection
 mc = minecraft.Minecraft.create()
 # Get player's current position
