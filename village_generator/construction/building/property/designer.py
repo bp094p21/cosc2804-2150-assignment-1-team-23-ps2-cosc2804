@@ -28,8 +28,8 @@ class Designer:
         self._design_house_components(property.house)
 
     def _design_property_components(self, property):
-        self._design_entrance(property)
         self._design_boundary(property)
+        self._design_entrance(property)
         self._design_pool(property)
         self._design_house(property)
         self._design_paths(property)
@@ -434,8 +434,10 @@ class Designer:
         property.components.append(entrance)
 
     def _design_boundary(self, property):
+        root_v3 = property.entrance_edge['start']
+        end_v3 = orientate(root_v3, property.orientation, 14, 14)
         fence_block = random.choice(OPTIONS[property.theme.name]['boundary']['basic'])
-        boundary = Boundary(fence_block)
+        boundary = Boundary(root_v3, end_v3, fence_block)
         print("Boundary design completed\n")
         print(boundary)
         property.components.append(boundary)
