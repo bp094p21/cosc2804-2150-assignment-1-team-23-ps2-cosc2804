@@ -72,8 +72,8 @@ def define_medium(mc, biome, theme, size):
 def define_large(mc, biome, theme, size):
     # Layout #1
     Layout(size,
-           [[Plot(), Plot(House(mc, Orientation.SOUTH.value, theme)), Plot(), Plot(), Plot(build_straight_ns), Plot(House(mc, Orientation.WEST.value, theme))],
-            [Plot(House(mc, Orientation.EAST.value, theme)), Plot(build_crossintersection), Plot(House(mc, Orientation.WEST.value, theme)), Plot(), Plot(build_straight_ns), Plot(House(mc, Orientation.WEST.value, theme))],
+           [[Plot(), Plot(House(mc, Orientation.SOUTH.value, theme)), Plot(), Plot(), Plot(build_intersection_e_ns), Plot(House(mc, Orientation.WEST.value, theme))],
+            [Plot(House(mc, Orientation.EAST.value, theme)), Plot(build_crossintersection), Plot(House(mc, Orientation.WEST.value, theme)), Plot(), Plot(build_intersection_e_ns), Plot(House(mc, Orientation.WEST.value, theme))],
             [Plot(), Plot(build_intersection_e_ns), Plot(build_straight_ew), Plot(build_straight_ew), Plot(build_crossintersection), Plot(build_straight_ew)],
             [Plot(Misc(mc, biome)), Plot(build_intersection_w_ns), Plot(), Plot(), Plot(build_straight_ns), Plot()],
             [Plot(), Plot(build_straight_ns), Plot(), Plot(House(mc, Orientation.EAST.value, theme)), Plot(build_crossintersection), Plot(House(mc, Orientation.WEST.value, theme))],
