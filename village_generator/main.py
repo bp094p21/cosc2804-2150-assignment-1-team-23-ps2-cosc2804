@@ -10,16 +10,15 @@ if __name__ == '__main__':
     mc = Minecraft.create()
 
     x, y, z = mc.player.getTilePos()
-    block = mc.getBlock(x, y-1, z)
 
-    # # Upon invocation will generate a village where the player is standing.
-    rand_num = random.randint(0, 2) #0 is small, 1 is medium, 2 is large
-    if rand_num == 0:
-        mc.postToChat('Sit tight whilst we generate a small sized village for you!')
-        build_village(VillageSize.SMALL, (x + 1, y, z + 1), mc.player.getBiome(), mc)
-    elif rand_num == 1:
-        mc.postToChat('Sit tight whilst we generate a medium sized village for you!')
-        build_village(VillageSize.MEDIUM, (x + 1, y, z + 1), mc.player.getBiome(), mc)
-    else:
-        mc.postToChat('Sit tight whilst we generate a large sized village for you!')
-        build_village(VillageSize.LARGE, (x + 1, y, z + 1), mc.player.getBiome(), mc)
+    # Integer representation of each village:
+    # 0 -- SMALL
+    # 1 -- MEDIUM
+    # 2 -- LARGE
+    rand = random.randint(0, 2) 
+    
+    village_size = 'SMALL' if rand == 0 else ('MEDIUM' if rand == 1 else 'LARGE')
+    mc.postToChat(f'A {village_size.lower()} village has been selected. Sit tight whilst we get to work!')
+
+    # Upon invocation will generate a village where the player is standing.
+    build_village(VillageSize[village_size.upper()], (x + 1, y, z + 1), mc.player.getBiome(), mc)
