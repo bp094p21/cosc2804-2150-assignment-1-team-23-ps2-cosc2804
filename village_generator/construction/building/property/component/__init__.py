@@ -12,7 +12,6 @@ from .roof import Roof
 from .room import Room
 from .stairs import Stairs
 from .steps import Steps
-from .tree import Tree
 from .veggie_patch import VeggiePatch
 from .wall import Wall, WallWrap
 from .window import Window

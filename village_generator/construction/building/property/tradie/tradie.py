@@ -8,9 +8,10 @@ class Tradie:
     msg = 'gday'
 
     def __init__(self):
-        print(f"{self.emoji} Tradie created.\n")
-        if self.name:
-            print(f"tradie.name: {self.name}\n")
+        # print(f"{self.emoji} Tradie created.\n")
+        # if self.name:
+        #     print(f"tradie.name: {self.name}\n")
+        pass
 
     # All Tradie sub-classes should have same build_component signature. They can have different code running inside
     # it based on what they're building.

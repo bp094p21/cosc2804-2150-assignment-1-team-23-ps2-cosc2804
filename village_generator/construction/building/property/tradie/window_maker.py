@@ -21,14 +21,14 @@ class WindowMaker(Tradie):
 
 # TESTING
 
-if __name__ == '__main__':
-    import sys
+# if __name__ == '__main__':
+#     import sys
 
-    sys.path.append('../property')
-    from components import wall as w
-    import block as b
-    from mcpi import minecraft
+#     sys.path.append('../property')
+#     from components import wall as w
+#     import block as b
+#     from mcpi import minecraft
 
-    mc = minecraft.Minecraft.create()
-    start_v3 = mc.player.getPos()
-    print(dir())
+#     mc = minecraft.Minecraft.create()
+#     start_v3 = mc.player.getPos()
+#     print(dir())
