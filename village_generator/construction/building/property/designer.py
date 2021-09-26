@@ -87,10 +87,6 @@ class Designer:
                 if h_z_offset == 3:
                     continue
 
-                trunk_block = random.choice(OPTIONS[property.theme.name]['tree']['trunk'])
-                leaves_block = random.choice(OPTIONS[property.theme.name]['tree']['leaves'])
-                property.components.append(Tree(o_v3, trunk_block, leaves_block))
-
     def _design_beds(self, house):
         h_v3 = house.house_v3
         layout = house.layout
