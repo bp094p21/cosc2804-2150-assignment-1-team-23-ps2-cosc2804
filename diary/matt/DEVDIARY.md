@@ -115,8 +115,7 @@
 
 * The majority of this week was spent brainstorming ideas, and designing systems that would later be tested/implemented
   in week 3. A few of these ideas were:
-    - The roads could take one multiple approaches:
-
+    - The roads could take one of two approaches:
       <br></br>**Easy Way**<br></br>
       Pros:
         - Its easy and will only take about a day to implement properly.
@@ -126,7 +125,7 @@
         - Does not look very clean, and does not account for heights greater than 1 (this goes against the criteria
           cause it says, players can walk along the roads without having to build or destroy blocks).
         - The code is somewhat ugly.
-      
+
       <br></br>**Hard Way**<br></br>
       Pros:
         - Very elegant and looks super nice.
