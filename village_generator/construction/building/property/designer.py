@@ -172,15 +172,19 @@ class Designer:
         window_block = random.choice(OPTIONS[house.theme]['window']['basic'])
         orientation = house.orientation
         h_v3 = house.house_v3
-
+        print(f"FLOOR ELEVATIONS IN DESIGN WINDOWS: {house.floor_elevations}")
         for window_layout in house.layout['windows']:
-            for i, floor_elevation in enumerate(house.floor_elevations):
+            i = 0
+            for floor_elevation in house.floor_elevations:
                 z_offset = window_layout['z_offset']
                 x_offset = window_layout['x_offset']
                 (x, y, z) = orientate(h_v3, orientation, z_offset, x_offset)
                 y += i * 4 + 2
                 window = Window(v.Vec3(x, y, z), window_block)
+                print(f"I MADE A WINDOW HERE")
                 house.components.append(window)
+                i += 1
+            i = 0
 
     def _design_roof(self, house):
         style = random.choice([0, 1, 2, 3])
@@ -283,14 +287,16 @@ class Designer:
         z_offset = house.layout['z_len'] - 1
         x_offset = house.layout['x_len'] - 1
         wall_block = random.choice(OPTIONS[house.theme]['wall']['basic'])
-
-        for i, floor_elevation in enumerate(house.floor_elevations):
+        i = 0
+        for floor_elevation in house.floor_elevations:
             x, y, z = house.house_v3
             y += floor_elevation
             (x2, y2, z2) = orientate(house.house_v3, orientation, z_offset, x_offset)
             y2 += 2 + floor_elevation
             wall_wrap = WallWrap(v.Vec3(x, y, z), v.Vec3(x2, y2, z2), wall_block, i)
             wall_wraps.append(wall_wrap)
+            i+=1
+        i = 0
 
         for wall_wrap in wall_wraps:
             house.components.append(wall_wrap)
@@ -300,8 +306,8 @@ class Designer:
 
     def _get_random_total_levels(self, z_len, x_len, house_position):
         total_levels = None
-        print(f"E LEN: {z_len}")
-        print(f"x_len: {x_len}")
+        print(f"Z LEN: {z_len}")
+        print(f"X len: {x_len}")
 
         if house_position == 'middle':
             total_levels = 1
@@ -387,6 +393,7 @@ class Designer:
         x_len = house_layout['x_len']
         total_levels = self._get_random_total_levels(z_len, x_len, house_layout['position'])
         house.total_levels = total_levels
+        print(f"HOUSE TOTAL LEVELS: {house.total_levels}")
         z_offset = house_layout['z_offset']
         x_offset = house_layout['x_offset']
         e_v3 = property.entrance_edge['start']
@@ -411,13 +418,14 @@ class Designer:
 
         for floor_level in range(total_levels):
             house.floor_elevations.append(elevation)
+            print(f"ELEVATION: {elevation}")
             floor_block = random.choice(OPTIONS[house.theme]['floor']['basic'])
             floors.append(Floor(root_v3, end_v3, floor_block, floor_level, elevation))
             elevation += 4
 
         for floor in floors:
             house.components.append(floor)
-            print(floor)
+            # print(floor)
 
     def _design_entrance(self, property):
         root_v3 = property.entrance_edge['start']
@@ -427,8 +435,8 @@ class Designer:
         fence_block = random.choice(OPTIONS[property.theme.name]['boundary']['basic'])
         gate_block = random.choice(OPTIONS[property.theme.name]['gate']['basic'])
         entrance = Entrance(root_v3, orientation, random_height, fence_block, gate_block)
-        print("Entrance design completed\n")
-        print(entrance)
+        # print("Entrance design completed\n")
+        # print(entrance)
         property.components.append(entrance)
 
     def _design_boundary(self, property):
@@ -436,8 +444,8 @@ class Designer:
         end_v3 = orientate(root_v3, property.orientation, 14, 14)
         fence_block = random.choice(OPTIONS[property.theme.name]['boundary']['basic'])
         boundary = Boundary(root_v3, end_v3, fence_block)
-        print("Boundary design completed\n")
-        print(boundary)
+        # print("Boundary design completed\n")
+        # print(boundary)
         property.components.append(boundary)
 
     def _design_pool(self, property):
@@ -489,8 +497,8 @@ class Designer:
         # position = property.layout.layout['pool']['position']
         pool = Pool(line_v3, fill_v3, fence_v3, gate_v3, line_block, fill_block, fence_block, gate_block,
                     pool_depth, line_raise, line_depth)
-        print("Pool design completed\n")
-        print(pool)
+        # print("Pool design completed\n")
+        # print(pool)
         property.components.append(pool)
 
 
