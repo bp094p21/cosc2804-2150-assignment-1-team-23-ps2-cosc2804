@@ -17,3 +17,4 @@ class House(Component):
 
     def __init__(self, components=[]):
         self.components = components
+        self.floor_elevations = []
