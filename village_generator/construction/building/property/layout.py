@@ -27,9 +27,10 @@ class Layout:
 
     # Init
     def __init__(self, plot_length: int):
+        self.layout = {}
         self.plot_length = plot_length
-        print(f"{self.emoji} Layout initialized.\n")
-        print(f"name: {self.name}\n")
+        # print(f"{self.emoji} Layout initialized.\n")
+        # print(f"name: {self.name}\n")
         self._randomize_layout()
 
     # Internal Methods
@@ -182,7 +183,7 @@ class Basic(Layout):
             'gate_x_offset': gate_x_offset
         }
 
-        self._print('pool', self.layout['pool'])
+        # self._print('pool', self.layout['pool'])
 
     def _position_house(self):
         # see _position_pool for description of below variables
@@ -272,7 +273,7 @@ class Basic(Layout):
             'internal_walls': [],
             'windows': []
         }
-        self._print('house', self.layout['house'])
+        # self._print('house', self.layout['house'])
 
     def _position_internal_doors(self):
         internal_door_layouts = []
@@ -525,7 +526,8 @@ class Basic(Layout):
             })
 
         for layout in self.layout['outdoor_features']:
-            self._print('outdoor_feature', layout)
+            # self._print('outdoor_feature', layout)
+            pass
 
     def _position_paths(self):
         # TODO look for gaps between pool, house, entrance and boundary to create paths
@@ -653,4 +655,4 @@ if __name__ == '__main__':
     house_type = 'basic'
     plot_length = 15
     layout = get_layout(house_type, plot_length)
-    print(layout)
+    # print(layout)
