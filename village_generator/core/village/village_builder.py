@@ -18,7 +18,7 @@ and specifiying the deisred specifications via argument insertion."""
 # functions within this module, and thereby, the build_village() function is best tested with its dependencies (
 # private functions).
 
-# 
+
 def build_village(size, location, biome, mc):
     """
     Create a custom Minecraft village.
