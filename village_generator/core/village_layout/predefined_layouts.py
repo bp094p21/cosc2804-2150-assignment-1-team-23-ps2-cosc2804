@@ -10,22 +10,6 @@ from construction import *
 # Dimensions - 5 * 4 = 20 Elements
 # Max Structures - 5
 def define_small(mc, biome, theme, size):
-       #FIXME: TEST CASE 1 WITH JUST HOUSES AND WHITESPACE
-       # Layout(size,
-       # [[Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(), Plot()],
-       # [Plot(), Plot(), Plot(), Plot(House(mc, Orientation.NORTH.value, theme))],
-       # [Plot(), Plot(), Plot(), Plot()],
-       # [Plot(), Plot(House(mc, Orientation.WEST.value, theme)), Plot(), Plot()],
-       # [Plot(), Plot(), Plot(House(mc, Orientation.EAST.value, theme)), Plot()]])
-
-       #FIXME: TEST CASE 2 WITH JUST HOUSES BUT NO WHITESPACE. FEEL FREE TO TEST WITH JUST ONE HOUSE.
-       # Layout(size,
-       # [[Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme))],
-       # [Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme))],
-       # [Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme))],
-       # [Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme))],
-       # [Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme)), Plot(House(mc, Orientation.NORTH.value, theme))]])
-
     # Layout #1
     Layout(size,
            [[Plot(), Plot(build_bent_connecting_se), Plot(build_straight_ew), Plot(House(mc, Orientation.WEST.value, theme))],
