@@ -48,10 +48,16 @@ Please, report your key activities in each week this assignment is running.
     * Reconsidered path design in order to fufill criteria better (perhaps doing a 9 block wide path with blockages on the side is not worth it when compared to doing a 5 block wide path with no blockages that can scale terrain)
     * Thought about and tested solutions to the environment conservation problem (how will we get houses to generate in natural ways when their positions are predetermined by the matrix?)
     * Created East/West and North/South paths that can scale any terrain (more mark efficient than previous design), this was done using the same algorithm I implemented in the terrain scanner last week, which is what allowed the efficient scalability
+    * Completed participation activity for Studio Class 1
     * Tried out using the math import to do vector calculus in minecraft (if we were able to find the base of the mountain on top and bottom, we could build the path going upwards in a way where it doesnt excavate terrain), in the process this would allow us to build houses in practically any position and connect them to paths accordingly. This is something Matt and I will work on throughout the week most likely
     * Tested the A* (AStar) path finding algorithm to use in place of our regular road designs in order to accomondate for extreme mountain terrain taking the best path, proved to be a waste of time as it appears to be impossible to force natural generation in extreme mountain terrain
     * Created a seperate version of the terrain scanner that will search plots (15x15) in the matrix for suitable places to build houses, and if the village cannot generate 3+ houses, then the village will not be spawned
     * In the end we collaboratively decided to not go with most of these new ideas and instead have gone back to our old design that suited better with the matrix, which is unfortunate given the amount of hours and code put into them, however it should be treated as learning experience to think more in depth on the consequences of big decisions before making them
+    * Created a border around the village that is determined by the dimensions of the village. This is done in order to prevent liquid from seeping in from the surroundings into the village upon generation.
+    * Completed participation activity for Studio Class 2
+    * Collaborated with team to create slides that would provide as a sufficient guide during recording to present our village to the marking criteria.
+    * Collaboratively recorded and submitted our village.
+    * Read up on Assembly in preperation for Week 4.
     
 .....
 .....
