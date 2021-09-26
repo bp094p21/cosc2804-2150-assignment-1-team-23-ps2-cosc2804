@@ -298,12 +298,14 @@ class Designer:
     def _design_walls(self, house):
         self._design_external_walls(house)
 
-    def _get_random_total_levels(self, z_len, x_len):
+    def _get_random_total_levels(self, z_len, x_len, house_position):
         total_levels = None
         print(f"E LEN: {z_len}")
         print(f"x_len: {x_len}")
 
-        if z_len >= 8 and (x_len == 11 or x_len == 8 or x_len == 7):
+        if house_position == 'middle':
+            total_levels = 1
+        elif z_len >= 8 and (x_len == 11 or x_len == 8 or x_len == 7):
             # total_levels = random.choice([1, 2])
             total_levels = 2  # HARD CODED FOR TESTING
         else:
@@ -383,7 +385,7 @@ class Designer:
         house.theme = property.theme.name
         z_len = house_layout['z_len']
         x_len = house_layout['x_len']
-        total_levels = self._get_random_total_levels(z_len, x_len)
+        total_levels = self._get_random_total_levels(z_len, x_len, house_layout['position'])
         house.total_levels = total_levels
         z_offset = house_layout['z_offset']
         x_offset = house_layout['x_offset']
