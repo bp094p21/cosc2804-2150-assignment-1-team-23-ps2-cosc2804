@@ -17,6 +17,8 @@ class JimsFencing(Tradie):
         elif object.type == 'boundary':
             self._build_boundary(object)
 
+    def _build_boundary(self, object):
+        self._wrap(object.start_v3, object.end_v3, object.block, self.mc)
     def _get_fence_v3(self, object):
         start_v3 = object.root_v3
         fence_v3 = {
@@ -70,5 +72,3 @@ class JimsFencing(Tradie):
     def _build_gate(self, start_v3, end_v3, block):
         self.mc.setBlocks(start_v3, end_v3, block)
 
-    def _build_boundary(self, object):
-        pass
