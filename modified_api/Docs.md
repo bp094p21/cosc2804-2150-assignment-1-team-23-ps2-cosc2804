@@ -8,9 +8,13 @@
 Aside from re-structuring and slightly improving the API's overall codebase (particularly the ``RemoteSession.java``
 file), I added some functionality to assist our group's needs.
 
-NOTE: This is not a fully-fledged re-write, as I did not have the time for this. However, if time was not a constraint,
+NOTE #1: This is not a fully-fledged re-write, as I did not have the time for this. However, if time was not a constraint,
 and interest prevailed, I would've re-written almost the entire codebase to make it very efficient, clean and practical.
 I also would've added a lot more functionality, and better documentation.
+
+
+NOTE #2: For this village generation to work properly, you need to make sure that you've set your ``LOCATION`` in the 
+RaspberyJuice plugin's ``/plugins/config.yml`` to ``ABSOLUTE``, otherwise you will encounter problems.
 <br></br>
 
 **New Methods**
