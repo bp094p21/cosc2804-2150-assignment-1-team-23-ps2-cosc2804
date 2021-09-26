@@ -36,7 +36,12 @@ class Architect:
         self.logbook.logs.append(
             f'{self.emoji} Specs received for property.\n\nLocation: {location_v3},\nOrientation: {house.orientation},\nTheme: {house.theme}\n')
         # self._print()
-        self._draft_property(location_v3, house.orientation, house.theme, plot_length)
+        property_orientation = None
+        if house.orientation == 0:
+            property_orientation = 3
+        else:
+            property_orientation = (house.orientation - 1) % 4
+        self._draft_property(location_v3, property_orientation, house.theme, plot_length)
         self._get_designer()
         self._get_component_specs()
         self._get_builder()
