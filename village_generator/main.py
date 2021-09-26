@@ -9,6 +9,15 @@ if __name__ == '__main__':
     mc = Minecraft.create()
 
     x, y, z = mc.player.getTilePos()
+    block = mc.getBlock(x, y-1, z)
 
     # Upon invocation will generate a village where the player is standing.
     build_village(VillageSize.LARGE, (x + 1, y, z + 1), mc.player.getBiome(), mc)
+    # Create a border
+    village_len_large = (15 * 7) + 1
+    village_wid_large = (15 * 6) + 1
+    mc.setBlocks(x, 50, z, x + village_wid_large, y, z, block) #50 is comfortable ground level
+    mc.setBlocks(x, 50, z, x, y, z + village_len_large, block)
+    mc.setBlocks(x, 50, z + village_len_large, x + village_wid_large, y, z + village_len_large, block)
+    mc.setBlocks(x + village_wid_large, 50, z, x + village_wid_large, y, z + village_len_large, block)
+
