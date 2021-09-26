@@ -1,7 +1,9 @@
 # Matt's Development Diary
+
 ## Student Code: s3902219
 
 ### NOTE: The order of entries is not chronological.
+
 <br></br>
 **Week 1**
 
@@ -87,26 +89,28 @@
   }
   ```
 
-    Feel free to use this if you'd like.
-    
-    <br></br>There are better, faster solutions out there that I am also aware of, however, they require too much work to integrate
-    and become increasingly more complicated as Mojang releases new Minecraft versions due to heavier obfuscation of the
-    source code and the sub-systems changing significantly, and frequently. Hence, in the interest of time, I decided to
-    just settle for the above.
+  Feel free to use this if you'd like.
 
-    <br></br>However, to my mistake, I accidentally installed the wrong version of build-tools, due to not being focused at the time.
-    And by the time I realised, I was far into this, and was a little demotivated to continue. More importantly, time was
-    running thing, so I just scrapped this whole idea after some thought and looked elsewhere for optimisations.
-    
-    <br></br>FYI: BuildTools takes a logon time to build, and it's a mission to install it for different versions. Note for future -
-    make sure you install BuildTools for 1.16.3 and NOT 1.12.2, since the spigot server ultimately is ported for 1.16.3.
-    
-    <br></br>After some thinking, I discovered a better form of optimisation, which was to move all the expensive calls to the
-    back-end, to avoid the bottleneck of requests being transferred through the sockets (there is a 9000 request limit I
-    believe, and it becomes quite slow). Repeated calls were not the way to go, and Java is a fast language to perform the
-    computation quickly. Doing so also allowed me not to resort to batch processing or any forms of multithreading or
-    micro-optimisations, which saved time. In doing so, I also added additional methods to the API (for a full list, check
-    the <b>API Additions</b> heading).
+  <br></br>There are better, faster solutions out there that I am also aware of, however, they require too much work to
+  integrate and become increasingly more complicated as Mojang releases new Minecraft versions due to heavier
+  obfuscation of the source code and the sub-systems changing significantly, and frequently. Hence, in the interest of
+  time, I decided to just settle for the above.
+
+  <br></br>However, to my mistake, I accidentally installed the wrong version of build-tools, due to not being focused
+  at the time. And by the time I realised, I was far into this, and was a little demotivated to continue. More
+  importantly, time was running thing, so I just scrapped this whole idea after some thought and looked elsewhere for
+  optimisations.
+
+  <br></br>FYI: BuildTools takes a logon time to build, and it's a mission to install it for different versions. Note
+  for future - make sure you install BuildTools for 1.16.3 and NOT 1.12.2, since the spigot server ultimately is ported
+  for 1.16.3.
+
+  <br></br>After some thinking, I discovered a better form of optimisation, which was to move all the expensive calls to
+  the back-end, to avoid the bottleneck of requests being transferred through the sockets (there is a 9000 request limit
+  I believe, and it becomes quite slow). Repeated calls were not the way to go, and Java is a fast language to perform
+  the computation quickly. Doing so also allowed me not to resort to batch processing or any forms of multithreading or
+  micro-optimisations, which saved time. In doing so, I also added additional methods to the API (for a full list, check
+  the <b>API Additions</b> heading).
 
 
 * Designed all the small, medium and large layouts and altered the Excel document so that these would be detailed. To
@@ -136,39 +140,40 @@
         - Difficult to implement and will take time if I'm doing it alone.
         - Will probably not have time to do the pathfinding thing.
         - Not 100% if I will be able to finish this and all the other stuff I still need to handle.
-      <br></br>
+          <br></br>
     - Started looking into pathfinding and derived a solid plan to get full marks:
-      <br></br><i>NOTE #1: A fair portion of this is discussed in <b>retrospect</b>, as the timeline of these events are far too
-      messy to be 100% accurate.</i>
-      <br></br>I would've used Dijkstra's Algorithm because it allows for weighting, such that I would make it prefer to go
-      around mountains instead of over, and to avoid water/lava if possible. In addition, it is better tailored for
+      <br></br><i>NOTE #1: A fair portion of this is discussed in <b>retrospect</b>, as the timeline of these events are
+      far too messy to be 100% accurate.</i>
+      <br></br>I would've used Dijkstra's Algorithm because it allows for weighting, such that I would make it prefer to
+      go around mountains instead of over, and to avoid water/lava if possible. In addition, it is better tailored for
       multiple destinations unlike a*. Breadth First Search was also applicable, however, it lacked the niceties of the
       weighting system.
-      <br></br>Lachlan's terrain scanner would scan each plot (15 x 15) and check if the land is suitable to place a house. If it
-      is suitable then it will identify that plot in the matrix with a number (or enum). If it was not suitable, it
-      would identify that. That way, all houses would be randomly placed. Then, with a pathfinding algorithm, would
-      iterate through the matrix of plots, and then the first one it finds would be the source, while the others would
-      be destinations. The destinations would be added to a list for later use. Then the pathfinding algorithm would
-      find the cheapest (depending on allocated weights as mentioned above) route to all houses, so that they are all
-      linked in some manner. Once the path is found, it would then simply draw the roads by replacing the blocks and
-      enforcing the gradient of less than or equal to 0.5 system to ensure 1-block increments in the elevation.
-      <br></br>Another alternative, presented by Lachie (occurred in week 3, but detailed here to keep topics consistent), was to
-      heavily weight against mountains where the y-level increments are inconsistent (i.e. greater than 1), so that the
-      pathfinder would very rarely go over mountains, and it would prefer to go around them. However, the downfall to
-      this was that houses would then not be built on top of mountains. While practical and doable, it was not ideal.
-      This would've been the fall-back option if the former option failed.
-      <br></br><i>NOTE #2: None of these ideas were implemented or tested yet. This was just planning to solve many issues I
-      personally encountered before reaching out to fellow teammates to get assistance. I had many solutions, but as you
-      will read, none of them turned out to be feasible within the timeframe.</i>
-    <br></br>
+      <br></br>Lachlan's terrain scanner would scan each plot (15 x 15) and check if the land is suitable to place a
+      house. If it is suitable then it will identify that plot in the matrix with a number (or enum). If it was not
+      suitable, it would identify that. That way, all houses would be randomly placed. Then, with a pathfinding
+      algorithm, would iterate through the matrix of plots, and then the first one it finds would be the source, while
+      the others would be destinations. The destinations would be added to a list for later use. Then the pathfinding
+      algorithm would find the cheapest (depending on allocated weights as mentioned above) route to all houses, so that
+      they are all linked in some manner. Once the path is found, it would then simply draw the roads by replacing the
+      blocks and enforcing the gradient of less than or equal to 0.5 system to ensure 1-block increments in the
+      elevation.
+      <br></br>Another alternative, presented by Lachie (occurred in week 3, but detailed here to keep topics
+      consistent), was to heavily weight against mountains where the y-level increments are inconsistent (i.e. greater
+      than 1), so that the pathfinder would very rarely go over mountains, and it would prefer to go around them.
+      However, the downfall to this was that houses would then not be built on top of mountains. While practical and
+      doable, it was not ideal. This would've been the fall-back option if the former option failed.
+      <br></br><i>NOTE #2: None of these ideas were implemented or tested yet. This was just planning to solve many
+      issues I personally encountered before reaching out to fellow teammates to get assistance. I had many solutions,
+      but as you will read, none of them turned out to be feasible within the timeframe.</i>
+      <br></br>
     - Tried to conceive a way to ensure houses are nicely placed in the terrain. Two approaches were discovered:
         1. They can be placed at the smallest y-block within a 15x15 plot (cutting into mountains - works well for
            non-mountainous biomes though).
         2. Alternatively, they can be placed on the highest y-block and the floating bits would be filled with the
-           material under the house so that it blends in naturally with the terrain. To prevent a very abnormal
-           look, complexity would be added, such that it bulges slightly, and it is not just a straight square of
-           blocks (it blends with the mountain). However, this is only for mountains, and would not be a problem for
-           houses that are not spawned on the edge or side of mountains.
+           material under the house so that it blends in naturally with the terrain. To prevent a very abnormal look,
+           complexity would be added, such that it bulges slightly, and it is not just a straight square of blocks (it
+           blends with the mountain). However, this is only for mountains, and would not be a problem for houses that
+           are not spawned on the edge or side of mountains.
 
 
 * Altered the sizes of the plots because they were far too large to begin with, and the terrain_scanner would not allow
@@ -198,28 +203,28 @@
       levels of difficulty in relation to accomplishing the task within a very limiting time frame. In addition, it
       required me to alter the entirety of the system and start over, which is obviously not a feasible task in the
       third week.
-    <br></br>
+      <br></br>
     - Implemented a ramp system using gradients and basic linear algebra (and vector calculus) to combat the 1-block max
       height increment issue. To no surprise, the idea was ditched because the plot-based matrix system did not align
       with this level of thinking. To implement such a system using the existing system, the roads would have to be
       connected via an ugly recursive node system.
 
-  <br></br>Nonetheless, the gist of the idea is a ramping system. The ramps would be filled with bricks all the way down, until
-  it the bricks touched the ground (think a bridge with pillars to keep it up-right). This prevented floating stairs.
-  First, the idea was to calculate the gradient of two 3D points (using the x, and z mapped to the y-axis respectively),
-  and if it was over 0.5 (too steep), then push out the z OR x coordinate (depending on player orientation) by 1 block,
-  until that gradient is either 0.5 or below. This would continue until the gradient satisfied the condition of being
-  equal to or less than 0.5. This number is unique because it allows the roads to then be built with a maximum of
-  1-block height increment (like a normal staircase).
-  <br></br>However, this idea later transitioned into a plot-based system, so that it could be interoperable with the current
-  design. Instead of pushing out the z/x coordinate by 1 block, it would,rather, select the next road plot. So, if one
-  road plot's road could not scale the mountain, while enforcing a 1-block-max height increment, then the next road plot
-  would be chosen, and the gradient re-calculated. The next road would most likely (in most cases) be able to scale the
-  mountain while enforcing this requirement. However, as mentioned above, this required a recursive node system, where
-  roads were connected to other roads (on the logical level), and it was just not a feasible task to get this working in
-  5 days. Moreover, it was rather messy, and there is definitely a more practical solution that awaits, given sufficient
-  time. Therefore, the idea was, yet again, abandoned.
-<br></br>
+  <br></br>Nonetheless, the gist of the idea is a ramping system. The ramps would be filled with bricks all the way
+  down, until it the bricks touched the ground (think a bridge with pillars to keep it up-right). This prevented
+  floating stairs. First, the idea was to calculate the gradient of two 3D points (using the x, and z mapped to the
+  y-axis respectively), and if it was over 0.5 (too steep), then push out the z OR x coordinate (depending on player
+  orientation) by 1 block, until that gradient is either 0.5 or below. This would continue until the gradient satisfied
+  the condition of being equal to or less than 0.5. This number is unique because it allows the roads to then be built
+  with a maximum of 1-block height increment (like a normal staircase).
+  <br></br>However, this idea later transitioned into a plot-based system, so that it could be interoperable with the
+  current design. Instead of pushing out the z/x coordinate by 1 block, it would,rather, select the next road plot. So,
+  if one road plot's road could not scale the mountain, while enforcing a 1-block-max height increment, then the next
+  road plot would be chosen, and the gradient re-calculated. The next road would most likely (in most cases) be able to
+  scale the mountain while enforcing this requirement. However, as mentioned above, this required a recursive node
+  system, where roads were connected to other roads (on the logical level), and it was just not a feasible task to get
+  this working in 5 days. Moreover, it was rather messy, and there is definitely a more practical solution that awaits,
+  given sufficient time. Therefore, the idea was, yet again, abandoned.
+  <br></br>
     - An alternative approach to the aforementioned road problem was also tackled from a more algorithmic, imperative
       approach. An algorithm that flattens the land based on the smallest block in a strip (hence the
       getSmallestYInLine() method - now obsolete) and enforces a 1-block height maximum via retaining the previous
@@ -227,12 +232,12 @@
       equal to 1 block. Once again, the idea was deserted. This was due to it digging into the terrain, and causing
       alignment problems with houses and roads not being on the same y-levels, even though their corresponding x/z
       values were aligned correctly.
-  <br></br>In addition, Lachie also had an attempt at this, which was more successful than its former (developed by myself), and
-  made use of his modular, and re-usable terrain_scanner. However, it dug into the terrain more than the former, and
-  also dissatisfied the same criteria its predecessor did, thus, also being ditched.
-  <br></br>This was a painstaking process because along the journey, I had to recode the roads at least 3 times in different
-  ways. Hence, a lot of time was wasted in this pursuit.
-    <br></br>
+      <br></br>In addition, Lachie also had an attempt at this, which was more successful than its former (developed by
+      myself), and made use of his modular, and re-usable terrain_scanner. However, it dug into the terrain more than
+      the former, and also dissatisfied the same criteria its predecessor did, thus, also being ditched.
+      <br></br>This was a painstaking process because along the journey, I had to recode the roads at least 3 times in
+      different ways. Hence, a lot of time was wasted in this pursuit.
+      <br></br>
 * The continuation of modifying the API once again to add 3 new methods took off here. The most notable was the removal
   function to assist the powerful terraform, ensuring a better time and auxiliary space complexity. As already
   mentioned, but for further clarity, the sockets proved to be a bottleneck, hence implementation of removing blocks and
@@ -285,3 +290,14 @@
 
 
 * Cleaned up the code, and altered parts to get it functioning with the village generation system.
+
+
+* Finalised the entire project, ensured that everything was cleaned up, fixed all imports, added documentation and
+  comments where applicable, cleaned up project structure, added in the forked API in the ``/modified_api`` directory and
+  added documentation on the new features and how to install it, tidied up dev diary. In addition, also re-wrote parts
+  of many files so that they were optimal, and short (less code repetition), concise and readable.
+
+
+* Completed the templates for the village generation, and tested them all thoroughly. Everything was working well,
+  however, the final outcome was a little disappointing, as it was not what we'd hoped or planned for. However, a lesson
+  has been learned over the course of this 3 weeks, and it will be followed closely in the next project, hopefully.
