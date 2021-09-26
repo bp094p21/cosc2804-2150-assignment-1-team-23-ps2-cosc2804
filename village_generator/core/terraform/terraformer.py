@@ -17,8 +17,7 @@ def terraform_entire_land(mc, biome, x1, y1, z1, x2, y2, z2):
     #Then build a border around the village to clear any liquid seeping in
     # Create a border around the perimeter of the village (1 area difference)
     x, y, z = mc.player.getTilePos()
-    block = mc.getBlock(x, y-1, z)
-    mc.postToChat(block)
+    block = mc.getBlock(x, y-6, z)
     mc.setBlocks(x1, 40, z1 - 1, x2, y, z1 - 1, block) 
     mc.setBlocks(x1 - 1, 40, z1, x1 - 1, y, z2, block)
     mc.setBlocks(x1, 40, z2 + 1, x2, y, z2 + 1, block)
