@@ -16,8 +16,8 @@ if __name__ == '__main__':
     # Create a border
     village_len_large = (15 * 7) + 1
     village_wid_large = (15 * 6) + 1
-    mc.setBlocks(x, 50, z, x + village_wid_large, y, z, block) #50 is comfortable ground level
-    mc.setBlocks(x, 50, z, x, y, z + village_len_large, block)
-    mc.setBlocks(x, 50, z + village_len_large, x + village_wid_large, y, z + village_len_large, block)
-    mc.setBlocks(x + village_wid_large, 50, z, x + village_wid_large, y, z + village_len_large, block)
+    mc.setBlocks(x, 40, z, x + village_wid_large, y, z, block) #40 is comfortable ground level
+    mc.setBlocks(x, 40, z, x, y, z + village_len_large, block)
+    mc.setBlocks(x, 40, z + village_len_large, x + village_wid_large, y, z + village_len_large, block)
+    mc.setBlocks(x + village_wid_large, 40, z, x + village_wid_large, y, z + village_len_large, block)
 
